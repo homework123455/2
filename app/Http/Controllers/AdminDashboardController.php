@@ -25,18 +25,22 @@ public function __construct()
         $applications=Application::where('user_id', Auth::user()->id)->get();
         $applicationsA=Application::orderBy('created_at', 'DESC')->get();
         $maintaincesALL=Maintaince::orderBy('created_at','DESC');
-		//$maintaincesALL1=Maintaince::orderBy('created_at','DESC')->get();
-		$maintaincesA=$maintaincesALL->whereIn('status',array('通過','駁回','申請中'))->get();
-        $maintainces=$maintaincesALL->whereIn('status',array('申請中'))->get();
+		$maintaincesALL1=Maintaince::orderBy('created_at','DESC');
+		$maintaincesALL2=Maintaince::orderBy('created_at','DESC');
 		
-        $assets=Asset::orderBy('created_at', 'ASC')->get();
+		$maintaincesA=$maintaincesALL1->whereIn('status',array('通過','駁回','申請中'))->get();
+		$maintaincesB=$maintaincesALL2->whereIn('status',array('通過','駁回','申請中'))->get();
+		$maintainces=$maintaincesALL->whereIn('status',array('申請中'))->get();
+		
+		$assets=Asset::orderBy('created_at', 'ASC')->get();
         //$maintainces=$maintaincesALL->whereNotIn('status',array('正常使用中','通過'))->get();
         $announcements = Announcement::orderBy('created_at', 'DESC')->take(3)->get();
         $users=User::orderBy('created_at' ,'DESC') ->get();
         $departmaentU=$users->where('department_id', Auth::user()->department_id);
 
 
-        $data=['applications'=>$applications,'maintainces'=>$maintainces,'maintainces_A'=>$maintaincesA,'assets'=>$assets,
+        $data=['applications'=>$applications,'maintainces'=>$maintainces,'maintainces_A'=>$maintaincesA,
+		'maintainces_B'=>$maintaincesB,'assets'=>$assets,
             'applicationsA'=>$applicationsA,'announcements'=>$announcements,
             "users"=>$users,'departmaentU'=>$departmaentU,'username'=>$username];
         if (Auth::user()->previlege_id==3)
