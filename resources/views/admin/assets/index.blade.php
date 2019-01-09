@@ -178,7 +178,7 @@
                                                 </form>
                                             @endif
 											@if($asset->status=='租借中')
-                                                <a class="btn btn-danger disabled" role="button">維修</a>
+                                                <a class="btn btn-danger disabled" role="button" >維修</a>
                                                 </form>
                                             @endif
 											@if($asset->status=='申請中')
@@ -186,7 +186,7 @@
                                                 </form>
                                             @endif
                                         </td>
-
+	                                   @if($asset->status=='正常使用中')
                                         <td width="80">
                                             <!-- Button trigger modal -->
                                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">
@@ -225,17 +225,49 @@
                                                 </div>
                                             </div>
                                         </td>
-
-
-                                    @else
-
-                                        <td width="80">
-                                            @if($asset->status=='正常使用中')
-                                                <a class="btn btn-primary" href="{{ route('admin.assets.application', $asset->id) }}" role="button" >租借</a>
-                                            @else
-                                                <a class="btn btn-primary disabled" href="{{ route('admin.assets.application', $asset->id) }}" role="button" >租借</a>
-                                            @endif
+										@else
+										<td width="80">
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-danger disabled" data-toggle="modal" data-target="#myModal">
+                                                刪除
+                                            </button>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                            <h4 class="modal-title" id="myModalLabel">提示訊息</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            確定刪除？
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <table style="text-align: right">
+                                                                <tbody style="text-align: right">
+                                                                <tr class="table-text" style="text-align: center">
+                                                                    <td width="100" >
+                                                                        <form action="{{ route('admin.assets.destroy', $asset->id) }}" method="POST">
+                                                                            {{ csrf_field() }}
+                                                                            {{ method_field('DELETE') }}
+                                                                            <button class="btn btn-danger">刪除</button>
+                                                                        </form>
+                                                                    </td>
+                                                                    <td width="100">
+                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                                                    </td>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </td>
+											@endif
+
+
+                                    
                                     @endif
                                 </tr>
                                 </tbody>

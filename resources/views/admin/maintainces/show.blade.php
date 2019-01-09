@@ -13,6 +13,7 @@
             </h1>
         </div>
     @endif
+
     <div class="col-lg-12">
         <h1 class="page-header">
             申請處理 <small>場地申請</small>
@@ -56,6 +57,7 @@
                 <tr>
                     <th width="100" style="text-align: center">申請人</th>
                     <th width="100" style="text-align: center">用途</th>
+					<th width="100" style="text-align: center">是否租借器材</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -70,6 +72,7 @@
                         </td>
 
                         <td style="text-align: center">{{ $application->problem }}</td>
+						<td style="text-align: center">{{ $application->tool }}</td>
                     </tr>
                 @endforeach
                 </tbody>
