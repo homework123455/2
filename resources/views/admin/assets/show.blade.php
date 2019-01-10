@@ -29,6 +29,14 @@
                 <label name="name">{{$asset->name}}</label>
             </div>
 
+
+
+        <div class="form-group">
+            <label width="80">場地圖片：</label>
+            <img src={{ $asset->file1}} width="500px" height="300px"/>
+
+        </div>
+
         <div class="form-group">
             <label width="80">場地類別：</label>
                     <label name="category">{{$category->name}}</label>

@@ -72,7 +72,49 @@ class AssetController extends Controller
     }
     public function store(AssetRequest $request)
     {
-        Asset::create($request->all());
+        $file = $request->file('img');
+        $filePath =[];  // 定义空数组用来存放图片路径
+        foreach ($file as $key => $value) {
+            // 判断图片上传中是否出错
+
+                if (!$value->isValid()) {
+                    exit("上傳圖片出錯，請重試！");
+                }
+
+            if(!empty($value)){//此处防止没有多文件上传的情况
+                $allowed_extensions = ["png", "jpg", "gif"];
+                if ($value->getClientOriginalExtension() && !in_array($value->getClientOriginalExtension(), $allowed_extensions)) {
+                    exit('您只能上傳PNG、JPG或GIF格式的圖片！');
+                }
+                $destinationPath = '/uploads/'.date('Y-m-d'); // public文件夹下面uploads/xxxx-xx-xx 建文件夹
+                $extension = $value->getClientOriginalExtension();   // 上传文件后缀
+                $fileName = date('YmdHis').mt_rand(100,999).'.'.$extension; // 重命名
+                $value->move(public_path().$destinationPath, $fileName); // 保存图片
+                $filePath[] = $destinationPath.'/'.$fileName;
+
+            }
+        }
+        /*Asset::create([
+        $request->all()]);*/
+        Asset::create([
+            'name'=>$request->name,
+            'category'=>$request->category,
+            'date'=>$request->date,
+
+            'status'=>$request->status,
+            'keeper'=>$request->keeper,
+
+            'lendable'=>$request->lendable,
+            'location'=>$request->location,
+            'warranty'=>$request->warranty,
+            'remark'=>$request->remark,
+
+            'file'=>$filePath[0],
+            'file1'=>$filePath[1]
+
+
+        ]);
+
         return redirect()->route('admin.assets.index');
     }
     public function destroy($id)

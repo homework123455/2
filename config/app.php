@@ -167,9 +167,7 @@ return [
          * Package Service Providers...
          */
         Recca0120\LaravelTracy\ServiceProvider::class,
-        Collective\Html\HtmlServiceProvider::class,
 
-        SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
         /*
          * Application Service Providers...
          */

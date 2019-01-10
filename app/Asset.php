@@ -19,8 +19,13 @@ class Asset extends Model
         'location',
         'remark',
 		'lendname',
+
 		'week_id',
 		'time_id'
+
+        'file',
+        'file1'
+
 		
        // 'vendor',
         //'warranty'

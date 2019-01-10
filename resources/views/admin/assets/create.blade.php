@@ -12,6 +12,7 @@
         </h1>
     </div>
 @endif
+
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
@@ -25,10 +26,16 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <form action="/admin/assets" method="POST" role="form">
+        <form action="/admin/assets" method="POST" role="form" enctype="multipart/form-data">
             {{ csrf_field() }}
 
             <div class="form-group">
+                <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+                    <legend>上傳其他房屋圖片</legend>
+                </fieldset>
+
+                <input type="file" name="img[]" accept="image/jpeg,image/jpg,image/gif,image/png" style="display: block;margin-bottom: 5px;">
+                <input type="file" name="img[]" accept="image/jpeg,image/jpg,image/gif,image/png" style="display: block;margin-bottom: 5px;">
                 <label>場地名稱：</label>
                 <input name="name" class="form-control" placeholder="請輸入場地名稱">
             </div>
