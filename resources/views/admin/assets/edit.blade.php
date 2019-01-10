@@ -93,8 +93,8 @@
            
 
             <div class="form-group">
-                <label>備註：</label>
-                <textarea name="submit" class="form-control" rows="5" value="{{$asset->remark}}"></textarea>
+                <label>詳細資訊：</label>
+                <input name="remark" class="form-control" placeholder="請輸入場地資訊" value="{{$asset->remark}}">
             </div>
 
             <div class="text-right">
