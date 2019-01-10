@@ -70,15 +70,21 @@
                 <i class="fa fa-dashboard"></i> 我的申請
             </li>
         </ol>
+		
         @if(count($applications) > 0)
+			
             <div class="table-responsive">
                 <table class="table table-bordered table-hover">
                     <thead>
                     <tr>
-                        <th width="80" style="text-align: center">申請編號</th>
+                        <th width="100" style="text-align: center">申請編號</th>
                         <th style="text-align: center">場地名稱</th>
                         <th width="100" style="text-align: center">申請狀態</th>
                         <th width="120" style="text-align: center">申請日期</th>
+						
+						<th width="80" style="text-align: center">功能</th> 
+						
+						  
                     </tr>
                     </thead>
                     @foreach($applicationsA as $application)
@@ -106,14 +112,35 @@
                                             {{ $maintaince-> date}}
                                         
                                     </td>
+									
+									
+									<td class="table-text" style="text-align: center">
+                                     @if($maintaince->status=='申請中')
+                                                                        
+																			<form action="{{ route('admin.maintainces.destroy', $maintaince->id ) }}" method="POST">
+																		{{ csrf_field() }}
+                                                                        {{ method_field('DELETE') }}
+                                                                            <button class="btn btn-danger">取消</button>
+                                                                        </form>
+																		@else
+                                                <a class="btn btn-danger disabled" role="button">取消</a>
+																		@endif
+                                                                    
+											
+                                        </td>
                                 </tr>
                             @endif
                         @endforeach
+						
                         </tbody>
                     @endforeach
                 </table>
+				
             </div>
+			
         @endif
+		
+		
     </div>
 </div>
 

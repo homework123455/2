@@ -15,8 +15,9 @@
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="{{ asset('css/sb-admin.css') }}" rel="stylesheet">
-
+    @if(Auth::user()->previlege_id==3)
+    <link href="{{asset('css/sb-admin.css')}}" rel="stylesheet">
+    @endif
     <!-- Morris Charts CSS -->
     <link href="{{ asset('css/plugins/morris.css') }}" rel="stylesheet">
 
@@ -34,35 +35,34 @@
 
 <body>
 
-<div id="wrapper">
+    <div id="wrapper">
 
-    @include('admin.layouts.partials.sidebar')
+        @include('admin.layouts.partials.sidebar')
+        <div id="page-wrapper">
 
-    <div id="page-wrapper">
+            <div class="container-fluid">
 
-        <div class="container-fluid">
+                @yield('content')
 
-            @yield('content')
+            </div>
+            <!-- /.container-fluid -->
 
         </div>
-        <!-- /.container-fluid -->
+        <!-- /#page-wrapper -->
 
     </div>
-    <!-- /#page-wrapper -->
+    <!-- /#wrapper -->
 
-</div>
-<!-- /#wrapper -->
+    <!-- jQuery -->
+    <script src="{{ asset('js/jquery.js') }}"></script>
 
-<!-- jQuery -->
-<script src="{{ asset('js/jquery.js') }}"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 
-<!-- Bootstrap Core JavaScript -->
-<script src="{{ asset('js/bootstrap.min.js') }}"></script>
-
-<!-- Morris Charts JavaScript -->
-<script src="{{ asset('js/plugins/morris/raphael.min.js') }}"></script>
-<script src="{{ asset('js/plugins/morris/morris.min.js') }}"></script>
-<script src="{{ asset('js/plugins/morris/morris-data.js') }}"></script>
+    <!-- Morris Charts JavaScript -->
+    <script src="{{ asset('js/plugins/morris/raphael.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/morris/morris.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/morris/morris-data.js') }}"></script>
 
 </body>
 

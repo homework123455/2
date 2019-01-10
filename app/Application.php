@@ -12,6 +12,7 @@ class Application extends Model
         'user_id',
         'maintaince_id',
         'problem',
+		'tool',
         'date'
     ];
 

@@ -12,7 +12,7 @@ use App\User;
 use App\Vendor;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-
+use DB;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -45,6 +45,7 @@ class MaintaincesController extends Controller
                 'status'=>'申請中',
                 //'method'=>'未選擇',
                 'remark'=>null,
+				
 				'date'=>Carbon::now(),
 				'user_id'=>$user_id
             ]);
@@ -81,6 +82,7 @@ class MaintaincesController extends Controller
             $maintainces->applications()->create([
                 'user_id'=>$request->user()->id,
                 'problem'=>$request->problem,
+				'tool'=>$request->tool,
                 'date'=>Carbon::now()
             ]);
 			/*
@@ -209,6 +211,23 @@ class MaintaincesController extends Controller
                 'status'=>'租借中',
 				'lendable'=>'0'
             ]);
+			$applications=$maintaince->applications()->get();
+		//$applications1=Maintaince::find($maintaince->user_id);
+        $users=User::orderBy('created_at','DESC')->get();
+		foreach ($applications as $application){
+		foreach($users as $user){
+        if($application->user_id==$user->id){
+			
+		//$user1=User::find($application->user_id);
+		$user2=$user->id;
+		}
+		}
+		}
+		$asset->lendings()->create([
+            'user_id'=>$user2,
+            'lenttime'=> Carbon::now(),
+			
+        ]);
         }elseif($request->method=='否'){
 			$asset=Asset::find($maintaince->asset_id);
             $maintaince->update([
@@ -278,7 +297,41 @@ class MaintaincesController extends Controller
 
         return redirect()->route('admin.maintainces.index');
     }
-
+	
+ public function destroy($id)
+    {
+		$maintainces=Maintaince::find($id);
+		//$maintaince=Maintaince::select('id')->where('id',$id)->get();
+		//$maintainces=Maintaince::orderBy('created_at', 'DESC')->get();
+		//$applications=Application::find($maintaince->maintaince_id);
+		$applications=Application::orderBy('created_at', 'DESC')->get();
+		//$applications1=$applications->select('id')->where('maintaince_id',$id)->get();
+		//$applications=$maintaince->applications()->get();
+		//foreach($maintainces as $maintaince){
+		foreach ($applications as $application){
+		
+        if($application->maintaince_id==$maintainces->id){
+			
+		
+		$applicationA=$application->id;
+		
+		}
+		//}
+		}
+		$asset=Asset::find($maintainces->asset_id);
+		$asset->update([
+                'status'=>'正常使用中',
+				'lendable'=>'1',
+				'lendname'=>NULL
+            ]);
+		//->where('maintaince_id', '==','7')
+		//DB::table('applications')->where('maintaince_id', '==','7')->delete();
+		Application::destroy($applicationA);
+		Maintaince::destroy($id);
+		
+		
+        return redirect()->route('admin.dashboard.user');
+    }
 
     public function mail($id){
 
