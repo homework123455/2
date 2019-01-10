@@ -18,7 +18,9 @@ class Asset extends Model
         'lendable',
         'location',
         'remark',
-		'lendname'
+		'lendname',
+        'file',
+        'file1'
 		
        // 'vendor',
         //'warranty'
