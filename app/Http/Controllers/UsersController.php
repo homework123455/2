@@ -50,8 +50,8 @@ class UsersController extends Controller
 
     public function update(Request $request, $id)
     {
-        
-		$user=User::find($id);
+
+        $user=User::find($id);
         $user->update($request->all());
 
         return redirect()->route('admin.users.index');
@@ -72,7 +72,7 @@ class UsersController extends Controller
         $user=User::orderBy('created_at', 'DESC')->first();
         $user->update([
             'password'=>bcrypt($user->password),
-			
+
         ]);
 
         return redirect()->route('admin.users.index');
@@ -85,12 +85,12 @@ class UsersController extends Controller
 
     public function data($id)
     {
-$user=User::find($id);
-$previlege=Previlege::find($user->previlege_id);
+        $user=User::find($id);
+        $previlege=Previlege::find($user->previlege_id);
 
-$data = ['user'=>$user,'previlege'=>$previlege];
-return view('admin.users.show', $data);
-}
+        $data = ['user'=>$user,'previlege'=>$previlege];
+        return view('admin.users.show', $data);
+    }
 
     public function Search(Request $request)
     {
@@ -102,26 +102,31 @@ return view('admin.users.show', $data);
         return view('admin.users.index' ,$data);
     }
     public function wrongdata($id)
-{
-    $user=User::find($id);
-    $wrong=Wrong::orderBy('id','ASC')->get();
-    $data = ['user'=>$user,'wrong'=>$wrong];
-    return view('admin.users.showwrong', $data);
-}
+    {
+        $user=User::find($id);
+        $wrong=Wrong::orderBy('id','ASC')->get();
+        $data = ['user'=>$user,'wrong'=>$wrong];
+        return view('admin.users.showwrong', $data);
+    }
     public function wrongcreate($id)
-{
-    $user=User::find($id);
+    {
+        $user=User::find($id);
 
-    $data=['user'=>$user];
-    return view('admin.users.wrongcreate',$data);
-}
+        $data=['user'=>$user];
+        return view('admin.users.wrongcreate',$data);
+    }
     public function wrongstore(WrongRequest $request,$id)
     {
+        $user=User::find($id);
+        $wrong=Wrong::orderBy('id','ASC')->get();
+        $data = ['user'=>$user,'wrong'=>$wrong];
         Wrong::create([
             'user_id'=>$id,
             'wrongname'=>$request->wrongname,
             'date'=>$request->date
         ]);
+        return view('admin.users.showwrong',$data);
     }
+
 
 }

@@ -24,10 +24,9 @@ class WrongRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id'=>'required|integer',
+
             'wrongname'=>'required|min:3|max:50',
-            'date'=>'required'
-            //
+           'date'=>'required'
         ];
     }
 }
