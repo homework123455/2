@@ -12,7 +12,7 @@
         <img  src="https://download.taiwantradeshows.com.tw/files/exhibitor/TM2017/0906/1473149981399-1.jpg"  class="img-circle" href="{{ route('admin.dashboard.index') }}"  width="65" height="50">
         </a>
     </div>
-    <a class="navbar-brand" href="{{ route('admin.dashboard.index') }}">勤益體育館場地報修系統</a>
+    <a class="navbar-brand" href="{{ route('admin.dashboard.index') }}">勤益體育館場地租借系統</a>
     <!-- Top Menu Items -->
     <ul class="nav navbar-right top-nav">
         <li class="dropdown">

@@ -26,7 +26,9 @@ class AssetRequest extends FormRequest
         return [
             'name'=>'required|min:3|max:50',
             'category'=>'required',
-            'date'=>'required',
+            //'week'=>'required',
+			//'time'=>'required',
+			
              //  'cost',
             //'status'=>'required|string|max:20',
             'keeper'=>'required',

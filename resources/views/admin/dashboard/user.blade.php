@@ -22,6 +22,52 @@
                 <a href="{{ route('admin.assets.index') }}" class="btn btn-primary">我要租借</a>
         </div>
         </div>
+		@if(count($asset_overtimes1) > 0)
+	<div class="row">
+    <div class="col-lg-12">
+        <ol class="breadcrumb">
+            <li class="active">
+                <i class="fa fa-dashboard" ></i> 超過時間
+				
+				
+            </li>
+        </ol>
+		 <div class="row">
+                <div class="col-lg-12">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th width="100" style="text-align: center">場地編號</th>
+                                <th width="300" style="text-align: center">場地名稱</th>
+                                
+								</tr>
+                            </thead>
+                            <tbody>
+							@foreach($asset_overtimes1 as $asset_overtime)
+                                
+
+                                    <tr>
+                                        <td style="text-align: center">
+                                            {{ $asset_overtime->id }}
+                                        </td>
+                                        <td style="text-align: center">
+                                            
+                                                    {{ $asset_overtime->name }}
+                                               
+                                        </td>
+										
+                                        
+										</tr>
+                                    
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+		</div>
+		
+		@endif
         <ol class="breadcrumb">
             <li class="active">
                 <i class="fa fa-dashboard"></i> 公告
@@ -143,6 +189,8 @@
 		
     </div>
 </div>
+
+	
 
 <!-- /.row -->
 

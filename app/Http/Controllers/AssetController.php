@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 
 use App\Asset;
+use App\Week;
+use App\Time_;
 use App\Category;
 use App\Http\Requests\AssetRequest;
 use App\Lending;
@@ -20,25 +22,33 @@ class AssetController extends Controller
 {
    
     //
-    public function index()
+    public function index(Request $request)
     {
+		$Search =$request->input('week_search');
+        $Search2 =$request->input('time_search');
+		$Search1 =$request->input('category_search');
         $asset=Asset::orderBy('created_at', 'DESC')->get();
         $category=Category::orderBy('created_at' ,'DESC') ->get();
         $lendings=Lending::whereNULL('returntime')->get();
+		$weeks=Week::orderBy('id','ASC')->get();
+		$times=Time_::orderBy('id','ASC')->get();
+		
 		/*
         if(!(Auth::user()->previlege_id==3)){
            $asset=Asset::where('id','0')->get();
 	   }
 */
-        $data=['assets'=>$asset,'lendings'=>$lendings,'categories'=>$category];
+        $data=['assets'=>$asset,'lendings'=>$lendings,'categories'=>$category,'times'=>$times,'weeks'=>$weeks,'Search'=>$Search,'Search1'=>$Search1,'Search2'=>$Search2];
         return view('admin.assets.index', $data);
     }
     public function create()
     {
         $category=Category::orderBy('created_at' ,'DESC') ->get();
         $users=User::orderBy('created_at' ,'DESC') ->get();
+		$weeks=Week::orderBy('id','ASC')->get();
+		$times=Time_::orderBy('id','ASC')->get();
        // $vendors=Vendor::orderBy('created_at' ,'DESC') ->get();
-        $data=['categories'=>$category,'users'=>$users];
+        $data=['categories'=>$category,'users'=>$users,'times'=>$times,'weeks'=>$weeks];
         return view('admin.assets.create' ,$data);
     }
 
@@ -48,6 +58,7 @@ class AssetController extends Controller
         $categories=Category::orderBy('created_at' ,'DESC') ->get();
         $users=User::orderBy('created_at' ,'DESC') ->get();
        // $vendors=Vendor::orderBy('created_at' ,'DESC') ->get();
+	  
         $asset=Asset::find($id);
         $data = ['asset' => $asset,'categories'=>$categories,'users'=>$users];
 
@@ -132,8 +143,12 @@ class AssetController extends Controller
 
     public function Search(Request $request)
     {
-	
-        $Search =$request->input('Search');
+	    
+		$times=Time_::orderBy('id','ASC')->get();
+        $Search =$request->input('week_search');
+        $Search2 =$request->input('time_search');
+		$Search1 =$request->input('category_search');
+		$weeks=Week::orderBy('id','ASC')->get();
 	if(Auth::user()->previlege_id!=3&&$Search==null)
 	{
 	$asset = Asset::orderBy('created_at', 'DESC')
@@ -143,25 +158,94 @@ class AssetController extends Controller
 	else
 	{
 	$asset = Asset::orderBy('created_at', 'DESC')
-            ->where('name', 'like','%'.$Search.'%')
+            ->where('week_id',$Search)
             ->get();
 	}        
         $category=Category::orderBy('created_at' ,'DESC') ->get();
         $lendings=Lending::whereNull('returntime')->get();
-        $data=['assets'=>$asset,'lendings'=>$lendings,'categories'=>$category];
+        $data=['assets'=>$asset,'lendings'=>$lendings,'categories'=>$category,'weeks'=>$weeks,'times'=>$times,'Search'=>$Search,'Search1'=>$Search1,'Search2'=>$Search2];
+        return view('admin.assets.index' ,$data);
+    }
+	public function Search1(Request $request)
+    {
+	    
+		$times=Time_::orderBy('id','ASC')->get();
+        $Search =$request->input('week_search');
+        $Search2 =$request->input('time_search');
+		$Search1 =$request->input('category_search');
+		$weeks=Week::orderBy('id','ASC')->get();
+	if(Auth::user()->previlege_id!=3&&$Search1==null)
+	{
+	$asset = Asset::orderBy('created_at', 'DESC')
+            ->where('id','0')
+            ->get();
+	}
+	else
+	{
+	$asset = Asset::orderBy('created_at', 'DESC')
+            ->where('category',$Search1)
+            ->get();
+	}        
+        $category=Category::orderBy('created_at' ,'DESC') ->get();
+        $lendings=Lending::whereNull('returntime')->get();
+        $data=['assets'=>$asset,'lendings'=>$lendings,'categories'=>$category,'weeks'=>$weeks,'times'=>$times,'Search'=>$Search,'Search1'=>$Search1,'Search2'=>$Search2];
+        return view('admin.assets.index' ,$data);
+    }
+		public function Search2(Request $request)
+    {
+	    
+		$times=Time_::orderBy('id','ASC')->get();
+        $Search =$request->input('week_search');
+        $Search2 =$request->input('time_search');
+		$Search1 =$request->input('category_search');
+		$weeks=Week::orderBy('id','ASC')->get();
+	if(Auth::user()->previlege_id!=3&&$Search2==null)
+	{
+	$asset = Asset::orderBy('created_at', 'DESC')
+            ->where('id','0')
+            ->get();
+	}
+	else
+	{
+	$asset = Asset::orderBy('created_at', 'DESC')
+            ->where('time_id',$Search2)
+            ->get();
+	}        
+        $category=Category::orderBy('created_at' ,'DESC') ->get();
+        $lendings=Lending::whereNull('returntime')->get();
+        $data=['assets'=>$asset,'lendings'=>$lendings,'categories'=>$category,'weeks'=>$weeks,'times'=>$times,'Search'=>$Search,'Search1'=>$Search1,'Search2'=>$Search2];
         return view('admin.assets.index' ,$data);
     }
 
     public function SearchAll(Request $request)
     {
         $asset = Asset::orderBy('created_at', 'DESC');
-
+        //$Search =$request->input('week_search');
         $Search =$request->input('Search');
+		//$Search1 =$request->input('category_search');
         $asset ->where('name', 'like','%'.$Search.'%')
             ->get();
         $category=Category::orderBy('created_at' ,'DESC') ->get();
         $data=['assets'=>$asset,'categories'=>$category];
         return view('admin.assets.index' ,$data);
+    }
+	public function SearchAll1(Request $request)
+    {
+        $Search =$request->input('week_search');
+        $Search2 =$request->input('time_search');
+		$Search1 =$request->input('category_search');
+        $asset=Asset::orderBy('created_at', 'DESC')->get();
+        $category=Category::orderBy('created_at' ,'DESC') ->get();
+        $lendings=Lending::whereNULL('returntime')->get();
+		$weeks=Week::orderBy('id','ASC')->get();
+		$times=Time_::orderBy('id','ASC')->get();
+		/*
+        if(!(Auth::user()->previlege_id==3)){
+           $asset=Asset::where('id','0')->get();
+	   }
+*/
+        $data=['assets'=>$asset,'lendings'=>$lendings,'categories'=>$category,'times'=>$times,'weeks'=>$weeks,'Search'=>$Search,'Search1'=>$Search1,'Search2'=>$Search2];
+        return view('admin.assets.index', $data);
     }
     public function scrapped($id)
     {

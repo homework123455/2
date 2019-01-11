@@ -11,16 +11,21 @@ class Asset extends Model
     protected $fillable = [
         'name',
         'category',
-        'date',
-        'cost',
+		
+        
         'status',
         'keeper',
         'lendable',
         'location',
         'remark',
 		'lendname',
+
+		'week_id',
+		'time_id'
+
         'file',
         'file1'
+
 		
        // 'vendor',
         //'warranty'
@@ -29,6 +34,14 @@ class Asset extends Model
     public function category() //  Asset (n) -> Category (1)
     {
         return $this->belongsTo(Category::class);
+    }
+	public function week() //  Asset (n) -> Category (1)
+    {
+        return $this->belongsTo(Week::class);
+    }
+	public function time_() //  Asset (n) -> Category (1)
+    {
+        return $this->belongsTo(Time_::class);
     }
 
     public function maintainces() //  Asset (1) -> Maintaince (n)

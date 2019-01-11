@@ -50,13 +50,23 @@
             </div>
 
             <div class="form-group">
-                <label>購置日期：</label>
-                <input name="date" class="form-control" placeholder="請輸入場地購置日期">
+                <label>開放星期：</label>
+				<select name="week_id" class="form-control">
+				@foreach($weeks as $week)
+                    <option value={{ $week->id }}>{{ $week->week }}</option>
+                    @endforeach
+					</select>
+               
             </div>
 
             <div class="form-group">
-                <label>成本：</label>
-                <input name="cost" class="form-control" placeholder="請輸入場地成本">
+                <label>時段：</label>
+				<select name="time_id" class="form-control">
+				@foreach($times as $time)
+                    <option value={{ $time->id }}>{{ $time->time_start}} ~ {{$time->time_end}}</option>
+                    @endforeach
+					</select>
+               
             </div>
 
             <div class="form-group">
@@ -65,13 +75,12 @@
                     <option value="正常使用中">正常使用中</option>
                     <option value="維修中">維修中</option>
                     <option value="租借中">租借中</option>
-                    <option value="待報廢">待報廢</option>
-                    <option value="已報廢">已報廢</option>
+                    
                 </select>
             </div>
 
             <div class="form-group">
-                <label>保管人：</label>
+                <label>負責人：</label>
                 <select name="keeper" class="form-control">
                     @foreach($users as $user)
                         <option value={{ $user->id }}>{{ $user->name }}</option>
@@ -88,19 +97,16 @@
             </div>
 
             <div class="form-group">
-                <label>放置地點：</label>
-                <input name="location" class="form-control" placeholder="請輸入場地放置地點">
+                <label>地點：</label>
+                <input name="location" class="form-control" placeholder="請輸入場地地點">
             </div>
 
             
 
-            <div class="form-group">
-                <label>耐用年限：</label>
-                <input name="warranty" class="form-control" placeholder="請輸入場地耐用年限">
-            </div>
+            
 
             <div class="form-group">
-                <label>備註：</label>
+                <label>詳細資訊：</label>
                 <textarea name="remark" class="form-control" rows="5"></textarea>
             </div>
 
