@@ -157,7 +157,7 @@
                                            
                                                 
                                             
-                                                <a href="{{ route('admin.maintainces.show', $maintaince->id) }}" class="btn btn-primary" role="button">處理</a>
+                                        <a href="{{ route('admin.maintainces.show', $maintaince->id) }}" class="btn btn-primary" role="button">處理</a>
                                             
                                         </td>
                                     </tr>
@@ -176,8 +176,24 @@
     <div class="col-lg-12">
         <ol class="breadcrumb">
             <li class="active">
-                <i class="fa fa-dashboard"></i> 超過時間
-				
+			<script language="JavaScript">
+
+function ShowTime(){
+　var NowDate=new Date();
+　var h=NowDate.getHours();
+　var m=NowDate.getMinutes();
+　var s=NowDate.getSeconds();　
+
+document.getElementById('showbox').innerHTML = '現在是'+h+'點'+m+'分'+s+'秒';
+
+setTimeout('ShowTime()',1000);
+}
+</script>
+<body onload="ShowTime()">
+
+
+                <i class="fa fa-dashboard" ></i> 超過時間 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-dashboard" id="showbox"></i>  
+	</body>			
 				
             </li>
         </ol>
@@ -188,7 +204,8 @@
                             <thead>
                             <tr>
                                 <th width="100" style="text-align: center">場地編號</th>
-                                <th width="300" style="text-align: center">場地名稱</th>
+                                <th width="200" style="text-align: center">場地名稱</th>
+								<th width="100" style="text-align: center">應歸還時間</th>
                                 <th width="100" style="text-align: center">租借人</th>
 								</tr>
                             </thead>
@@ -200,12 +217,13 @@
                                         <td style="text-align: center">
                                             {{ $asset_overtime->id }}
                                         </td>
-                                        <td style="text-align: center">
-                                            
-                                                    {{ $asset_overtime->name }}
-                                               
-                                        </td>
+                                        <td style="text-align: center">{{ $asset_overtime->name }}</td>  
+										@foreach($times as $time)
+										@if($time->id==$asset_overtime->time_id)
 										
+                                        <td style="text-align: center">{{ $time->time_end }}</td> 										
+                                         @endif
+										 @endforeach
                                         <td style="text-align: center">{{ $asset_overtime->lendname }}</td>
 										</tr>
                                     

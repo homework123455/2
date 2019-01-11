@@ -10,12 +10,7 @@
            <small></small>
         </h1>
     </div>
-        <div class="col-lg-12">
-        <h1 class="page-header">
-            <small></small>
-        </h1>
-
-        </div>
+        
         <div class="col-lg-12">
         <div class="row,page-header" style="margin-bottom: 20px; text-align: right" >
             <div>
@@ -27,7 +22,24 @@
     <div class="col-lg-12">
         <ol class="breadcrumb">
             <li class="active">
-                <i class="fa fa-dashboard" ></i> 超過時間
+                <script language="JavaScript">
+
+function ShowTime(){
+　var NowDate=new Date();
+　var h=NowDate.getHours();
+　var m=NowDate.getMinutes();
+　var s=NowDate.getSeconds();　
+
+document.getElementById('showbox').innerHTML = '現在是'+h+'點'+m+'分'+s+'秒';
+
+setTimeout('ShowTime()',1000);
+}
+</script>
+<body onload="ShowTime()">
+
+
+                <i class="fa fa-dashboard" ></i> 超過時間 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-dashboard" id="showbox"></i>  
+	</body>			
 				
 				
             </li>
