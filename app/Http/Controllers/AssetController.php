@@ -23,6 +23,7 @@ class AssetController extends Controller
     //
     public function index(Request $request)
     {
+		$maintaincesALL=Maintaince::orderBy('created_at','DESC');
 		$Search =$request->input('week_search');
         $Search2 =$request->input('time_search');
 		$Search1 =$request->input('category_search');
@@ -31,13 +32,13 @@ class AssetController extends Controller
         $lendings=Lending::whereNULL('returntime')->get();
 		$weeks=Week::orderBy('id','ASC')->get();
 		$times=Time_::orderBy('id','ASC')->get();
-		
+		$maintainces=$maintaincesALL->whereIn('status',array('申請中'))->get();
 		/*
         if(!(Auth::user()->previlege_id==3)){
            $asset=Asset::where('id','0')->get();
 	   }
 */
-        $data=['assets'=>$asset,'lendings'=>$lendings,'categories'=>$category,'times'=>$times,'weeks'=>$weeks,'Search'=>$Search,'Search1'=>$Search1,'Search2'=>$Search2];
+        $data=['assets'=>$asset,'lendings'=>$lendings,'categories'=>$category,'times'=>$times,'weeks'=>$weeks,'Search'=>$Search,'Search1'=>$Search1,'Search2'=>$Search2,'maintainces'=>$maintainces];
         return view('admin.assets.index', $data);
     }
     public function create()
@@ -54,12 +55,14 @@ class AssetController extends Controller
     public function edit($id)
     {
         //$array = ["正常使用中","維修中","租借中","待報廢","已報廢"];
+		$weeks=Week::orderBy('id','ASC')->get();
+		$times=Time_::orderBy('id','ASC')->get();
         $categories=Category::orderBy('created_at' ,'DESC') ->get();
         $users=User::orderBy('created_at' ,'DESC') ->get();
        // $vendors=Vendor::orderBy('created_at' ,'DESC') ->get();
 	  
         $asset=Asset::find($id);
-        $data = ['asset' => $asset,'categories'=>$categories,'users'=>$users];
+        $data = ['asset' => $asset,'categories'=>$categories,'users'=>$users,'times'=>$times,'weeks'=>$weeks];
 
         return view('admin.assets.edit', $data);
     }
@@ -76,11 +79,12 @@ class AssetController extends Controller
         $filePath =[];  // 定义空数组用来存放图片路径
         foreach ($file as $key => $value) {
             // 判断图片上传中是否出错
-
+/*
                 if (!$value->isValid()) {
-                    exit("上傳圖片出錯，請重試！");
+                   // exit"<script> alert('上傳圖片出錯，請重試！')</script>";
+					echo '<script>alert('.上傳圖片出錯，請重試！.');</script>';
                 }
-
+*/
             if(!empty($value)){//此处防止没有多文件上传的情况
                 $allowed_extensions = ["png", "jpg", "gif"];
                 if ($value->getClientOriginalExtension() && !in_array($value->getClientOriginalExtension(), $allowed_extensions)) {
@@ -99,14 +103,15 @@ class AssetController extends Controller
         Asset::create([
             'name'=>$request->name,
             'category'=>$request->category,
-            'date'=>$request->date,
+            //'date'=>$request->date,
 
             'status'=>$request->status,
             'keeper'=>$request->keeper,
-
+            'week_id'=>$request->week_id,
+			'time_id'=>$request->time_id,
             'lendable'=>$request->lendable,
             'location'=>$request->location,
-            'warranty'=>$request->warranty,
+            //'warranty'=>$request->warranty,
             'remark'=>$request->remark,
 
             'file'=>$filePath[0],
@@ -132,10 +137,11 @@ class AssetController extends Controller
         $maintainceitems=MaintainceItem::orderBy('created_at', 'ASC')->get();
         $assetmaintainces=Maintaince::where('asset_id',$asset->id)->where('status','通過')->get();
         $lendings=Lending::where('returntime',null)->get();
-
+        $times=Time_::orderBy('id','ASC')->get();
+		$weeks=Week::orderBy('id','ASC')->get();
         $data = ['asset' => $asset,'category'=>$category,'user'=>$user,
                  'assetmaintainces'=>$assetmaintainces,'maintainceitems'=>$maintainceitems,
-                'lendings'=>$lendings];
+                'lendings'=>$lendings,'times'=>$times,'weeks'=>$weeks];
 
         return view('admin.assets.show', $data);
     }

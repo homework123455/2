@@ -40,13 +40,34 @@
             </div>
 
             <div class="form-group">
-                <label>購置日期：</label>
-                <input name="date" class="form-control" placeholder="請輸入場地購置日期" value="{{$asset->date}}">
+                <label>開放星期：</label>
+				<select name="week_id" class="form-control">
+	            <option value="">請選擇</option>
+				@foreach($weeks as $week)
+				@if($week->id==$asset->week_id)
+				 
+                 <option selected="true" value={{ $week->id }} >{{ $week->week }}</option>
+			 @else
+				  <option  value={{ $week->id }}>{{ $week->week }}</option>
+			  @endif
+                    @endforeach
+					</select>
+               
             </div>
 
             <div class="form-group">
-                <label>成本：</label>
-                <input name="cost" class="form-control" placeholder="請輸入場地成本" value="{{$asset->cost}}">
+                <label>時段：</label>
+				<select name="time_id" class="form-control">
+	<option value="">請選擇</option>
+				@foreach($times as $time)
+				@if($time->id==$asset->time_id)
+                    <option  selected="true" value={{ $time->id }}>{{ $time->time_start}} ~ {{$time->time_end}}</option>
+				@else
+				  <option  value={{ $time->id }}>{{ $time->time_start}} ~ {{$time->time_end}}</option>
+			  @endif
+                    @endforeach
+					</select>
+               
             </div>
 
             <div class="form-group">
@@ -55,7 +76,7 @@
             </div>
 
             <div class="form-group">
-                <label>保管人：</label>
+                <label>負責人：</label>
                 <select name="keeper" class="form-control">
                     @foreach($users as $user)
                         @if($asset->keeper==$user->id)

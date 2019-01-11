@@ -44,8 +44,8 @@ public function __construct()
         $announcements = Announcement::orderBy('created_at', 'DESC')->take(3)->get();
         $users=User::orderBy('created_at' ,'DESC') ->get();
         $departmaentU=$users->where('department_id', Auth::user()->department_id);
-		
-        $time_nows=date("H:i:s");
+		//$time_nowid=Carbon::now('Asia/Taipei');
+        $time_nows=date("H:i:s", time()+8*60*60);
 		//$time_nows_id=strtotime($time_nows);
 		//$time_ids=Time_::find($assets->time_id);
 		//foreach($time_nows as $time_now ){
@@ -58,9 +58,11 @@ public function __construct()
 					$time_nowid=$time->id;
 					//$asset_timeend=$time->time_end;
 					}
-					
-			//$time_nowid=$time_nows;
-		//}
+			else{		
+			$time_nowid=Carbon::now('Asia/Taipei');
+			//$dt->timezone = new DateTimeZone('Europe/London');
+
+		}
 			
 		}
         $asset_overtimes=$assets1->where('time_id', '!=', $time_nowid)->where('status','租借中')->get();
