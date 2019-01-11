@@ -21,7 +21,7 @@ class Asset extends Model
 		'lendname',
 
 		'week_id',
-		'time_id'
+		'time_id',
 
         'file',
         'file1'

@@ -26,16 +26,21 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <form action="/admin/assets" method="POST" role="form" enctype="multipart/form-data">
+        <form action="/admin/assets" method="POST"  role="form"   enctype="multipart/form-data">
             {{ csrf_field() }}
+       
+
 
             <div class="form-group">
                 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
-                    <legend>上傳其他房屋圖片</legend>
+                    <label>上傳場地圖片:</label>
                 </fieldset>
 
-                <input type="file" name="img[]" accept="image/jpeg,image/jpg,image/gif,image/png" style="display: block;margin-bottom: 5px;">
-                <input type="file" name="img[]" accept="image/jpeg,image/jpg,image/gif,image/png" style="display: block;margin-bottom: 5px;">
+                <input type="file" name="img[]"  accept="image/jpeg,image/jpg,image/gif,image/png" style="display: block;margin-bottom: 5px;">
+				 <input type="file" name="img[]"  accept="image/jpeg,image/jpg,image/gif,image/png" style="display: block;margin-bottom: 5px;">
+                </div>
+				
+				<div class="form-group">
                 <label>場地名稱：</label>
                 <input name="name" class="form-control" placeholder="請輸入場地名稱">
             </div>
