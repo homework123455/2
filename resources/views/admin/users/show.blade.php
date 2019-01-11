@@ -52,6 +52,7 @@
                     <label name="previlege_id">{{$previlege->name}}</label>
             </div>
 
+
         <div>
             <a href="{{ route('admin.dashboard.index') }}" class="btn btn-success">返回</a>
         </div>

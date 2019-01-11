@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Department;
 use App\Previlege;
 use App\User;
+use App\Wrong;
 use Illuminate\Http\Request;
 use App\Http\Requests\UsersPostRequest;
+use App\Http\Requests\WrongRequest;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
@@ -43,6 +45,8 @@ class UsersController extends Controller
         $data = ['user'=>$user,'previleges'=>$previleges,'departments'=>$departments];
         return view('admin.users.edit', $data);
     }
+
+
 
     public function update(Request $request, $id)
     {
@@ -81,12 +85,12 @@ class UsersController extends Controller
 
     public function data($id)
     {
-        $user=User::find($id);
-        $previlege=Previlege::find($user->previlege_id);
+$user=User::find($id);
+$previlege=Previlege::find($user->previlege_id);
 
-        $data = ['user'=>$user,'previlege'=>$previlege];
-        return view('admin.users.show', $data);
-    }
+$data = ['user'=>$user,'previlege'=>$previlege];
+return view('admin.users.show', $data);
+}
 
     public function Search(Request $request)
     {
@@ -94,8 +98,30 @@ class UsersController extends Controller
         $user = User::orderBy('created_at', 'DESC')
             ->where('name', 'like','%'.$Search.'%')
             ->get();
-        $data=['user'=>user];
+        $data=['user'=>$user];
         return view('admin.users.index' ,$data);
+    }
+    public function wrongdata($id)
+{
+    $user=User::find($id);
+    $wrong=Wrong::orderBy('id','ASC')->get();
+    $data = ['user'=>$user,'wrong'=>$wrong];
+    return view('admin.users.showwrong', $data);
+}
+    public function wrongcreate($id)
+{
+    $user=User::find($id);
+
+    $data=['user'=>$user];
+    return view('admin.users.wrongcreate',$data);
+}
+    public function wrongstore(WrongRequest $request,$id)
+    {
+        Wrong::create([
+            'user_id'=>$id,
+            'wrongname'=>$request->wrongname,
+            'date'=>$request->date
+        ]);
     }
 
 }

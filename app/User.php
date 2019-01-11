@@ -56,4 +56,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Lending::class);
     }
+    public function wrongs() //  User (1) -> wrong (n)
+    {
+        return $this->hasMany(Wrong::class);
+    }
 }

@@ -81,6 +81,7 @@
                                                 <td width="100" >
                                                     <a class="btn btn-primary" role="button" href="{{ route('admin.users.edit', $user->id) }}" >修改</a>
                                                 </td>
+
                                                 <!-- 刪除按鈕 -->
                                                 <td width="100">
                                                     <!-- Button trigger modal -->
@@ -120,6 +121,9 @@
                                                         </div>
                                                     </div>
 
+                                                </td>
+                                                <td width="100" >
+                                                    <a class="btn btn-warning" role="button"  href="{{ route('admin.users.showwrong', $user->id) }}" >違規</a>
                                                 </td>
                                             </tr>
                                         </tbody>
