@@ -115,7 +115,13 @@ Route::patch('assets/{id}/scrapped1', ['as' => 'admin.assets.scrapped1', 'uses' 
     Route::patch('users/{id}', ['as' => 'admin.users.update', 'uses' => 'UsersController@update']);     //修改使用者(2)
     Route::delete('users/{id}', ['as' => 'admin.users.destroy', 'uses' => 'UsersController@destroy']);   //刪除使用者
     Route::post('users/search'  , ['as' => 'admin.users.search', 'uses' => 'UsersController@Search']);  //查詢使用者
-    Route::get('users/{id}/data', ['as' => 'admin.users.data', 'uses' => 'UsersController@data']); 
+    Route::get('users/{id}/data', ['as' => 'admin.users.data', 'uses' => 'UsersController@data']);
+    Route::get('users/{id}/wrongdata', ['as' => 'admin.users.showwrong', 'uses' => 'UsersController@wrongdata']);
+    Route::get('users/{id}/wrongdata/create', ['as' => 'admin.users.showwrong.wrongcreate', 'uses' => 'UsersController@wrongcreate']);
+    Route::patch('users/{id}/wrongdata/store', ['as' => 'admin.users.showwrong.wrongstore', 'uses' => 'UsersController@wrongstore']);
+
+
+
 });
 
 Route::get('/tracy',function(){throw new \Exception('Tracy works');} );
