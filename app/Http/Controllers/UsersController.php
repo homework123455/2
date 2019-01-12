@@ -125,7 +125,38 @@ class UsersController extends Controller
             'wrongname'=>$request->wrongname,
             'date'=>$request->date
         ]);
-        return view('admin.users.showwrong',$data);
+        return redirect()->route('admin.users.showwrong', $data);
+    }
+	public function destroy1($id,$wid)
+    {
+		
+		$user=User::find($id);
+        $wrong=Wrong::orderBy('id','ASC')->get();
+        $data = ['user'=>$user,'wrong'=>$wrong];
+        Wrong::destroy($wid);
+		
+        return redirect()->route('admin.users.showwrong', $data);
+    }
+	public function wrongedit($id,$wid)
+    {
+        $user=User::find($id);
+		$wid=Wrong::find($wid);
+        $wrong=Wrong::orderBy('id','ASC')->get();
+        $data = ['user'=>$user,'wrong'=>$wrong,'wid'=>$wid];
+        return view('admin.users.wrongedit', $data);
+    }
+
+
+
+    public function update1(Request $request,$id,$wid)
+    {
+
+        $user=User::find($id);
+        $wrong=Wrong::find($wid);
+        $data = ['user'=>$user,'wrong'=>$wrong];
+        $wrong->update($request->all());
+
+        return redirect()->route('admin.users.showwrong', $data);
     }
 
 

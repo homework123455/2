@@ -24,7 +24,7 @@
 
 <div class="row">
     <div class="col-lg-12">
-            <form action="/admin/users/{{$user->id}}/wrongdata/store" method="POST" role="form">
+            <form action="/admin/users/{{$user->id}}/wrongdata" method="POST" role="form">
                 {{ csrf_field() }}
                 {{ method_field('PATCH') }}
 

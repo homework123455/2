@@ -37,10 +37,11 @@
                 <thead>
                     <tr>
 
-                        <th width="120" style="text-align: center">姓名</th>
-                        <th width="100" style="text-align: center">違規編號</th>
-                        <th width="120" style="text-align: center">違規內容</th>
-                        <th width="80 " style="text-align: center">違規時間</th>
+                        <th width="200" style="text-align: center">姓名</th>
+                        <th width="200" style="text-align: center">違規編號</th>
+                        <th width="500" style="text-align: center">違規內容</th>
+                        <th width="200 " style="text-align: center">違規時間</th>
+						<th width="1" style="text-align: center">功能</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -50,9 +51,27 @@
                         <td style="text-align: center">{{$user->name}}</td>
                         <td style="text-align: center">{{$wrongs->id}}</td>
                         <td style="text-align: center">{{$wrongs->wrongname}}</td>
+						
                         <td style="text-align: center">{{$wrongs->date}}</td>
-
-
+						<td>
+                            <table>
+                                <tbody>
+                                <tr class="table-text" style="text-align: center">
+                        <td class="table-text" style="text-align: center">
+                          <form action="{{ route('admin.users.showwrong.destroy1', ['wid'=>$wrongs->id,'id'=>$user->id]) }}" method="POST">
+                             {{ csrf_field() }}
+                             {{ method_field('DELETE') }}
+                             <button class="btn btn-danger" width="10" >刪除</button>
+                             </form>
+                                              
+                            </td>
+							<td class="table-text" style="text-align: center" width="10">
+							<a class="btn btn-primary" role="button" width="1" href="{{ route('admin.users.showwrong.wrongedit', ['wid'=>$wrongs->id,'id'=>$user->id]) }}" >修改</a>
+							</td>
+                         </tr>
+                                </tbody>
+                            </table>
+                        </td>
 
 
 

@@ -121,7 +121,10 @@ Route::patch('assets/{id}/scrapped1', ['as' => 'admin.assets.scrapped1', 'uses' 
     Route::get('users/{id}/data', ['as' => 'admin.users.data', 'uses' => 'UsersController@data']);
     Route::get('users/{id}/wrongdata', ['as' => 'admin.users.showwrong', 'uses' => 'UsersController@wrongdata']);
     Route::get('users/{id}/wrongdata/create', ['as' => 'admin.users.showwrong.wrongcreate', 'uses' => 'UsersController@wrongcreate']);
-    Route::patch('users/{id}/wrongdata/store', ['as' => 'admin.users.showwrong.wrongstore', 'uses' => 'UsersController@wrongstore']);
+    Route::patch('users/{id}/wrongdata', ['as' => 'admin.users.showwrong.wrongstore', 'uses' => 'UsersController@wrongstore']);
+	Route::delete('users/{id}/wrongdata/{wid}', ['as' => 'admin.users.showwrong.destroy1', 'uses' => 'UsersController@destroy1']);
+	Route::get('users/{id}/wrongdata/{wid}/wrongedit', ['as' => 'admin.users.showwrong.wrongedit'   , 'uses' => 'UsersController@wrongedit']);
+    Route::patch('users/{id}/wrongdata/{wid}'   , ['as' => 'admin.users.showwrong.update1' , 'uses' => 'UsersController@update1']);
 
 
 

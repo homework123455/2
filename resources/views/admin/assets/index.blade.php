@@ -46,7 +46,8 @@
 			  @endif
                     @endforeach
 					</select>
-
+					
+<div>
 <label>時段查詢：</label>
     {{ csrf_field() }}
 
@@ -60,8 +61,10 @@
 			  @endif
                     @endforeach
 					</select>
-
-
+</div>
+<div>
+ <label>場地類別查詢：</label>
+    {{ csrf_field() }}
      <select name="category_search" class="form-control">
 	 <option value="">請選擇</option>
                     @foreach($categories as $category)
@@ -73,7 +76,7 @@
                     
                     @endforeach
                 </select>
-        
+        </div>
         <span class="input-group-btn">
             <button class="btn btn-info"><i class="fa fa-search"></i></button>
         </span>
