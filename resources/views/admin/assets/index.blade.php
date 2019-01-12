@@ -31,9 +31,10 @@
 <button class="btn btn-info"><i class="fa fa-search"></i></button>
     </span>
 	</form>
+
  <label>星期查詢：</label>  <form action="{{ route('admin.assets.search10') }}" method="POST">
     {{ csrf_field() }}
-        <span class="input-group-btn">
+
     <select name="week_search" class="form-control">
 	<option value="">請選擇</option>
 				@foreach($weeks as $week)
@@ -45,6 +46,7 @@
 			  @endif
                     @endforeach
 					</select>
+
 <label>時段查詢：</label>
     {{ csrf_field() }}
 
@@ -59,8 +61,6 @@
                     @endforeach
 					</select>
 
- <label>場地類別查詢：</label>
-    {{ csrf_field() }}
 
      <select name="category_search" class="form-control">
 	 <option value="">請選擇</option>
@@ -73,8 +73,10 @@
                     
                     @endforeach
                 </select>
+        
+        <span class="input-group-btn">
             <button class="btn btn-info"><i class="fa fa-search"></i></button>
-    </span>
+        </span>
 </form>
 
 </div>

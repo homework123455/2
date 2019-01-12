@@ -205,32 +205,32 @@ class AssetController extends Controller
         $Search2 = $request->input('time_search');
         $Search1 = $request->input('category_search');
         $weeks = Week::orderBy('id', 'ASC')->get();
-        if(Auth::user()->previlege_id == 3 && $Search == "" && $Search1 ==""&& $Search2 =="") {
+        if( $Search == "" && $Search1 ==""&& $Search2 =="") {
             $asset = Asset::orderBy('created_at', 'DESC')
                 ->where('id', '0')
                 ->get();
         }
-        else if (Auth::user()->previlege_id == 3 && $Search2 =="" && $Search1 =="") {
+        else if ( $Search2 =="" && $Search1 =="") {
             $asset = Asset::orderBy('created_at', 'DESC')
                 ->where('week_id', $Search)
                 ->get();
-        } else if (Auth::user()->previlege_id == 3 && $Search == "" &&$Search1 == "") {
+        } else if ( $Search == "" &&$Search1 == "") {
             $asset = Asset::orderBy('created_at', 'DESC')
                 ->where('time_id', $Search2)
                 ->get();
-        } else if (Auth::user()->previlege_id == 3 && $Search =="" && $Search2 =="") {
+        } else if ( $Search =="" && $Search2 =="") {
             $asset = Asset::orderBy('created_at', 'DESC')
                 ->where('category', $Search1)
                 ->get();
-        } else if (Auth::user()->previlege_id == 3 && $Search == "") {
+        } else if ( $Search == "") {
             $asset = Asset::orderBy('created_at', 'DESC')
                 ->where('time_id', $Search2)->where('category', $Search1)
                 ->get();
-        } else if (Auth::user()->previlege_id == 3 && $Search1 == "") {
+        } else if ($Search1 == "") {
             $asset = Asset::orderBy('created_at', 'DESC')
                 ->where('time_id', $Search2)->where('week_id', $Search)
                 ->get();
-        } else if (Auth::user()->previlege_id == 3 && $Search2 == "") {
+        } else if ( $Search2 == "") {
             $asset = Asset::orderBy('created_at', 'DESC')
                 ->where('category', $Search1)->where('week_id', $Search)
                 ->get();
