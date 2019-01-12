@@ -49,7 +49,7 @@ Route::group(['prefix' => 'admin'], function() {
     Route::delete('assets/{id}', ['as' => 'admin.assets.destroy', 'uses' => 'AssetController@destroy']);   //刪除資產
     Route::post('assets/search'  , ['as' => 'admin.assets.search', 'uses' => 'AssetController@Search']); //查詢星期
     Route::post('assets/search1'  , ['as' => 'admin.assets.search1', 'uses' => 'AssetController@Search1']);	//查詢場地類別
-	Route::post('assets/search2'  , ['as' => 'admin.assets.search2', 'uses' => 'AssetController@Search2']);	//查詢開放時段
+	Route::post('assets/search10'  , ['as' => 'admin.assets.search10', 'uses' => 'AssetController@Search10']);	//查詢開放時段
 	Route::post('assets/searchALL1'  , ['as' => 'admin.assets.searchALL1', 'uses' => 'AssetController@searchALL1']);	//查詢開放時段
     Route::get('assets/{id}/data', ['as' => 'admin.assets.data', 'uses' => 'AssetController@data']);       //資產詳細資料
 

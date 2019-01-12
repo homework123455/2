@@ -13,16 +13,16 @@
         </h1>
     </div>
 <div class="row">
-    <div class="col-lg-12">
-        <h1 class="page-header">
-		@if(Auth::user()->previlege_id==3)
-            場地管理 <small>所有場地列表</small>
-		@else
-			查詢場地 <small>查詢場地列表</small>
-		@endif
-        </h1>
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                @if(Auth::user()->previlege_id==3)
+                    場地管理 <small>所有場地列表</small>
+                @else
+                    查詢場地 <small>查詢場地列表</small>
+                @endif
+            </h1>
+        </div>
     </div>
-</div>
 <!-- /.row -->
 <div class="input-group custom-search-form">
 <label>顯示全部：</label>  <form action="{{ route('admin.assets.searchALL1') }}" method="POST">
@@ -31,9 +31,9 @@
 <button class="btn btn-info"><i class="fa fa-search"></i></button>
     </span>
 	</form>
- <label>星期查詢：</label>  <form action="{{ route('admin.assets.search') }}" method="POST">
+ <label>星期查詢：</label>  <form action="{{ route('admin.assets.search10') }}" method="POST">
     {{ csrf_field() }}
-    <span class="input-group-btn">
+        <span class="input-group-btn">
     <select name="week_search" class="form-control">
 	<option value="">請選擇</option>
 				@foreach($weeks as $week)
@@ -45,14 +45,11 @@
 			  @endif
                     @endforeach
 					</select>
-    <button class="btn btn-info"><i class="fa fa-search"></i></button>
-    </span>
-</form>
-<label>時段查詢：</label>  <form action="{{ route('admin.assets.search2') }}" method="POST">
+<label>時段查詢：</label>
     {{ csrf_field() }}
-    <span class="input-group-btn">
+
     <select name="time_search" class="form-control">
-	<option value="">請選擇</option>
+	<option value="" >請選擇</option>
 				@foreach($times as $time)
 				@if($time->id==$Search2)
                     <option  selected="true" value={{ $time->id }}>{{ $time->time_start}} ~ {{$time->time_end}}</option>
@@ -61,12 +58,10 @@
 			  @endif
                     @endforeach
 					</select>
-    <button class="btn btn-info"><i class="fa fa-search"></i></button>
-    </span>
-</form>
- <label>場地類別查詢：</label>  <form action="{{ route('admin.assets.search1') }}" method="POST">
+
+ <label>場地類別查詢：</label>
     {{ csrf_field() }}
-    <span class="input-group-btn">
+
      <select name="category_search" class="form-control">
 	 <option value="">請選擇</option>
                     @foreach($categories as $category)
@@ -78,7 +73,7 @@
                     
                     @endforeach
                 </select>
-    <button class="btn btn-info"><i class="fa fa-search"></i></button>
+            <button class="btn btn-info"><i class="fa fa-search"></i></button>
     </span>
 </form>
 
