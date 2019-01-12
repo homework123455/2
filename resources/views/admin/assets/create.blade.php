@@ -37,7 +37,7 @@
                 </fieldset>
 
                 <input type="file" name="img[]"  accept="image/jpeg,image/jpg,image/gif,image/png" style="display: block;margin-bottom: 5px;">
-				 <input type="file" name="img[]"  accept="image/jpeg,image/jpg,image/gif,image/png" style="display: block;margin-bottom: 5px;">
+				
                 </div>
 				
 				<div class="form-group">

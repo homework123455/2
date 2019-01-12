@@ -37,6 +37,8 @@ class AssetRequest extends FormRequest
             // 'remark',
             //'vendor'=>'required',
             //'warranty'=>'required',
+			'img'=>'required'
+			//'file1'=>'required|image|size:500'
 
         ];
     }

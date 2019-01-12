@@ -82,12 +82,12 @@ class AssetController extends Controller
             // 判断图片上传中是否出错
 /*
                 if (!$value->isValid()) {
-                   // exit"<script> alert('上傳圖片出錯，請重試！')</script>";
-					echo '<script>alert('.上傳圖片出錯，請重試！.');</script>';
+                    exit('上傳圖片出錯，請重試！');
+					//echo '<script>alert('.上傳圖片出錯，請重試！.');</script>';
                 }
 */
             if(!empty($value)){//此处防止没有多文件上传的情况
-                $allowed_extensions = ["png", "jpg", "gif"];
+                $allowed_extensions = ["png", "jpg", "gif","JPG"];
                 if ($value->getClientOriginalExtension() && !in_array($value->getClientOriginalExtension(), $allowed_extensions)) {
                     exit('您只能上傳PNG、JPG或GIF格式的圖片！');
                 }
@@ -116,7 +116,7 @@ class AssetController extends Controller
             'remark'=>$request->remark,
 
             'file'=>$filePath[0],
-            'file1'=>$filePath[1]
+            //'file1'=>$filePath[1]
 
 
         ]);

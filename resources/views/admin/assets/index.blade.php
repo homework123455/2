@@ -133,7 +133,11 @@
                             {{ $asset->id }}
                         </td>
                         <td style="text-align: center">
-                            {{ $asset->name }}
+						@if(Auth::user()->previlege_id==3)
+                         {{ $asset->name }}
+					 @else
+						 <a href="{{ route('admin.assets.data', $asset->id) }}">{{ $asset->name }}</a>
+						 @endif
                         </td>
                         <td style="text-align: center">
                             @foreach($categories as $category)
@@ -143,7 +147,13 @@
                             @endforeach
                         </td>
                         <td style="text-align: center">{{ $asset->location }}</td>
-                        <td style="text-align: center">{{ $asset->status }}</td>
+						@if($asset->status =='正常使用中')
+                    <td style="text-align: center"><font color="#01DF3A"  >{{ $asset->status }}</font></td>
+                    @elseif($asset->status =='租借中')
+                    <td style="text-align: center"><font color="#FF0000"  >{{ $asset->status }}</font></td>
+					@else
+						<td style="text-align: center"><font color="#FF8000"  >{{ $asset->status }}</font></td>
+                     @endif
 						@foreach($times as $time)
 						@foreach($weeks as $week)
 						@if($asset->time_id==$time->id)
@@ -208,16 +218,27 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
+                                                            </div>	
+															 
                                                     @endif
                                                 @endforeach
+												
                                             @else
-                                                <a class="btn btn-primary disabled" role="button">歸還</a>
+												
+												@foreach($maintainces as $maintaince)
+												@if($maintaince->asset_id==$asset->id)
+												<a href="{{ route('admin.maintainces.show', $maintaince->id) }}"  class="btn btn-success" role="button">處理</a>
+                                                            <!-- Modal -->
+                                                           
+                                            </td>
                                             @endif
-                                        </td>
+											@endforeach
+                                        
+                                        @endif  
+                                       
 
                                         <td width="80" >
-                                            @if((!($asset->status=='維修中')||$asset->status=='正常使用中'))
+                                            @if(($asset->status=='正常使用中'))
                                                 <a class="btn btn-primary" role="button" href="{{ route('admin.assets.edit', $asset->id) }}" >修改</a>
                                             @else
                                                 <a class="btn btn-primary    disabled" role="button" href="{{ route('admin.assets.edit', $asset->id) }}" >修改</a>
