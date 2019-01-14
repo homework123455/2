@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Announcement;
+use App\New_;
 use App\Application;
 use App\Asset;
 use App\Week;
@@ -41,7 +41,7 @@ public function __construct()
 		$assets2=Asset::orderBy('created_at', 'ASC');
         //$maintainces=$maintaincesALL->whereNotIn('status',array('正常使用中','通過'))->get();
 		
-        $announcements = Announcement::orderBy('created_at', 'DESC')->take(3)->get();
+        $news = New_::orderBy('created_at', 'DESC')->take(3)->get();
         $users=User::orderBy('created_at' ,'DESC') ->get();
         $departmaentU=$users->where('department_id', Auth::user()->department_id);
 		//$time_nowid=Carbon::now('Asia/Taipei');
@@ -78,7 +78,7 @@ public function __construct()
 		$asset_overtimes1=$assets2->where('time_id', '!=', $time_nowid)->where('status','租借中')->where('lendname',$user2)->get();
         $data=['applications'=>$applications,'maintainces'=>$maintainces,'maintainces_A'=>$maintaincesA,
 		'maintainces_B'=>$maintaincesB,'assets'=>$assets,
-            'applicationsA'=>$applicationsA,'announcements'=>$announcements,
+            'applicationsA'=>$applicationsA,'news'=>$news,
             "users"=>$users,'departmaentU'=>$departmaentU,'username'=>$username,'times'=>$times,'weeks'=>$weeks,'asset_overtimes'=>$asset_overtimes,'asset_overtimes1'=>$asset_overtimes1,'time_nowid'=>$time_nowid,'time_nows'=>$time_nows];
         if (Auth::user()->previlege_id==3)
             return view('admin.dashboard.mis',$data);

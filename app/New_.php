@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Announcement extends Model
+class New_ extends Model
 {
-    protected $table = 'announcements';
+    protected $table = 'news';
     protected $fillable = [
         'user_id',
         'title',

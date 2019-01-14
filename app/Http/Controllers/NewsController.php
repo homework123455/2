@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Announcement;
+use App\New_;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use Carbon\Carbon;
@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-class AnnouncementsController extends Controller
+class NewsController extends Controller
 {
     public function __construct()
     {
@@ -19,60 +19,60 @@ class AnnouncementsController extends Controller
     //
     public function index()
     {
-        $announcements = Announcement::orderBy('created_at', 'DESC')->get();
+        $news = New_::orderBy('created_at', 'DESC')->get();
         $users=User::orderBy('created_at' ,'DESC') ->get();
-        $data = ['announcements' => $announcements,'users'=> $users];
+        $data = ['news' => $news,'users'=> $users];
 
-        return view('admin.announcements.index', $data);
+        return view('admin.news.index', $data);
     }
 
     public function create()
     {
         $today = Carbon::today();
         $data = ['today'=>$today];
-        return view('admin.announcements.create',$data);
+        return view('admin.news.create',$data);
     }
 
     public function edit($id)
     {
-        $announcements = Announcement::find($id);
-        $data = ['announcements' => $announcements];
+        $news = New_::find($id);
+        $data = ['news' => $news];
 
-        return view('admin.announcements.edit', $data);
+        return view('admin.news.edit', $data);
     }
 
     public function update(Request $request, $id)
     {
-        $announcements = Announcement::find($id);
-        $announcements->update($request->all());
+        $news = New_::find($id);
+        $news->update($request->all());
 
-        return redirect()->route('admin.announcements.index');
+        return redirect()->route('admin.news.index');
     }
 
     public function store(Request  $request)
     {
-        Announcement::create([
+        New_::create([
             'user_id'=>Auth::user()->id,
             'title'=>$request->title,
             'content'=>$request->content1,
             'date'=>$request->date
         ]);
-        return redirect()->route('admin.announcements.index');
+        return redirect()->route('admin.news.index');
     }
 
     public function destroy($id)
     {
-        Announcement::destroy($id);
-        return redirect()->route('admin.announcements.index');
+        New_::destroy($id);
+        return redirect()->route('admin.news.index');
     }
     public function show(Request $request)
     {
         $Search =$request->input('Search');
-        $announcements = Announcement::orderBy('created_at', 'DESC')
+        $news = New_::orderBy('created_at', 'DESC')
             ->when($Search, function ($query) use ($Search) {
                 return $query->where('name', 'like','%'.$Search.'%');
             })->get();
-        $data=['announcements'=>$announcements];
-        return view('admin.announcements.index' ,$data);
+        $data=['news'=>$news];
+        return view('admin.news.index' ,$data);
     }
 }

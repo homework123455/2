@@ -23,13 +23,13 @@ Route::get('/'         , ['as' => 'home.index' , 'uses' => 'HomeController@index
 Route::group(['prefix' => 'admin'], function() {
     Route::get('/', ['as' => 'admin.dashboard.index', 'uses' => 'AdminDashboardController@index']);
 	/////
-	Route::get('announcements'         , ['as' => 'admin.announcements.index' , 'uses' => 'AnnouncementsController@index']);
-    Route::get('announcements/create'   , ['as' => 'admin.announcements.create' , 'uses' => 'AnnouncementsController@create']);
-    Route::post('announcements'         , ['as' => 'admin.announcements.store'  , 'uses' => 'AnnouncementsController@store']);
-    Route::get('announcements/{id}/edit', ['as' => 'admin.announcements.edit'   , 'uses' => 'AnnouncementsController@edit']);
-    Route::patch('announcements/{id}'   , ['as' => 'admin.announcements.update' , 'uses' => 'AnnouncementsController@update']);
-    Route::delete('announcements/{id}'  , ['as' => 'admin.announcements.destroy', 'uses' => 'AnnouncementsController@destroy']);
-    Route::post('announcements/show'  , ['as' => 'admin.announcements.show', 'uses' => 'AnnouncementsController@show']);
+	Route::get('announcements'         , ['as' => 'admin.news.index' , 'uses' => 'NewsController@index']);
+    Route::get('news/create'   , ['as' => 'admin.news.create' , 'uses' => 'NewsController@create']);
+    Route::post('news'         , ['as' => 'admin.news.store'  , 'uses' => 'NewsController@store']);
+    Route::get('news/{id}/edit', ['as' => 'admin.news.edit'   , 'uses' => 'NewsController@edit']);
+    Route::patch('news/{id}'   , ['as' => 'admin.news.update' , 'uses' => 'NewsController@update']);
+    Route::delete('news/{id}'  , ['as' => 'admin.news.destroy', 'uses' => 'NewsController@destroy']);
+    Route::post('news/show'  , ['as' => 'admin.news.show', 'uses' => 'NewsController@show']);
 
     Route::get('user',['as' => 'admin.dashboard.user', 'uses' => 'AdminDashboardController@index']);
     Route::get('mis',['as' => 'admin.dashboard.mis', 'uses' => 'AdminDashboardController@index']);

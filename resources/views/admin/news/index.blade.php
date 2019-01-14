@@ -13,7 +13,7 @@
 </div>
 <!-- /.row -->
 <div class="input-group custom-search-form">
-    <form action="{{ route('admin.announcements.show') }}" method="POST">
+    <form action="{{ route('admin.news.show') }}" method="POST">
         {{ csrf_field() }}
         <span class="input-group-btn">
     <input name="Search" class="form-control" placeholder="Search...">
@@ -24,7 +24,7 @@
 
 <div class="row" style="margin-bottom: 20px; text-align: right">
     <div class="col-lg-12">
-        <a href="{{ route('admin.announcements.create') }}" class="btn btn-success">新增公告</a>
+        <a href="{{ route('admin.news.create') }}" class="btn btn-success">新增公告</a>
     </div>
 </div>
 <!-- /.row -->
@@ -43,14 +43,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach($announcements as $announcement)
+                @foreach($news as $new)
                     <tr>
-                        <td style="text-align: center">{{ $announcement->title}}</td>
-                        <td style="text-align: center">{{ $announcement->content }}</td>
-                        <td style="text-align: center">{{ $announcement->date}}</td>
+                        <td style="text-align: center">{{ $new->title}}</td>
+                        <td style="text-align: center">{{ $new->content }}</td>
+                        <td style="text-align: center">{{ $new->date}}</td>
                         <td style="text-align: center">
                             @foreach($users as $user)
-                                @if($announcement->user_id==$user->id)
+                                @if($new->user_id==$user->id)
                                     {{ $user->name }}
                                 @endif
                             @endforeach
@@ -60,7 +60,7 @@
                                 <tbody>
                                 <tr class="table-text" style="text-align: center">
                                     <td width="100" >
-                                        <a class="btn btn-primary" role="button" href="{{ route('admin.announcements.edit', $announcement->id) }}" >修改</a>
+                                        <a class="btn btn-primary" role="button" href="{{ route('admin.news.edit', $new->id) }}" >修改</a>
                                     </td>
                                     <!-- 刪除按鈕 -->
                                     <td width="100">
@@ -84,7 +84,7 @@
                                                             <tbody style="text-align: right">
                                                             <tr class="table-text" style="text-align: center">
                                                                 <td width="100" >
-                                                                    <form action="{{ route('admin.announcements.destroy', $announcement->id) }}" method="POST">
+                                                                    <form action="{{ route('admin.news.destroy', $new->id) }}" method="POST">
                                                                         {{ csrf_field() }}
                                                                         {{ method_field('DELETE') }}
                                                                         <button class="btn btn-danger">刪除</button>
