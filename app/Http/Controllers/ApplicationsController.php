@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Application;
-use App\Asset;
+use App\Place;
 use App\Category;
 use Illuminate\Http\Request;
 
@@ -18,12 +18,12 @@ class ApplicationsController extends Controller
     //
     public function create($id)
     {
-        $asset=Asset::find($id);
+        $place=Place::find($id);
 
-        $data = ['asset' => $asset
-            //,'application'=>$asset->Maintainces->applications
+        $data = ['place' => $place
+            //,'application'=>$place->Maintainces->applications
         ];
-        return view('admin.assets.application', $data);
+        return view('admin.places.application', $data);
     }
 
 

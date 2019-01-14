@@ -25,14 +25,14 @@
     </div>
 <!-- /.row -->
 <div class="input-group custom-search-form">
-<label>顯示全部：</label>  <form action="{{ route('admin.assets.searchALL1') }}" method="POST">
+<label>顯示全部：</label>  <form action="{{ route('admin.places.searchALL1') }}" method="POST">
 {{ csrf_field() }}
 <span class="input-group-btn">
 <button class="btn btn-info"><i class="fa fa-search"></i></button>
     </span>
 	</form>
 
- <label>星期查詢：</label>  <form action="{{ route('admin.assets.search10') }}" method="POST">
+ <label>星期查詢：</label>  <form action="{{ route('admin.places.search10') }}" method="POST">
     {{ csrf_field() }}
 
     <select name="week_search" class="form-control">
@@ -91,7 +91,7 @@
 
         
         @if(Auth::user()->previlege_id==3)
-            <a href="{{ route('admin.assets.create') }}" class="btn btn-success">建立新場地</a>
+            <a href="{{ route('admin.places.create') }}" class="btn btn-success">建立新場地</a>
         @endif
     </div>
 
@@ -127,37 +127,37 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach($assets as $asset)
+                @foreach($places as $place)
                     <tr>
                         <td style="text-align: center">
-                            {{ $asset->id }}
+                            {{ $place->id }}
                         </td>
                         <td style="text-align: center">
 						@if(Auth::user()->previlege_id==3)
-                         {{ $asset->name }}
+                         {{ $place->name }}
 					 @else
-						 <a href="{{ route('admin.assets.data', $asset->id) }}">{{ $asset->name }}</a>
+						 <a href="{{ route('admin.places.data', $place->id) }}">{{ $place->name }}</a>
 						 @endif
                         </td>
                         <td style="text-align: center">
                             @foreach($categories as $category)
-                                @if($asset->category==$category->id)
+                                @if($place->category==$category->id)
                                     {{ $category->name }}
                                 @endif
                             @endforeach
                         </td>
-                        <td style="text-align: center">{{ $asset->location }}</td>
-						@if($asset->status =='正常使用中')
-                    <td style="text-align: center"><font color="#01DF3A"  >{{ $asset->status }}</font></td>
-                    @elseif($asset->status =='租借中')
-                    <td style="text-align: center"><font color="#FF0000"  >{{ $asset->status }}</font></td>
+                        <td style="text-align: center">{{ $place->location }}</td>
+						@if($place->status =='正常使用中')
+                    <td style="text-align: center"><font color="#01DF3A"  >{{ $place->status }}</font></td>
+                    @elseif($place->status =='租借中')
+                    <td style="text-align: center"><font color="#FF0000"  >{{ $place->status }}</font></td>
 					@else
-						<td style="text-align: center"><font color="#FF8000"  >{{ $asset->status }}</font></td>
+						<td style="text-align: center"><font color="#FF8000"  >{{ $place->status }}</font></td>
                      @endif
 						@foreach($times as $time)
 						@foreach($weeks as $week)
-						@if($asset->time_id==$time->id)
-							@if($asset->week_id==$week->id)
+						@if($place->time_id==$time->id)
+							@if($place->week_id==$week->id)
 						<td style="text-align: center">{{ $week->week}} {{ $time->time_start}} ~ {{$time->time_end}}</td>
                        @endif
 					   @endif
@@ -172,17 +172,17 @@
 
     
                                             <td width="80" >
-                                                @if($asset->status=='正常使用中'&&$asset->lendable==1)
-                                                    <a class="btn btn-primary" role="button" href="{{ route('admin.lendings.create', $asset->id) }}" >借用</a>
+                                                @if($place->status=='正常使用中'&&$place->lendable==1)
+                                                    <a class="btn btn-primary" role="button" href="{{ route('admin.lendings.create', $place->id) }}" >借用</a>
                                                 @else
-                                                    <a class="btn btn-primary disabled" role="button" href="{{ route('admin.lendings.create', $asset->id) }}">借用</a>
+                                                    <a class="btn btn-primary disabled" role="button" href="{{ route('admin.lendings.create', $place->id) }}">借用</a>
                                                 @endif
                                             </td>
 
                                         <td width="80">
-                                        @if($asset->status=='租借中'||$asset->status=='正常使用中')
+                                        @if($place->status=='租借中'||$place->status=='正常使用中')
                                                 @foreach($lendings as $lending)
-                                                    @if($asset->id==$lending->asset_id)
+                                                    @if($place->id==$lending->asset_id)
                                                             <!-- Button trigger modal -->
                                                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal1">
                                                                 歸還
@@ -203,7 +203,7 @@
                                                                                 <tbody style="text-align: right">
                                                                                 <tr class="table-text" style="text-align: center">
                                                                                     <td width="100" >
-                                                                                        <form action="{{ route('admin.lendings.return',['aid'=>$asset->id,'id'=>$lending->id]) }}" method="POST">
+                                                                                        <form action="{{ route('admin.lendings.return',['aid'=>$place->id,'id'=>$lending->id]) }}" method="POST">
                                                                                             {{ csrf_field() }}
                                                                                             {{ method_field('PATCH') }}
                                                                                             <button class="btn btn-danger">歸還</button>
@@ -226,7 +226,7 @@
                                             @else
 												
 												@foreach($maintainces as $maintaince)
-												@if($maintaince->asset_id==$asset->id)
+												@if($maintaince->asset_id==$place->id)
 												<a href="{{ route('admin.maintainces.show', $maintaince->id) }}"  class="btn btn-success" role="button">處理</a>
                                                             <!-- Modal -->
                                                            
@@ -238,40 +238,40 @@
                                        
 
                                         <td width="80" >
-                                            @if(($asset->status=='正常使用中'))
-                                                <a class="btn btn-primary" role="button" href="{{ route('admin.assets.edit', $asset->id) }}" >修改</a>
+                                            @if(($place->status=='正常使用中'))
+                                                <a class="btn btn-primary" role="button" href="{{ route('admin.places.edit', $place->id) }}" >修改</a>
                                             @else
-                                                <a class="btn btn-primary    disabled" role="button" href="{{ route('admin.assets.edit', $asset->id) }}" >修改</a>
+                                                <a class="btn btn-primary    disabled" role="button" href="{{ route('admin.places.edit', $place->id) }}" >修改</a>
                                             @endif
                                         </td>
 
                                         <td width="80" >
-                                            @if($asset->status=='正常使用中')
-                                                <form action="{{ route('admin.assets.scrapped', $asset->id) }}" method="POST">
+                                            @if($place->status=='正常使用中')
+                                                <form action="{{ route('admin.places.scrapped', $place->id) }}" method="POST">
                                                     {{ csrf_field() }}
                                                     {{ method_field('PATCH') }}
                                                     <button class="btn btn-danger">維修</button>
                                                 </form>
                                             @endif
-											@if($asset->status=='維修中')
-                                                <form action="{{ route('admin.assets.scrapped1', $asset->id) }}" method="POST">
+											@if($place->status=='維修中')
+                                                <form action="{{ route('admin.places.scrapped1', $place->id) }}" method="POST">
                                                     {{ csrf_field() }}
                                                     {{ method_field('PATCH') }}
                                                     <button class="btn btn-danger">完成</button>
                                                 </form>
                                             @endif
-											@if($asset->status=='租借中')
+											@if($place->status=='租借中')
                                                 <a class="btn btn-danger disabled" role="button" >維修</a>
                                                 </form>
                                             @endif
-											@if($asset->status=='申請中')
+											@if($place->status=='申請中')
                                                 <a class="btn btn-danger disabled" role="button">維修</a>
                                                 </form>
                                             @endif
                                         </td>
-	                                   @if($asset->status=='正常使用中')
+	                                   @if($place->status=='正常使用中')
                                         <td class="table-text" style="text-align: center">
-                                                                        <form action="{{ route('admin.assets.destroy', $asset->id) }}" method="POST">
+                                                                        <form action="{{ route('admin.places.destroy', $place->id) }}" method="POST">
                                                                             {{ csrf_field() }}
                                                                             {{ method_field('DELETE') }}
                                                                             <button class="btn btn-danger">刪除</button>
@@ -280,7 +280,7 @@
                                         </td>
 										@else
 										<td class="table-text" style="text-align: center">
-                                                                        <form action="{{ route('admin.assets.destroy', $asset->id) }}" method="POST">
+                                                                        <form action="{{ route('admin.places.destroy', $place->id) }}" method="POST">
                                                                             {{ csrf_field() }}
                                                                             {{ method_field('DELETE') }}
                                                                             <button class="btn btn-danger disabled">刪除</button>
@@ -290,10 +290,10 @@
 											@endif
 @else
                                             <td width="80" >
-                                            @if($asset->status=='正常使用中')
-                                                <a class="btn btn-primary" href="{{ route('admin.assets.application', $asset->id) }}" role="button" >租借</a>
+                                            @if($place->status=='正常使用中')
+                                                <a class="btn btn-primary" href="{{ route('admin.places.application', $place->id) }}" role="button" >租借</a>
                                             @else
-                                                <a class="btn btn-primary disabled" href="{{ route('admin.assets.application', $asset->id) }}" role="button" >租借</a>
+                                                <a class="btn btn-primary disabled" href="{{ route('admin.places.application', $place->id) }}" role="button" >租借</a>
                                             @endif
                                         </td>
                                     

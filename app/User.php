@@ -32,7 +32,7 @@ class User extends Authenticatable
         return $this->belongsTo(Receive::class);
     }
 	//////
-   public function maintainces() //  Asset (1) -> Maintaince (n)
+   public function maintainces() //  Place (1) -> Maintaince (n)
     {
         return $this->hasMany(Maintaince::class);
     }
@@ -42,9 +42,9 @@ class User extends Authenticatable
         return $this->hasMany(Application::class);
     }
 
-    public function assets() //  User (1) -> asset (n)
+    public function places() //  User (1) -> asset (n)
     {
-        return $this->hasMany(Asset::class);
+        return $this->hasMany(Place::class);
     }
 
     public function Previlege() // User (n) ->Previlege (1)

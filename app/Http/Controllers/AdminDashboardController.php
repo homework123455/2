@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\New_;
 use App\Application;
-use App\Asset;
+use App\Place;
 use App\Week;
 use App\Time_;
 use App\Maintaince;
@@ -36,9 +36,9 @@ public function __construct()
 		$maintainces=$maintaincesALL->whereIn('status',array('申請中'))->get();
 		$weeks=Week::orderBy('id','ASC')->get();
 		$times=Time_::orderBy('id','ASC')->get();
-		$assets=Asset::orderBy('created_at', 'ASC')->get();
-		$assets1=Asset::orderBy('created_at', 'ASC');
-		$assets2=Asset::orderBy('created_at', 'ASC');
+		$places=Place::orderBy('created_at', 'ASC')->get();
+		$places1=Place::orderBy('created_at', 'ASC');
+		$places2=Place::orderBy('created_at', 'ASC');
         //$maintainces=$maintaincesALL->whereNotIn('status',array('正常使用中','通過'))->get();
 		
         $news = New_::orderBy('created_at', 'DESC')->take(3)->get();
@@ -47,7 +47,7 @@ public function __construct()
 		//$time_nowid=Carbon::now('Asia/Taipei');
         $time_nows=date("H:i:s", time()+8*60*60);
 		//$time_nows_id=strtotime($time_nows);
-		//$time_ids=Time_::find($assets->time_id);
+		//$time_ids=Time_::find($places->time_id);
 		//foreach($time_nows as $time_now ){
 			foreach($times as $time ){
 				///$time_start_id=strtotime($time->time_start);
@@ -65,8 +65,8 @@ public function __construct()
 		}
 			
 		}
-        $asset_overtimes=$assets1->where('time_id', '!=', $time_nowid)->where('status','租借中')->get();
-		//foreach ($asset_overtimes as $asset_overtime){
+        $place_overtimes=$places1->where('time_id', '!=', $time_nowid)->where('status','租借中')->get();
+		//foreach ($place_overtimes as $asset_overtime){
 		foreach($users as $user){
         if($username==$user->id){
 			
@@ -75,11 +75,11 @@ public function __construct()
 		}
 		}
 		//}
-		$asset_overtimes1=$assets2->where('time_id', '!=', $time_nowid)->where('status','租借中')->where('lendname',$user2)->get();
+		$place_overtimes1=$places2->where('time_id', '!=', $time_nowid)->where('status','租借中')->where('lendname',$user2)->get();
         $data=['applications'=>$applications,'maintainces'=>$maintainces,'maintainces_A'=>$maintaincesA,
-		'maintainces_B'=>$maintaincesB,'assets'=>$assets,
+		'maintainces_B'=>$maintaincesB,'places'=>$places,
             'applicationsA'=>$applicationsA,'news'=>$news,
-            "users"=>$users,'departmaentU'=>$departmaentU,'username'=>$username,'times'=>$times,'weeks'=>$weeks,'asset_overtimes'=>$asset_overtimes,'asset_overtimes1'=>$asset_overtimes1,'time_nowid'=>$time_nowid,'time_nows'=>$time_nows];
+            "users"=>$users,'departmaentU'=>$departmaentU,'username'=>$username,'times'=>$times,'weeks'=>$weeks,'place_overtimes'=>$place_overtimes,'place_overtimes1'=>$place_overtimes1,'time_nowid'=>$time_nowid,'time_nows'=>$time_nows];
         if (Auth::user()->previlege_id==3)
             return view('admin.dashboard.mis',$data);
         elseif(Auth::user()->previlege_id==4)

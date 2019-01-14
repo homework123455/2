@@ -16,8 +16,8 @@
         <h1 class="page-header">
             場地 <small>場地資料</small>
 			
-        <a href="{{ route('admin.assets.index') }}" class="btn btn-success" style="margin-bottom: 20px; text-align: right">返回</a>
-		<a href="{{ route('admin.assets.application', $asset->id) }}" class="btn btn-success" style="margin-bottom: 20px; text-align: right">租借</a>
+        <a href="{{ route('admin.places.index') }}" class="btn btn-success" style="margin-bottom: 20px; text-align: right">返回</a>
+		<a href="{{ route('admin.places.application', $place->id) }}" class="btn btn-success" style="margin-bottom: 20px; text-align: right">租借</a>
                        
 						   
         </h1>
@@ -34,14 +34,14 @@
     <div class="col-xs-6">
             <div class="form-group">
                 <label width="80">場地名稱：</label>
-                <label name="name">{{$asset->name}}</label>
+                <label name="name">{{$place->name}}</label>
             </div>
 
 
 
         <div class="form-group">
             <label width="80">場地圖片：</label>
-            <img src={{ $asset->file1}} width="500px" height="300px"/>
+            <img src={{ $place->file1}} width="500px" height="300px"/>
 
         </div>
 
@@ -53,10 +53,10 @@
 
             <div class="form-group">
                 <label width="80">場地狀態：</label>
-                @if($asset->status=='正常使用中')
-                    <label name="status">{{$asset->status}}</label>
+                @if($place->status=='正常使用中')
+                    <label name="status">{{$place->status}}</label>
                     @else
-                <label name="status"><font color="#FF0000"  size="+2">{{$asset->status}}</font></label>
+                <label name="status"><font color="#FF0000"  size="+2">{{$place->status}}</font></label>
             @endif
             </div>
 
@@ -68,7 +68,7 @@
             <div class="form-group">
                 <label width="80">可否租借：</label>
                     <label name="lendable">
-                        @if($asset->lendable)
+                        @if($place->lendable)
                         是
                         @else
                             <lable name="lendable">否</lable>
@@ -78,15 +78,15 @@
 
             <div class="form-group">
                 <label width="80">地點：</label>
-                <label name="location">{{$asset->location}}</label>
+                <label name="location">{{$place->location}}</label>
             </div>
 
             <div class="form-group">
                 <label width="80">開放時段：</label>
 				@foreach($times as $time)
 				@foreach($weeks as $week)
-										@if($time->id==$asset->time_id)
-											@if($week->id==$asset->week_id)
+										@if($time->id==$place->time_id)
+											@if($week->id==$place->week_id)
 										 <label name="warranty">{{$week->week}}&nbsp;&nbsp;&nbsp;&nbsp;{{ $time->time_end }}~{{ $time->time_start }}</label>
                                         									
                                          @endif
@@ -98,7 +98,7 @@
 
             <div class="form-group">
                 <label width="80">詳細資訊：</label>
-                <lable name="warranty">{{$asset->remark}}</lable>
+                <lable name="warranty">{{$place->remark}}</lable>
             </div>
     </div>
     

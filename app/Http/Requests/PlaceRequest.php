@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AssetRequest extends FormRequest
+class PlaceRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -37,7 +37,7 @@ class AssetRequest extends FormRequest
             // 'remark',
             //'vendor'=>'required',
             //'warranty'=>'required',
-			'img'=>'required'
+			//'img'=>'required'
 			//'file1'=>'required|image|size:500'
 
         ];

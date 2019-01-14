@@ -10,14 +10,14 @@ class Lending extends Model
     protected $table = 'lendings';
     protected $fillable = [
         'user_id',
-        'asset_id',
+        'place_id',
         'lenttime',
         'returntime',
     ];
 
-    public function Asset() // Lending (n) -> Asset (1)
+    public function Place() // Lending (n) -> Place (1)
     {
-        return $this->belongsTo(Asset::class);
+        return $this->belongsTo(Place::class);
     }
 
     public function User() // Lending (n) -> User (1)

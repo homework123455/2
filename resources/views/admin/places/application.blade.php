@@ -24,14 +24,14 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <form action="/admin/assets/{{$asset->id}}/application/store" method="POST" role="form">
+        <form action="/admin/places/{{$place->id}}/application/store" method="POST" role="form">
             {{ csrf_field() }}
             {{ method_field('PATCH') }}
 
             <div>
             <div class="form-group">
                 <label>場地名稱：</label>
-                <lable name="name">{{$asset->name}}</lable>
+                <lable name="name">{{$place->name}}</lable>
             </div>
 
             <div class="form-group">
@@ -41,7 +41,7 @@
 
             <div class="form-group">
                 <label>場地狀態：</label>
-                <lable name="status">{{$asset->status}}</lable>
+                <lable name="status">{{$place->status}}</lable>
             </div>
 
             <div class="form-group">
@@ -51,7 +51,7 @@
 
             <div class="form-group">
                 <label>地點：</label>
-                <lable name="location">{{$asset->location}}</lable>
+                <lable name="location">{{$place->location}}</lable>
             </div>
 			<div class="form-group">
                 <label>租用器材：</label>
@@ -110,7 +110,7 @@ function Change(Obj){
 
             <div>
                 <button type="submit" class="btn btn-success">申請</button>
-                <a href="{{ route('admin.assets.index') }}" class="btn btn-success">返回</a>
+                <a href="{{ route('admin.places.index') }}" class="btn btn-success">返回</a>
             </div>
         </form>
 

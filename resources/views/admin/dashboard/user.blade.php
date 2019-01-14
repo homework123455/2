@@ -14,7 +14,7 @@
         <div class="col-lg-12">
         <div class="row,page-header" style="margin-bottom: 20px; text-align: right" >
             <div>
-                <a href="{{ route('admin.assets.index') }}" class="btn btn-primary">我要租借</a>
+                <a href="{{ route('admin.places.index') }}" class="btn btn-primary">我要租借</a>
         </div>
         </div>
 		@if(count($asset_overtimes1) > 0)
@@ -56,16 +56,16 @@ setTimeout('ShowTime()',1000);
 								</tr>
                             </thead>
                             <tbody>
-							@foreach($asset_overtimes1 as $asset_overtime)
+							@foreach($asset_overtimes1 as $place_overtime)
                                 
 
                                     <tr>
                                         <td style="text-align: center">
-                                            {{ $asset_overtime->id }}
+                                            {{ $place_overtime->id }}
                                         </td>
                                         <td style="text-align: center">
                                             
-                                                    {{ $asset_overtime->name }}
+                                                    {{ $place_overtime->name }}
                                                
                                         </td>
 										
@@ -157,9 +157,9 @@ setTimeout('ShowTime()',1000);
                                     </td>
 
                                     <td style="text-align: center">
-                                        @foreach($assets as $asset)
-                                            @if($maintaince->asset_id==$asset->id)
-                                                {{ $asset->name }}
+                                        @foreach($places as $place)
+                                            @if($maintaince->asset_id==$place->id)
+                                                {{ $place->name }}
                                             @endif
                                         @endforeach
                                     </td>

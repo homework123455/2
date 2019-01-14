@@ -138,9 +138,9 @@
                                             {{ $maintaince->id }}
                                         </td>
                                         <td style="text-align: center">
-                                            @foreach($assets as $asset)
-                                                @if($maintaince->asset_id==$asset->id)
-                                                    {{ $asset->name }}
+                                            @foreach($places as $place)
+                                                @if($maintaince->asset_id==$place->id)
+                                                    {{ $place->name }}
                                                 @endif
                                             @endforeach
                                         </td>
@@ -171,7 +171,7 @@
         @endif
     </div>
 </div>
-@if(count($asset_overtimes) > 0)
+@if(count($place_overtimes) > 0)
 	<div class="row">
     <div class="col-lg-12">
         <ol class="breadcrumb">
@@ -210,21 +210,21 @@ setTimeout('ShowTime()',1000);
 								</tr>
                             </thead>
                             <tbody>
-							@foreach($asset_overtimes as $asset_overtime)
+							@foreach($place_overtimes as $place_overtime)
                                 
 
                                     <tr>
                                         <td style="text-align: center">
-                                            {{ $asset_overtime->id }}
+                                            {{ $place_overtime->id }}
                                         </td>
-                                        <td style="text-align: center">{{ $asset_overtime->name }}</td>  
+                                        <td style="text-align: center">{{ $place_overtime->name }}</td>  
 										@foreach($times as $time)
-										@if($time->id==$asset_overtime->time_id)
+										@if($time->id==$place_overtime->time_id)
 										
                                         <td style="text-align: center">{{ $time->time_end }}</td> 										
                                          @endif
 										 @endforeach
-                                        <td style="text-align: center">{{ $asset_overtime->lendname }}</td>
+                                        <td style="text-align: center">{{ $place_overtime->lendname }}</td>
 										</tr>
                                     
                             @endforeach
