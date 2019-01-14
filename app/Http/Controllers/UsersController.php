@@ -7,7 +7,7 @@ use App\Previlege;
 use App\User;
 use App\Wrong;
 use Illuminate\Http\Request;
-use App\Http\Requests\UsersPostRequest;
+use App\Http\Requests\userRequest;
 use App\Http\Requests\WrongRequest;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Crypt;
@@ -57,7 +57,7 @@ class UsersController extends Controller
         return redirect()->route('admin.users.index');
     }
 
-    public function store(UsersPostRequest $request)
+    public function store(userRequest $request)
     {
         /*$department_id = $request->input('department_id');
          $this->validate($request, [
@@ -94,11 +94,13 @@ class UsersController extends Controller
 
     public function Search(Request $request)
     {
+		$previleges=Previlege::orderBy('created_at','DESC')->get();
+        $departments=Department::orderBy('created_at','DESC')->get();
         $Search =$request->input('Search');
-        $user = User::orderBy('created_at', 'DESC')
+        $users = User::orderBy('created_at', 'DESC')
             ->where('name', 'like','%'.$Search.'%')
             ->get();
-        $data=['user'=>$user];
+        $data=['users'=>$users,'previleges'=>$previleges,'departments'=>$departments];
         return view('admin.users.index' ,$data);
     }
     public function wrongdata($id)

@@ -23,7 +23,7 @@ Route::get('/'         , ['as' => 'home.index' , 'uses' => 'HomeController@index
 Route::group(['prefix' => 'admin'], function() {
     Route::get('/', ['as' => 'admin.dashboard.index', 'uses' => 'AdminDashboardController@index']);
 	/////
-	Route::get('announcements'         , ['as' => 'admin.news.index' , 'uses' => 'NewsController@index']);
+	Route::get('news'         , ['as' => 'admin.news.index' , 'uses' => 'NewsController@index']);
     Route::get('news/create'   , ['as' => 'admin.news.create' , 'uses' => 'NewsController@create']);
     Route::post('news'         , ['as' => 'admin.news.store'  , 'uses' => 'NewsController@store']);
     Route::get('news/{id}/edit', ['as' => 'admin.news.edit'   , 'uses' => 'NewsController@edit']);
@@ -78,38 +78,14 @@ Route::patch('assets/{id}/scrapped1', ['as' => 'admin.assets.scrapped1', 'uses' 
     Route::get('maintainces', ['as' => 'admin.maintainces.index', 'uses' => 'MaintaincesController@index']);                        //報修主畫面
     Route::get('maintainces/{id}/show', ['as' => 'admin.maintainces.show', 'uses' => 'MaintaincesController@show']);               //選擇維修方式(1)
     Route::patch('maintainces/{id}'  , ['as' => 'admin.maintainces.process', 'uses' => 'MaintaincesController@process']);            //選擇維修方式(2)
-    Route::get('maintainces/{id}/details'  , ['as' => 'admin.maintainces.details', 'uses' => 'MaintainceItemsController@index']);      //輸入維修項目資料
-    Route::post('maintainces/{id}/detail'  , ['as' => 'admin.maintainces.details.store', 'uses' => 'MaintainceItemsController@store']);  //新增維修項目
+    //Route::get('maintainces/{id}/details'  , ['as' => 'admin.maintainces.details', 'uses' => 'MaintainceItemsController@index']);      //輸入維修項目資料
+   // Route::post('maintainces/{id}/detail'  , ['as' => 'admin.maintainces.details.store', 'uses' => 'MaintainceItemsController@store']);  //新增維修項目
     Route::post('maintainces/{id}/complete'  , ['as' => 'admin.maintainces.complete', 'uses' => 'MaintaincesController@complete']);  //完成維修
-    Route::get('maintainces/{mid}/details/{id}'  , ['as' => 'admin.maintainces.edit', 'uses' => 'MaintainceItemsController@edit']);                 //修改維修項目資料(1)
-    Route::patch('maintainces/{mid}/details/{id}'  , ['as' => 'admin.maintainces.details.update', 'uses' => 'MaintainceItemsController@update']);   //修改維修項目資料(2)
+   // Route::get('maintainces/{mid}/details/{id}'  , ['as' => 'admin.maintainces.edit', 'uses' => 'MaintainceItemsController@edit']);                 //修改維修項目資料(1)
+    //Route::patch('maintainces/{mid}/details/{id}'  , ['as' => 'admin.maintainces.details.update', 'uses' => 'MaintainceItemsController@update']);   //修改維修項目資料(2)
     Route::delete('maintainces/{id}'  , ['as' => 'admin.maintainces.destroy', 'uses' => 'MaintaincesController@destroy']);  //刪除維修項目
 
-    //耗材
-    Route::get('supplies'          , ['as' => 'admin.supplies.index' , 'uses' => 'SuppliesController@index']);
-    Route::get('supplies/create'   , ['as' => 'admin.supplies.create' , 'uses' => 'SuppliesController@create']);
-    Route::post('supplies'         , ['as' => 'admin.supplies.store'  , 'uses' => 'SuppliesController@store']);
-    Route::get('supplies/{id}/edit', ['as' => 'admin.supplies.edit'   , 'uses' => 'SuppliesController@edit']);
-    Route::patch('supplies/{id}'   , ['as' => 'admin.supplies.update' , 'uses' => 'SuppliesController@update']);
-    Route::delete('supplies/{id}'  , ['as' => 'admin.supplies.destroy', 'uses' => 'SuppliesController@destroy']);
-    Route::post('supplies/show'  , ['as' => 'admin.supplies.show', 'uses' => 'SuppliesController@show']);//查詢
-    Route::get('supplies/{id}/data', ['as' => 'admin.supplies.data', 'uses' => 'SuppliesController@data']);       //詳細資料
-
-    //廠商
-    Route::get('vendors'         , ['as' => 'admin.vendors.index' , 'uses' => 'VendorsController@index']);
-    Route::get('vendors/create'   , ['as' => 'admin.vendors.create' , 'uses' => 'VendorsController@create']);
-    Route::post('vendors'         , ['as' => 'admin.vendors.store'  , 'uses' => 'VendorsController@store']);
-    Route::get('vendors/{id}/edit', ['as' => 'admin.vendors.edit'   , 'uses' => 'VendorsController@edit']);
-    Route::patch('vendors/{id}'   , ['as' => 'admin.vendors.update' , 'uses' => 'VendorsController@update']);
-    Route::delete('vendors/{id}'  , ['as' => 'admin.vendors.destroy', 'uses' => 'VendorsController@destroy']);
-    Route::post('vendors/show'  , ['as' => 'admin.vendors.show', 'uses' => 'VendorsController@show']);
-    Route::get('vendors/{id}/data', ['as' => 'admin.vendors.data', 'uses' => 'VendorsController@data']);       //詳細資料
-
-    //耗材領取
-   Route::get('supplies/{id}/receive',['as' => 'admin.supplies.receive' , 'uses' => 'ReceivesController@create']);
-    Route::post('supplies/{id}'   , ['as' => 'admin.receives.store' , 'uses' => 'ReceivesController@store']);    //添購跟新增合起來
-    Route::get('supplies/{id}/buy', ['as' => 'admin.supplies.buy', 'uses' => 'SuppliesController@buy']);        //添購耗材
-    Route::patch('supplies/{id}', ['as' => 'admin.supplies.buyupdate', 'uses' => 'SuppliesController@buyupdate']);
+    
 	//使用者
     Route::get('users', ['as' => 'admin.users.index', 'uses' => 'UsersController@index']);              //使用者主畫面
     Route::get('users/create', ['as' => 'admin.users.create', 'uses' => 'UsersController@create']);       //新增使用者(1)
