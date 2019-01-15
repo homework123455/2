@@ -17,7 +17,7 @@
                 <a href="{{ route('admin.places.index') }}" class="btn btn-primary">我要租借</a>
         </div>
         </div>
-		@if(count($asset_overtimes1) > 0)
+		@if(count($place_overtimes1) > 0)
 	<div class="row">
     <div class="col-lg-12">
         <ol class="breadcrumb">
@@ -56,7 +56,7 @@ setTimeout('ShowTime()',1000);
 								</tr>
                             </thead>
                             <tbody>
-							@foreach($asset_overtimes1 as $place_overtime)
+							@foreach($place_overtimes1 as $place_overtime)
                                 
 
                                     <tr>
@@ -158,7 +158,7 @@ setTimeout('ShowTime()',1000);
 
                                     <td style="text-align: center">
                                         @foreach($places as $place)
-                                            @if($maintaince->asset_id==$place->id)
+                                            @if($maintaince->place_id==$place->id)
                                                 {{ $place->name }}
                                             @endif
                                         @endforeach
