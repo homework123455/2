@@ -99,7 +99,7 @@ class UsersController extends Controller
 		}
 		}
 		
-		Wrong::destroy($wrong_id);
+		//Wrong::destroy($wrong_id);
 		
         User::destroy($id);
         return redirect()->route('admin.users.index');
