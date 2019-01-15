@@ -15,9 +15,9 @@ class Lending extends Model
         'returntime',
     ];
 
-    public function Asset() // Lending (n) -> Asset (1)
+    public function Place() // Lending (n) -> Place (1)
     {
-        return $this->belongsTo(Asset::class);
+        return $this->belongsTo(Place::class);
     }
 
     public function User() // Lending (n) -> User (1)

@@ -21,7 +21,7 @@
                 <div class="title">History</div>
                 <div class="row" style="margin-bottom: 20px; text-align: right" >
                         <div class="col-lg-12">
-                            <a href="{{ route('admin.assets.index') }}">返回</a>
+                            <a href="{{ route('admin.places.index') }}">返回</a>
                         </div>
                 </div>
             </div>

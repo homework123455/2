@@ -29,13 +29,15 @@
 
         <div class="form-group">
             <label width="80">場地名稱：</label>
-            <lable name="name">{{$places->name}}</lable>
+
+            <lable name="name">{{$place->name}}</lable>
         </div>
 
         <div class="form-group">
             <label width="80">負責人：</label>
             @foreach($users as $user)
-                @if($places->keeper==$user->id)
+
+                @if($place->keeper==$user->id)
             <lable name="keeper">{{$user->name}}</lable>
                 @endif
                 @endforeach
@@ -43,7 +45,8 @@
 
         <div class="form-group">
             <label width="80">地點：</label>
-            <lable name="location">{{$places->location}}</lable>
+
+            <lable name="location">{{$place->location}}</lable>
         </div>
 
         <ol class="breadcrumb">
@@ -105,7 +108,8 @@
 							 </tr>
                 </thead>
                 <tbody>
-                @foreach($places1 as $place1)
+
+                @foreach($place1 as $place1)
                     <tr>
                         <td style="text-align: center">
                             {{ $place1->id }}

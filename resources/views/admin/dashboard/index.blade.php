@@ -135,9 +135,9 @@
                             </td>
 
                             <td style="text-align: center">
-                                @foreach($assets as $asset)
-                                    @if($maintaince->asset_id==$asset->id)
-                                        {{ $asset->name }}
+                                @foreach($places as $place)
+                                    @if($maintaince->asset_id==$place->id)
+                                        {{ $place->name }}
                                     @endif
                                 @endforeach
                             </td>
@@ -193,9 +193,9 @@
                         </td>
 
                         <td style="text-align: center">
-                            @foreach($assets as $asset)
-                                @if($maintaince->asset_id==$asset->id)
-                                    {{ $asset->name }}
+                            @foreach($places as $place)
+                                @if($maintaince->asset_id==$place->id)
+                                    {{ $place->name }}
                                 @endif
                             @endforeach
                         </td>

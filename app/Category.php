@@ -12,9 +12,9 @@ class Category extends Model
         'name'
     ];
 
-    public function assets() // Category (1) -> Asset (n)
+    public function places() // Category (1) -> Place (n)
     {
-        return $this->hasMany(Asset::class);
+        return $this->hasMany(Place::class);
     }
 
 }

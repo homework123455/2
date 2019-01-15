@@ -28,7 +28,9 @@ class PlaceController extends Controller
         $Search = $request->input('week_search');
         $Search2 = $request->input('time_search');
         $Search1 = $request->input('category_search');
-        $places = Place::orderBy('created_at', 'DESC')->get();
+
+        $place = Place::orderBy('created_at', 'DESC')->get();
+
         $category = Category::orderBy('created_at', 'DESC')->get();
         $lendings = Lending::whereNULL('returntime')->get();
         $weeks = Week::orderBy('id', 'ASC')->get();
@@ -36,10 +38,12 @@ class PlaceController extends Controller
         $maintainces = $maintaincesALL->whereIn('status', array('申請中'))->get();
         /*
         if(!(Auth::user()->previlege_id==3)){
-           $places=Place::where('id','0')->get();
+
+           $place=Place::where('id','0')->get();
        }
 */
-        $data = ['places' => $places, 'lendings' => $lendings, 'categories' => $category, 'times' => $times, 'weeks' => $weeks, 'Search' => $Search, 'Search1' => $Search1, 'Search2' => $Search2, 'maintainces' => $maintainces];
+        $data = ['places' => $place, 'lendings' => $lendings, 'categories' => $category, 'times' => $times, 'weeks' => $weeks, 'Search' => $Search, 'Search1' => $Search1, 'Search2' => $Search2, 'maintainces' => $maintainces];
+
         return view('admin.places.index', $data);
     }
 
@@ -63,16 +67,18 @@ class PlaceController extends Controller
         $users = User::orderBy('created_at', 'DESC')->get();
         // $vendors=Vendor::orderBy('created_at' ,'DESC') ->get();
 
-        $places = Place::find($id);
-        $data = ['places' => $places, 'categories' => $categories, 'users' => $users, 'times' => $times, 'weeks' => $weeks];
+
+        $place = Place::find($id);
+        $data = ['place' => $place, 'categories' => $categories, 'users' => $users, 'times' => $times, 'weeks' => $weeks];
 
         return view('admin.places.edit', $data);
     }
 
     public function update(PlaceRequest $request, $id)
     {
-        $places = Place::find($id);
-        $places->update($request->all());
+
+        $place = Place::find($id);
+        $place->update($request->all());
 
         return redirect()->route('admin.places.index');
     }
@@ -130,11 +136,11 @@ class PlaceController extends Controller
             'remark' => $request->remark,
 
 
-            //'file'=>$filePath[0],
-            //'file1'=>$filePath[1]
+          
 
             'file' => $filePath[0],
-            //'file1' => $filePath[1]
+
+            
 
 
 
@@ -151,17 +157,18 @@ class PlaceController extends Controller
 
     public function data($id)
     {
-        $places = Place::find($id);
-        $category = Category::find($places->category);
-        //$vendor=Vendor::find($places->vendor);
-        $user = User::find($places->keeper);
+
+        $place = Place::find($id);
+        $category = Category::find($place->category);
+        //$vendor=Vendor::find($place->vendor);
+        $user = User::find($place->keeper);
         $maintainceitems = MaintainceItem::orderBy('created_at', 'ASC')->get();
-        $placemaintainces = Maintaince::where('place_id', $places->id)->where('status', '通過')->get();
+        $assetmaintainces = Maintaince::where('place_id', $place->id)->where('status', '通過')->get();
         $lendings = Lending::where('returntime', null)->get();
         $times = Time_::orderBy('id', 'ASC')->get();
         $weeks = Week::orderBy('id', 'ASC')->get();
-        $data = ['places' => $places, 'category' => $category, 'user' => $user,
-            'placemaintainces' => $placemaintainces, 'maintainceitems' => $maintainceitems,
+        $data = ['place' => $place, 'category' => $category, 'user' => $user,
+            'assetmaintainces' => $assetmaintainces, 'maintainceitems' => $maintainceitems,
             'lendings' => $lendings, 'times' => $times, 'weeks' => $weeks];
 
         return view('admin.places.show', $data);
@@ -176,17 +183,19 @@ class PlaceController extends Controller
         $Search1 = $request->input('category_search');
         $weeks = Week::orderBy('id', 'ASC')->get();
         if (Auth::user()->previlege_id != 3 && $Search == null) {
-            $places = Place::orderBy('created_at', 'DESC')
+
+            $place = Place::orderBy('created_at', 'DESC')
                 ->where('id', '0')
                 ->get();
         } else {
-            $places = Place::orderBy('created_at', 'DESC')
+            $place = Place::orderBy('created_at', 'DESC')
                 ->where('week_id', $Search)
                 ->get();
         }
         $category = Category::orderBy('created_at', 'DESC')->get();
         $lendings = Lending::whereNull('returntime')->get();
-        $data = ['places' => $places, 'lendings' => $lendings, 'categories' => $category, 'weeks' => $weeks, 'times' => $times, 'Search' => $Search, 'Search1' => $Search1, 'Search2' => $Search2];
+
+        $data = ['places' => $place, 'lendings' => $lendings, 'categories' => $category, 'weeks' => $weeks, 'times' => $times, 'Search' => $Search, 'Search1' => $Search1, 'Search2' => $Search2];
         return view('admin.places.index', $data);
     }
 
@@ -199,17 +208,19 @@ class PlaceController extends Controller
         $Search1 = $request->input('category_search');
         $weeks = Week::orderBy('id', 'ASC')->get();
         if (Auth::user()->previlege_id != 3 && $Search1 == null) {
-            $places = Place::orderBy('created_at', 'DESC')
+
+            $place = Place::orderBy('created_at', 'DESC')
                 ->where('id', '0')
                 ->get();
         } else {
-            $places = Place::orderBy('created_at', 'DESC')
+            $place = Place::orderBy('created_at', 'DESC')
                 ->where('category', $Search1)
                 ->get();
         }
         $category = Category::orderBy('created_at', 'DESC')->get();
         $lendings = Lending::whereNull('returntime')->get();
-        $data = ['places' => $places, 'lendings' => $lendings, 'categories' => $category, 'weeks' => $weeks, 'times' => $times, 'Search' => $Search, 'Search1' => $Search1, 'Search2' => $Search2];
+
+        $data = ['places' => $place, 'lendings' => $lendings, 'categories' => $category, 'weeks' => $weeks, 'times' => $times, 'Search' => $Search, 'Search1' => $Search1, 'Search2' => $Search2];
         return view('admin.places.index', $data);
     }
 
@@ -222,44 +233,48 @@ class PlaceController extends Controller
         $Search1 = $request->input('category_search');
         $weeks = Week::orderBy('id', 'ASC')->get();
         if( $Search == "" && $Search1 ==""&& $Search2 =="") {
-            $places = Place::orderBy('created_at', 'DESC')
+
+            $place = Place::orderBy('created_at', 'DESC')
                 ->where('id', '0')
                 ->get();
         }
         else if ( $Search2 =="" && $Search1 =="") {
-            $places = Place::orderBy('created_at', 'DESC')
+
+            $place = Place::orderBy('created_at', 'DESC')
                 ->where('week_id', $Search)
                 ->get();
         } else if ( $Search == "" &&$Search1 == "") {
-            $places = Place::orderBy('created_at', 'DESC')
+            $place = Place::orderBy('created_at', 'DESC')
                 ->where('time_id', $Search2)
                 ->get();
         } else if ( $Search =="" && $Search2 =="") {
-            $places = Place::orderBy('created_at', 'DESC')
+            $place = Place::orderBy('created_at', 'DESC')
                 ->where('category', $Search1)
                 ->get();
         } else if ( $Search == "") {
-            $places = Place::orderBy('created_at', 'DESC')
+            $place = Place::orderBy('created_at', 'DESC')
                 ->where('time_id', $Search2)->where('category', $Search1)
                 ->get();
         } else if ($Search1 == "") {
-            $places = Place::orderBy('created_at', 'DESC')
+            $place = Place::orderBy('created_at', 'DESC')
                 ->where('time_id', $Search2)->where('week_id', $Search)
                 ->get();
         } else if ( $Search2 == "") {
-            $places = Place::orderBy('created_at', 'DESC')
+            $place = Place::orderBy('created_at', 'DESC')
                 ->where('category', $Search1)->where('week_id', $Search)
                 ->get();
         } else
     {
-            $places = Place::orderBy('created_at', 'DESC')
+
+            $place = Place::orderBy('created_at', 'DESC')
             ->where('category', $Search1)->where('week_id', $Search)->where('time_id', $Search2)
             ->get();
         }
 
         $category = Category::orderBy('created_at', 'DESC')->get();
         $lendings = Lending::whereNull('returntime')->get();
-        $data = ['places' => $places, 'lendings' => $lendings, 'categories' => $category, 'weeks' => $weeks, 'times' => $times, 'Search' => $Search, 'Search1' => $Search1, 'Search2' => $Search2];
+
+        $data = ['places' => $place, 'lendings' => $lendings, 'categories' => $category, 'weeks' => $weeks, 'times' => $times, 'Search' => $Search, 'Search1' => $Search1, 'Search2' => $Search2];
         return view('admin.places.index', $data);
         }
 
@@ -274,32 +289,36 @@ class PlaceController extends Controller
 		$weeks=Week::orderBy('id','ASC')->get();
 	if(Auth::user()->previlege_id!=3&&$Search2==null)
 	{
-	$places = Place::orderBy('created_at', 'DESC')
+
+	$place = Place::orderBy('created_at', 'DESC')
             ->where('id','0')
             ->get();
 	}
 	else
 	{
-	$places = Place::orderBy('created_at', 'DESC')
+
+	$place = Place::orderBy('created_at', 'DESC')
             ->where('time_id',$Search2)
             ->get();
 	}        
         $category=Category::orderBy('created_at' ,'DESC') ->get();
         $lendings=Lending::whereNull('returntime')->get();
-        $data=['places'=>$places,'lendings'=>$lendings,'categories'=>$category,'weeks'=>$weeks,'times'=>$times,'Search'=>$Search,'Search1'=>$Search1,'Search2'=>$Search2];
+
+        $data=['places'=>$place,'lendings'=>$lendings,'categories'=>$category,'weeks'=>$weeks,'times'=>$times,'Search'=>$Search,'Search1'=>$Search1,'Search2'=>$Search2];
         return view('admin.places.index' ,$data);
     }
 
     public function SearchAll(Request $request)
     {
-        $places = Place::orderBy('created_at', 'DESC');
+
+        $place = Place::orderBy('created_at', 'DESC');
         //$Search =$request->input('week_search');
         $Search =$request->input('Search');
 		//$Search1 =$request->input('category_search');
-        $places ->where('name', 'like','%'.$Search.'%')
+        $place ->where('name', 'like','%'.$Search.'%')
             ->get();
         $category=Category::orderBy('created_at' ,'DESC') ->get();
-        $data=['places'=>$places,'categories'=>$category];
+        $data=['places'=>$place,'categories'=>$category];
         return view('admin.places.index' ,$data);
     }
 	public function SearchAll1(Request $request)
@@ -307,23 +326,26 @@ class PlaceController extends Controller
         $Search =$request->input('week_search');
         $Search2 =$request->input('time_search');
 		$Search1 =$request->input('category_search');
-        $places=Place::orderBy('created_at', 'DESC')->get();
+
+        $place=Place::orderBy('created_at', 'DESC')->get();
         $category=Category::orderBy('created_at' ,'DESC') ->get();
         $lendings=Lending::whereNULL('returntime')->get();
 		$weeks=Week::orderBy('id','ASC')->get();
 		$times=Time_::orderBy('id','ASC')->get();
 		/*
         if(!(Auth::user()->previlege_id==3)){
-           $places=Place::where('id','0')->get();
+
+           $place=Place::where('id','0')->get();
 	   }
 */
-        $data=['places'=>$places,'lendings'=>$lendings,'categories'=>$category,'times'=>$times,'weeks'=>$weeks,'Search'=>$Search,'Search1'=>$Search1,'Search2'=>$Search2];
+        $data=['places'=>$place,'lendings'=>$lendings,'categories'=>$category,'times'=>$times,'weeks'=>$weeks,'Search'=>$Search,'Search1'=>$Search1,'Search2'=>$Search2];
         return view('admin.places.index', $data);
     }
     public function scrapped($id)
     {
-        $places=Place::find($id);
-        $places->update([
+
+        $place=Place::find($id);
+        $place->update([
             'status'=>'維修中',
 			'lendable'=>'0'
         ]);
@@ -332,8 +354,9 @@ class PlaceController extends Controller
     }
 	public function scrapped1($id)
     {
-        $places=Place::find($id);
-        $places->update([
+
+        $place=Place::find($id);
+        $place->update([
             'status'=>'正常使用中',
 			'lendable'=>'1'
         ]);
@@ -342,18 +365,20 @@ class PlaceController extends Controller
 
     public function lendings_create($id)
     {
-        $places=Place::find($id);
+
+        $place=Place::find($id);
         $users=User::orderBy('created_at' ,'DESC') ->get();
         $today = Carbon::today();
-        $data=['places'=>$places,'users'=>$users,'today'=>$today];
+        $data=['place'=>$place,'users'=>$users,'today'=>$today];
         return view('admin.places.lending' ,$data);
     }
 
     public function lendings_store(Request $request,$id)
     {
-        $places=Place::find($id);
+
+        $place=Place::find($id);
 		$users=User::orderBy('created_at' ,'DESC') ->get();
-        $places->lendings()->create([
+        $place->lendings()->create([
             'user_id'=>$request->user_id,
             'lenttime'=> Carbon::now(),
 			
@@ -369,7 +394,8 @@ class PlaceController extends Controller
 		
 		
 		
-        $places->update([
+
+        $place->update([
             'status'=>'租借中',
 			'lendable'=>'0',
 			'lendname'=>$lendname_name,
@@ -379,7 +405,8 @@ class PlaceController extends Controller
 
     public function lendings_return($aid,$id)
     {
-        $places=Place::find($aid);
+
+        $place=Place::find($aid);
         $lending=Lending::find($id);
 		/*
         $lending->update([
@@ -387,7 +414,7 @@ class PlaceController extends Controller
         ]);
 		*/
 		Lending::destroy($id);
-        $places->update([
+        $place->update([
             'status'=>'正常使用中',
 			'lendable'=>'1',
 			'lendname'=>NULL

@@ -120,12 +120,16 @@ class MaintaincesController extends Controller
     {
         $maintainces=Maintaince::orderBy('created_at', 'DESC')->whereNotIn('status',['通過'])->get();
         $maintaincesA=Maintaince::orderBy('created_at', 'DESC')->where('status','申請中')->get();
-        $places=Place::orderBy('created_at', 'DESC')->get();
+
+        $place=Place::orderBy('created_at', 'DESC')->get();
+
         $applications=Application::orderBy('created_at', 'DESC')->get();
         $data=['maintainces'=>$maintainces,
             'maintaincesA'=>$maintaincesA,
             'applications'=>$applications,
-            'places'=>$places
+
+            'places'=>$place
+
         ];
         return view('admin.maintainces.index', $data);
     }
@@ -143,7 +147,9 @@ class MaintaincesController extends Controller
 */
     public function show($id){
         $maintaince=Maintaince::find($id);
-        $places=Place::find($maintaince->place_id);
+
+        $place=Place::find($maintaince->place_id);
+
 		$user_id=Auth::user()->id;
 		$user1=Maintaince::orderBy('created_at', 'DESC')->where('user_id',$user_id)->get();
 		$category=Category::orderBy('created_at' ,'DESC') ->get();
@@ -161,7 +167,9 @@ class MaintaincesController extends Controller
 		}
 		}
 		////////////
-		$places1=Place::orderBy('created_at', 'DESC')->where('lendname','=',$user2)->get();
+
+		$place1=Place::orderBy('created_at', 'DESC')->where('lendname','=',$user2)->get();
+
         //$user=User::find($applications->user_id);
 		//$user_name=User::find($user_id->name);
 		//$times=User::find($user->times);
@@ -190,8 +198,9 @@ class MaintaincesController extends Controller
             }
         }
 */
-        $data=['maintaince'=>$maintaince,'places'=>$places,'applications'=>$applications,'users'=>$users,
-                'places1'=>$places1,'categories'=>$category,'user_id'=>$user_id];
+
+        $data=['maintaince'=>$maintaince,'place'=>$place,'applications'=>$applications,'users'=>$users,
+                'place1'=>$place1,'categories'=>$category,'user_id'=>$user_id];
         return view('admin.maintainces.show', $data);
     }
 

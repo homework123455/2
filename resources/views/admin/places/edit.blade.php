@@ -17,20 +17,23 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <form action="/admin/places/{{$places->id}}" method="POST" role="form">
+
+        <form action="/admin/places/{{$place->id}}" method="POST" role="form">
             {{ csrf_field() }}
             {{ method_field('PATCH') }}
 
             <div class="form-group">
                 <label>場地名稱：</label>
-                <input name="name" class="form-control" placeholder="請輸入場地名稱" value="{{$places->name}}">
+
+                <input name="name" class="form-control" placeholder="請輸入場地名稱" value="{{$place->name}}">
             </div>
 
             <div class="form-group">
                 <label>場地類別：</label>
                 <select name="category" class="form-control">
                     @foreach($categories as $category)
-                        @if($places->category==$category->id)
+
+                        @if($place->category==$category->id)
                             <option value={{ $category->id }} selected="true">{{ $category->name }}</option>
                         @else
                             <option value={{ $category->id }}>{{ $category->name }}</option>
@@ -44,7 +47,8 @@
 				<select name="week_id" class="form-control">
 	            <option value="">請選擇</option>
 				@foreach($weeks as $week)
-				@if($week->id==$places->week_id)
+
+				@if($week->id==$place->week_id)
 				 
                  <option selected="true" value={{ $week->id }} >{{ $week->week }}</option>
 			 @else
@@ -60,7 +64,8 @@
 				<select name="time_id" class="form-control">
 	<option value="">請選擇</option>
 				@foreach($times as $time)
-				@if($time->id==$places->time_id)
+
+				@if($time->id==$place->time_id)
                     <option  selected="true" value={{ $time->id }}>{{ $time->time_start}} ~ {{$time->time_end}}</option>
 				@else
 				  <option  value={{ $time->id }}>{{ $time->time_start}} ~ {{$time->time_end}}</option>
@@ -72,14 +77,16 @@
 
             <div class="form-group">
                 <label>場地狀態：</label>
-                <label>{{$places->status}}</label>
+
+                <label>{{$place->status}}</label>
             </div>
 
             <div class="form-group">
                 <label>負責人：</label>
                 <select name="keeper" class="form-control">
                     @foreach($users as $user)
-                        @if($places->keeper==$user->id)
+
+                        @if($place->keeper==$user->id)
                             <option value={{ $user->id }} selected="true">{{ $user->name }}</option>
                         @else
                             <option value={{ $user->id }}>{{ $user->name }}</option>
@@ -90,23 +97,26 @@
 
             <div class="form-group">
                 <label>可否租借：</label>
-                @if($places->status=='租借中')
-                    @if($places->lendable=="0")
+
+                @if($place->status=='租借中')
+                    @if($place->lendable=="0")
                         <label>否</label>
                         @else
                         <label>是</label>
                     @endif
                     @else
                 <select name="lendable" class="form-control">
-                    <option value="0" {{ $places->lendable?'':'SELECTED' }}>否</option>
-                    <option value="1" {{ $places->lendable?'SELECTED':'' }}>是</option>
+
+                    <option value="0" {{ $place->lendable?'':'SELECTED' }}>否</option>
+                    <option value="1" {{ $place->lendable?'SELECTED':'' }}>是</option>
                 </select>
                     @endif
             </div>
 
             <div class="form-group">
                 <label>地點：</label>
-                <input name="location" class="form-control" placeholder="請輸入場地地點" value="{{$places->location}}">
+
+                <input name="location" class="form-control" placeholder="請輸入場地地點" value="{{$place->location}}">
             </div>
 
             
@@ -115,7 +125,8 @@
 
             <div class="form-group">
                 <label>詳細資訊：</label>
-                <input name="remark" class="form-control" placeholder="請輸入場地資訊" value="{{$places->remark}}">
+
+                <input name="remark" class="form-control" placeholder="請輸入場地資訊" value="{{$place->remark}}">
             </div>
 
             <div class="text-right">

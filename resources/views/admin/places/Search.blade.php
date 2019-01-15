@@ -17,7 +17,7 @@
 
     <div class="row">
         <div class="col-lg-12">
-            <form action="/admin/assets" method="POST" role="form">
+            <form action="/admin/places" method="POST" role="form">
                 {{ csrf_field() }}
 
                 <div class="form-group">
