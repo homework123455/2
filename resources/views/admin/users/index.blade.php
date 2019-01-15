@@ -46,7 +46,7 @@
                     <tr>
                         <th style="text-align: center">E-mail</th>
                         <th width="120" style="text-align: center">姓名</th>
-                        <th width="100" style="text-align: center">部門</th>
+                        <th width="100" style="text-align: center">科系</th>
                         <th width="120" style="text-align: center">職位</th>
                         <th width="80 " style="text-align: center">分機</th>
                         <th width="100" style="text-align: center">權限</th>
