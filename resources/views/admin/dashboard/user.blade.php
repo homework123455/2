@@ -170,8 +170,7 @@ setTimeout('ShowTime()',1000);
                                             {{ $maintaince-> date}}
                                         
                                     </td>
-									
-									
+
 									<td class="table-text" style="text-align: center">
                                      @if($maintaince->status=='申請中')
                                                                         
@@ -180,12 +179,55 @@ setTimeout('ShowTime()',1000);
                                                                         {{ method_field('DELETE') }}
                                                                             <button class="btn btn-danger">取消</button>
                                                                         </form>
-																		@else
-                                                <a class="btn btn-danger disabled" role="button">取消</a>
-																		@endif
+                                        @elseif($maintaince->status=='駁回')
+                                                                <table >
+                                                                    <tbody>
+                                                                        <td width="100">
+                                                                            <!-- Button trigger modal -->
+                                                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">
+                                                                                查看
+                                                                            </button>
+                                                                            <!-- Modal -->
+                                                                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                                                                <div class="modal-dialog" role="document">
+                                                                                    <div class="modal-content">
+                                                                                        <div class="modal-header">
+                                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                                                            <h4 class="modal-title" id="myModalLabel">提示訊息</h4>
+                                                                                        </div>
+                                                                                        <div class="modal-body">
+                                                                                            駁回原因：
+                                                                                            {{ $maintaince->reason }}
+                                                                                        </div>
+                                                                                        <div class="modal-footer">
+                                                                                            <table style="text-align: right">
+                                                                                                <tbody style="text-align: right">
+                                                                                                <tr class="table-text" style="text-align: center">
+                                                                                                    <td width="100" >
+                                                                                                        <form action="{{ route('admin.dashboard.user') }}">
+                                                                                                            {{ csrf_field() }}
+                                                                                                            <button class="btn btn-danger">確認</button>
+                                                                                                        </form>
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                                </tbody>
+                                                                                            </table>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tbody>
+                                                                </table>
+                                                        </table>
+                                        @else
+                                            <a class="btn btn-danger disabled" role="button">取消</a>
+                                        @endif
                                                                     
 											
                                         </td>
+
+
                                 </tr>
                             @endif
                         @endforeach

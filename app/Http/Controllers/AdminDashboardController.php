@@ -29,7 +29,7 @@ public function __construct()
         $maintaincesALL=Maintaince::orderBy('created_at','DESC');
 		$maintaincesALL1=Maintaince::orderBy('created_at','DESC');
 		$maintaincesALL2=Maintaince::orderBy('created_at','DESC');
-		
+
 		
 		$maintaincesA=$maintaincesALL1->whereIn('status',array('通過','駁回','申請中'))->get();
 		$maintaincesB=$maintaincesALL2->whereIn('status',array('通過','駁回','申請中'))->get();
@@ -79,7 +79,8 @@ public function __construct()
         $data=['applications'=>$applications,'maintainces'=>$maintainces,'maintainces_A'=>$maintaincesA,
 		'maintainces_B'=>$maintaincesB,'places'=>$places,
             'applicationsA'=>$applicationsA,'news'=>$news,
-            "users"=>$users,'departmaentU'=>$departmaentU,'username'=>$username,'times'=>$times,'weeks'=>$weeks,'place_overtimes'=>$place_overtimes,'place_overtimes1'=>$place_overtimes1,'time_nowid'=>$time_nowid,'time_nows'=>$time_nows];
+            "users"=>$users,'departmaentU'=>$departmaentU,'username'=>$username,'times'=>$times,'weeks'=>$weeks,'place_overtimes'=>$place_overtimes,
+            'place_overtimes1'=>$place_overtimes1,'time_nowid'=>$time_nowid,'time_nows'=>$time_nows];
         if (Auth::user()->previlege_id==3)
             return view('admin.dashboard.mis',$data);
         elseif(Auth::user()->previlege_id==4)
