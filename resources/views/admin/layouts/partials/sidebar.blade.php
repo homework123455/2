@@ -57,7 +57,7 @@
                     <a href="{{ route('admin.places.index') }}"><i class="fa fa-fw fa-edit"></i> 場地管理</a>
                 </li>
             <li>
-                <a href="{{ route('admin.maintainces.index') }}"><i class="fa fa-fw fa-edit"></i> 報修處理</a>
+                <a href="{{ route('admin.maintainces.index') }}"><i class="fa fa-fw fa-edit"></i> 申請處理</a>
             </li>
            
                <li>

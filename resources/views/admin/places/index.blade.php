@@ -182,7 +182,7 @@
                                         <td width="80">
                                         @if($place->status=='租借中'||$place->status=='正常使用中')
                                                 @foreach($lendings as $lending)
-                                                    @if($place->id==$lending->asset_id)
+                                                    @if($place->id==$lending->place_id)
                                                             <!-- Button trigger modal -->
                                                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal1">
                                                                 歸還
@@ -226,7 +226,7 @@
                                             @else
 												
 												@foreach($maintainces as $maintaince)
-												@if($maintaince->asset_id==$place->id)
+												@if($maintaince->place_id==$place->id)
 												<a href="{{ route('admin.maintainces.show', $maintaince->id) }}"  class="btn btn-success" role="button">處理</a>
                                                             <!-- Modal -->
                                                            
