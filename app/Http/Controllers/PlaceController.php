@@ -24,7 +24,7 @@ class PlaceController extends Controller
     //
     public function index(Request $request)
     {
-        $maintaincesALL = Maintaince::orderBy('created_at', 'DESC');
+        
         $Search = $request->input('week_search');
         $Search2 = $request->input('time_search');
         $Search1 = $request->input('category_search');
@@ -35,6 +35,7 @@ class PlaceController extends Controller
         $lendings = Lending::whereNULL('returntime')->get();
         $weeks = Week::orderBy('id', 'ASC')->get();
         $times = Time_::orderBy('id', 'ASC')->get();
+		$maintaincesALL = Maintaince::orderBy('created_at', 'DESC');
         $maintainces = $maintaincesALL->whereIn('status', array('申請中'))->get();
         /*
         if(!(Auth::user()->previlege_id==3)){
@@ -226,7 +227,8 @@ class PlaceController extends Controller
 
     public function Search10(Request $request)
     {
-
+        $maintaincesALL = Maintaince::orderBy('created_at', 'DESC');
+        $maintainces = $maintaincesALL->whereIn('status', array('申請中'))->get();
         $times = Time_::orderBy('id', 'ASC')->get();
         $Search = $request->input('week_search');
         $Search2 = $request->input('time_search');
@@ -274,7 +276,7 @@ class PlaceController extends Controller
         $category = Category::orderBy('created_at', 'DESC')->get();
         $lendings = Lending::whereNull('returntime')->get();
 
-        $data = ['places' => $place, 'lendings' => $lendings, 'categories' => $category, 'weeks' => $weeks, 'times' => $times, 'Search' => $Search, 'Search1' => $Search1, 'Search2' => $Search2];
+        $data = ['places' => $place, 'lendings' => $lendings, 'categories' => $category, 'weeks' => $weeks, 'times' => $times, 'Search' => $Search, 'Search1' => $Search1, 'Search2' => $Search2,'maintainces'=>$maintainces];
         return view('admin.places.index', $data);
         }
 
@@ -323,6 +325,8 @@ class PlaceController extends Controller
     }
 	public function SearchAll1(Request $request)
     {
+	$maintaincesALL = Maintaince::orderBy('created_at', 'DESC');
+        $maintainces = $maintaincesALL->whereIn('status', array('申請中'))->get();
         $Search =$request->input('week_search');
         $Search2 =$request->input('time_search');
 		$Search1 =$request->input('category_search');
@@ -338,7 +342,7 @@ class PlaceController extends Controller
            $place=Place::where('id','0')->get();
 	   }
 */
-        $data=['places'=>$place,'lendings'=>$lendings,'categories'=>$category,'times'=>$times,'weeks'=>$weeks,'Search'=>$Search,'Search1'=>$Search1,'Search2'=>$Search2];
+        $data=['places'=>$place,'lendings'=>$lendings,'categories'=>$category,'times'=>$times,'weeks'=>$weeks,'Search'=>$Search,'Search1'=>$Search1,'Search2'=>$Search2,'maintainces'=>$maintainces];
         return view('admin.places.index', $data);
     }
     public function scrapped($id)
