@@ -145,11 +145,39 @@
 
             <div class="form-group">
                 <label>選擇是否核准</label>
-                <select name="method" class="form-control">
-                        <option value="是">是</option>
-                        <option value="否">否</option>
-                      
+
+                <Script language="javascript">
+                    function agree(){
+                        var a=document.getElementById("method");
+
+                        var index=a.selectedIndex ;
+                        var b=document.getElementById("reason");
+                        var c=a.options[index].value;
+                        if(c=='0'){
+
+
+                            b.readOnly=true;
+                        }
+                        else{
+                            if(c=='1'){
+                                b.removeAttribute('readOnly');
+
+                            }
+                        }
+
+                    }
+
+                </Script>
+                <select id="method" name="method" class="form-control" onchange="agree()">
+                        <option value="0">是</option>
+                        <option value="1">否</option>
                 </select>
+
+                <label>駁回原因：</label>
+                <input type="text" id="reason" name="reason" class="form-control" placeholder="請輸入駁回原因" readonly>
+
+
+
             </div>
 
                     

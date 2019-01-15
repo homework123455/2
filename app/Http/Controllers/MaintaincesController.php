@@ -206,10 +206,11 @@ class MaintaincesController extends Controller
 
     public function process(Request $request,$id){
         $maintaince=Maintaince::find($id);
+        $reason = $request->input('reason');
         $maintaince->update([
             'method'=>$request->method
         ]);
-        if($request->method=='是'){
+        if($request->method=='0'){
             $place=Place::find($maintaince->place_id);
             $maintaince->update([
                 'status'=>'通過',
@@ -237,12 +238,12 @@ class MaintaincesController extends Controller
             'lenttime'=> Carbon::now(),
 			
         ]);
-        }elseif($request->method=='否'){
+        }elseif($request->method=='1'){
 			$place=Place::find($maintaince->place_id);
             $maintaince->update([
                 'status'=>'駁回',
 				'lendable'=>'1',
-				
+				'reason'=>$reason,
             ]);
 			$place->update([
                 'status'=>'正常使用中',

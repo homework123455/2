@@ -15,7 +15,8 @@ class Maintaince extends Model
         'status',
         'method',
         'remark',
-		'user_id',
+        'reason',
+		'user_id'
 		
     ];
 
