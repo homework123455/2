@@ -10,7 +10,7 @@ class Lending extends Model
     protected $table = 'lendings';
     protected $fillable = [
         'user_id',
-        'asset_id',
+        'place_id',
         'lenttime',
         'returntime',
     ];

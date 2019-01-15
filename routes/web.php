@@ -41,38 +41,38 @@ Route::group(['prefix' => 'admin'], function() {
     Route::post('posts'         , ['as' => 'admin.posts.store'  , 'uses' => 'AdminPostsController@store']);
     Route::delete('posts/{id}'  , ['as' => 'admin.posts.destroy', 'uses' => 'AdminPostsController@destroy']);
 	////
-	Route::get('assets', ['as' => 'admin.assets.index', 'uses' => 'AssetController@index']);
-	Route::get('assets/create', ['as' => 'admin.assets.create', 'uses' => 'AssetController@create']);       //新增資產(1)
-    Route::post('assets', ['as' => 'admin.asset.store', 'uses' => 'AssetController@store']);               //新增資產(2)
-    Route::get('assets/{id}/edit', ['as' => 'admin.assets.edit', 'uses' => 'AssetController@edit']);        //修改資產(1)
-    Route::patch('assets/{id}', ['as' => 'admin.assets.update', 'uses' => 'AssetController@update']);     //修改資產(2)
-    Route::delete('assets/{id}', ['as' => 'admin.assets.destroy', 'uses' => 'AssetController@destroy']);   //刪除資產
-    Route::post('assets/search'  , ['as' => 'admin.assets.search', 'uses' => 'AssetController@Search']); //查詢星期
-    Route::post('assets/search1'  , ['as' => 'admin.assets.search1', 'uses' => 'AssetController@Search1']);	//查詢場地類別
-	Route::post('assets/search10'  , ['as' => 'admin.assets.search10', 'uses' => 'AssetController@Search10']);	//查詢開放時段
-	Route::post('assets/searchALL1'  , ['as' => 'admin.assets.searchALL1', 'uses' => 'AssetController@searchALL1']);	//查詢開放時段
-    Route::get('assets/{id}/data', ['as' => 'admin.assets.data', 'uses' => 'AssetController@data']);       //資產詳細資料
+	Route::get('places', ['as' => 'admin.places.index', 'uses' => 'PlaceController@index']);
+	Route::get('places/create', ['as' => 'admin.places.create', 'uses' => 'PlaceController@create']);       //新增資產(1)
+    Route::post('places', ['as' => 'admin.places.store', 'uses' => 'PlaceController@store']);               //新增資產(2)
+    Route::get('places/{id}/edit', ['as' => 'admin.places.edit', 'uses' => 'PlaceController@edit']);        //修改資產(1)
+    Route::patch('places/{id}', ['as' => 'admin.places.update', 'uses' => 'PlaceController@update']);     //修改資產(2)
+    Route::delete('places/{id}', ['as' => 'admin.places.destroy', 'uses' => 'PlaceController@destroy']);   //刪除資產
+    Route::post('places/search'  , ['as' => 'admin.places.search', 'uses' => 'PlaceController@Search']); //查詢星期
+    Route::post('places/search1'  , ['as' => 'admin.places.search1', 'uses' => 'PlaceController@Search1']);	//查詢場地類別
+	Route::post('places/search10'  , ['as' => 'admin.places.search10', 'uses' => 'PlaceController@Search10']);	//查詢開放時段
+	Route::post('places/searchALL1'  , ['as' => 'admin.places.searchALL1', 'uses' => 'PlaceController@searchALL1']);	//查詢開放時段
+    Route::get('places/{id}/data', ['as' => 'admin.places.data', 'uses' => 'PlaceController@data']);       //資產詳細資料
 
-    Route::get('assets/instascan', ['as' => 'admin.assets.instascan', 'uses' => 'AssetController@instascan']);
+    Route::get('places/instascan', ['as' => 'admin.places.instascan', 'uses' => 'PlaceController@instascan']);
 
     //未做
-    Route::post('assets/searchAll'  , ['as' => 'admin.assets.searchAll', 'uses' => 'AssetController@SearchAll']);  //查詢資產(複雜)
+    Route::post('places/searchAll'  , ['as' => 'admin.places.searchAll', 'uses' => 'PlaceController@SearchAll']);  //查詢資產(複雜)
 
     //報廢資產
-    Route::patch('assets/{id}/scrapped', ['as' => 'admin.assets.scrapped', 'uses' => 'AssetController@scrapped']);  
-Route::patch('assets/{id}/scrapped1', ['as' => 'admin.assets.scrapped1', 'uses' => 'AssetController@scrapped1']); 	//報廢資產
+    Route::patch('places/{id}/scrapped', ['as' => 'admin.places.scrapped', 'uses' => 'PlaceController@scrapped']);  
+Route::patch('places/{id}/scrapped1', ['as' => 'admin.places.scrapped1', 'uses' => 'PlaceController@scrapped1']); 	//報廢資產
 
     //未做
-    //Route::patch('assets/{id}/scrapped', ['as' => 'admin.assets.update', 'uses' => 'AssetController@update']);     //取消報修資產
+    //Route::patch('places/{id}/scrapped', ['as' => 'admin.places.update', 'uses' => 'PlaceController@update']);     //取消報修資產
 
     //租用資產
-    Route::get('assets/{id}/lending', ['as' => 'admin.lendings.create', 'uses' => 'AssetController@lendings_create']);     //租用資產(1)
-    Route::post('assets/{id}/lending', ['as' => 'admin.lendings.store', 'uses' => 'AssetController@lendings_store']);     //租用資產(2)
-    Route::patch('assets/{aid}/lending/{id}', ['as' => 'admin.lendings.return', 'uses' => 'AssetController@lendings_return']);     //歸還資產
+    Route::get('places/{id}/lending', ['as' => 'admin.lendings.create', 'uses' => 'PlaceController@lendings_create']);     //租用資產(1)
+    Route::post('places/{id}/lending', ['as' => 'admin.lendings.store', 'uses' => 'PlaceController@lendings_store']);     //租用資產(2)
+    Route::patch('places/{aid}/lending/{id}', ['as' => 'admin.lendings.return', 'uses' => 'PlaceController@lendings_return']);     //歸還資產
 
     //申請
-    Route::get('assets/{id}/application', ['as' => 'admin.assets.application', 'uses' => 'MaintaincesController@create']);             //員工申請資產(1)
-    Route::patch('assets/{id}/application/store', ['as' => 'admin.assets.application.store', 'uses' => 'MaintaincesController@store']);  //員工申請資產(2)
+    Route::get('places/{id}/application', ['as' => 'admin.places.application', 'uses' => 'MaintaincesController@create']);             //員工申請資產(1)
+    Route::patch('places/{id}/application/store', ['as' => 'admin.places.application.store', 'uses' => 'MaintaincesController@store']);  //員工申請資產(2)
 
     //報修
     Route::get('maintainces', ['as' => 'admin.maintainces.index', 'uses' => 'MaintaincesController@index']);                        //報修主畫面

@@ -9,7 +9,7 @@ class Maintaince extends Model
     //
     protected $table = 'maintainces';
     protected $fillable = [
-        'asset_id',
+        'place_id',
         'vendor_id',
         'date',
         'status',
@@ -20,7 +20,7 @@ class Maintaince extends Model
     ];
 
 
-    public function asset() // Maintaince (n) -> asset (1)
+    public function place() // Maintaince (n) -> asset (1)
     {
         return $this->belongsTo(Asset::class);
     }

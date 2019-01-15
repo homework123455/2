@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Application;
-use App\Asset;
+use App\Place;
 //use App\times;
 use App\Category;
 use App\Maintaince;
@@ -26,11 +26,11 @@ class MaintaincesController extends Controller
     //
     public function create($id)
     {
-        $asset=Asset::find($id);
-        $category=Category::find($asset->category);
-        $user=User::find($asset->keeper);
-        $data = ['asset' => $asset,'category'=>$category,'user'=>$user];
-        return view('admin.assets.application', $data);
+        $place=Place::find($id);
+        $category=Category::find($place->category);
+        $user=User::find($place->keeper);
+        $data = ['place' => $place,'category'=>$category,'user'=>$user];
+        return view('admin.places.application', $data);
     }
 
     public function store(Requests\ApplicationRequest $request,$id)
@@ -38,10 +38,10 @@ class MaintaincesController extends Controller
 		
 		$user_id=Auth::user()->id;
 		
-        $asset=Asset::find($id);
-        if($asset->status=='正常使用中'){
-            $asset->maintainces()->create([
-                //'vendor_id'=>$asset->vendor,
+        $place=Place::find($id);
+        if($place->status=='正常使用中'){
+            $place->maintainces()->create([
+                //'vendor_id'=>$place->vendor,
                 'status'=>'申請中',
                 //'method'=>'未選擇',
                 'remark'=>null,
@@ -71,7 +71,7 @@ class MaintaincesController extends Controller
             $user2=$user->name;
 		}
 		}
-            $asset->update([
+            $place->update([
 			
 			'lendable'=>'0',
             'status'=>'申請中',
@@ -86,7 +86,7 @@ class MaintaincesController extends Controller
                 'date'=>Carbon::now()
             ]);
 			/*
-			$asset->lendings()->create([
+			$place->lendings()->create([
             'user_id'=>$request->user()->id,
             'lenttime'=> Carbon::now(),
 			
@@ -95,14 +95,14 @@ class MaintaincesController extends Controller
 			/*
             //Mail
             $users=User::where('previlege_id',3)->get();
-            $userk=User::find($asset->keeper);
+            $userk=User::find($place->keeper);
             foreach ($users as $user)
             {
                 $to = ['email'=>$user->email,
                     'name'=>$user->name];
                 $data = [
-                    'name'=>$asset->name,
-                    'location'=>$asset->location,
+                    'name'=>$place->name,
+                    'location'=>$place->location,
                     'keeper'=>$userk->name,
                     'applications_user'=>Auth::user()->name,
                     'problem'=>$request->problem,
@@ -113,19 +113,19 @@ class MaintaincesController extends Controller
             }
 			*/
         }
-        return redirect()->route('admin.assets.index');
+        return redirect()->route('admin.places.index');
     }
 
     public function index()
     {
         $maintainces=Maintaince::orderBy('created_at', 'DESC')->whereNotIn('status',['通過'])->get();
         $maintaincesA=Maintaince::orderBy('created_at', 'DESC')->where('status','申請中')->get();
-        $asset=Asset::orderBy('created_at', 'DESC')->get();
+        $places=Place::orderBy('created_at', 'DESC')->get();
         $applications=Application::orderBy('created_at', 'DESC')->get();
         $data=['maintainces'=>$maintainces,
             'maintaincesA'=>$maintaincesA,
             'applications'=>$applications,
-            'assets'=>$asset
+            'places'=>$places
         ];
         return view('admin.maintainces.index', $data);
     }
@@ -133,17 +133,17 @@ class MaintaincesController extends Controller
     public function Search(Request $request)
     {
         $Search =$request->input('Search');
-        $asset = Asset::orderBy('created_at', 'DESC')
+        $place = Place::orderBy('created_at', 'DESC')
             ->where('name', 'like','%'.$Search.'%')
             ->get();
         $category=Category::orderBy('created_at' ,'DESC') ->get();
-        $data=['assets'=>$asset,'categories'=>$category];
-        return view('admin.assets.index' ,$data);
+        $data=['places'=>$place,'categories'=>$category];
+        return view('admin.places.index' ,$data);
     }
 */
     public function show($id){
         $maintaince=Maintaince::find($id);
-        $asset=Asset::find($maintaince->asset_id);
+        $places=Place::find($maintaince->place_id);
 		$user_id=Auth::user()->id;
 		$user1=Maintaince::orderBy('created_at', 'DESC')->where('user_id',$user_id)->get();
 		$category=Category::orderBy('created_at' ,'DESC') ->get();
@@ -161,7 +161,7 @@ class MaintaincesController extends Controller
 		}
 		}
 		////////////
-		$asset1=Asset::orderBy('created_at', 'DESC')->where('lendname','=',$user2)->get();
+		$places1=Place::orderBy('created_at', 'DESC')->where('lendname','=',$user2)->get();
         //$user=User::find($applications->user_id);
 		//$user_name=User::find($user_id->name);
 		//$times=User::find($user->times);
@@ -169,7 +169,7 @@ class MaintaincesController extends Controller
 		//$times=Maintaince::find($id);
 		////////////
         //$maintainceitems=MaintainceItem::orderBy('created_at', 'ASC')->get();
-        //$assetmaintainces=Maintaince::where('asset_id',$asset->id)->where('status','已完成維修')->get();
+        //$assetmaintainces=Maintaince::where('place_id',$place->id)->where('status','已完成維修')->get();
       /*
         if($maintaince->status=='申請中'){
             $maintaince->update([
@@ -190,8 +190,8 @@ class MaintaincesController extends Controller
             }
         }
 */
-        $data=['maintaince'=>$maintaince,'asset'=>$asset,'applications'=>$applications,'users'=>$users,
-                'asset1'=>$asset1,'categories'=>$category,'user_id'=>$user_id];
+        $data=['maintaince'=>$maintaince,'places'=>$places,'applications'=>$applications,'users'=>$users,
+                'places1'=>$places1,'categories'=>$category,'user_id'=>$user_id];
         return view('admin.maintainces.show', $data);
     }
 
@@ -201,13 +201,13 @@ class MaintaincesController extends Controller
             'method'=>$request->method
         ]);
         if($request->method=='是'){
-            $asset=Asset::find($maintaince->asset_id);
+            $place=Place::find($maintaince->place_id);
             $maintaince->update([
                 'status'=>'通過',
                 'date'=>Carbon::now(),
 				'lenttime'=>Carbon::now()
             ]);
-            $asset->update([
+            $place->update([
                 'status'=>'租借中',
 				'lendable'=>'0'
             ]);
@@ -223,19 +223,19 @@ class MaintaincesController extends Controller
 		}
 		}
 		}
-		$asset->lendings()->create([
+		$place->lendings()->create([
             'user_id'=>$user2,
             'lenttime'=> Carbon::now(),
 			
         ]);
         }elseif($request->method=='否'){
-			$asset=Asset::find($maintaince->asset_id);
+			$place=Place::find($maintaince->place_id);
             $maintaince->update([
                 'status'=>'駁回',
 				'lendable'=>'1',
 				
             ]);
-			$asset->update([
+			$place->update([
                 'status'=>'正常使用中',
 				'lendable'=>'1',
 				'lendname'=>NULL
@@ -258,12 +258,12 @@ class MaintaincesController extends Controller
 
     public function complete(Request $request,$id){
         $maintaince=Maintaince::find($id);
-        $asset=Asset::find($maintaince->asset_id);
+        $place=Place::find($maintaince->place_id);
         /*$maintaince->update([
             'status'=>'已完成維修',
             'date'=>Carbon::now()
         ]);*/
-        $asset->update([
+        $place->update([
             'status'=>'正常使用中'
         ]);
 		/*
@@ -273,7 +273,7 @@ class MaintaincesController extends Controller
             $to = ['email'=>$user->email,
                 'name'=>$user->name];
             $data = [
-                'name'=>$asset->name,
+                'name'=>$place->name,
                 'date'=>Carbon::now(),
             ];
             Mail::later(1,' admin.mails.complete',$data, function($message) use ($to) {
@@ -286,8 +286,8 @@ class MaintaincesController extends Controller
             $to = ['email'=>'moneyyinsh001@gmail.com',
                 'name'=>'shark'];
             $data = ['maintainceitems'=>$maintainceitems,
-                'name'=>$asset->name,
-                'location'=>$asset->location,
+                'name'=>$place->name,
+                'location'=>$place->location,
                 'total'=>$maintainceitems->sum('amount'),
             ];
             Mail::later(1,' admin.mails.spend',$data, function($message) use ($to) {
@@ -318,8 +318,8 @@ class MaintaincesController extends Controller
 		}
 		//}
 		}
-		$asset=Asset::find($maintainces->asset_id);
-		$asset->update([
+		$place=Place::find($maintainces->place_id);
+		$place->update([
                 'status'=>'正常使用中',
 				'lendable'=>'1',
 				'lendname'=>NULL
@@ -337,14 +337,14 @@ class MaintaincesController extends Controller
 
         $maintaince=Maintaince::find($id);
         $application=$maintaince->applications()->get();
-        $asset=Asset::find($maintaince->asset_id);
+        $place=Place::find($maintaince->place_id);
         $users=User::orderBy('created_at','DESC')->get();
 
         foreach ($users as $user)
         {
             $to = ['email'=>$user->email,
                 'name'=>$user->name];
-            $data = ['status'=>$asset->status,
+            $data = ['status'=>$place->status,
             ];
             Mail::later(10,' admin.mails.test01',$data, function($message) use ($to) {
                 $message->to($to['email'], $to['name'])->subject('測試信件');
@@ -362,10 +362,10 @@ class MaintaincesController extends Controller
         $to = ['email'=>$user->email,
             'name'=>$user->name];
         //信件的內容(即表單填寫的資料)
-        $data = ['status'=>$asset->status,
+        $data = ['status'=>$place->status,
         ];
         //寄出信件
-        Mail::raw(' 資產狀態變更成'.$asset->status.' ！', function($message) use ($to) {
+        Mail::raw(' 資產狀態變更成'.$place->status.' ！', function($message) use ($to) {
             //$message->from($from['email'], $from['name']);
             $message->to($to['email'], $to['name'])->subject('測試信件');
         });

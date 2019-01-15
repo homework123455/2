@@ -29,13 +29,13 @@
 
         <div class="form-group">
             <label width="80">場地名稱：</label>
-            <lable name="name">{{$asset->name}}</lable>
+            <lable name="name">{{$places->name}}</lable>
         </div>
 
         <div class="form-group">
             <label width="80">負責人：</label>
             @foreach($users as $user)
-                @if($asset->keeper==$user->id)
+                @if($places->keeper==$user->id)
             <lable name="keeper">{{$user->name}}</lable>
                 @endif
                 @endforeach
@@ -43,7 +43,7 @@
 
         <div class="form-group">
             <label width="80">地點：</label>
-            <lable name="location">{{$asset->location}}</lable>
+            <lable name="location">{{$places->location}}</lable>
         </div>
 
         <ol class="breadcrumb">
@@ -105,23 +105,23 @@
 							 </tr>
                 </thead>
                 <tbody>
-                @foreach($asset1 as $asset1)
+                @foreach($places1 as $place1)
                     <tr>
                         <td style="text-align: center">
-                            {{ $asset1->id }}
+                            {{ $place1->id }}
                         </td>
                         <td style="text-align: center">
-                            <a href="{{ route('admin.assets.data', $asset1->id) }}">{{ $asset1->name }}</a>
+                            <a href="{{ route('admin.places.data', $place1->id) }}">{{ $place1->name }}</a>
                         </td>
                         <td style="text-align: center">
                             @foreach($categories as $category)
-                                @if($asset1->category==$category->id)
+                                @if($place1->category==$category->id)
                                     {{ $category->name }}
                                 @endif
                             @endforeach
                         </td>
 						<td style="text-align: center">
-                            {{ $asset1->status }}
+                            {{ $place1->status }}
                         </td>
 						</tr>
 						@endforeach

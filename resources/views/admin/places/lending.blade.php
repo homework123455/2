@@ -17,7 +17,7 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <form action="/admin/assets/{{$asset->id}}/lending" method="POST" role="form">
+        <form action="/admin/places/{{$places->id}}/lending" method="POST" role="form">
             {{ csrf_field() }}
             <div class="form-group">
                 <label>租借人姓名：</label>
@@ -29,7 +29,7 @@
             </div>
             <div class="form-group">
                 <label>租借場地名稱：</label>
-                <label>{{$asset->name}}</label>
+                <label>{{$places->name}}</label>
             </div>
             <div class="form-group">
                 <label>租借時間：</label>

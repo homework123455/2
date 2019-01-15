@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Asset extends Model
+class Place extends Model
 {
     //資產
-    protected $table = 'assets';
+    protected $table = 'places';
     protected $fillable = [
         'name',
         'category',
@@ -24,7 +24,7 @@ class Asset extends Model
 		'time_id',
 
         'file',
-        'file1'
+        //'file1'
 
 		
        // 'vendor',

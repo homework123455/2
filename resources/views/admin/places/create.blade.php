@@ -26,7 +26,7 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <form action="/admin/assets" method="POST"  role="form"   enctype="multipart/form-data">
+        <form action="/admin/places" method="POST"  role="form"   enctype="multipart/form-data">
             {{ csrf_field() }}
        
 

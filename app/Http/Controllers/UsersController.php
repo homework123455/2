@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Application;
 use App\Department;
 use App\Previlege;
 use App\User;
@@ -79,6 +79,28 @@ class UsersController extends Controller
     }
     public function destroy($id)
     {
+		$applications=Application::orderBy('created_at', 'DESC')->get();
+		//$applications1=Application::orderBy('created_at', 'DESC')->get();
+		$wrongs=Wrong::orderBy('id','ASC')->get();
+		foreach($wrongs as $wrong)
+		{
+		if($wrong->user_id==$id)
+		{
+			$wrong_id=$wrong->id;
+			Wrong::destroy($wrong_id);
+		}
+		}
+		foreach($applications as $application)
+		{
+		if($application->user_id==$id)
+		{
+			$application_id=$application->id;
+			Application::destroy($application_id);
+		}
+		}
+		
+		Wrong::destroy($wrong_id);
+		
         User::destroy($id);
         return redirect()->route('admin.users.index');
     }
