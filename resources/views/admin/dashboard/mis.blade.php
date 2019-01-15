@@ -139,7 +139,7 @@
                                         </td>
                                         <td style="text-align: center">
                                             @foreach($places as $place)
-                                                @if($maintaince->asset_id==$place->id)
+                                                @if($maintaince->place_id==$place->id)
                                                     {{ $place->name }}
                                                 @endif
                                             @endforeach
