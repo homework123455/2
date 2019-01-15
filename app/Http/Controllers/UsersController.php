@@ -109,8 +109,8 @@ class UsersController extends Controller
     {
         $user=User::find($id);
         $previlege=Previlege::find($user->previlege_id);
-
-        $data = ['user'=>$user,'previlege'=>$previlege];
+        $departments=Department::orderBy('created_at','DESC')->get(); 
+        $data = ['user'=>$user,'previlege'=>$previlege,'departments'=>$departments];
         return view('admin.users.show', $data);
     }
 

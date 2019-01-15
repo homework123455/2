@@ -28,14 +28,16 @@
             </div>
 
             <div class="form-group">
-                <label width="80">部門：</label>
-                <label name="department_id">{{$user->department_id}}</label>
+                <label width="80">系所：</label>
+                <label name="department_id">
+				@foreach($departments as $department)
+				@if($user->department_id==$department->id)
+				{{$department->name}}</label>
+			@endif
+			@endforeach
             </div>
 
-            <div class="form-group">
-                <label width="80">分機號碼：</label>
-                <label name="extension">{{$user->extension}}</label>
-            </div>
+            
 
             <div class="form-group">
                 <label width="80">職位：</label>
@@ -54,7 +56,7 @@
 
 
         <div>
-            <a href="{{ route('admin.dashboard.index') }}" class="btn btn-success">返回</a>
+            <a href="{{ route('admin.users.index') }}" class="btn btn-success">返回</a>
         </div>
         <p>&nbsp;</p>
         <p>&nbsp;</p>

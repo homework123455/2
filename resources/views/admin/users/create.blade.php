@@ -49,7 +49,7 @@
             </div>
 
             <div class="form-group">
-                <label width="80">部門：</label>
+                <label width="80">系所：</label>
                 <select name='department_id'  class="form-control"  >
 				
                     @foreach($departments as $department)
@@ -58,10 +58,6 @@
                 </select>
             </div>
 
-            <div class="form-group">
-                <label width="80">分機號碼：</label>
-                <input name="extension" class="form-control" placeholder="請輸入分機號碼">
-            </div>
 
             <div class="form-group">
                 <label width="80">職位：</label>

@@ -35,7 +35,7 @@ public function __construct()
 		$maintaincesB=$maintaincesALL2->whereIn('status',array('通過','駁回','申請中'))->get();
 		$maintainces=$maintaincesALL->whereIn('status',array('申請中'))->get();
 		$weeks=Week::orderBy('id','ASC')->get();
-		$times=Time_::orderBy('id','ASC')->get();
+		$times=Time_::orderBy('id','DESC')->get();
 		$places=Place::orderBy('created_at', 'ASC')->get();
 		$places1=Place::orderBy('created_at', 'ASC');
 		$places2=Place::orderBy('created_at', 'ASC');
