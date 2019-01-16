@@ -221,6 +221,7 @@ class PlaceController extends Controller
         $category = Category::find($place->category);
         //$vendor=Vendor::find($place->vendor);
         $user = User::find($place->keeper);
+		
         $maintainceitems = MaintainceItem::orderBy('created_at', 'ASC')->get();
         $assetmaintainces = Maintaince::where('place_id', $place->id)->where('status', '通過')->get();
         $lendings = Lending::where('returntime', null)->get();

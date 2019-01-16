@@ -180,9 +180,7 @@ setTimeout('ShowTime()',1000);
                                                                             <button class="btn btn-danger">取消</button>
                                                                         </form>
                                         @elseif($maintaince->status=='駁回')
-                                                                <table >
-                                                                    <tbody>
-                                                                        <td width="100">
+                                                               
                                                                             <!-- Button trigger modal -->
                                                                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">
                                                                                 查看
@@ -216,10 +214,7 @@ setTimeout('ShowTime()',1000);
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-                                                                        </td>
-                                                                    </tbody>
-                                                                </table>
-                                                        </table>
+                                                                  
                                         @else
                                             <a class="btn btn-danger disabled" role="button">取消</a>
                                         @endif
