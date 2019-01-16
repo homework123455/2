@@ -37,7 +37,7 @@ class PlaceRequest extends FormRequest
             // 'remark',
             //'vendor'=>'required',
             //'warranty'=>'required',
-			//'img'=>'required'
+			'img'=>'required'
 			//'file1'=>'required|image|size:500'
 
         ];

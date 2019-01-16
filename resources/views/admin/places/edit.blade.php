@@ -18,11 +18,17 @@
 <div class="row">
     <div class="col-lg-12">
 
-        <form action="/admin/places/{{$place->id}}" method="POST" role="form">
+        <form action="/admin/places/{{$place->id}}" method="POST" role="form" enctype="multipart/form-data">
             {{ csrf_field() }}
-            {{ method_field('PATCH') }}
+			{{ method_field('PATCH') }}
 
+            
             <div class="form-group">
+			 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+                    <label>上傳場地圖片:</label>
+                </fieldset>
+
+                <input type="file" name="img[]"  accept="image/jpeg,image/jpg,image/gif,image/png" style="display: block;margin-bottom: 5px;">
                 <label>場地名稱：</label>
 
                 <input name="name" class="form-control" placeholder="請輸入場地名稱" value="{{$place->name}}">
