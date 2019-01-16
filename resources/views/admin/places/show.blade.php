@@ -17,7 +17,10 @@
             場地 <small>場地資料</small>
 			
         <a href="{{ route('admin.places.index') }}" class="btn btn-success" style="margin-bottom: 20px; text-align: right">返回</a>
-		<a href="{{ route('admin.places.application', $place->id) }}" class="btn btn-success" style="margin-bottom: 20px; text-align: right">租借</a>
+		@if($place->status=='正常使用中')
+			<a href="{{ route('admin.places.application', $place->id) }}" class="btn btn-success" style="margin-bottom: 20px; text-align: right">租借</a>
+		@endif
+		
                        
 						   
         </h1>
@@ -41,7 +44,7 @@
 
         <div class="form-group">
             <label width="80">場地圖片：</label>
-            <img src={{ $place->file1}} width="500px" height="300px"/>
+            <img src={{ $place->file}} width="500px" height="300px"/>
 
         </div>
 
