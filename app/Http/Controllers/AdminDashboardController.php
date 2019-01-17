@@ -35,7 +35,7 @@ public function __construct()
 		$maintaincesB=$maintaincesALL2->whereIn('status',array('通過','駁回','申請中'))->get();
 		$maintainces=$maintaincesALL->whereIn('status',array('申請中'))->get();
 		$weeks=Week::orderBy('id','ASC')->get();
-		$times=Time_::orderBy('id','DESC')->get();
+		$times=Time_::orderBy('id','ASC')->get();
 		$places=Place::orderBy('created_at', 'ASC')->get();
 		$places1=Place::orderBy('created_at', 'ASC');
 		$places2=Place::orderBy('created_at', 'ASC');
@@ -45,7 +45,7 @@ public function __construct()
         $users=User::orderBy('created_at' ,'DESC') ->get();
         $departmaentU=$users->where('department_id', Auth::user()->department_id);
 		//$time_nowid=Carbon::now('Asia/Taipei');
-        $time_nows=date("H:i:s", time()+8*60*60);
+        $time_nows=date("H:i:s", time());
 		//$time_nows_id=strtotime($time_nows);
 		//$time_ids=Time_::find($places->time_id);
 		//foreach($time_nows as $time_now ){
@@ -58,12 +58,13 @@ public function __construct()
 					$time_nowid=$time->id;
 					//$asset_timeend=$time->time_end;
 					}
-			else{		
+			
+			
+		}
+		if(!$time_nows){		
 			$time_nowid=Carbon::now('Asia/Taipei');
 			//$dt->timezone = new DateTimeZone('Europe/London');
 
-		}
-			
 		}
         $place_overtimes=$places1->where('time_id', '!=', $time_nowid)->where('status','租借中')->get();
 		//foreach ($place_overtimes as $asset_overtime){
