@@ -166,7 +166,7 @@ return [
         /*
          * Package Service Providers...
          */
-        Recca0120\LaravelTracy\ServiceProvider::class,
+       
 
         /*
          * Application Service Providers...
