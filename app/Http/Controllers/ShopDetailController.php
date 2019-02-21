@@ -11,10 +11,15 @@ class ShopDetailController extends Controller
 {
     public function index($id)
     {
+		
+		$data = Good::where('id',$id)
+		->get();
+		
+		/*
         $data = DB::table('goods')
         ->join('plants', 'goods.id', '=', 'plants.goods_id')
         ->where('plants.id',$id)
-        ->get();
+        ->get();*/
         return view('single-product-details', ['goods' => $data]);
     }
 

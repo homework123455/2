@@ -18,10 +18,15 @@ class Good extends Model
         
         'goods_name2',
         'photo1',
+
 		'details',
 		'details2',
-		'details3'
-		
+		'details3',
+
+		'photo2',
+		'photo3',
+		'photo4'
+
 
     ];
 

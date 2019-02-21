@@ -12,7 +12,7 @@
 */
 Route::auth();
 Route::get('/home',
-    function (){return view('home');
+    function (){return redirect()->action('AdminDashboardController@index');
 });
 //Route::get('/', ['as' => 'admin.dashboard.index', 'uses' => 'AdminDashboardController@index']);
 Route::get('/'         , ['as' => 'home.index' , 'uses' => 'HomeController@index']);
@@ -48,7 +48,7 @@ Route::get('shopprice/{type}', ['as' => 'sort.shop', 'uses' => 'ShopController@p
 
 
 //淨化能力篩選
-Route::get('shop/cleanup', ['as' => 'cleanup.shop', 'uses' => 'ShopController@cleanup',function(){
+Route::get('shopcleanup/{id}', ['as' => 'cleanup.shop', 'uses' => 'ShopController@cleanup',function(){
 }]);
 Route::get('shop/cleandown', ['as' => 'cleandown.shop', 'uses' => 'ShopController@cleandown',function(){
 }]);
@@ -80,6 +80,7 @@ Route::post('/orders',['as'=> 'orders.store','uses'=>'CheckoutController@store',
 }]);
 // 後台
 Route::group(['prefix' => 'admin'], function() {
+	
     Route::get('/', ['as' => 'admin.dashboard.index', 'uses' => 'AdminDashboardController@index']);
 	/////
 	Route::get('news'         , ['as' => 'admin.news.index' , 'uses' => 'NewsController@index']);
@@ -93,7 +94,7 @@ Route::group(['prefix' => 'admin'], function() {
     Route::get('user',['as' => 'admin.dashboard.user', 'uses' => 'AdminDashboardController@index']);
     Route::get('mis',['as' => 'admin.dashboard.mis', 'uses' => 'AdminDashboardController@index']);
 /////
-    
+    Route::get('shops', ['as' => 'admin.shops.index', 'uses' => 'ShopController@index1']);
 	////
 	Route::get('places', ['as' => 'admin.places.index', 'uses' => 'PlaceController@index']);
 	Route::get('places/create', ['as' => 'admin.places.create', 'uses' => 'PlaceController@create']);       //新增資產(1)

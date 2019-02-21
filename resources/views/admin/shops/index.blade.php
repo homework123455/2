@@ -16,7 +16,7 @@
         <div class="col-lg-12">
             <h1 class="page-header">
                 @if(Auth::user()->previlege_id==3)
-                    場地管理 <small>所有場地列表</small>
+                    訂單管理 <small>所有訂單列表</small>
                 @else
                     查詢場地 <small>查詢場地列表</small>
                 @endif
@@ -91,7 +91,7 @@
 
         
         @if(Auth::user()->previlege_id==3)
-            <a href="{{ route('admin.places.create') }}" class="btn btn-success">建立新場地</a>
+            <a href="{{ route('admin.ss.create') }}" class="btn btn-success">建立新場地</a>
         @endif
     </div>
 
@@ -105,9 +105,9 @@
                 <thead>
                     <tr>
                         @if(Auth::user()->previlege_id==3)
-            			<th width="120" style="text-align: center">場地編號</th>
-                        	<th width="300" style="text-align: center">場地名稱</th>
-                       	 	<th width="150" style="text-align: center">場地類別</th>
+            			<th width="120" style="text-align: center">訂單編號</th>
+                        	<th width="300" style="text-align: center">訂單名稱</th>
+                       	 	
                             	<th width="200" style="text-align: center">地點</th>
                         	<th width="150" style="text-align: center">場地狀態</th>
                         	<th width="150" style="text-align: center">開放時段</th>

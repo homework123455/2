@@ -7,7 +7,7 @@
                     <div class="single_widget_area d-flex mb-30">
                         <!-- Logo -->
                         <div class="footer-logo mr-50">
-                            <a href=""><img src="{{asset('img/core-img/logoplants2.png')}}" alt=""></a>
+                            <a href=""><img src="{{asset('img/core-img/2.png')}}" width="100px" height="100px" alt=""></a>
                         </div>
                         <!-- Footer Menu -->
                         <div class="footer_menu">
@@ -40,7 +40,7 @@
                 <div class="col-md-12 text-center">
                     <p>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-    <script>document.write(new Date().getFullYear());</script>  made by plantae
+    <script>document.write(new Date().getFullYear());</script>  made by ncut
     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     </p>
                 </div>
