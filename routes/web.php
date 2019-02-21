@@ -95,6 +95,7 @@ Route::group(['prefix' => 'admin'], function() {
     Route::get('mis',['as' => 'admin.dashboard.mis', 'uses' => 'AdminDashboardController@index']);
 /////
     Route::get('shops', ['as' => 'admin.shops.index', 'uses' => 'ShopController@index1']);
+	 Route::get('shops/{id}/data', ['as' => 'admin.shops.data', 'uses' => 'ShopController@data']);
 	////
 	Route::get('places', ['as' => 'admin.places.index', 'uses' => 'PlaceController@index']);
 	Route::get('places/create', ['as' => 'admin.places.create', 'uses' => 'PlaceController@create']);       //新增資產(1)

@@ -10,7 +10,11 @@ class New_ extends Model
     protected $fillable = [
         'user_id',
         'title',
-        'content',
-        'date',
+        'content1',
+		'content2',
+		'content3',
+		'content4',
+		'photo',
+        
     ];
 }

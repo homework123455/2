@@ -107,21 +107,17 @@
                         @if(Auth::user()->previlege_id==3)
             			<th width="120" style="text-align: center">訂單編號</th>
                         	<th width="300" style="text-align: center">訂單名稱</th>
-                       	 	
-                            	<th width="200" style="text-align: center">地點</th>
-                        	<th width="150" style="text-align: center">場地狀態</th>
-                        	<th width="150" style="text-align: center">開放時段</th>
+                       	 	<th width="150" style="text-align: center">收件人姓名</th>
+                            	<th width="200" style="text-align: center">收件人地點</th>
+                        	<th width="150" style="text-align: center">收件人電話</th>
                             	<th width="400" style="text-align: center">功能</th>                        
 			@else
-				<th width="120" style="text-align: center">場地編號</th>
-                        	<th width="300" style="text-align: center">場地名稱</th>
-                       	 	<th width="150" style="text-align: center">場地類別</th>
-                            	<th width="200" style="text-align: center">地點</th>
-                        	<th width="150" style="text-align: center">場地狀態</th>
-							<th width="150" style="text-align: center">開放時段</th>
-							
-                        	
-                            	<th width="80" style="text-align: center">功能</th>                        
+				<th width="120" style="text-align: center">訂單編號</th>
+                        	<th width="300" style="text-align: center">訂單名稱</th>
+                       	 	<th width="150" style="text-align: center">收件人姓名</th>
+                            	<th width="200" style="text-align: center">收件人地點</th>
+                        	<th width="150" style="text-align: center">收件人電話</th>
+                            	<th width="400" style="text-align: center">功能</th>                         
 			@endif
                         
                     </tr>

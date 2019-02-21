@@ -46,7 +46,7 @@
                 @foreach($news as $new)
                     <tr>
                         <td style="text-align: center">{{ $new->title}}</td>
-                        <td style="text-align: center">{{ $new->content }}</td>
+                        <td style="text-align: center">{{ $new->content1 }}{{ $new->content2 }}{{ $new->content3 }}{{ $new->content4 }}</td>
                         <td style="text-align: center">{{ $new->date}}</td>
                         <td style="text-align: center">
                             @foreach($users as $user)

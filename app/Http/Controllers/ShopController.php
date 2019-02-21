@@ -77,19 +77,19 @@ class ShopController extends Controller
     }
 	  public function index1(Request $request)
     {
-        if(!Auth:user()->previlege_id==3)){
+        //if(!Auth:user()->previlege_id==3)){
 		$order=Order::where('users_id',Auth::user()->id)->get();
 
         //$good = Good::orderBy('created_at', 'DESC')->get();
 		$ordersdetail= OrdersDetail::where('orders_id',$order)->get();
 
         //$category = Category::orderBy('created_at', 'DESC')->get();
-		}
-		else{
+		//}
+		//else{
 			$order =Order::all();
 			$ordersdetail=OrdersDetail::find($order);
 			
-		}
+		//}
         /*
         if(!(Auth::user()->previlege_id==3)){
 
@@ -176,7 +176,7 @@ class ShopController extends Controller
           
 
             'photo1' => $filePath[0],
-			 'pgoto2' => $filePath[1],
+			 'photo2' => $filePath[1],
 
             
 

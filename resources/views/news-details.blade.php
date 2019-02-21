@@ -50,7 +50,7 @@
                             <h2>{{$new->title}}</h2>
                             <p>{{$new->content1}}</p>
                             <div class="single_product_thumb d-flex justify-content-center mb-50">
-                                <img src="../../img/news-img/{{$new->photo}}" alt="">
+                                <img src={{$new->photo}} alt="">
                             </div>
                             <p>{{$new->content2}}</p>
                             <p>{{$new->content3}}</p>

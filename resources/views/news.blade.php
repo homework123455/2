@@ -44,7 +44,7 @@
                 <!-- Single Blog Area -->
                 <div class="col-12 col-lg-6">
                     <div class="single-blog-area mb-50">
-                        <img src="img/news-img/{{$new->photo}}" alt="">
+                        <img src={{$new->photo}} alt="">
                         <!-- Post Title -->
                         <div class="post-title">
                             <a href="#">{{$new->title}}</a>
