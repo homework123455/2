@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Good;
 use App\Place;
 use App\Week;
 use App\Time_;
@@ -28,7 +28,7 @@ class PlaceController extends Controller
         $Search = $request->input('week_search');
         $Search2 = $request->input('time_search');
         $Search1 = $request->input('category_search');
-
+        $goods = Good::all();
         $place = Place::orderBy('created_at', 'DESC')->get();
 
         $category = Category::orderBy('created_at', 'DESC')->get();
@@ -43,7 +43,7 @@ class PlaceController extends Controller
            $place=Place::where('id','0')->get();
        }
 */
-        $data = ['places' => $place, 'lendings' => $lendings, 'categories' => $category, 'times' => $times, 'weeks' => $weeks, 'Search' => $Search, 'Search1' => $Search1, 'Search2' => $Search2, 'maintainces' => $maintainces];
+        $data = ['goods'=>$goods,'places' => $place, 'lendings' => $lendings, 'categories' => $category, 'times' => $times, 'weeks' => $weeks, 'Search' => $Search, 'Search1' => $Search1, 'Search2' => $Search2, 'maintainces' => $maintainces];
 
         return view('admin.places.index', $data);
     }

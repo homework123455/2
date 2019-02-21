@@ -30,7 +30,7 @@
         <div class="single_product_thumb d-flex justify-content-center" >
             
             
-            <img src="../img/product-img/{{$good->photo1}}" width="450px" height="350px"  alt="">
+            <img src={{ $good->photo1}} width="450px" height="350px"  alt="">
             
         </div>
 
@@ -92,7 +92,7 @@
 
         <div class="single_product_desc clearfix"> 
 
-            <img src="../img/product-img/{{$good->photo3}} " style="border:2px green dashed;"" alt="">
+            <img src={{ $good->photo3}} style="border:2px green dashed;"" alt="">
 
         </div>
 												
@@ -113,7 +113,7 @@
 
         <div class="single_product_desc clearfix">
                                            
-        <img src="../img/product-img/{{$good->photo4}}" " style="border:2px green dashed;" alt="">
+        <img src={{ $good->photo4}} style="border:2px green dashed;" alt="">
                                 
         </div>    
 

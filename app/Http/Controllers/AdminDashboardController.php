@@ -61,11 +61,11 @@ public function __construct()
 			
 			
 		}
-		if(!$time_nows){		
-			$time_nowid=Carbon::now('Asia/Taipei');
+		//if(!isset($time_nows)){		
+			$time_nowid=Carbon::now();
 			//$dt->timezone = new DateTimeZone('Europe/London');
 
-		}
+		//}
         $place_overtimes=$places1->where('time_id', '!=', $time_nowid)->where('status','租借中')->get();
 		//foreach ($place_overtimes as $asset_overtime){
 		foreach($users as $user){

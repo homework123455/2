@@ -118,15 +118,15 @@
                                 <div class="single-product-wrapper">
                                     <!-- Product Image -->
                                     <div class="product-img">
-                                        <img src="../img/product-img/{{$good->photo1}}" alt="">
+                                        <img src={{ $good->photo1}} alt="">
                                         <!-- Hover Thumb -->
-                                        <img class="hover-img" src="../img/product-img/{{$good->photo2}}" alt="">
+                                        <img class="hover-img" src={{ $good->photo2}} alt="">
                                     </div>
                                     <!-- Product Description -->
                                     <div class="product-description">
 
                                         <a href="{{route('detail',['id'=>$good->id])}}">
-                                            <h6> {{$good->goods_name2}}</h6>
+                                            <h6> {{$good->name}}</h6>
                                         </a>
                                         <p class="product-price"> $ {{$good->price}}</p>
 

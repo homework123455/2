@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-
+use App\Http\Requests\PlaceRequest;
 use App\Good;
 use App\Plant;
 use DB;
@@ -17,6 +17,7 @@ class ShopController extends Controller
 		$category = Category::all();
         return view('Shop', ['goods' => $data,'categories'=>$category]);
     }
+
 
     //淨化力
     public function cleanup($id)
@@ -62,6 +63,7 @@ class ShopController extends Controller
         $data = Good::orderBy('price', $tpye)->get();
         return view('Shop', ['goods' => $data,'categories'=>$category]);
     }
+
 
     //搜尋
     public function search(Request $request)
@@ -129,7 +131,7 @@ class ShopController extends Controller
     {
 
         $good = Good::find($id);
-		 $file = $request->file('img');
+		$file = $request->file('img');
         $filePath = [];  // 定义空数组用来存放图片路径
         foreach ($file as $key => $value) {
             // 判断图片上传中是否出错
@@ -164,19 +166,31 @@ class ShopController extends Controller
             }
         }
         $good->update([
-            'goods_name2' => $request->name,
+             'name' => $request->name,
             'category' => $request->category,
+            //'date'=>$request->date,
+
+            'status' => $request->status,
             
             'lendable' => $request->lendable,
-            //'location' => $request->location,
+            'price' => $request->price,
             //'warranty'=>$request->warranty,
             'remark' => $request->remark,
+			'details'=>$request->details,
+			'details2'=>$request->details2,
+			'details3'=>$request->details3,
 
 
           
 
             'photo1' => $filePath[0],
+<<<<<<< HEAD
 			 'photo2' => $filePath[1],
+=======
+			'photo2' => $filePath[1],
+			'photo3' => $filePath[2],
+			'photo4' => $filePath[3],
+>>>>>>> f9c11f3b1812779f6e318bf76e989c8bbe8afe86
 
             
 
@@ -225,24 +239,28 @@ class ShopController extends Controller
         }
         /*Place::create([
         $request->all()]);*/
-        Place::create([
+        Good::create([
             'name' => $request->name,
             'category' => $request->category,
             //'date'=>$request->date,
 
             'status' => $request->status,
-            'keeper' => $request->keeper,
-            'week_id' => $request->week_id,
-            'time_id' => $request->time_id,
+            
             'lendable' => $request->lendable,
-            'location' => $request->location,
+            'price' => $request->price,
             //'warranty'=>$request->warranty,
             'remark' => $request->remark,
+			'details'=>$request->details,
+			'details2'=>$request->details2,
+			'details3'=>$request->details3,
 
 
           
 
-            'file' => $filePath[0],
+            'photo1' => $filePath[0],
+			'photo2' => $filePath[1],
+			'photo3' => $filePath[2],
+			'photo4' => $filePath[3],
 
             
 
@@ -255,7 +273,7 @@ class ShopController extends Controller
 
     public function destroy($id)
     {
-        Place::destroy($id);
+        Good::destroy($id);
         return redirect()->route('admin.places.index');
     }
 

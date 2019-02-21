@@ -99,11 +99,19 @@ Route::group(['prefix' => 'admin'], function() {
 	////
 	Route::get('places', ['as' => 'admin.places.index', 'uses' => 'PlaceController@index']);
 	Route::get('places/create', ['as' => 'admin.places.create', 'uses' => 'PlaceController@create']);       //新增資產(1)
+	Route::post('places', ['as' => 'admin.places.store', 'uses' => 'PlaceController@store']);               //新增資產(2)
+	////商品
 	Route::get('shops/create', ['as' => 'admin.shops.create', 'uses' => 'ShopController@create']);       //新增資產(1)
-
-    Route::post('places', ['as' => 'admin.places.store', 'uses' => 'PlaceController@store']);               //新增資產(2)
-
-                
+    Route::post('places', ['as' => 'admin.shops.store', 'uses' => 'ShopController@store']);
+	Route::delete('shops/{id}', ['as' => 'admin.shops.destroy', 'uses' => 'ShopController@destroy']); 
+	Route::get('shops/{id}/edit', ['as' => 'admin.shops.edit', 'uses' => 'ShopController@edit']);        //修改資產(1)
+    Route::patch('shops/{id}', ['as' => 'admin.shops.update', 'uses' => 'ShopController@update']);
+	////
+	/////分類
+    Route::get('categories', ['as' => 'admin.categories.index', 'uses' => 'CategorieController@index']);
+	Route::get('categories/create', ['as' => 'admin.categories.create', 'uses' => 'CategorieController@create']);       
+	Route::post('categories', ['as' => 'admin.categories.store', 'uses' => 'CategorieController@store']);
+    /////            
 
     Route::get('places/{id}/edit', ['as' => 'admin.places.edit', 'uses' => 'PlaceController@edit']);        //修改資產(1)
     Route::patch('places/{id}', ['as' => 'admin.places.update', 'uses' => 'PlaceController@update']);     //修改資產(2)
