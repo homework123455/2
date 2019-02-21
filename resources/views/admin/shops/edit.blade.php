@@ -18,7 +18,7 @@
 <div class="row">
     <div class="col-lg-12">
 
-        <form action="/admin/places/{{$place->id}}" method="POST" role="form" enctype="multipart/form-data">
+        <form action="/admin/shops/{{$good->id}}" method="POST" role="form" enctype="multipart/form-data">
             {{ csrf_field() }}
 			{{ method_field('PATCH') }}
 
@@ -29,10 +29,13 @@
                 </fieldset>
 
                 <input type="file" name="img[]"  accept="image/jpeg,image/jpg,image/gif,image/png" style="display: block;margin-bottom: 5px;">
+				<input type="file" name="img[]"  accept="image/jpeg,image/jpg,image/gif,image/png" style="display: block;margin-bottom: 5px;">
+				<input type="file" name="img[]"  accept="image/jpeg,image/jpg,image/gif,image/png" style="display: block;margin-bottom: 5px;">
+				<input type="file" name="img[]"  accept="image/jpeg,image/jpg,image/gif,image/png" style="display: block;margin-bottom: 5px;">
                 <label>商品名稱：</label>
 
-                <input name="name" class="form-control" placeholder="請輸入場地名稱" value="{{$place->name}}">
-				<input name="name" class="form-control" placeholder="請輸入場地名稱" value="{{$place->name}}">
+                <input name="name" class="form-control" placeholder="請輸入場地名稱" value="{{$good->name}}">
+				
             </div>
 
             <div class="form-group">
@@ -40,7 +43,7 @@
                 <select name="category" class="form-control">
                     @foreach($categories as $category)
 
-                        @if($place->category==$category->id)
+                        @if($good->category==$category->id)
                             <option value={{ $category->id }} selected="true">{{ $category->name }}</option>
                         @else
                             <option value={{ $category->id }}>{{ $category->name }}</option>
@@ -54,7 +57,7 @@
             <div class="form-group">
                 <label>場地狀態：</label>
 
-                <label>{{$place->status}}</label>
+                <label>{{$good->status}}</label>
             </div>
 
            
@@ -62,8 +65,8 @@
             <div class="form-group">
                 <label>可否租借：</label>
 
-                @if($place->status=='租借中')
-                    @if($place->lendable=="0")
+                @if($good->status=='租借中')
+                    @if($good->lendable=="0")
                         <label>否</label>
                         @else
                         <label>是</label>
@@ -71,26 +74,29 @@
                     @else
                 <select name="lendable" class="form-control">
 
-                    <option value="0" {{ $place->lendable?'':'SELECTED' }}>否</option>
-                    <option value="1" {{ $place->lendable?'SELECTED':'' }}>是</option>
+                    <option value="0" {{ $good->lendable?'':'SELECTED' }}>否</option>
+                    <option value="1" {{ $good->lendable?'SELECTED':'' }}>是</option>
                 </select>
                     @endif
             </div>
 
             <div class="form-group">
-                <label>地點：</label>
+                <label>售價：</label>
 
-                <input name="location" class="form-control" placeholder="請輸入場地地點" value="{{$place->location}}">
+                <input name="price" class="form-control" placeholder="請輸入商品售價" value="{{$good->price}}">
             </div>
 
             
 
            
 
-            <div class="form-group">
+              <div class="form-group">
                 <label>詳細資訊：</label>
-
-                <input name="remark" class="form-control" placeholder="請輸入場地資訊" value="{{$place->remark}}">
+                <textarea name="details" class="form-control" rows="2"></textarea>
+				<label>產品資訊：</label>
+                <textarea name="details2" class="form-control" rows="2"></textarea>
+				<label>介紹：</label>
+                <textarea name="details3" class="form-control" rows="2"></textarea>
             </div>
 
             <div class="text-right">

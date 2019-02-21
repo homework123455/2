@@ -103,6 +103,8 @@ Route::group(['prefix' => 'admin'], function() {
 	Route::get('shops/create', ['as' => 'admin.shops.create', 'uses' => 'ShopController@create']);       //新增資產(1)
     Route::post('places', ['as' => 'admin.shops.store', 'uses' => 'ShopController@store']);
 	Route::delete('shops/{id}', ['as' => 'admin.shops.destroy', 'uses' => 'ShopController@destroy']); 
+	Route::get('shops/{id}/edit', ['as' => 'admin.shops.edit', 'uses' => 'ShopController@edit']);        //修改資產(1)
+    Route::patch('shops/{id}', ['as' => 'admin.shops.update', 'uses' => 'ShopController@update']);
 	////
 	/////分類
     Route::get('categories', ['as' => 'admin.categories.index', 'uses' => 'CategorieController@index']);

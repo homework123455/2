@@ -113,11 +113,7 @@
                             <table>
                                 <tbody>
                                 
-                                        <td width="80" >
-                                            
-                                                <a class="btn btn-primary" role="button" href="{{ route('admin.places.edit', $categorie->id) }}" >修改</a>
-                                            
-                                        </td>
+                                       
 
                                         
 	                                   @if($categorie=='正常使用中')

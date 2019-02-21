@@ -131,7 +131,7 @@ class ShopController extends Controller
     {
 
         $good = Good::find($id);
-		 $file = $request->file('img');
+		$file = $request->file('img');
         $filePath = [];  // 定义空数组用来存放图片路径
         foreach ($file as $key => $value) {
             // 判断图片上传中是否出错
@@ -166,19 +166,27 @@ class ShopController extends Controller
             }
         }
         $good->update([
-            'goods_name2' => $request->name,
+             'name' => $request->name,
             'category' => $request->category,
+            //'date'=>$request->date,
+
+            'status' => $request->status,
             
             'lendable' => $request->lendable,
-            //'location' => $request->location,
+            'price' => $request->price,
             //'warranty'=>$request->warranty,
             'remark' => $request->remark,
+			'details'=>$request->details,
+			'details2'=>$request->details2,
+			'details3'=>$request->details3,
 
 
           
 
             'photo1' => $filePath[0],
-			 'pgoto2' => $filePath[1],
+			'photo2' => $filePath[1],
+			'photo3' => $filePath[2],
+			'photo4' => $filePath[3],
 
             
 

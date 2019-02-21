@@ -156,7 +156,7 @@
 
                                         <td width="80" >
                                            
-                                                <a class="btn btn-primary" role="button" href="{{ route('admin.places.edit', $good->id) }}" >修改</a>
+                                                <a class="btn btn-primary" role="button" href="{{ route('admin.shops.edit', $good->id) }}" >修改</a>
                                             
                                         </td>
 
