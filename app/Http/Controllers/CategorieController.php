@@ -4,33 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use App\Http\Requests\PlaceRequest;
-use App\Good;
+
+use App\Categorie ;
 use App\Plant;
 use DB;
 use App\Category;
-class ShopController extends Controller
+class CategorieController extends Controller
 {
     public function index()
     {
-        $data = Good::all();
-        return view('Shop', ['goods' => $data]);
+        $categories = Categorie::all();
+		$data = ['categories' => $categories];
+        return view('admin.categories.index', ['categories' => $categories]);
     }
 
-   
-
-    //搜尋
-    public function search(Request $request)
-    {
-
-        $search = $request->input("search");
-
-        $data =DB::table('goods')
-            ->join('plants', 'goods.id', '=', 'plants.goods_id')
-            ->where('goods_name2','like','%'.$search.'%')
-            ->get();
-        return view('Shop', ['goods' => $data]);
-    }
+    
 	  public function index1(Request $request)
     {
         
@@ -54,10 +42,10 @@ class ShopController extends Controller
 	public function create()
 	{
 		$category = Category::orderBy('created_at', 'DESC')->get();
-		$good=Good::orderBy('created_at','DESC')->get();
-		$data = ['categories' => $category ,'goods'=>$good];
 		
-		return view('admin.shops.create', $data);
+		$data = ['categories' => $category ];
+		
+		return view('admin.categories.create', $data);
 	}
 
     public function edit($id)
@@ -137,76 +125,21 @@ class ShopController extends Controller
         return redirect()->route('admin.places.index');
     }
 
-    public function store(PlaceRequest $request)
+    public function store(Request $request)
     {
-        $file = $request->file('img');
-        $filePath = [];  // 定义空数组用来存放图片路径
-        foreach ($file as $key => $value) {
-            // 判断图片上传中是否出错
-
-/*
-                if (!$value->isValid()) {
-                    exit('上傳圖片出錯，請重試！');
-					//echo '<script>alert('.上傳圖片出錯，請重試！.');</script>';
-                }
-*/
-            //if(!empty($value)){//此处防止没有多文件上传的情况
-               // $allowed_extensions = ["png", "jpg", "gif","JPG"];
-
-            /*
-                            if (!$value->isValid()) {
-                               // exit"<script> alert('上傳圖片出錯，請重試！')</script>";
-                                echo '<script>alert('.上傳圖片出錯，請重試！.');</script>';
-                            }
-            */
-            if (!empty($value)) {//此处防止没有多文件上传的情况
-                $allowed_extensions = ["png", "jpg", "gif","JPG"];
-
-                if ($value->getClientOriginalExtension() && !in_array($value->getClientOriginalExtension(), $allowed_extensions)) {
-                    exit('您只能上傳PNG、JPG或GIF格式的圖片！');
-                }
-                $destinationPath = '/uploads/' . date('Y-m-d'); // public文件夹下面uploads/xxxx-xx-xx 建文件夹
-                $extension = $value->getClientOriginalExtension();   // 上传文件后缀
-                $fileName = date('YmdHis') . mt_rand(100, 999) . '.' . $extension; // 重命名
-                $value->move(public_path() . $destinationPath, $fileName); // 保存图片
-                $filePath[] = $destinationPath . '/' . $fileName;
-
-            }
-        }
-        /*Place::create([
-        $request->all()]);*/
-        Good::create([
+        
+        Categorie::create([
             'name' => $request->name,
-            'category' => $request->category,
-            //'date'=>$request->date,
-
-            'status' => $request->status,
-            
-            'lendable' => $request->lendable,
-            'price' => $request->price,
-            //'warranty'=>$request->warranty,
-            'remark' => $request->remark,
-			'details'=>$request->details,
-			'details2'=>$request->details2,
-			'details3'=>$request->details3,
-
-
-          
-
-            'photo' => $filePath[0],
-
-            
-
-
+           
 
         ]);
 
-        return redirect()->route('admin.places.index');
+        return redirect()->route('admin.categories.index');
     }
 
     public function destroy($id)
     {
-        Good::destroy($id);
+        Place::destroy($id);
         return redirect()->route('admin.places.index');
     }
 

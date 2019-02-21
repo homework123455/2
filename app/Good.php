@@ -9,16 +9,19 @@ class Good extends Model
 {
     protected $table ='goods';
 	protected $fillable = [
-        
+        'name',
         'category',
 		
         
         'price',
         'stock',
-        'goods_name1',
+        
         'goods_name2',
         'photo1',
-		'photo2'
+		'details',
+		'details2',
+		'details3'
+		
 
     ];
 

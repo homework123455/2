@@ -31,9 +31,9 @@ class PlaceRequest extends FormRequest
 			
              //  'cost',
             //'status'=>'required|string|max:20',
-            'keeper'=>'required',
+            //'keeper'=>'required',
             //'lendable'=>'required|boolean',
-            'location'=>'required|max:50',
+            //'location'=>'required|max:50',
             // 'remark',
             //'vendor'=>'required',
             //'warranty'=>'required',

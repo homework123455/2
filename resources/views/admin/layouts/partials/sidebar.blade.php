@@ -12,7 +12,7 @@
         <img  src="http://www.ncut.edu.tw/ncutnew/newncit/exampage/logo.gif"  class="img-circle" href="{{ route('admin.dashboard.index') }}"  width="65" height="50">
         </a>
     </div>
-    <a class="navbar-brand" href="{{ route('admin.dashboard.index') }}">勤益體育館場地租借系統</a>
+    <a class="navbar-brand" href="{{ route('admin.dashboard.index') }}">體育用品系統</a>
     <!-- Top Menu Items -->
     <ul class="nav navbar-right top-nav">
         <li class="dropdown">
@@ -55,6 +55,9 @@
                 </li>
                 <li>
                     <a href="{{ route('admin.places.index') }}"><i class="fa fa-fw fa-edit"></i> 場地管理</a>
+                </li>
+				<li>
+                    <a href="{{ route('admin.categories.index') }}"><i class="fa fa-fw fa-edit"></i> 商品分類管理</a>
                 </li>
             <li>
                 <a href="{{ route('admin.maintainces.index') }}"><i class="fa fa-fw fa-edit"></i> 申請處理</a>
