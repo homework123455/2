@@ -30,7 +30,7 @@
         <div class="single_product_thumb d-flex justify-content-center">
             
             
-            <img src="../img/product-img/{{$good->photo1}}" alt="">
+            <img src="../img/product-img/{{$good->photo1}}" width="500px" height="500" alt="">
             
         </div>
 

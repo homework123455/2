@@ -97,6 +97,7 @@ Route::group(['prefix' => 'admin'], function() {
 	////
 	Route::get('places', ['as' => 'admin.places.index', 'uses' => 'PlaceController@index']);
 	Route::get('places/create', ['as' => 'admin.places.create', 'uses' => 'PlaceController@create']);       //新增資產(1)
+	Route::get('shops/create', ['as' => 'admin.shops.create', 'uses' => 'ShopController@create']);       //新增資產(1)
 
     Route::post('places', ['as' => 'admin.places.store', 'uses' => 'PlaceController@store']);               //新增資產(2)
 

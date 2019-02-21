@@ -34,7 +34,7 @@ class CheckoutController extends Controller
             );
             Cart::where('users_id',Auth::user()->id)->first()->delete();
         }
-        return redirect()->route('main.user');
+        return redirect()->route('main.shop');
     }
 
     public function cartdetail()
