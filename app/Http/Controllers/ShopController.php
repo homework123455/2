@@ -184,13 +184,10 @@ class ShopController extends Controller
           
 
             'photo1' => $filePath[0],
-<<<<<<< HEAD
-			 'photo2' => $filePath[1],
-=======
 			'photo2' => $filePath[1],
 			'photo3' => $filePath[2],
 			'photo4' => $filePath[3],
->>>>>>> f9c11f3b1812779f6e318bf76e989c8bbe8afe86
+
 
             
 
