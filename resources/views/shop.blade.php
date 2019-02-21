@@ -28,7 +28,7 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="page-title text-center">
-                        <h2>Plant</h2>
+                        <h2>Shop</h2>
                     </div>
                 </div>
             </div>
@@ -53,18 +53,23 @@
                                 <ul id="menu-content2" class="menu-content collapse show">
                                     <!-- Single Item -->
                                     <li data-toggle="collapse" data-target="#clothing">
-                                        <a>淨化能力</a>
+                                      
                                         <ul class="sub-menu collapse show" id="clothing">
-                                            <li><a href="{{route('cleanup.shop')}}">高</a></li>
-                                            <li><a href="{{route('cleandown.shop')}}">低</a></li>
+										@foreach($categories as $category)
+										
+										 <li><a href="{{route('cleanup.shop',$category->id)}}">{{$category->name}}</a></li>
+										@endforeach
+                                           
+                                          
                                         </ul>
                                     </li>
                                 </ul>
                             </div>
                                                         <!--  Catagories  -->
+														<!--
                             <div class="catagories-menu">
                                 <ul id="menu-content2" class="menu-content collapse show">
-                                    <!-- Single Item -->
+                                    
                                     <li data-toggle="collapse" data-target="#clothing">
                                         <a>滯塵能力</a>
                                         <ul class="sub-menu collapse show" id="clothing">
@@ -76,6 +81,7 @@
                                     
                                 </ul>
                             </div>
+							-->
                         </div>
                     </div>
                 </div>
@@ -118,9 +124,7 @@
                                     </div>
                                     <!-- Product Description -->
                                     <div class="product-description">
-                                        <span>
-                                        {{$good->goods_name1}}
-                                         </span>
+
                                         <a href="{{route('detail',['id'=>$good->id])}}">
                                             <h6> {{$good->goods_name2}}</h6>
                                         </a>

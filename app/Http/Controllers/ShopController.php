@@ -14,18 +14,16 @@ class ShopController extends Controller
     public function index()
     {
         $data = Good::all();
-        return view('Shop', ['goods' => $data]);
+		$category = Category::all();
+        return view('Shop', ['goods' => $data,'categories'=>$category]);
     }
 
     //淨化力
-    public function cleanup()
+    public function cleanup($id)
     {
-
-        $data = DB::table('goods')
-        ->join('plants', 'goods.id', '=', 'plants.goods_id')
-        ->where('cleanup_co2','>',5)
-        ->get();
-        return view('Shop', ['goods' => $data]);
+		$category = Category::all();		
+        $data = Good::where('category','=',$id)->get();
+        return view('Shop', ['goods' => $data,'categories'=>$category]);
         
     }
     public function cleandown()
@@ -60,9 +58,9 @@ class ShopController extends Controller
     //價格排序
     public function price($tpye)
     {
-
+		$category = Category::all();
         $data = Good::orderBy('price', $tpye)->get();
-        return view('Shop', ['goods' => $data]);
+        return view('Shop', ['goods' => $data,'categories'=>$category]);
     }
 
     //搜尋
@@ -79,20 +77,26 @@ class ShopController extends Controller
     }
 	  public function index1(Request $request)
     {
-        
-      
+        if(!Auth:user()->previlege_id==3)){
+		$order=Order::where('users_id',Auth::user()->id)->get();
 
-        $good = Good::orderBy('created_at', 'DESC')->get();
+        //$good = Good::orderBy('created_at', 'DESC')->get();
+		$ordersdetail= OrdersDetail::where('orders_id',$order)->get();
 
-        $category = Category::orderBy('created_at', 'DESC')->get();
-     
+        //$category = Category::orderBy('created_at', 'DESC')->get();
+		}
+		else{
+			$order =Order::all();
+			$ordersdetail=OrdersDetail::find($order);
+			
+		}
         /*
         if(!(Auth::user()->previlege_id==3)){
 
            $place=Place::where('id','0')->get();
        }
 */
-        $data = ['goods' => $good, 'categories' => $category,  'Search' => $Search, 'Search1' => $Search1, 'Search2' => $Search2];
+        $data = ['orders' => $order,'ordersdetails'=>$ordersdetail, 'categories' => $category,  'Search' => $Search, 'Search1' => $Search1, 'Search2' => $Search2];
 
         return view('admin.shops.index', $data);
     }
@@ -258,8 +262,9 @@ class ShopController extends Controller
     public function data($id)
     {
 
-        $place = Place::find($id);
-        $category = Category::find($place->category);
+        $order = Order::find($id);
+		$ordersdetail=OrdersDetail::where('orders_id',$order->id);
+        /*$category = Category::find($place->category);
         //$vendor=Vendor::find($place->vendor);
         $user = User::find($place->keeper);
 		
@@ -268,11 +273,12 @@ class ShopController extends Controller
         $lendings = Lending::where('returntime', null)->get();
         $times = Time_::orderBy('id', 'ASC')->get();
         $weeks = Week::orderBy('id', 'ASC')->get();
-        $data = ['place' => $place, 'category' => $category, 'user' => $user,
+		place' => $place, 'category' => $category, 'user' => $user,
             'assetmaintainces' => $assetmaintainces, 'maintainceitems' => $maintainceitems,
-            'lendings' => $lendings, 'times' => $times, 'weeks' => $weeks];
+            'lendings' => $lendings, 'times' => $times, 'weeks' => $weeks*/
+        $data = ['orders'=>$order,'ordersdetails'=>$ordersdetail];
 
-        return view('admin.places.show', $data);
+        return view('admin.shops.show', $data);
     }
 
    

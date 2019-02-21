@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
-
+use App\Good;
 use DB;
 use App\Cart;
 use App\Order;
@@ -13,6 +13,8 @@ class CheckoutController extends Controller
 {
     public function store(Request $request)
     {
+		$good =Good::all();
+		
         Order::create($request->all());
         $count =  DB::table('orders')->orderby('id','Desc')->value('id');
         DB::table('orders')->where('users_id',null)->update(
@@ -31,7 +33,16 @@ class CheckoutController extends Controller
                     'users_id' => Auth::user()->id,
                     'orders_id' => $count
                 ]
+			
             );
+			$stock=Good::where('goods_name2',$cart->product)->get()->first();
+			$result = $stock->stock-$cart->qty;
+			DB::table('goods')->where('goods_name2',$cart->product)->update(
+			[
+			'stock'=>$result
+			]);
+			
+			
             Cart::where('users_id',Auth::user()->id)->first()->delete();
         }
         return redirect()->route('main.shop');

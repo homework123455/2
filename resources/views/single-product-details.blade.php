@@ -27,10 +27,10 @@
     <section class="single_product_details_area d-flex align-items-center">
         @foreach($goods as $good)
         <!-- Single Product Thumb -->
-        <div class="single_product_thumb d-flex justify-content-center">
+        <div class="single_product_thumb d-flex justify-content-center" >
             
             
-            <img src="../img/product-img/{{$good->photo1}}" width="500px" height="500" alt="">
+            <img src="../img/product-img/{{$good->photo1}}" width="450px" height="350px"  alt="">
             
         </div>
 
@@ -51,40 +51,24 @@
             <form class="cart-form clearfix" method="post">
 
                 <!-- table -->
-
-                <div class="clearfix mr-50 mt-10 mb-30">
+<div class="clearfix mr-50 mt-10 mb-30">
                 <table class="table" border="5">
                 <tr>
-                　<td colspan="2" align="center">淨化室內空氣能力與維護管理難易度</td>
+                　<td colspan="2" align="center">商品詳細資訊</td>
                 </tr>
                 <tr>
-                　<td>單位葉面積之滯塵能力</td>
-                  <td>{{$good->dust}}</td>
+                　<td>商品規格</td>
+                  <td>{{$good->details}} </td>
                 </tr>
-                <tr>
-                　<td>降低二氧化碳能力</td>
-                  <td>{{$good->cleanup_co2}}</td>
-                </tr>
-                <tr>
-                　<td>揮發性有機污染物移除能力</td>
-                  <td>{{$good->cleanup_organic}}</td>
-                </tr>
-                <tr>
-                　<td colspan="2"  align="center">淨化揮發性有機污染物種類</td>
-                </tr>
-                <tr>
-                　<td colspan="2"  align="center">{{$good->cleanup_type}}</td>
-                </tr>
-                <tr>
-                　<td>蒸散作用速率</td>
-                  <td>{{$good->spread}}</td>
-                </tr>
-                <tr>
-                　<td>維護管理容易度</td>
-                  <td>{{$good->manage}}</td>
-                </tr>
+              
                 </table>
                 </div>
+            
+			
+
+
+			
+				
                 
                 
                 
@@ -100,34 +84,36 @@
                 </div>
                 
             </form>
+			
         </div>
+		
         <!-- Single Product Description -->
 
 
         <div class="single_product_desc clearfix"> 
 
-            <img src="../img/introduction-img/{{$good->introduction_img1}}" alt="">
+            <img src="../img/product-img/{{$good->photo3}} " style="border:2px green dashed;"" alt="">
 
         </div>
-                                               
+												
         <div class="single_product_desc clearfix">                                         
-            
-            <p class="product-desc d-flex mb-30">{{$good->style}}</p>
-            <p class="product-desc d-flex mb-30">{{$good->size}}</p>         
+            <hr>
+            <p class="product-desc d-flex mb-30" >{{$good->details2}}</p>
+                    
                    
         </div>        
             
         <div class="single_product_desc clearfix">
 
-            <p class="product-desc d-flex mb-30">{{$good->output}}</p>
-            <p class="product-desc d-flex mb-30">{{$good->bug}}</p>
+            <p class="product-desc d-flex mb-30">{{$good->details3}}</p>
+           
         
             
         </div>
 
         <div class="single_product_desc clearfix">
                                            
-        <img src="../img/introduction-img/{{$good->introduction_img2}}" alt="">
+        <img src="../img/product-img/{{$good->photo4}}" " style="border:2px green dashed;" alt="">
                                 
         </div>    
 
