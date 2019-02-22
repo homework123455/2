@@ -15,6 +15,7 @@ class ShopDetailController extends Controller
 		$data = Good::where('id',$id)
 		->get();
 		
+		
 		/*
         $data = DB::table('goods')
         ->join('plants', 'goods.id', '=', 'plants.goods_id')

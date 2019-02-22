@@ -38,7 +38,7 @@
         <!-- Single Product Description -->        
         <div class="single_product_desc clearfix">
                                            
-            
+
                 
             <h2>{{$good->name}}</h2>
                         
@@ -66,9 +66,6 @@
             
 			
 
-
-			
-				
                 
                 
                 
