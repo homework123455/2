@@ -14,7 +14,7 @@
         <div class="col-lg-12">
         <div class="row,page-header" style="margin-bottom: 20px; text-align: right" >
             <div>
-                <a href="{{ route('admin.places.index') }}" class="btn btn-primary">我要租借</a>
+                <a href="{{ route('main.shop') }}" class="btn btn-primary">前往商城</a>
         </div>
         </div>
 		@if(count($place_overtimes1) > 0)
@@ -102,8 +102,8 @@ setTimeout('ShowTime()',1000);
                         @foreach($news as $new)
                             <tr>
                                 <td style="text-align: center">{{ $new->title}}</td>
-                                <td style="text-align: center">{{ $new->content }}</td>
-                                <td style="text-align: center">{{ $new->date}}</td>
+                                <td style="text-align: center">{{ $new->content1 }}</td>
+                                <td style="text-align: center">{{ $new->created_at}}</td>
                                 <td style="text-align: center">
                                     @foreach($users as $user)
                                         @if($new->user_id==$user->id)
@@ -125,66 +125,66 @@ setTimeout('ShowTime()',1000);
     <div class="col-lg-12">
         <ol class="breadcrumb">
             <li class="active">
-                <i class="fa fa-dashboard"></i> 我的申請
+                <i class="fa fa-dashboard"></i> 我的訂單
             </li>
         </ol>
 		
-        @if(count($applications) > 0)
+        @if(count($order_users) > 0)
 			
             <div class="table-responsive">
                 <table class="table table-bordered table-hover">
                     <thead>
                     <tr>
-                        <th width="100" style="text-align: center">申請編號</th>
-                        <th style="text-align: center">場地名稱</th>
-                        <th width="100" style="text-align: center">申請狀態</th>
-                        <th width="120" style="text-align: center">申請日期</th>
+                        <th width="100" style="text-align: center">訂單編號</th>
+                        <th style="text-align: center">訂單內容</th>
+                        <th width="100" style="text-align: center">訂單狀態</th>
+                        <th width="120" style="text-align: center">訂單日期</th>
 						
 						<th width="80" style="text-align: center">功能</th> 
 						
 						  
                     </tr>
                     </thead>
-                    @foreach($applicationsA as $application)
+					
+                    @foreach($order_users as $order_user)
+					
+					
                         
 						
 						<tbody>
-                        @foreach($maintainces_A as $maintaince)
-                           @if($maintaince->id==$application->maintaince_id)
+                        
                                 <tr>
                                     <td style="text-align: center">
-                                        {{ $maintaince->id }}
+                                        {{ $order_user->id }}
                                     </td>
 
                                     <td style="text-align: center">
-                                        @foreach($places as $place)
-                                            @if($maintaince->place_id==$place->id)
-                                                {{ $place->name }}
-                                            @endif
-                                        @endforeach
+                                        
+                                                {{ $order_user->name }}
+                                          
                                     </td>
 
-                                    <td style="text-align: center">{{ $maintaince->status }}</td>
+                                    <td style="text-align: center">{{ $order_user->status }}</td>
                                     <td style="text-align: center">
                                        
-                                            {{ $maintaince-> date}}
+                                            {{ $order_user->created_at}}
                                         
                                     </td>
 
 									<td class="table-text" style="text-align: center">
-                                     @if($maintaince->status=='申請中')
+                                     @if($order_user->status=='處理中'||$order_user->status=='未處理')
                                                                         
-																			<form action="{{ route('admin.maintainces.destroy', $maintaince->id ) }}" method="POST">
+																			<form action="{{ route('orders.destroy', $order_user->id ) }}" method="POST">
 																		{{ csrf_field() }}
                                                                         {{ method_field('DELETE') }}
                                                                             <button class="btn btn-danger">取消</button>
                                                                         </form>
-                                        @elseif($maintaince->status=='駁回')
+                                        @elseif($order_user->status=='送貨中'||$order_user->status=='已完成')
                                                                
                                                                             <!-- Button trigger modal -->
-                                                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">
+                                                                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">
                                                                                 查看
-                                                                            </button>
+                                                                            </button
                                                                             <!-- Modal -->
                                                                             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                                                                 <div class="modal-dialog" role="document">
@@ -193,9 +193,38 @@ setTimeout('ShowTime()',1000);
                                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                                                                             <h4 class="modal-title" id="myModalLabel">提示訊息</h4>
                                                                                         </div>
+																						
                                                                                         <div class="modal-body">
-                                                                                            駁回原因：
-                                                                                            {{ $maintaince->reason }}
+                                                                                             <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                       
+                        <th style="text-align: center">訂單內容</th>
+						<th style="text-align: center">數量</th>
+						<th style="text-align: center">價格</th>
+                         
+						
+						  
+                    </tr>
+                    </thead>
+					<tbody>
+					    
+
+						@foreach($ordersdetails as $ordersdetail)
+						@if($ordersdetail->orders_id==$order_user->id)
+                            <tr>
+                                <td style="text-align: center">{{ $ordersdetail->product}}</td>
+								<td style="text-align: center">{{ $ordersdetail->qty}}</td>
+								<td style="text-align: center">{{ $ordersdetail->total}}</td>
+								</tr>
+						@endif
+						@endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
                                                                                         </div>
                                                                                         <div class="modal-footer">
                                                                                             <table style="text-align: right">
@@ -224,10 +253,11 @@ setTimeout('ShowTime()',1000);
 
 
                                 </tr>
-                            @endif
-                        @endforeach
+                       
 						
                         </tbody>
+						
+						
                     @endforeach
                 </table>
 				

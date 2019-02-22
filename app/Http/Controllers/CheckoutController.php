@@ -35,9 +35,9 @@ class CheckoutController extends Controller
                 ]
 			
             );
-			$stock=Good::where('goods_name2',$cart->product)->get()->first();
+			$stock=Good::where('name',$cart->product)->get()->first();
 			$result = $stock->stock-$cart->qty;
-			DB::table('goods')->where('goods_name2',$cart->product)->update(
+			DB::table('goods')->where('name',$cart->product)->update(
 			[
 			'stock'=>$result
 			]);

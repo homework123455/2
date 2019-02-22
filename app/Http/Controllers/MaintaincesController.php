@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Order;
+use App\OrdersDetail;
 use App\Application;
 use App\Place;
 //use App\times;
@@ -118,20 +119,26 @@ class MaintaincesController extends Controller
 
     public function index()
     {
+		
         $maintainces=Maintaince::orderBy('created_at', 'DESC')->whereNotIn('status',['通過'])->get();
         $maintaincesA=Maintaince::orderBy('created_at', 'DESC')->where('status','申請中')->get();
 
         $place=Place::orderBy('created_at', 'DESC')->get();
 
         $applications=Application::orderBy('created_at', 'DESC')->get();
-        $data=['maintainces'=>$maintainces,
+       
+		
+		$users=User::orderBy('created_at','DESC')->get();
+		$orders = Order::orderBy('created_at','DESC')->get();
+		$order_users = Order::where('users_id',Auth::user()->id)->get();
+        $ordersdetail = OrdersDetail::where('users_id',Auth::user()->id)->get();
+		$data=['orders'=>$orders,'ordersdetail'=>$ordersdetail,'order_users'=>$order_users,'users'=>$users,'maintainces'=>$maintainces,
             'maintaincesA'=>$maintaincesA,
             'applications'=>$applications,
 
-            'places'=>$place
-
-        ];
-        return view('admin.maintainces.index', $data);
+            'places'=>$place];
+        //return view('home',['orders' => $order,'ordersdetails' => $ordersdetail]);
+        return view('orders.index', $data);
     }
 /*
     public function Search(Request $request)
@@ -310,6 +317,7 @@ class MaintaincesController extends Controller
 	
  public function destroy($id)
     {
+		/*
 		$maintainces=Maintaince::find($id);
 		//$maintaince=Maintaince::select('id')->where('id',$id)->get();
 		//$maintainces=Maintaince::orderBy('created_at', 'DESC')->get();
@@ -329,15 +337,17 @@ class MaintaincesController extends Controller
 		//}
 		}
 		$place=Place::find($maintainces->place_id);
+		/*
 		$place->update([
                 'status'=>'正常使用中',
 				'lendable'=>'1',
 				'lendname'=>NULL
             ]);
+			*/
 		//->where('maintaince_id', '==','7')
 		//DB::table('applications')->where('maintaince_id', '==','7')->delete();
-		Application::destroy($applicationA);
-		Maintaince::destroy($id);
+		//Application::destroy($applicationA);
+		Order::destroy($id);
 		
 		
         return redirect()->route('admin.dashboard.user');

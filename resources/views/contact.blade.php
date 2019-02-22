@@ -10,7 +10,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title  -->
-    <title>室內植物盆栽訂購系統</title>
+    <title>體育用品系統</title>
 
     <!-- Favicon  -->
     <link rel="icon" href="img/core-img/plant.ico">
@@ -55,7 +55,7 @@
             <div class="contact-address mt-50">
                 <p><span>address:</span>臺中市太平區坪林里中山路二段57號</p>
                 <p><span>telephone:</span>(04)12345678</p>
-                <p><span>E-mail:</span>PlantaeShop@gmail.com</p>
+                <p><span>E-mail:</span>yolin870513@gmail.com</p>
             </div>
         </div>
 

@@ -71,13 +71,13 @@ Route::get('news/detail/{id}', ['as' => 'news.detail', 'uses' => 'NewsDetailCont
 //搜尋
 Route::post('/shop/search',['as'=> 'search','uses'=>'ShopController@search']);
 
-
+Route::get('orders', ['as' => 'orders.index' , 'uses' => 'MaintaincesController@index']);
+Route::delete('orders/{id}'  , ['as' => 'orders.destroy', 'uses' => 'MaintaincesController@destroy']);
 
 //checkout
 Route::get('checkout',['as'=> 'checkout','uses'=>'CheckoutController@cartdetail']);
 
-Route::post('/orders',['as'=> 'orders.store','uses'=>'CheckoutController@store',function(Request $request){
-}]);
+Route::post('/orders',['as'=> 'orders.store','uses'=>'CheckoutController@store',function(Request $request){}]);
 // 後台
 Route::group(['prefix' => 'admin'], function() {
 	
@@ -90,8 +90,8 @@ Route::group(['prefix' => 'admin'], function() {
     Route::patch('news/{id}'   , ['as' => 'admin.news.update' , 'uses' => 'NewsController@update']);
     Route::delete('news/{id}'  , ['as' => 'admin.news.destroy', 'uses' => 'NewsController@destroy']);
     Route::post('news/show'  , ['as' => 'admin.news.show', 'uses' => 'NewsController@show']);
-
     Route::get('user',['as' => 'admin.dashboard.user', 'uses' => 'AdminDashboardController@index']);
+    //Route::get('user',['as' => 'admin.dashboard.user', 'uses' => 'AdminDashboardController@index1',function(Request $request){}]);
     Route::get('mis',['as' => 'admin.dashboard.mis', 'uses' => 'AdminDashboardController@index']);
 /////
     Route::get('shops', ['as' => 'admin.shops.index', 'uses' => 'ShopController@index1']);

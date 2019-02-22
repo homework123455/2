@@ -1,13 +1,13 @@
 @extends('admin.layouts.master')
 
-@section('title', '修改場地')
+@section('title', '修改商品')
 
 @section('content')
 <!-- Page Heading -->
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-            修改場地 <small>編輯場地資料</small>
+            修改商品 <small>編輯商品資料</small>
         </h1>
     </div>
 </div>
@@ -25,7 +25,7 @@
             
             <div class="form-group">
 			 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
-                    <label>上傳場地圖片:</label>
+                    <label>上傳商品圖片:</label>
                 </fieldset>
 
                 <input type="file" name="img[]"  accept="image/jpeg,image/jpg,image/gif,image/png" style="display: block;margin-bottom: 5px;">
@@ -34,7 +34,7 @@
 				<input type="file" name="img[]"  accept="image/jpeg,image/jpg,image/gif,image/png" style="display: block;margin-bottom: 5px;">
                 <label>商品名稱：</label>
 
-                <input name="name" class="form-control" placeholder="請輸入場地名稱" value="{{$good->name}}">
+                <input name="name" class="form-control" placeholder="請輸入商品名稱" value="{{$good->name}}">
 				
             </div>
 
@@ -55,7 +55,7 @@
            
 
             <div class="form-group">
-                <label>場地狀態：</label>
+                <label>商品狀態：</label>
 
                 <label>{{$good->status}}</label>
             </div>

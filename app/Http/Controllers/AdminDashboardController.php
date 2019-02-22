@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Order;
+use App\OrdersDetail;
 use App\New_;
 use App\Application;
 use App\Place;
@@ -20,9 +21,32 @@ class AdminDashboardController extends Controller
 public function __construct()
     {
         $this->middleware('auth');
-    }
+	}
+    
+	/*
+	public function index1($id)
+    {
+		        $news = New_::orderBy('created_at', 'DESC')->take(3)->get();
+        $users=User::orderBy('created_at' ,'DESC') ->get();
+		
+		$orders = Order::orderBy('created_at','DESC')->get();
+		$order_users = Order::where('users_id',Auth::user()->id)->get();
+        $ordersdetails = OrdersDetail::orderBy('id' ,'DESC') ->get();
+		$order_numbers = OrdersDetail::find($id);
+		$data=['orders'=>$orders,'ordersdetails'=>$ordersdetails,'order_users'=>$order_users,'order_numbers'=>$order_numbers,'news'=>$news,
+            "users"=>$users];
+if (Auth::user()->previlege_id==3)
+            return view('admin.dashboard.mis',$data);
+        elseif(Auth::user()->previlege_id==4)
+            return view('admin.dashboard.admin',$data);
+        elseif(Auth::user()->previlege_id)
+            return view('admin.dashboard.user',$data);
+
+	}
+	*/
     public function index()
     {
+		//$order_numbers = OrdersDetail::find($id);
         $username=Auth::user()->id;
         $applications=Application::where('user_id', Auth::user()->id)->get();
         $applicationsA=Application::orderBy('created_at', 'DESC')->get();
@@ -43,6 +67,11 @@ public function __construct()
 		
         $news = New_::orderBy('created_at', 'DESC')->take(3)->get();
         $users=User::orderBy('created_at' ,'DESC') ->get();
+		
+		$orders = Order::orderBy('created_at','DESC')->get();
+		$order_users = Order::where('users_id',Auth::user()->id)->get();
+        $ordersdetails = OrdersDetail::orderBy('id' ,'DESC') ->get();
+		
         $departmaentU=$users->where('department_id', Auth::user()->department_id);
 		//$time_nowid=Carbon::now('Asia/Taipei');
         $time_nows=date("H:i:s", time());
@@ -77,7 +106,7 @@ public function __construct()
 		}
 		//}
 		$place_overtimes1=$places2->where('time_id', '!=', $time_nowid)->where('status','租借中')->where('lendname',$user2)->get();
-        $data=['applications'=>$applications,'maintainces'=>$maintainces,'maintainces_A'=>$maintaincesA,
+        $data=['orders'=>$orders,'ordersdetails'=>$ordersdetails,'order_users'=>$order_users,'applications'=>$applications,'maintainces'=>$maintainces,'maintainces_A'=>$maintaincesA,
 		'maintainces_B'=>$maintaincesB,'places'=>$places,
             'applicationsA'=>$applicationsA,'news'=>$news,
             "users"=>$users,'departmaentU'=>$departmaentU,'username'=>$username,'times'=>$times,'weeks'=>$weeks,'place_overtimes'=>$place_overtimes,

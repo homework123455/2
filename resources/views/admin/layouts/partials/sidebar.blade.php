@@ -54,13 +54,13 @@
                     <a href="{{ route('admin.dashboard.index') }}"><i class="fa fa-fw fa-dashboard"></i> 首頁</a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.places.index') }}"><i class="fa fa-fw fa-edit"></i> 場地管理</a>
+                    <a href="{{ route('admin.places.index') }}"><i class="fa fa-fw fa-edit"></i> 商品管理</a>
                 </li>
 				<li>
                     <a href="{{ route('admin.categories.index') }}"><i class="fa fa-fw fa-edit"></i> 商品分類管理</a>
                 </li>
             <li>
-                <a href="{{ route('admin.maintainces.index') }}"><i class="fa fa-fw fa-edit"></i> 申請處理</a>
+                <a href="{{ route('orders.index') }}"><i class="fa fa-fw fa-edit"></i> 訂單處理</a>
             </li>
            
                <li>

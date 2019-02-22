@@ -32,8 +32,8 @@
                             @foreach($news as $new)
                                 <tr>
                                     <td style="text-align: center">{{ $new->title}}</td>
-                                    <td style="text-align: center">{{ $new->content }}</td>
-                                    <td style="text-align: center">{{ $new->date}}</td>
+                                    <td style="text-align: center">{{ $new->content1 }}</td>
+                                    <td style="text-align: center">{{ $new->created_at}}</td>
                                     <td style="text-align: center">
                                         @foreach($users as $user)
                                             @if($new->user_id==$user->id)

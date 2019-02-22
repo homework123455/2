@@ -1,13 +1,13 @@
 @extends('admin.layouts.master')
 
-@section('title', '申請處理')
+@section('title', '訂單處理')
 
 @section('content')
 <!-- Page Heading -->
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-            申請處理 <small>所有申請列表</small>
+            訂單處理1 <small>所有訂單列表</small>
         </h1>
     </div>
 </div>
@@ -19,18 +19,18 @@
     <div class="col-lg-12">
         <ol class="breadcrumb">
             <li class="active">
-                <i class="fa fa-edit"></i>申請處理-處理中
+                <i class="fa fa-edit"></i>訂單處理-處理中
             </li>
         </ol>
         <div class="table-responsive">
             <table class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                    <th width="80" style="text-align: center">申請編號</th>
-                    <th style="text-align: center">場地名稱</th>
-                    <th width="100" style="text-align: center">申請狀態</th>
+                    <th width="80" style="text-align: center">訂單編號</th>
+                    <th style="text-align: center">會員名稱</th>
+                    <th width="100" style="text-align: center">訂單狀態</th>
                    
-                    <th width="120" style="text-align: center">申請日期</th>
+                    <th width="120" style="text-align: center">訂單日期</th>
                     <th width="100" style="text-align: center">功能</th>
                 </tr>
                 </thead>
@@ -74,7 +74,7 @@
     <div class="col-lg-12">
         <ol class="breadcrumb">
             <li class="active">
-                <i class="fa fa-edit"></i>申請處理-目前無申請
+                <i class="fa fa-edit"></i>訂單處理-目前無訂單
             </li>
         </ol>
 		</div>
