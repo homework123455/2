@@ -36,7 +36,7 @@ class CartController extends Controller
     public function add($id)
     {
         if (Auth::check()) {
-            $good = DB::table('goods')->where('id', $id)->value('goods_name2');
+            $good = DB::table('goods')->where('id', $id)->value('name');
             $photo = DB::table('goods')->where('id', $id)->value('photo1');
             $price = DB::table('goods')->where('id', $id)->value('price');
             DB::table('carts')->insert(
