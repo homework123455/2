@@ -53,6 +53,9 @@
                 <li class="active">
                     <a href="{{ route('admin.dashboard.index') }}"><i class="fa fa-fw fa-dashboard"></i> 首頁</a>
                 </li>
+				<li class="active">
+                    <a href="{{ route('main.shop') }}"><i class="fa fa-fw fa-dashboard"></i> 商店</a>
+                </li>
                 <li>
                     <a href="{{ route('admin.places.index') }}"><i class="fa fa-fw fa-edit"></i> 商品管理</a>
                 </li>

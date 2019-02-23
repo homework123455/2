@@ -407,10 +407,10 @@ class PlaceController extends Controller
     public function scrapped($id)
     {
 
-        $place=Place::find($id);
+        $place=Good::find($id);
         $place->update([
-            'status'=>'維修中',
-			'lendable'=>'0'
+            'status'=>'下架中',
+			
         ]);
 		
         return redirect()->route('admin.places.index');
@@ -418,11 +418,18 @@ class PlaceController extends Controller
 	public function scrapped1($id)
     {
 
-        $place=Place::find($id);
+        $place=Good::find($id);
+		
+		if($place->stock>0){
         $place->update([
-            'status'=>'正常使用中',
-			'lendable'=>'1'
-        ]);
+            'status'=>'正常供貨中',
+			]);
+		}
+		else{
+			$place->update([
+            'status'=>'待補貨',
+			]);
+		}
         return redirect()->route('admin.places.index');
     }
 
@@ -488,4 +495,5 @@ class PlaceController extends Controller
 {
     return view('admin.places.instascan');
 }
+
 }

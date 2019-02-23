@@ -76,7 +76,7 @@
                         <a href="{{route('cart.add',['id'=>$good->id])}}" class="btn essence-btn">Add to Cart</a>
                     </div>
                     <tr>
-                　    <td>庫存量：{{$good->stock}}</td>
+                　    <td>庫存量：{{$good->value}}</td>
                     </tr>
                 </div>
                 

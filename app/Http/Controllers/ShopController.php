@@ -242,6 +242,7 @@ class ShopController extends Controller
             //'date'=>$request->date,
 
             'status' => $request->status,
+			'stock' => $request->stock,
             
             'lendable' => $request->lendable,
             'price' => $request->price,
@@ -381,6 +382,37 @@ class ShopController extends Controller
 {
     return view('admin.places.instascan');
 }
+ public function supplement($id)
+    {
+     
+      
+        $categories = Category::orderBy('created_at', 'DESC')->get();
+        $good = Good::find($id);
+        $data = ['good' => $good, 'categories' => $categories];
+
+        return view('admin.shops.supplement', $data);
+    }
+
+    public function update1(Request $request, $id)
+    {
+
+        $good = Good::find($id);
+		
+		
+        $good->update([
+             'value' => $good->value+$request->value,
+			 'stock' => $good->stock-$request->value
+           
+
+
+            
+
+
+
+        ]);;
+
+        return redirect()->route('admin.places.index');
+    }
 }
 
 

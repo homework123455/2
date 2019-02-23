@@ -50,11 +50,14 @@
 
             <div class="form-group">
                 <label>商品分類：</label>
-                <select name="category" class="form-control">
+ 
+                <select id="category" name="category" class="form-control">
                     @foreach($categories as $category)
                     <option value={{ $category->id }}>{{ $category->name }}</option>
                     @endforeach
                 </select>
+				
+
             </div>
 
             
@@ -77,6 +80,10 @@
                     <option value="0">否</option>
                     <option value="1">可</option>
                 </select>
+            </div>
+			<div class="form-group">
+                <label>庫存數量：</label>
+                <input name="stock" class="form-control" placeholder="請輸入庫存數量">
             </div>
 
 

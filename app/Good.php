@@ -15,6 +15,7 @@ class Good extends Model
         
         'price',
         'stock',
+		'value',
         
         'goods_name2',
         'photo1',
@@ -25,7 +26,8 @@ class Good extends Model
 
 		'photo2',
 		'photo3',
-		'photo4'
+		'photo4',
+		'status'
 
 
     ];

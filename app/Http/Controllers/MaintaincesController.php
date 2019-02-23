@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Good;
 use App\Order;
 use App\OrdersDetail;
 use App\Application;
@@ -131,11 +132,16 @@ class MaintaincesController extends Controller
 		$users=User::orderBy('created_at','DESC')->get();
 		$orders = Order::orderBy('created_at','DESC')->get();
 		$order_users = Order::where('users_id',Auth::user()->id)->get();
+		$order_status1 = Order::where('status',"未處理")->get();
+		$order_status2 = Order::where('status',"處理中")->get();
+		$order_status3 = Order::where('status',"已完成")->get();
         $ordersdetail = OrdersDetail::where('users_id',Auth::user()->id)->get();
 		$data=['orders'=>$orders,'ordersdetail'=>$ordersdetail,'order_users'=>$order_users,'users'=>$users,'maintainces'=>$maintainces,
             'maintaincesA'=>$maintaincesA,
             'applications'=>$applications,
-
+'order_status1'=>$order_status1,
+'order_status2'=>$order_status2,
+'order_status3'=>$order_status3,
             'places'=>$place];
         //return view('home',['orders' => $order,'ordersdetails' => $ordersdetail]);
         return view('orders.index', $data);
@@ -153,111 +159,64 @@ class MaintaincesController extends Controller
     }
 */
     public function show($id){
-        $maintaince=Maintaince::find($id);
+        
 
-        $place=Place::find($maintaince->place_id);
-
-		$user_id=Auth::user()->id;
-		$user1=Maintaince::orderBy('created_at', 'DESC')->where('user_id',$user_id)->get();
-		$category=Category::orderBy('created_at' ,'DESC') ->get();
-       // $vendors=Vendor::orderBy('created_at','DESC')->get();
-        $applications=$maintaince->applications()->get();
-		//$applications1=Maintaince::find($maintaince->user_id);
+        
         $users=User::orderBy('created_at','DESC')->get();
-		foreach ($applications as $application){
-		foreach($users as $user){
-        if($application->user_id==$user->id){
-			
-		//$user1=User::find($application->user_id);
-		$user2=$user->name;
-		}
-		}
-		}
-		////////////
+		$order=Order::find($id);
+		$orders = Order::where('users_id',$order->users_id)->get();
+        $ordersdetail = OrdersDetail::where('orders_id',$id)->get();
+		$ordertotal=0;
+		foreach($ordersdetail as $order1){
+		$ordertotal = $ordertotal+$order1->total;
+		}   
 
-		$place1=Place::orderBy('created_at', 'DESC')->where('lendname','=',$user2)->get();
-
-        //$user=User::find($applications->user_id);
-		//$user_name=User::find($user_id->name);
-		//$times=User::find($user->times);
-		//$times=User::where('name',$users->name)->get();
-		//$times=Maintaince::find($id);
-		////////////
-        //$maintainceitems=MaintainceItem::orderBy('created_at', 'ASC')->get();
-        //$assetmaintainces=Maintaince::where('place_id',$place->id)->where('status','已完成維修')->get();
-      /*
-        if($maintaince->status=='申請中'){
-            $maintaince->update([
-                'status'=>'申請待處理'
-            ]);*/
-			/*
-            //Mail
-            foreach ($applications as $application){
-            $user=User::find($application->user_id);
-                $to = ['email'=>$user->email,
-                    'name'=>$user->name
-					
-					];
-                $data=[];
-                Mail::later(1,' admin.mails.status',$data, function($message) use ($to) {
-                    $message->to($to['email'], $to['name'])->subject('MIS人員已閱讀過');
-                });
-            }
-        }
-*/
-
-        $data=['maintaince'=>$maintaince,'place'=>$place,'applications'=>$applications,'users'=>$users,
-                'place1'=>$place1,'categories'=>$category,'user_id'=>$user_id];
-        return view('admin.maintainces.show', $data);
+        $data=['orders'=>$orders,'users'=>$users,'order'=>$order,'ordersdetail'=>$ordersdetail,'ordertotal'=>$ordertotal];
+        return view('orders.show', $data);
     }
 
     public function process(Request $request,$id){
-        $maintaince=Maintaince::find($id);
+        $order=Order::find($id);
+		$ordersdetail = OrdersDetail::where('orders_id',$id)->get();
+		$goods = Good::orderBy('created_at', 'DESC')->get();
+		
         $reason = $request->input('reason');
-        $maintaince->update([
-            'method'=>$request->method
-        ]);
-        if($request->method=='0'){
-            $place=Place::find($maintaince->place_id);
-            $maintaince->update([
-                'status'=>'通過',
-                'date'=>Carbon::now(),
-				'lenttime'=>Carbon::now()
+        
+        if($request->method=='1'){
+				$order->update([
+               'status'=>'駁回',
+			   'reason'=>$reason,
             ]);
-            $place->update([
-                'status'=>'租借中',
-				'lendable'=>'0'
+		}
+        elseif($request->method=='0'){
+		//for($i=1;$i<=count($ordersdetail);$i++){
+		
+		foreach($ordersdetail as $order1){
+		//while ($row = OrdersDetail::where('orders_id',$id)->first() != null){
+		//$good=Good::where('name',$order1->product);
+		//$good1=Good::where('name',$order1->product)->get();
+		foreach($goods as $good){
+		if($good->name==$order1->product)
+		{
+		//foreach($good as $good2){
+		$value1=$good->value-$order1->qty;
+		
+		$good->update([
+                'value' => $value1,
+				
             ]);
-			$applications=$maintaince->applications()->get();
-		//$applications1=Maintaince::find($maintaince->user_id);
-        $users=User::orderBy('created_at','DESC')->get();
-		foreach ($applications as $application){
-		foreach($users as $user){
-        if($application->user_id==$user->id){
-			
-		//$user1=User::find($application->user_id);
-		$user2=$user->id;
+		//}
+		}	
 		}
 		}
+			$order->update([
+                'status'=>'處理中',
+				
+            ]);
+        //}
+		//OrdersDetail::where('orders_id',$id)->first()->delete();
+		//}
 		}
-		$place->lendings()->create([
-            'user_id'=>$user2,
-            'lenttime'=> Carbon::now(),
-			
-        ]);
-        }elseif($request->method=='1'){
-			$place=Place::find($maintaince->place_id);
-            $maintaince->update([
-                'status'=>'駁回',
-				'lendable'=>'1',
-				'reason'=>$reason,
-            ]);
-			$place->update([
-                'status'=>'正常使用中',
-				'lendable'=>'1',
-				'lendname'=>NULL
-            ]);
-        }
         //Mail
 		/*
         foreach ($maintaince->applications()->get() as $application){
@@ -270,7 +229,7 @@ class MaintaincesController extends Controller
             });
         }
 */
-        return redirect()->route('admin.maintainces.index');
+        return redirect()->route('orders.index');
     }
 
     public function complete(Request $request,$id){

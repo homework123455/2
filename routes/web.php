@@ -73,11 +73,14 @@ Route::post('/shop/search',['as'=> 'search','uses'=>'ShopController@search']);
 
 Route::get('orders', ['as' => 'orders.index' , 'uses' => 'MaintaincesController@index']);
 Route::delete('orders/{id}'  , ['as' => 'orders.destroy', 'uses' => 'MaintaincesController@destroy']);
+Route::get('orders/{id}/show', ['as' => 'orders.show', 'uses' => 'MaintaincesController@show']); 
+Route::patch('orders/{id}'  , ['as' => 'orders.process', 'uses' => 'MaintaincesController@process']);
 
 //checkout
 Route::get('checkout',['as'=> 'checkout','uses'=>'CheckoutController@cartdetail']);
 
 Route::post('/orders',['as'=> 'orders.store','uses'=>'CheckoutController@store',function(Request $request){}]);
+
 // 後台
 Route::group(['prefix' => 'admin'], function() {
 	
@@ -111,7 +114,11 @@ Route::group(['prefix' => 'admin'], function() {
     Route::get('categories', ['as' => 'admin.categories.index', 'uses' => 'CategorieController@index']);
 	Route::get('categories/create', ['as' => 'admin.categories.create', 'uses' => 'CategorieController@create']);       
 	Route::post('categories', ['as' => 'admin.categories.store', 'uses' => 'CategorieController@store']);
-    /////            
+    /////   
+    /////補貨
+    Route::get('shops/{id}/supplement', ['as' => 'admin.shops.supplement', 'uses' => 'ShopController@supplement']);        
+    Route::patch('shops/{id}', ['as' => 'admin.shops.update1', 'uses' => 'ShopController@update1']);    
+     /////////	
 
     Route::get('places/{id}/edit', ['as' => 'admin.places.edit', 'uses' => 'PlaceController@edit']);        //修改資產(1)
     Route::patch('places/{id}', ['as' => 'admin.places.update', 'uses' => 'PlaceController@update']);     //修改資產(2)

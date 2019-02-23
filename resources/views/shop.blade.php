@@ -113,6 +113,7 @@
                         <div class="row">
 
                         @foreach ($goods as $good)
+						@if($good->status!="下架中"&&$good->value>0)
                             <!-- Single Product -->
                             <div class="col-12 col-sm-6 col-lg-4">
                                 <div class="single-product-wrapper">
@@ -140,7 +141,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+                            @endif
                         @endforeach
                         </div>
                     </div>

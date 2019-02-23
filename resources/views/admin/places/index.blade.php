@@ -96,6 +96,7 @@
                        	 	<th width="150" style="text-align: center">商品類別</th>
                             	
                         	<th width="150" style="text-align: center">商品狀態</th>
+							<th width="200" style="text-align: center">架上數量</th>
                         	<th width="200" style="text-align: center">庫存</th>
                             	<th width="400" style="text-align: center">功能</th>                        
 			@else
@@ -104,6 +105,7 @@
                        	 	<th width="150" style="text-align: center">商品類別</th>
                             	
                         	<th width="150" style="text-align: center">商品狀態</th>
+							<th width="200" style="text-align: center">架上數量</th>
 							<th width="200" style="text-align: center">庫存</th>
 							
                         	
@@ -132,11 +134,15 @@
                                 @endif
                             @endforeach
                         </td>
+						@if($good->value<=0)
+							<td style="text-align: center"><font color="#FF0000"  > 待補貨 </td>
+						@else
                         <td style="text-align: center"> {{ $good->status}} </td>
-						
+						@endif
                     
-						
+						<td style="text-align: center">{{ $good->value}}</td>
 						<td style="text-align: center">{{ $good->stock}}</td>
+						
                       
 
                         <td>
@@ -147,8 +153,20 @@
 
     
                                             <td width="80" >
-                                                
-                                                    <a class="btn btn-primary" role="button" href="{{ route('admin.lendings.create', $good->id) }}" >下架</a>
+                                                @if($good->status!='下架中')
+                                                <form action="{{ route('admin.places.scrapped', $good->id) }}" method="POST">
+                                                    {{ csrf_field() }}
+                                                    {{ method_field('PATCH') }}
+                                                    <button class="btn btn-danger">下架</button>
+                                                </form>
+                                            @endif
+											@if($good->status=='下架中')
+                                                <form action="{{ route('admin.places.scrapped1', $good->id) }}" method="POST">
+                                                    {{ csrf_field() }}
+                                                    {{ method_field('PATCH') }}
+                                                    <button class="btn btn-danger">上架</button>
+                                                </form>
+                                            @endif
                                                 
                                             </td>
 
@@ -161,23 +179,15 @@
                                         </td>
 
                                         <td width="80" >
-                                            @if($good->name=='正常使用中')
-                                                <form action="{{ route('admin.places.scrapped', $good->id) }}" method="POST">
-                                                    {{ csrf_field() }}
-                                                    {{ method_field('PATCH') }}
-                                                    <button class="btn btn-danger">補貨</button>
-                                                </form>
-                                            @endif
-											@if($good->name=='維修中')
-                                                <form action="{{ route('admin.places.scrapped1', $good->id) }}" method="POST">
-                                                    {{ csrf_field() }}
-                                                    {{ method_field('PATCH') }}
-                                                    <button class="btn btn-danger">完成</button>
-                                                </form>
-                                            @endif
+                                            
+												<a class="btn btn-primary" role="button" href="{{ route('admin.shops.supplement', $good->id) }}" >補貨</a>
+                                                
+                                                    
+                                                
+                                            
 											
                                         </td>
-	                                   @if($good->stock=='0')
+	                                   @if($good->stock=='0'||$good->status=="下架中")
                                         <td class="table-text" style="text-align: center">
                                                                         <form action="{{ route('admin.shops.destroy', $good->id) }}" method="POST">
                                                                             {{ csrf_field() }}
