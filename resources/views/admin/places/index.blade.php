@@ -115,7 +115,9 @@
                     </tr>
                 </thead>
                 <tbody>
+				
                 @foreach($goods as $good)
+				
                     <tr>
                         <td style="text-align: center">
                             {{ $good->id }}
@@ -187,7 +189,12 @@
                                             
 											
                                         </td>
-	                                   @if($good->stock=='0'||$good->status=="下架中")
+										
+										
+										@foreach($cands as $cand)
+										
+	                                   @if($good->stock=='0'&&$good->status=="下架中")
+										@if($cand->product!=$good->name)
                                         <td class="table-text" style="text-align: center">
                                                                         <form action="{{ route('admin.shops.destroy', $good->id) }}" method="POST">
                                                                             {{ csrf_field() }}
@@ -196,7 +203,11 @@
                                                                         </form>
                                               
                                         </td>
-										@else
+										
+										@endif
+										@endif
+										@if($good->stock>'0'||$good->status!="下架中"||$cand->product==$good->name)
+									    
 										<td class="table-text" style="text-align: center">
                                                                         <form action="{{ route('admin.places.destroy', $good->id) }}" method="POST">
                                                                             {{ csrf_field() }}
@@ -205,8 +216,13 @@
                                                                         </form>
                                            
                                         </td>
-											@endif
-
+										
+										@endif
+											
+											@break
+											
+											
+                                        @endforeach
                                     
                                     @endif
                                 </tr>

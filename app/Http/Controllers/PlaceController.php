@@ -13,7 +13,7 @@ use App\Lending;
 use App\Maintaince;
 use App\MaintainceItem;
 use App\User;
-
+use DB;
 //use App\Vendor;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -32,7 +32,8 @@ class PlaceController extends Controller
         //$goods = Good::all();
 		$goods = Good::paginate(2);
         $place = Place::orderBy('created_at', 'DESC')->get();
-        $ordersdetail = OrdersDetail::all();
+        $cands = OrdersDetail::all();
+		//$cands=DB::table('ordersdetail')->orderby('id','Desc')->value('product');
 		
         $category = Category::orderBy('created_at', 'DESC')->get();
         $lendings = Lending::whereNULL('returntime')->get();
@@ -46,7 +47,7 @@ class PlaceController extends Controller
            $place=Place::where('id','0')->get();
        }
 */
-        $data = ['ordersdetail'=>$ordersdetail,'goods'=>$goods,'places' => $place, 'lendings' => $lendings, 'categories' => $category, 'times' => $times, 'weeks' => $weeks, 'Search' => $Search, 'Search1' => $Search1, 'Search2' => $Search2, 'maintainces' => $maintainces];
+        $data = ['cands'=>$cands,'goods'=>$goods,'places' => $place, 'lendings' => $lendings, 'categories' => $category, 'times' => $times, 'weeks' => $weeks, 'Search' => $Search, 'Search1' => $Search1, 'Search2' => $Search2, 'maintainces' => $maintainces];
 
         return view('admin.places.index', $data);
     }
