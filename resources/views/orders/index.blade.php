@@ -20,7 +20,7 @@
 
     <!-- 目前任務 -->
 	
-    @if (count($order_status3) > 0)
+    @if (count($order_status1) > 0)
         <div class="row">
     <div class="col-lg-12">
         <ol class="breadcrumb">
@@ -43,7 +43,7 @@
                     <!-- 表身 -->
                     <tbody>
 
-                    @foreach ($orders as $order)
+                    @foreach ($order_status1 as $order)
 					@if($order->status=="未處理")
                         <tr>
                             <!-- 任務名稱 -->
@@ -81,6 +81,7 @@
                     </tbody>
                 </table>
             </div>
+			{!! $order_status1->appends(['page2' => $order_status2->currentPage(),'page3' => $order_status3->currentPage() ])->render() !!}
         </div>
     @endif
 	@if (count($order_status2) > 0)
@@ -106,7 +107,7 @@
                     <!-- 表身 -->
                     <tbody>
 
-                    @foreach ($orders as $order)
+                    @foreach ($order_status2 as $order)
 					@if($order->status=="處理中")
                         <tr>
                             <!-- 任務名稱 -->
@@ -128,8 +129,13 @@
                     
 
                         <td class="table-text" style="text-align: center">
+						<form action="{{ route('orders.scrapped', $order->id) }}" method="POST">
+                                                    {{ csrf_field() }}
+                                                    {{ method_field('PATCH') }}
+                                                    <button class="btn btn-danger">完成</button>
+                                                </form>
                                 
-                                   <div> <a href="{{ route('orders.show', $order->id) }}" class="btn btn-primary" role="button">處理</a></div>
+                                  
                                 
                         </td>
                     
@@ -144,6 +150,9 @@
                     </tbody>
                 </table>
             </div>
+			
+{!! $order_status2->appends(['page1' => $order_status1->currentPage() ,'page3' => $order_status3->currentPage() ])->render() !!}
+			
         </div>
     @endif
 	@if (count($order_status3) > 0)
@@ -169,13 +178,19 @@
                     <!-- 表身 -->
                     <tbody>
 
-                    @foreach ($orders as $order)
-					@if($order->status=="已完成")
+                    @foreach ($order_status3 as $order)
+					@if($order->status=="已完成"||$order->status=="駁回")
                         <tr>
                             <!-- 任務名稱 -->
+							@if($order->status=="已完成")
                             <td style="text-align: center">
                                 <div>{{ $order->id}}</div>
                             </td>
+							@else
+								 <td style="text-align: center"><font color="#FF0000"  >
+                                <div>{{ $order->id}}</div>
+                            </td>
+							@endif
 							<td style="text-align: center">
                                 <div>{{ $order->address}}</div>
                             </td>
@@ -192,14 +207,10 @@
 
                         <td class="table-text" style="text-align: center">
                                 
-                                   <div> <a href="{{ route('orders.show', $order->id) }}" class="btn btn-primary" role="button">查看</a></div>
+                                   <div> <a href="{{ route('orders.show1', $order->id) }}" class="btn btn-primary" role="button">查看</a></div>
                                 
                         </td>
                     
-	
-                    
-                
-
                         </tr>
 						@endif
                     @endforeach
@@ -207,6 +218,8 @@
                     </tbody>
                 </table>
             </div>
+			
+			{!! $order_status3->appends(['page1' => $order_status1->currentPage(),'page2' => $order_status2->currentPage() ])->render() !!}
         </div>
     @endif
 	

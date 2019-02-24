@@ -220,6 +220,7 @@
 </div>
         </div>
     </div>
+	{{$goods->links()}}
 </div>
 <!-- /.row -->
 @endsection

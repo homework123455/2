@@ -16,10 +16,12 @@ class CheckoutController extends Controller
 		$good =Good::all();
 		
         Order::create($request->all());
+		
         $count =  DB::table('orders')->orderby('id','Desc')->value('id');
         DB::table('orders')->where('users_id',null)->update(
             [
                 'users_id'=>Auth::user()->id,
+				'status'=>"未處理"
             ]
         );
         while ($row = Cart::where('users_id',Auth::user()->id)->first() != null){
@@ -31,7 +33,8 @@ class CheckoutController extends Controller
                     'cost' => $cart->cost,
                     'total' => $cart->total,
                     'users_id' => Auth::user()->id,
-                    'orders_id' => $count
+                    'orders_id' => $count,
+					
                 ]
 			
             );

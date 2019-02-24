@@ -74,7 +74,9 @@ Route::post('/shop/search',['as'=> 'search','uses'=>'ShopController@search']);
 Route::get('orders', ['as' => 'orders.index' , 'uses' => 'MaintaincesController@index']);
 Route::delete('orders/{id}'  , ['as' => 'orders.destroy', 'uses' => 'MaintaincesController@destroy']);
 Route::get('orders/{id}/show', ['as' => 'orders.show', 'uses' => 'MaintaincesController@show']); 
+Route::get('orders/{id}/show1', ['as' => 'orders.show1', 'uses' => 'MaintaincesController@show1']);
 Route::patch('orders/{id}'  , ['as' => 'orders.process', 'uses' => 'MaintaincesController@process']);
+Route::patch('orders/{id}/scrapped', ['as' => 'orders.scrapped', 'uses' => 'MaintaincesController@scrapped']);
 
 //checkout
 Route::get('checkout',['as'=> 'checkout','uses'=>'CheckoutController@cartdetail']);

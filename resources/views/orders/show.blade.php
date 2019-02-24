@@ -51,7 +51,7 @@
 		
         <ol class="breadcrumb">
             <li class="active">
-                <i class="fa fa-edit"></i> 申請資訊
+                <i class="fa fa-edit"></i> 訂單資訊
             </li>
         </ol>
         <div class="table-responsive">

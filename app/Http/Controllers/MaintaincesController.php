@@ -132,9 +132,12 @@ class MaintaincesController extends Controller
 		$users=User::orderBy('created_at','DESC')->get();
 		$orders = Order::orderBy('created_at','DESC')->get();
 		$order_users = Order::where('users_id',Auth::user()->id)->get();
-		$order_status1 = Order::where('status',"未處理")->get();
-		$order_status2 = Order::where('status',"處理中")->get();
-		$order_status3 = Order::where('status',"已完成")->get();
+		//$order_status1 = Order::paginate(2)->where('status',"未處理")->get();
+		$order_status1 = Order::where('status',"未處理")->paginate(2,  ['*'],  'page1');
+		//$order_status2 = Order::where('status',"處理中")->get();
+		$order_status2 = Order::where('status',"處理中")->paginate(2,  ['*'],  'page2');
+		//$order_status3 = Order::whereIn('status',['已完成','駁回'])->get();
+		$order_status3 = Order::whereIn('status',['已完成','駁回'])->paginate(3,  ['*'],  'page3');
         $ordersdetail = OrdersDetail::where('users_id',Auth::user()->id)->get();
 		$data=['orders'=>$orders,'ordersdetail'=>$ordersdetail,'order_users'=>$order_users,'users'=>$users,'maintainces'=>$maintainces,
             'maintaincesA'=>$maintaincesA,
@@ -173,6 +176,22 @@ class MaintaincesController extends Controller
 
         $data=['orders'=>$orders,'users'=>$users,'order'=>$order,'ordersdetail'=>$ordersdetail,'ordertotal'=>$ordertotal];
         return view('orders.show', $data);
+    }
+	 public function show1($id){
+        
+
+        
+        $users=User::orderBy('created_at','DESC')->get();
+		$order=Order::find($id);
+		$orders = Order::where('users_id',$order->users_id)->get();
+        $ordersdetail = OrdersDetail::where('orders_id',$id)->get();
+		$ordertotal=0;
+		foreach($ordersdetail as $order1){
+		$ordertotal = $ordertotal+$order1->total;
+		}   
+
+        $data=['orders'=>$orders,'users'=>$users,'order'=>$order,'ordersdetail'=>$ordersdetail,'ordertotal'=>$ordertotal];
+        return view('orders.show1', $data);
     }
 
     public function process(Request $request,$id){
@@ -229,6 +248,17 @@ class MaintaincesController extends Controller
             });
         }
 */
+        return redirect()->route('orders.index');
+    }
+	 public function scrapped($id)
+    {
+
+        $order=Order::find($id);
+        $order->update([
+            'status'=>'已完成',
+			
+        ]);
+		
         return redirect()->route('orders.index');
     }
 
