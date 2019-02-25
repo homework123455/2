@@ -12,8 +12,9 @@ class ShopDetailController extends Controller
     public function index($id)
     {
 		
-		$data = Good::where('id',$id)
-		->get();
+		$data = Good::where('id',$id)->get();
+		
+		
 		
 		
 		/*

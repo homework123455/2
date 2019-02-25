@@ -138,14 +138,31 @@ class MaintaincesController extends Controller
 		$order_status2 = Order::where('status',"處理中")->paginate(2,  ['*'],  'page2');
 		//$order_status3 = Order::whereIn('status',['已完成','駁回'])->get();
 		$order_status3 = Order::whereIn('status',['已完成','駁回'])->paginate(3,  ['*'],  'page3');
+		$order_status4 = Order::where('status','已出貨')->paginate(3,  ['*'],  'page4');
         $ordersdetail = OrdersDetail::where('users_id',Auth::user()->id)->get();
+		//$nowtime=
+		foreach($order_status4 as $order){
+			$time=((strtotime("now")-strtotime($order->updated_at))/ (60*60*24));
+			if($time>7){
+		    $order->update([
+            'status'=>'已完成',
+			
+        ]);
+				
+			}
+		}
+		
+		
 		$data=['orders'=>$orders,'ordersdetail'=>$ordersdetail,'order_users'=>$order_users,'users'=>$users,'maintainces'=>$maintainces,
             'maintaincesA'=>$maintaincesA,
             'applications'=>$applications,
 'order_status1'=>$order_status1,
 'order_status2'=>$order_status2,
 'order_status3'=>$order_status3,
+'order_status4'=>$order_status4,
+'time'=>$time,
             'places'=>$place];
+			
         //return view('home',['orders' => $order,'ordersdetails' => $ordersdetail]);
         return view('orders.index', $data);
     }
@@ -255,7 +272,8 @@ class MaintaincesController extends Controller
 
         $order=Order::find($id);
         $order->update([
-            'status'=>'已完成',
+            'status'=>'已出貨',
+			'updated_at'=>Carbon::now(),
 			
         ]);
 		
