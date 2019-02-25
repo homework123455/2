@@ -12,10 +12,18 @@ class ShopDetailController extends Controller
     public function index($id)
     {
 		
+
 		$data = Good::where('id',$id)
 		->get();
 		$i =1;
 		$stock =Good::where('id',$id)->value('value');
+
+
+		
+		
+		
+		
+
 		/*
         $data = DB::table('goods')
         ->join('plants', 'goods.id', '=', 'plants.goods_id')
