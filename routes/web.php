@@ -86,7 +86,7 @@ Route::post('/orders',['as'=> 'orders.store','uses'=>'CheckoutController@store',
 // 後台
 Route::group(['prefix' => 'admin'], function() {
 	
-    Route::get('/', ['as' => 'admin.dashboard.index', 'uses' => 'AdminDashboardController@index']);
+    Route::get('/', ['as' => 'admin.dashboard.index', 'uses' => 'AdminDashboardController@index']);	
 	/////
 	Route::get('news'         , ['as' => 'admin.news.index' , 'uses' => 'NewsController@index']);
     Route::get('news/create'   , ['as' => 'admin.news.create' , 'uses' => 'NewsController@create']);

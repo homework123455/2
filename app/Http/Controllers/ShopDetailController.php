@@ -14,14 +14,14 @@ class ShopDetailController extends Controller
 		
 		$data = Good::where('id',$id)
 		->get();
-		
-		
+		$i =1;
+		$stock =Good::where('id',$id)->value('value');
 		/*
         $data = DB::table('goods')
         ->join('plants', 'goods.id', '=', 'plants.goods_id')
         ->where('plants.id',$id)
         ->get();*/
-        return view('single-product-details', ['goods' => $data]);
+        return view('single-product-details', ['goods' => $data,'stocks'=>$stock,'i'=>$i]);
     }
 
     public function show()

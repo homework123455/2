@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Redirect;
 use App\Cart;
 use DB;
+use App\Good;
 
 
 
@@ -18,6 +19,7 @@ class CartController extends Controller
     {
 
         if (Auth::check()) {
+			$good=Good::all();
             $all = 0;
             $data = DB::table('carts')
                 ->where('users_id',Auth::user()->id)
@@ -25,7 +27,7 @@ class CartController extends Controller
             foreach ($data as $s){
                 $all = $all + $s->total;
             }
-            return view('cart',['carts' => $data,'a' =>$all]);
+            return view('cart',['carts' => $data,'a' =>$all,'goods'=>$good]);
         }else{
             return redirect()->route('login');
         }
@@ -39,6 +41,8 @@ class CartController extends Controller
             $good = DB::table('goods')->where('id', $id)->value('name');
             $photo = DB::table('goods')->where('id', $id)->value('photo1');
             $price = DB::table('goods')->where('id', $id)->value('price');
+			$cart = DB::table('carts')->where('product',$good)->where('users_id',Auth::user()->id)->get()->first();
+			if(empty($cart)){
             DB::table('carts')->insert(
                 [
                     'photo' => $photo,
@@ -48,6 +52,23 @@ class CartController extends Controller
                     'users_id' => Auth::user()->id
                 ]
             );
+			
+			}
+			else{
+			DB::table('carts')->where('product',$good)->update(
+			[
+			'qty'=>$cart->qty+1,
+			
+			]);
+			$total =DB::table('carts')->where('product',$good)->value('qty');;
+				DB::table('carts')->where('product',$good)->update(
+			[
+			'total'=>$total * $cart->cost,
+			
+			]);
+				
+			}
+			
             return Redirect::to(url()->previous());
         }else{
             return redirect()->route('login');

@@ -3,7 +3,8 @@
 @section('title', '主控台')
 
 @section('content')
-<!-- Page Heading -->
+<!-- Page Heading -->\
+
 <div class="row">
     <div class="col-sm-12">
         <h1 class="page-header">

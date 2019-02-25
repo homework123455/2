@@ -39,11 +39,11 @@ class CheckoutController extends Controller
 			
             );
 			$stock=Good::where('name',$cart->product)->get()->first();
-			$result = $stock->stock-$cart->qty;
-			DB::table('goods')->where('name',$cart->product)->update(
+			//$result = $stock->stock-$cart->qty;
+			/*DB::table('goods')->where('name',$cart->product)->update(
 			[
 			'stock'=>$result
-			]);
+			]);*/
 			
 			
             Cart::where('users_id',Auth::user()->id)->first()->delete();

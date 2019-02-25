@@ -10,7 +10,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title  -->
-    <title>室內植物盆栽訂購系統</title>
+    <title>體育用品系統</title>
 
     <!-- Favicon  -->
     <link rel="icon" href="../img/core-img/plant.ico">

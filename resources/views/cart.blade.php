@@ -101,7 +101,7 @@
 		</td>
 		<td width="5" align="center" valign="center">
 			<div class="product-right1">
-				<select name="qty" onchange="javascript:location.href=this.value;">
+				<input name="qty" onchange="javascript:location.href=this.value;">
 					<option value="">數量修改</option>
 					<option value="{{route('cart.update',['id'=>$cart->id,'q'=>'1'])}}">1</option>
 					<option value="{{route('cart.update',['id'=>$cart->id,'q'=>'2'])}}">2</option>

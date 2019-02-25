@@ -63,8 +63,31 @@
               
                 </table>
                 </div>
-            
-			
+		<!--
+			 <div class="form-group">
+                <label>請選擇數量：</label>
+                <select name="qty" class="form-control">
+                
+					
+						for($i=1;$i<=$good->stock;$i++)
+						{
+							<option value={{$i}} >{{ $i }}</option>
+						}
+
+                </select>
+				-->
+				<div class="form-group">
+                <label>請選擇數量：</label>
+                <select name="qty" class="form-control">
+                
+					<?php
+						for($i=1;$i<=$stocks;$i++)
+						{
+						echo	"<option value=$i > $i ";
+						}
+					?>
+                </select>
+				
 
                 
                 
