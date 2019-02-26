@@ -91,6 +91,7 @@
                 <thead>
                     <tr>
                         @if(Auth::user()->previlege_id==3)
+							<th width="120" style="text-align: center">商品圖片</th>
             			<th width="120" style="text-align: center">商品編號</th>
                         	<th width="300" style="text-align: center">商品名稱</th>
                        	 	<th width="150" style="text-align: center">商品類別</th>
@@ -100,6 +101,7 @@
                         	<th width="200" style="text-align: center">庫存</th>
                             	<th width="400" style="text-align: center">功能</th>                        
 			@else
+				<th width="120" style="text-align: center">商品圖片</th>
 				<th width="120" style="text-align: center">商品編號</th>
                         	<th width="300" style="text-align: center">商品名稱</th>
                        	 	<th width="150" style="text-align: center">商品類別</th>
@@ -119,6 +121,9 @@
                 @foreach($goods as $good)
 				
                     <tr>
+					<td style="text-align: center">
+                            <img src = {{$good->photo1}} height="100px" alt="">
+                        </td>
                         <td style="text-align: center">
                             {{ $good->id }}
                         </td>

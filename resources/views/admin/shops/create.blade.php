@@ -23,73 +23,58 @@
 <!-- /.row -->
 @include('admin.layouts.partials.validation')
 <!-- /.row -->
-<!--
-<Script language="Css">
-.img {
-    max-width: 150px; 
-    max-height: 150px;
-    margin: 5px;
-}
+
 </Script>
 <Script language="javascript">
-$(".form1").vmodel("--preview", true, function (){
- 
-        var vs = this;
- 
-        // 自動讀取的方法
-        this.autoload = ['change_file'];
- 
-        // 連續的圖片編碼
-        this.imgcode = '';
- 
-        // 選取發生改變
-        this.change_file = function (){
-            vs.root.on("change", ".upl", function (){
-                local_show(this);
-            });
-        }
- 
-        // 批次圖片，先清空後再插入
-        var local_show = function (input){
-            if (input.files && input.files[0]) {
-                local_clean();
-                local_each_img(input.files);
-            }
-        }
- 
-        // 批次讀取，最後再一次寫入
-        var local_each_img = function (files){
- 
-            $.each(files, function (index, file){
-                console.log(file); //檔案資訊可以在這裡看到
-                var src = URL.createObjectURL(file);
-                local_create_imgcode(src);
-            });
- 
-            // 放置預覽元素後重設
-            vs.root.find(".preview").html(vs.imgcode);
-            local_reset();
-        }
- 
-        // 建立圖片
-        var local_create_imgcode = function(src){
-            vs.imgcode += '<img class="img" src="' + src + '">';
-        }
- 
-        // 清空預覽區域
-        var local_clean = function (){
-            vs.root.find(".preview").empty();
-        }
- 
-        // 還原 input[type=file]
-        var local_reset = function (){
-            vs.imgcode = '';
-            vs.root.find(".upl").val(null);
-        }
- 
-    });
+function openFile(event){
+  var input = event.target; //取得上傳檔案
+  var reader = new FileReader(); //建立FileReader物件
+
+  reader.readAsDataURL(input.files[0]); //以.readAsDataURL將上傳檔案轉換為base64字串
+
+  reader.onload = function(){ //FileReader取得上傳檔案後執行以下內容
+    var dataURL = reader.result; //設定變數dataURL為上傳圖檔的base64字串
+    $('#output').attr('src', dataURL).show(); //將img的src設定為dataURL並顯示
+  };
+}
+
+function openFile1(event){
+  var input = event.target; //取得上傳檔案
+  var reader = new FileReader(); //建立FileReader物件
+
+  reader.readAsDataURL(input.files[0]); //以.readAsDataURL將上傳檔案轉換為base64字串
+
+  reader.onload = function(){ //FileReader取得上傳檔案後執行以下內容
+    var dataURL = reader.result; //設定變數dataURL為上傳圖檔的base64字串
+    $('#output1').attr('src', dataURL).show(); //將img的src設定為dataURL並顯示
+  };
+}
+
+function openFile2(event){
+  var input = event.target; //取得上傳檔案
+  var reader = new FileReader(); //建立FileReader物件
+
+  reader.readAsDataURL(input.files[0]); //以.readAsDataURL將上傳檔案轉換為base64字串
+
+  reader.onload = function(){ //FileReader取得上傳檔案後執行以下內容
+    var dataURL = reader.result; //設定變數dataURL為上傳圖檔的base64字串
+    $('#output2').attr('src', dataURL).show(); //將img的src設定為dataURL並顯示
+  };
+}
+
+function openFile3(event){
+  var input = event.target; //取得上傳檔案
+  var reader = new FileReader(); //建立FileReader物件
+
+  reader.readAsDataURL(input.files[0]); //以.readAsDataURL將上傳檔案轉換為base64字串
+
+  reader.onload = function(){ //FileReader取得上傳檔案後執行以下內容
+    var dataURL = reader.result; //設定變數dataURL為上傳圖檔的base64字串
+    $('#output3').attr('src', dataURL).show(); //將img的src設定為dataURL並顯示
+  };
+}
  </Script>
- -->
+
 <div class="row">
     <div class="col-lg-12">
         <form class"form1" action="/admin/places" method="POST"  role="form"   enctype="multipart/form-data">
@@ -100,13 +85,14 @@ $(".form1").vmodel("--preview", true, function (){
                     <label>上傳商品圖片:</label>
                 </fieldset>
 
-                <input type="file" name="img[]"  accept="image/jpeg,image/jpg,image/gif,image/png" style="display: block;margin-bottom: 5px;">	
-					<!--<div class="preview">
-				</div>			-->	
-				<input type="file" name="img[]"  accept="image/jpeg,image/jpg,image/gif,image/png" style="display: block;margin-bottom: 5px;">
-				<input type="file" name="img[]"  accept="image/jpeg,image/jpg,image/gif,image/png" style="display: block;margin-bottom: 5px;">	
-				<input type="file" name="img[]"  accept="image/jpeg,image/jpg,image/gif,image/png" style="display: block;margin-bottom: 5px;">
-				
+                <input type="file" name="img[]"  onchange="openFile(event)" accept="image/jpeg,image/jpg,image/gif,image/png" style="display: block;margin-bottom: 5px;">	
+				<img id="output" height="200" style="display:none">
+				<input type="file" name="img[]" onchange="openFile1(event)" accept="image/jpeg,image/jpg,image/gif,image/png" style="display: block;margin-bottom: 5px;">
+				<img id="output1" height="200" style="display:none">
+				<input type="file" name="img[]" onchange="openFile2(event)" accept="image/jpeg,image/jpg,image/gif,image/png" style="display: block;margin-bottom: 5px;">	
+				<img id="output2" height="200" style="display:none">
+				<input type="file" name="img[]" onchange="openFile3(event)" accept="image/jpeg,image/jpg,image/gif,image/png" style="display: block;margin-bottom: 5px;">
+				<img id="output3" height="200" style="display:none">
                 </div>
 
             				
