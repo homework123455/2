@@ -22,13 +22,13 @@
 
 <body>
     <!-- ##### Welcome Area Start ##### -->
-    <section class="welcome_area bg-img background-overlay" style="background-image: url(img/bg-img/welcome.jpg);">
+    <section class="welcome_area bg-img background-overlay" style="background-image: url(img/bg-img/1234.png);">
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="hero-content">
-                        <h6>Planting</h6>
-                        <h2>為日常生活中增添點綠意</h2>
+                        <h6></h6>
+                        <h2></h2>
                         <a href="{{route('main.shop')}}" class="btn essence-btn">看商品</a>
                     </div>
                 </div>

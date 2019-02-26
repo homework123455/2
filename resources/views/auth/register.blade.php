@@ -24,8 +24,10 @@
                             </div>
                         </div>
 
+
+
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail</label>
+                            <label for="email" class="col-md-4 control-label">信箱</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}">
@@ -37,6 +39,22 @@
                                 @endif
                             </div>
                         </div>
+						
+						 <div class="form-group">
+                            <label for="email" class="col-md-4 control-label">電話</label>
+
+                            <div class="col-md-6">
+                                <input id="phone" type="phone" class="form-control" name="phone" >
+
+                                
+                                    <span class="help-block">
+                                        <strong></strong>
+                                    </span>
+                               
+                            </div>
+                        </div>
+						
+						
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="col-md-4 control-label">密碼</label>
@@ -63,6 +81,17 @@
                                         <strong>{{ $errors->first('password_confirmation') }}</strong>
                                     </span>
                                 @endif
+                            </div>
+                        </div>
+						
+						 <div class="form-group">
+                            <label for="address" class="col-md-4 control-label">住址</label>
+
+                            <div class="col-md-6">
+                                <input id="address" type="text" class="form-control" name="address"
+									<span class="help-block">
+                                        <strong></strong>
+                                    </span>								
                             </div>
                         </div>
 

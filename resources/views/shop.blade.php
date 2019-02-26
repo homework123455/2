@@ -28,7 +28,7 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="page-title text-center">
-                        <h2>Shop</h2>
+                        <h2>商品</h2>
                     </div>
                 </div>
             </div>
@@ -77,7 +77,6 @@
                                             <li><a href="{{route('dustdown.shop')}}">低</a></li>
                                         </ul>
                                     </li>
-
                                     
                                 </ul>
                             </div>
@@ -155,4 +154,3 @@
 </body>
 
 </html>
-

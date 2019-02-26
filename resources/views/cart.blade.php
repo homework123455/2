@@ -25,7 +25,7 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="page-title text-center">
-                        <h2>cart</h2>
+                        <h2>購物車</h2>
                     </div>
                 </div>
             </div>
@@ -50,15 +50,15 @@
 		</td>
 		<td width="250" align="center" valign="center">
 			<div class="product-right">
-				<h5>Product Name</h5>
+				<h5>商品名稱</h5>
 			</div>
 		</td>
 		<td width="20" align="center" valign="center">
-				<h5>Prcie</h5>
+				<h5>商品價格</h5>
 		</td>
 		<td width="50" align="center" valign="center">
 			<div class="product-right1">
-			    <h5>Quantity</h5>
+			    <h5>數量</h5>
 			</div>
 		</td>
 		<td width="5" align="center" valign="center">
@@ -68,7 +68,7 @@
 		</td>
 		<td width="200" align="center" valign="center">
 			<div class="product-right1">
-			    <h5>Total</h5>
+			    <h5>總金額</h5>
 			</div>
 		</td>
 		<td width="200" align="center" valign="center">

@@ -21,7 +21,7 @@
             {{ csrf_field() }}
 	<div class="form-group">
                 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
-                    <label>上傳商品圖片:</label>
+                    <label>上傳公告圖片:</label>
                 </fieldset>
 
                 <input type="file" name="img[]"  accept="image/jpeg,image/jpg,image/gif,image/png" style="display: block;margin-bottom: 5px;">
