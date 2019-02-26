@@ -63,6 +63,13 @@
 					<th width="100" style="text-align: center">商品數量</th>
 					<th width="100" style="text-align: center">商品單價</th>
                     <th width="100" style="text-align: center">下單時間</th>
+					@if($order->status=="已出貨"||$order->status=="已完成")
+					<th width="100" style="text-align: center">出貨時間</th>
+				    @elseif($order->status=="駁回")
+					<th width="100" style="text-align: center">處理時間</th>
+					
+					
+					@endif
 					<th width="100" style="text-align: center">訂單狀態</th>
                 </tr>
                 </thead>
@@ -76,6 +83,11 @@
 						 
 
                         <td style="text-align: center">{{$order->created_at}}</td>
+						@if($order->status=="已出貨"||$order->status=="已完成")
+						<td style="text-align: center">{{$order->updated_at}}</td>
+					@elseif($order->status=="駁回")
+					<td style="text-align: center">{{$order->stated}}</td>
+					@endif
 						<td style="text-align: center">{{$order->status}}</td>
 						
                     </tr>

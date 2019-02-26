@@ -222,6 +222,7 @@ class MaintaincesController extends Controller
 				$order->update([
                'status'=>'駁回',
 			   'reason'=>$reason,
+			   'updated_at'=>Carbon::now(),
             ]);
 		}
         elseif($request->method=='0'){
@@ -247,6 +248,7 @@ class MaintaincesController extends Controller
 		}
 			$order->update([
                 'status'=>'處理中',
+				'updated_at'=>Carbon::now(),
 				
             ]);
         //}

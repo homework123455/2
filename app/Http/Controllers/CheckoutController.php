@@ -8,7 +8,7 @@ use DB;
 use App\Cart;
 use App\Order;
 use Illuminate\Support\Facades\Auth;
-
+use Carbon\Carbon;
 class CheckoutController extends Controller
 {
     public function store(Request $request)
@@ -21,7 +21,8 @@ class CheckoutController extends Controller
         DB::table('orders')->where('users_id',null)->update(
             [
                 'users_id'=>Auth::user()->id,
-				'status'=>"未處理"
+				'status'=>"未處理",
+				'created_at'=>Carbon::now(),
             ]
         );
         while ($row = Cart::where('users_id',Auth::user()->id)->first() != null){
