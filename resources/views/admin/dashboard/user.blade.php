@@ -180,68 +180,12 @@ setTimeout('ShowTime()',1000);
                                                                         {{ method_field('DELETE') }}
                                                                             <button class="btn btn-danger">取消</button>
                                                                         </form>
-                                        @elseif($order_user->status=='送貨中'||$order_user->status=='已完成')
+                                        @elseif($order_user->status=='已出貨'||$order_user->status=='已完成')
                                                                
-                                                                            <!-- Button trigger modal -->
-                                                                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">
-                                                                                查看
-                                                                            </button
-                                                                            <!-- Modal -->
-                                                                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                                                                                <div class="modal-dialog" role="document">
-                                                                                    <div class="modal-content">
-                                                                                        <div class="modal-header">
-                                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                                                            <h4 class="modal-title" id="myModalLabel">提示訊息</h4>
-                                                                                        </div>
-																						
-                                                                                        <div class="modal-body">
-                                                                                             <div class="table-responsive">
-                <table class="table table-bordered table-hover">
-                    <thead>
-                    <tr>
-                       
-                        <th style="text-align: center">訂單內容</th>
-						<th style="text-align: center">數量</th>
-						<th style="text-align: center">價格</th>
-                         
-						
-						  
-                    </tr>
-                    </thead>
-					<tbody>
-					    
-
-						@foreach($ordersdetails as $ordersdetail)
-						@if($ordersdetail->orders_id==$order_user->id)
-                            <tr>
-                                <td style="text-align: center">{{ $ordersdetail->product}}</td>
-								<td style="text-align: center">{{ $ordersdetail->qty}}</td>
-								<td style="text-align: center">{{ $ordersdetail->total}}</td>
-								</tr>
-						@endif
-						@endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-                                                                                        </div>
-                                                                                        <div class="modal-footer">
-                                                                                            <table style="text-align: right">
-                                                                                                <tbody style="text-align: right">
-                                                                                                <tr class="table-text" style="text-align: center">
-                                                                                                    <td width="100" >
-                                                                                                        <form action="{{ route('admin.dashboard.user') }}">
-                                                                                                            {{ csrf_field() }}
-                                                                                                            <button class="btn btn-danger">確認</button>
-                                                                                                        </form>
-                                                                                                    </td>
-                                                                                                </tr>
-                                                                                                </tbody>
-                                                                                            </table>
-                                                                                        </div>
-                                                                                    </div>
+                                                                           
+                                                                             <div> <a href="{{ route('orders.show1', $order_user->id) }}" class="btn btn-primary" role="button">查看</a></div>
+                                                                                
+                                                                           
                                                                                 </div>
                                                                             </div>
                                                                   

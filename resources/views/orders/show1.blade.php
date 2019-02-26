@@ -101,8 +101,11 @@
                     
 
         <div class="text-right">
-            
+        @if((Auth::user()->previlege_id>=3))
             <a class="btn btn-success" href="{{ route('orders.index') }}"  role="button">返回</a>
+		@else
+			<a class="btn btn-success" href="{{ route('admin.dashboard.index') }}"  role="button">返回</a>
+		@endif
         </div>
         </form>
         <p>&nbsp;</p>

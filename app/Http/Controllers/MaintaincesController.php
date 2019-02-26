@@ -156,12 +156,12 @@ class MaintaincesController extends Controller
 		$data=['orders'=>$orders,'ordersdetail'=>$ordersdetail,'order_users'=>$order_users,'users'=>$users,'maintainces'=>$maintainces,
             'maintaincesA'=>$maintaincesA,
             'applications'=>$applications,
-'order_status1'=>$order_status1,
-'order_status2'=>$order_status2,
-'order_status3'=>$order_status3,
-'order_status4'=>$order_status4,
-'time'=>$time,
-            'places'=>$place];
+			'order_status1'=>$order_status1,
+			'order_status2'=>$order_status2,
+			'order_status3'=>$order_status3,
+			'order_status4'=>$order_status4,
+		//	'time'=>$time,
+			'places'=>$place];
 			
         //return view('home',['orders' => $order,'ordersdetails' => $ordersdetail]);
         return view('orders.index', $data);
