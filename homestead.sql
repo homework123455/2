@@ -44,7 +44,8 @@ CREATE TABLE `carts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `carts` (`users_id`, `id`, `photo`, `product`, `cost`, `qty`, `total`) VALUES
-(22,	187,	'1.jpg',	'羽球拍',	250,	1,	250);
+(27,	16,	'/uploads/2019-02-22/20190222165549622.jpg',	'羽球拍',	250,	3,	750),
+(22,	18,	'/uploads/2019-02-22/20190222165549622.jpg',	'羽球拍',	250,	5,	1250);
 
 DROP TABLE IF EXISTS `categories`;
 CREATE TABLE `categories` (
@@ -57,12 +58,14 @@ CREATE TABLE `categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `categories` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1,	'羽球類',	NULL,	NULL),
-(2,	'籃球類',	NULL,	NULL),
-(6,	'桌球類',	NULL,	NULL),
-(7,	'排球類',	NULL,	NULL),
-(9,	'網球類',	NULL,	NULL),
-(10,	'泳具類',	NULL,	NULL);
+(1,	'羽球類',	'2019-02-22 08:53:24',	'2019-02-22 08:53:24'),
+(2,	'籃球類',	'2019-02-22 08:53:24',	'2019-02-22 08:53:24'),
+(6,	'桌球類',	'2019-02-22 08:53:24',	'2019-02-22 08:53:24'),
+(7,	'排球類',	'2019-02-22 08:53:24',	'2019-02-22 08:53:24'),
+(9,	'網球類',	'2019-02-20 08:53:24',	'2019-02-20 08:53:24'),
+(10,	'泳具類',	'2019-02-20 09:53:24',	'2019-02-20 09:53:24'),
+(11,	'test',	'2019-02-22 08:53:24',	'2019-02-22 08:53:24'),
+(12,	'羽球場B',	'2019-02-22 09:22:18',	'2019-02-22 09:22:18');
 
 DROP TABLE IF EXISTS `departments`;
 CREATE TABLE `departments` (
@@ -103,12 +106,14 @@ CREATE TABLE `goods` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `status` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+  `value` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-INSERT INTO `goods` (`id`, `name`, `photo4`, `photo3`, `category`, `details3`, `details`, `details2`, `price`, `stock`, `goods_name1`, `photo1`, `photo2`, `created_at`, `updated_at`, `status`) VALUES
-(1,	'羽球拍',	'4.jpg',	'3.jpg',	1,	'要買就要買正廠的總代理產品，日後才會有保障，過去有很多人因為比較了那中間一點點價差，就在拍賣上面買下他的KAWASAKI羽球拍，但之後拍子有問題了，那個號稱有實體店面的賣家，在鐵門上貼出一張很大的出租紅紙，消費者不得不再送回原廠維修，繞了一大圈還是又在原廠，這中間浪費的時間與油錢都不止當初的那一點價差了。  所以現在我們很多客戶還是直接在這邊購買，為的就是能得到最直接與快速的服務，如果您也是沒空去處理這些小事，那麼請您成為我們的客戶，我們必定讓您享受原廠總代理最直接的服務。',	'品牌：VICTOR  型號：JS-NATSIR L  中管材質：超高剛性碳纖維+PYROFIL by Mitsubishi＋7.0 SHAFT \\n  拍裝材質：超高剛性碳纖維+Nano Fortify  穿線磅數：3U(28 lbs(12.5 Kg)4U(27 lbs(12 Kg)  球拍重量 / 握柄尺寸：3U/G4、G5 4U/G5  拍身長度：675 mm  平衡點：    HH ○○○●○ HL  中管軟硬度：S ○●○○○ F',	'羽球是一種高運動量性的運動，而且是屬於隔網對抗性的運動，在過程中減少了與對手的身體碰撞，較少有運動傷害的情形發生，因此能當作一項很好的休閒運動，它不須花費太多金錢, 也不用練習困難的技巧， 就能充分享受到運動的樂趣。在假日全家出遊帶著2把球拍，找個公園的空曠地就可以開心的玩了起來，不像籃球運動須受到場地的限制，人多的時候還要耐心的輪流，況且運動量可大亦可小，隨個人的年齡和體力情況而自我調整。  因此館長非常熱愛羽球活動，當然這麼適合全家一起休閒的活動一定要推廣給老顧客們，特地找羽球拍的領導品牌『KAWASAKI』造福本館的顧客。',	250,	0,	'HEDERA HELIX \'INGELISE\' 	',	'1.jpg',	'2.jpg',	'2018-12-14 06:46:48',	'2018-12-14 06:46:48',	'補貨中'),
-(2,	'籃球',	'b5.jpg',	'b4.jpg',	2,	'',	'',	'',	300,	99,	'SINNINGIA SPECIOSA ',	'b1.jpg',	'b3.jpg',	'2018-12-14 06:47:34',	'2018-12-14 06:47:34',	'正常供貨中');
+INSERT INTO `goods` (`id`, `name`, `photo4`, `photo3`, `category`, `details3`, `details`, `details2`, `price`, `stock`, `goods_name1`, `photo1`, `photo2`, `created_at`, `updated_at`, `status`, `value`) VALUES
+(1,	'羽球拍',	'/uploads/2019-02-22/20190222165549119.jpg',	'/uploads/2019-02-22/20190222165549298.jpg',	1,	'3',	'1',	'2',	250,	48,	'HEDERA HELIX \'INGELISE\' 	',	'/uploads/2019-02-22/20190222165549622.jpg',	'/uploads/2019-02-22/20190222165549632.jpg',	'2018-12-14 06:46:48',	'2019-02-26 11:54:37',	'正常供貨中',	36),
+(2,	'籃球1',	'/uploads/2019-02-22/20190222165614291.jpg',	'/uploads/2019-02-22/20190222165614940.jpg',	2,	'1',	'3',	'2',	300,	96,	'SINNINGIA SPECIOSA ',	'/uploads/2019-02-22/20190222165614706.jpg',	'/uploads/2019-02-22/20190222165614191.jpg',	'2018-12-14 06:47:34',	'2019-02-26 10:43:56',	'正常供貨中',	6),
+(5,	'YouLin',	'/uploads/2019-02-23/20190223142722861.jpg',	'/uploads/2019-02-23/20190223142722836.jpg',	12,	'3',	'1',	'2',	100,	49,	'',	'/uploads/2019-02-23/20190223142722451.jpg',	'/uploads/2019-02-23/20190223142722991.jpg',	'2019-02-23 06:27:22',	'2019-02-24 11:03:05',	'正常供貨中',	19);
 
 DROP TABLE IF EXISTS `lendings`;
 CREATE TABLE `lendings` (
@@ -217,7 +222,7 @@ CREATE TABLE `news` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `news` (`photo`, `content4`, `content3`, `content2`, `id`, `user_id`, `title`, `content1`, `created_at`, `updated_at`) VALUES
-('/uploads/2019-02-22/20190222020619307.png',	'jfkldsajklf;jsa;lfjlk;fas ',	'jkfjdaskjfkldjasklfjl; ',	'fldasjkfkl;jaslk;fjlkasjfl;ksa ',	7,	22,	'HIHI',	'adfadfafdasfdas ',	'2019-02-21 18:06:19',	'2019-02-21 18:06:19');
+('/uploads/2019-02-22/20190222134626780.jpg',	'jfkldsajklf;jsa;lfjlk;fas ',	'jkfjdaskjfkldjasklfjl; ',	'fldasjkfkl;jaslk;fjlkasjfl;ksa ',	7,	26,	'HIHI',	'adfadfafdasfdas ',	'2019-02-21 18:06:19',	'2019-02-22 05:46:26');
 
 DROP TABLE IF EXISTS `news1`;
 CREATE TABLE `news1` (
@@ -244,19 +249,21 @@ CREATE TABLE `orders` (
   `postcode` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
   `ph_number` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
   `address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   `users_id` int(10) unsigned DEFAULT NULL,
+  `status` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+  `reason` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `orders_user_id_foreign` (`users_id`),
   CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-INSERT INTO `orders` (`id`, `name`, `postcode`, `ph_number`, `address`, `created_at`, `updated_at`, `users_id`) VALUES
-(102,	'goods',	'a',	'a',	'a',	'2019-02-21 15:39:17',	'2019-02-21 15:39:17',	22),
-(103,	'homestea',	'a',	'adf',	'a',	'2019-02-21 15:39:51',	'2019-02-21 15:39:51',	22),
-(104,	'homestea',	'a',	'adf',	'a',	'2019-02-21 15:41:34',	'2019-02-21 15:41:34',	22),
-(105,	'homestea',	'a',	'a',	'a',	'2019-02-21 15:42:22',	'2019-02-21 15:42:22',	22);
+INSERT INTO `orders` (`id`, `name`, `postcode`, `ph_number`, `address`, `created_at`, `updated_at`, `users_id`, `status`, `reason`) VALUES
+(1,	'ya',	'fdasf',	'0912345678',	'adsfaf',	'2019-02-26 10:35:20',	'2019-02-26 10:41:10',	22,	'已出貨',	NULL),
+(2,	'ya',	'aa',	'0912345678',	'ㄑaa',	'2019-02-26 10:43:39',	'2019-02-26 10:43:58',	22,	'已出貨',	NULL),
+(3,	'5455',	'dasf',	'dafs',	'dasf',	'2019-02-26 11:54:04',	'2019-02-26 12:31:16',	26,	'已出貨',	NULL),
+(4,	'黃宥領',	'406',	'0936763689',	'國立勤益科技大學',	'2019-02-26 12:30:56',	'2019-02-26 12:31:22',	28,	'駁回',	'爽');
 
 DROP TABLE IF EXISTS `ordersdetail`;
 CREATE TABLE `ordersdetail` (
@@ -270,15 +277,15 @@ CREATE TABLE `ordersdetail` (
   PRIMARY KEY (`id`),
   KEY `users_id` (`users_id`),
   KEY `orders_id` (`orders_id`),
-  CONSTRAINT `ordersdetail_ibfk_1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`),
-  CONSTRAINT `ordersdetail_ibfk_2` FOREIGN KEY (`orders_id`) REFERENCES `orders` (`id`)
+  CONSTRAINT `ordersdetail_ibfk_1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `ordersdetail` (`id`, `orders_id`, `users_id`, `product`, `cost`, `qty`, `total`) VALUES
-(46,	103,	22,	'羽球拍',	250,	1,	250),
-(47,	104,	22,	'羽球拍',	250,	1,	250),
-(48,	105,	22,	'羽球拍',	250,	1,	250),
-(49,	105,	22,	'籃球',	300,	1,	300);
+(59,	114,	22,	'羽球拍',	250,	5,	1250),
+(60,	1,	22,	'羽球拍',	250,	3,	750),
+(61,	2,	22,	'籃球1',	300,	3,	900),
+(62,	3,	26,	'羽球拍',	250,	1,	250),
+(63,	4,	28,	'羽球拍',	250,	3,	750);
 
 DROP TABLE IF EXISTS `password_resets`;
 CREATE TABLE `password_resets` (
@@ -438,6 +445,7 @@ INSERT INTO `times` (`id`, `time_start`, `time_end`) VALUES
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
+  `address` varchar(255) CHARACTER SET utf8 NOT NULL,
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -456,12 +464,14 @@ CREATE TABLE `users` (
   UNIQUE KEY `users_email_unique` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `extension`, `position`, `phone`, `department_id`, `previlege_id`, `remember_token`, `created_at`, `updated_at`, `times`, `place`) VALUES
-(16,	'管理員',	'admin1@gmail.com',	'$2y$10$UjRDChSZWsth6TRYJIx7SObtI3ZZcHU8gtpHQGwoFfhwE07fNfYza',	'113',	'管理員',	'0912-345-678',	8,	3,	'oItTaN3nNLPPcFaOKWEuw5iQnU64WJeJRmB495cAefmw8e6q323uqyjkEfnL',	'2017-11-02 10:48:50',	'2019-01-15 15:50:46',	0,	NULL),
-(17,	'使用者',	'user1@gmail.com',	'user1',	'167',	'學生',	'0934-567-891',	7,	1,	'PMlwz2P30jXCxdUnWxq8kI9SCfQvQhZpscwodUXc4IktIg8NQSCNOL9H9v9e',	'2019-01-02 10:49:56',	'2019-01-15 08:42:38',	0,	'0'),
-(22,	'尤盈宜1',	'user123@gmail.com',	'$2y$10$U0opfxF9oIo/zI4S85tk5.yIpXmM7vCPbA2CAYsbTVzpifTNAV1qS',	'',	'學生',	'0912345678',	1,	1,	'1XNCQlCKJN70Ktoeh5y5eXYMocqIgeXXbilmIiRybGbhnK7u50vsBU7JE5AK',	'2019-01-15 08:53:57',	'2019-02-21 16:03:30',	0,	NULL),
-(24,	'尤盈宜2',	'superuser123@gmail.com',	'$2y$10$ps79jP29YVOXzWNTL6MKJeQZn1pmv1Atxmvg2G7HSY1m2hRpK4SVG',	'',	'系統管理員',	'0956123456',	1,	4,	'j5iaWr0AIoJ1CETsvoOj27s4S6c4afLJUeffc8WiRC5sxnXWF4FekwgsFIUW',	'2019-01-15 09:04:10',	'2019-01-15 10:21:17',	0,	NULL),
-(26,	'尤盈宜',	'admin123@gmail.com',	'$2y$10$zuVCBIwFIfueiEFJ783C6uOzDlJE3lZ6xP.9wmLioCJ1PcwJOM6ae',	'',	'管理員',	'0945678912',	1,	3,	'7OU07DvmeN2tSpV2n8Skz9RrD7z0lw5ITVi5xsHGblU46JjjtUigzyP5Cvbh',	'2019-01-15 09:10:06',	'2019-01-16 15:16:38',	0,	NULL);
+INSERT INTO `users` (`address`, `id`, `name`, `email`, `password`, `extension`, `position`, `phone`, `department_id`, `previlege_id`, `remember_token`, `created_at`, `updated_at`, `times`, `place`) VALUES
+('',	16,	'管理員',	'admin1@gmail.com',	'$2y$10$UjRDChSZWsth6TRYJIx7SObtI3ZZcHU8gtpHQGwoFfhwE07fNfYza',	'113',	'管理員',	'0912-345-678',	8,	3,	'oItTaN3nNLPPcFaOKWEuw5iQnU64WJeJRmB495cAefmw8e6q323uqyjkEfnL',	'2017-11-02 10:48:50',	'2019-01-15 15:50:46',	0,	NULL),
+('',	17,	'使用者',	'user1@gmail.com',	'user1',	'167',	'學生',	'0934-567-891',	7,	1,	'PMlwz2P30jXCxdUnWxq8kI9SCfQvQhZpscwodUXc4IktIg8NQSCNOL9H9v9e',	'2019-01-02 10:49:56',	'2019-01-15 08:42:38',	0,	'0'),
+('',	22,	'尤盈宜1',	'user123@gmail.com',	'$2y$10$U0opfxF9oIo/zI4S85tk5.yIpXmM7vCPbA2CAYsbTVzpifTNAV1qS',	'',	'學生',	'0912345678',	1,	1,	'qaEi5gqWtq3rrBqVd7STNaCypmKWBCjp9OraqACAFgUMxwStbW2RWJwiipRX',	'2019-01-15 08:53:57',	'2019-02-26 12:51:51',	0,	NULL),
+('',	24,	'尤盈宜2',	'superuser123@gmail.com',	'$2y$10$ps79jP29YVOXzWNTL6MKJeQZn1pmv1Atxmvg2G7HSY1m2hRpK4SVG',	'',	'系統管理員',	'0956123456',	1,	4,	'j5iaWr0AIoJ1CETsvoOj27s4S6c4afLJUeffc8WiRC5sxnXWF4FekwgsFIUW',	'2019-01-15 09:04:10',	'2019-01-15 10:21:17',	0,	NULL),
+('',	26,	'尤盈宜',	'admin123@gmail.com',	'$2y$10$zuVCBIwFIfueiEFJ783C6uOzDlJE3lZ6xP.9wmLioCJ1PcwJOM6ae',	'',	'管理員',	'0945678912',	1,	3,	'zrkyVyOfF9CRhQPdwbdRUzgvht0UfCOUtw1ibghviHTO3CFSu33W9xYnpUX2',	'2019-01-15 09:10:06',	'2019-02-26 12:31:29',	0,	NULL),
+('aaaaaa',	27,	'yaqq',	'gg123@gmail.com',	'$2y$10$rmHpoKeWsLHCcKZK0D4FK.2tEuISteoyBq9FO83gLl9EJ/vZ31s1m',	NULL,	NULL,	NULL,	1,	3,	'S4UJ3Qu0dOyyIkMtd7zRnJPJfjPa7moS3VdzET2lb7jo4Iygp41B2dUHFr0W',	'2019-02-26 12:19:25',	'2019-02-26 12:29:05',	0,	NULL),
+('國立勤益科技大學',	28,	'黃宥領',	'yolin0513@gmail.com',	'$2y$10$ogtzDSWkZD8gFakKjLFzEur2J/M08HQDGDfuRyg90eexF4Uco/Rwu',	NULL,	NULL,	'0936763689',	1,	1,	'cCKhDJvu4V7RtCZjOF2FkKgzUMiW2HOZanVPla2f6enhJQnWtVFd6suyTIMu',	'2019-02-26 12:30:03',	'2019-02-26 12:31:04',	0,	NULL);
 
 DROP TABLE IF EXISTS `weeks`;
 CREATE TABLE `weeks` (
@@ -498,4 +508,4 @@ INSERT INTO `wrongs` (`id`, `user_id`, `wrongname`, `date`, `created_at`, `updat
 (12,	17,	'亂丟垃圾',	'2019-01-01 00:00:00',	'2019-01-11 18:42:08',	'2019-01-11 18:42:08'),
 (13,	17,	'亂丟垃圾',	'2019-01-01 00:00:00',	'2019-01-11 18:42:22',	'2019-01-11 18:42:22');
 
--- 2019-02-21 18:22:55
+-- 2019-02-27 08:21:52
