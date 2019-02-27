@@ -116,6 +116,7 @@ Route::group(['prefix' => 'admin'], function() {
     Route::get('categories', ['as' => 'admin.categories.index', 'uses' => 'CategorieController@index']);
 	Route::get('categories/create', ['as' => 'admin.categories.create', 'uses' => 'CategorieController@create']);       
 	Route::post('categories', ['as' => 'admin.categories.store', 'uses' => 'CategorieController@store']);
+	Route::delete('categories/{id}', ['as' => 'admin.categories.destroy', 'uses' => 'CategorieController@destroy']);
     /////   
     /////補貨
     Route::get('shops/{id}/supplement', ['as' => 'admin.shops.supplement', 'uses' => 'ShopController@supplement']);        

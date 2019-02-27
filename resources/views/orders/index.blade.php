@@ -35,7 +35,7 @@
                     <!-- 表頭 -->
                     <thead>
 					<th style="text-align:center">訂單編號</th>
-                    <th style="text-align:center">訂單內容</th>
+                    <th style="text-align:center">送貨地址</th>
 					<th style="text-align:center">會員姓名</th>
                     <th style="text-align:center">處理</th>
                     </thead>
@@ -99,7 +99,7 @@
                     <!-- 表頭 -->
                     <thead>
 					<th style="text-align:center">訂單編號</th>
-                    <th style="text-align:center">訂單內容</th>
+                    <th style="text-align:center">送貨地址</th>
 					<th style="text-align:center">會員姓名</th>
                     <th style="text-align:center">處理</th>
                     </thead>
@@ -170,7 +170,7 @@
                     <!-- 表頭 -->
                     <thead>
 					<th style="text-align:center">訂單編號</th>
-                    <th style="text-align:center">訂單內容</th>
+                    <th style="text-align:center">送貨地址</th>
 					<th style="text-align:center">會員姓名</th>
                     <th style="text-align:center">處理</th>
                     </thead>
@@ -252,7 +252,7 @@
                     <!-- 表頭 -->
                     <thead>
 					<th style="text-align:center">訂單編號</th>
-                    <th style="text-align:center">訂單內容</th>
+                    <th style="text-align:center">送貨地址</th>
 					<th style="text-align:center">會員姓名</th>
                     <th style="text-align:center">處理</th>
                     </thead>

@@ -116,25 +116,19 @@
                                        
 
                                         
-	                                   @if($categorie=='正常使用中')
+	                                  
                                         <td class="table-text" style="text-align: center">
-                                                                        <form action="{{ route('admin.places.destroy', $categorie->id) }}" method="POST">
+                                                                        <form action="{{ route('admin.categories.destroy', $categorie->id) }}" method="POST">
                                                                             {{ csrf_field() }}
                                                                             {{ method_field('DELETE') }}
                                                                             <button class="btn btn-danger">刪除</button>
                                                                         </form>
                                               
                                         </td>
-										@else
-										<td class="table-text" style="text-align: center">
-                                                                        <form action="{{ route('admin.places.destroy', $categorie->id) }}" method="POST">
-                                                                            {{ csrf_field() }}
-                                                                            {{ method_field('DELETE') }}
-                                                                            <button class="btn btn-danger disabled">刪除</button>
-                                                                        </form>
+										
                                            
                                         </td>
-											@endif
+											
                                             
                                             
                                     

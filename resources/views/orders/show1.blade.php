@@ -86,7 +86,7 @@
 						@if($order->status=="已出貨"||$order->status=="已完成")
 						<td style="text-align: center">{{$order->updated_at}}</td>
 					@elseif($order->status=="駁回")
-					<td style="text-align: center">{{$order->stated}}</td>
+					<td style="text-align: center">{{$order->status}}</td>
 					@endif
 						<td style="text-align: center">{{$order->status}}</td>
 						

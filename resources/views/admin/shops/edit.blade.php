@@ -14,7 +14,55 @@
 <!-- /.row -->
 @include('admin.layouts.partials.validation')
 <!-- /.row -->
+<Script language="javascript">
+function openFile(event){
+  var input = event.target; //取得上傳檔案
+  var reader = new FileReader(); //建立FileReader物件
 
+  reader.readAsDataURL(input.files[0]); //以.readAsDataURL將上傳檔案轉換為base64字串
+
+  reader.onload = function(){ //FileReader取得上傳檔案後執行以下內容
+    var dataURL = reader.result; //設定變數dataURL為上傳圖檔的base64字串
+    $('#output').attr('src', dataURL).show(); //將img的src設定為dataURL並顯示
+  };
+}
+
+function openFile1(event){
+  var input = event.target; //取得上傳檔案
+  var reader = new FileReader(); //建立FileReader物件
+
+  reader.readAsDataURL(input.files[0]); //以.readAsDataURL將上傳檔案轉換為base64字串
+
+  reader.onload = function(){ //FileReader取得上傳檔案後執行以下內容
+    var dataURL = reader.result; //設定變數dataURL為上傳圖檔的base64字串
+    $('#output1').attr('src', dataURL).show(); //將img的src設定為dataURL並顯示
+  };
+}
+
+function openFile2(event){
+  var input = event.target; //取得上傳檔案
+  var reader = new FileReader(); //建立FileReader物件
+
+  reader.readAsDataURL(input.files[0]); //以.readAsDataURL將上傳檔案轉換為base64字串
+
+  reader.onload = function(){ //FileReader取得上傳檔案後執行以下內容
+    var dataURL = reader.result; //設定變數dataURL為上傳圖檔的base64字串
+    $('#output2').attr('src', dataURL).show(); //將img的src設定為dataURL並顯示
+  };
+}
+
+function openFile3(event){
+  var input = event.target; //取得上傳檔案
+  var reader = new FileReader(); //建立FileReader物件
+
+  reader.readAsDataURL(input.files[0]); //以.readAsDataURL將上傳檔案轉換為base64字串
+
+  reader.onload = function(){ //FileReader取得上傳檔案後執行以下內容
+    var dataURL = reader.result; //設定變數dataURL為上傳圖檔的base64字串
+    $('#output3').attr('src', dataURL).show(); //將img的src設定為dataURL並顯示
+  };
+}
+ </Script>
 <div class="row">
     <div class="col-lg-12">
 
@@ -28,10 +76,15 @@
                     <label>上傳商品圖片:</label>
                 </fieldset>
 
-                <input type="file" name="img[]"  accept="image/jpeg,image/jpg,image/gif,image/png" style="display: block;margin-bottom: 5px;">
-				<input type="file" name="img[]"  accept="image/jpeg,image/jpg,image/gif,image/png" style="display: block;margin-bottom: 5px;">
-				<input type="file" name="img[]"  accept="image/jpeg,image/jpg,image/gif,image/png" style="display: block;margin-bottom: 5px;">
-				<input type="file" name="img[]"  accept="image/jpeg,image/jpg,image/gif,image/png" style="display: block;margin-bottom: 5px;">
+                <input type="file" name="img[]"  onchange="openFile(event)" accept="image/jpeg,image/jpg,image/gif,image/png" style="display: block;margin-bottom: 5px;">	
+				<img id="output" height="200" style="display:none">
+				<input type="file" name="img[]" onchange="openFile1(event)" accept="image/jpeg,image/jpg,image/gif,image/png" style="display: block;margin-bottom: 5px;">
+				<img id="output1" height="200" style="display:none">
+				<input type="file" name="img[]" onchange="openFile2(event)" accept="image/jpeg,image/jpg,image/gif,image/png" style="display: block;margin-bottom: 5px;">	
+				<img id="output2" height="200" style="display:none">
+				<input type="file" name="img[]" onchange="openFile3(event)" accept="image/jpeg,image/jpg,image/gif,image/png" style="display: block;margin-bottom: 5px;">
+				<img id="output3" height="200" style="display:none">
+                </div>
                 <label>商品名稱：</label>
 
                 <input name="name" class="form-control" placeholder="請輸入商品名稱" value="{{$good->name}}">

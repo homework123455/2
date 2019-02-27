@@ -27,6 +27,7 @@ class CategorieController extends Controller
         $good = Good::orderBy('created_at', 'DESC')->get();
 
         $category = Category::orderBy('created_at', 'DESC')->get();
+		
      
         /*
         if(!(Auth::user()->previlege_id==3)){
@@ -139,8 +140,8 @@ class CategorieController extends Controller
 
     public function destroy($id)
     {
-        Place::destroy($id);
-        return redirect()->route('admin.places.index');
+        Categorie::destroy($id);
+        return redirect()->route('admin.categories.index');
     }
 
     public function data($id)
