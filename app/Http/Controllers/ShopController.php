@@ -165,12 +165,13 @@ class ShopController extends Controller
 
             }
         }
+		
         $good->update([
              'name' => $request->name,
             'category' => $request->category,
             //'date'=>$request->date,
 
-            'status' => $request->status,
+            
             
             'lendable' => $request->lendable,
             'price' => $request->price,
@@ -193,7 +194,7 @@ class ShopController extends Controller
 
 
 
-        ]);;
+        ]);
 
         return redirect()->route('admin.places.index');
     }
@@ -409,7 +410,7 @@ class ShopController extends Controller
 
 
 
-        ]);;
+        ]);
 
         return redirect()->route('admin.places.index');
     }

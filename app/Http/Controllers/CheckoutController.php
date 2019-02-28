@@ -27,6 +27,11 @@ class CheckoutController extends Controller
         );
         while ($row = Cart::where('users_id',Auth::user()->id)->first() != null){
             $cart = Cart::where('users_id',Auth::user()->id)->first();
+			foreach($good as $good1){
+				if($cart->product==$good1->name){
+					$product_id=$good1->id;
+				}
+			}
             DB::table('ordersdetail')->insert(
                 [
                     'qty' => $cart->qty,
@@ -35,6 +40,7 @@ class CheckoutController extends Controller
                     'total' => $cart->total,
                     'users_id' => Auth::user()->id,
                     'orders_id' => $count,
+					'product_id'=>$product_id
 					
                 ]
 			

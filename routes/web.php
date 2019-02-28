@@ -120,7 +120,7 @@ Route::group(['prefix' => 'admin'], function() {
     /////   
     /////補貨
     Route::get('shops/{id}/supplement', ['as' => 'admin.shops.supplement', 'uses' => 'ShopController@supplement']);        
-    Route::patch('shops/{id}', ['as' => 'admin.shops.update1', 'uses' => 'ShopController@update1']);    
+    Route::patch('shops/supplement/{id}', ['as' => 'admin.shops.update1', 'uses' => 'ShopController@update1']);    
      /////////	
 
     Route::get('places/{id}/edit', ['as' => 'admin.places.edit', 'uses' => 'PlaceController@edit']);        //修改資產(1)

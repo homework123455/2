@@ -194,24 +194,30 @@
                                             
 											
                                         </td>
+										<?php
+										$link=mysqli_connect("localhost:33060","root","root","homestead");
+										$sql ="SELECT * FROM ordersdetail WHERE product_id='$good->id'";
+										$rec = $link->query($sql);	
+										$rNum = $rec->num_rows;
+										//$rs = $rec->fetch_array();
+										
+										$S1=$rNum;	
+																			
+										?>
 										
 										
-										@foreach($cands as $cand)
 										
-	                                   @if($good->stock=='0'&&$good->status=="下架中")
-										@if($cand->product!=$good->name)
+	                                   @if($good->status=="下架中"&&$S1<=0)
+										
                                         <td class="table-text" style="text-align: center">
                                                                         <form action="{{ route('admin.shops.destroy', $good->id) }}" method="POST">
                                                                             {{ csrf_field() }}
                                                                             {{ method_field('DELETE') }}
-                                                                            <button class="btn btn-danger">刪除</button>
+                                                                            <button class="btn btn-danger ">刪除</button>
                                                                         </form>
                                               
                                         </td>
-										
-										@endif
-										@endif
-										@if($good->stock>'0'||$good->status!="下架中"||$cand->product==$good->name)
+										@else
 									    
 										<td class="table-text" style="text-align: center">
                                                                         <form action="{{ route('admin.places.destroy', $good->id) }}" method="POST">
@@ -222,12 +228,15 @@
                                            
                                         </td>
 										
+										
+										
+										
 										@endif
 											
-											@break
 											
 											
-                                        @endforeach
+											
+                                        
                                     
                                     @endif
                                 </tr>

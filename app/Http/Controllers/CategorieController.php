@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Good;
+use App\Order;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-
+use App\OrdersDetail;
 use App\Categorie ;
 use App\Plant;
 use DB;
@@ -13,9 +14,13 @@ class CategorieController extends Controller
 {
     public function index()
     {
+		$orders = Order::orderBy('created_at','DESC')->get();
+		$ordersdetails = OrdersDetail::all();
+		$goods = Good::orderBy('created_at', 'DESC')->get();
         $categories = Categorie::all();
-		$data = ['categories' => $categories];
-        return view('admin.categories.index', ['categories' => $categories]);
+		$i=0;	
+		$data = ['i'=>$i,'goods' => $goods,'orders'=>$orders,'ordersdetails'=>$ordersdetails,'categories' => $categories];
+        return view('admin.categories.index', $data);
     }
 
     

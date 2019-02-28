@@ -14,6 +14,7 @@
 <!-- /.row -->
 @include('admin.layouts.partials.validation')
 <!-- /.row -->
+</Script>
 <Script language="javascript">
 function openFile(event){
   var input = event.target; //取得上傳檔案
@@ -115,23 +116,7 @@ function openFile3(event){
 
            
 
-            <div class="form-group">
-                <label>可否租借：</label>
-
-                @if($good->status=='租借中')
-                    @if($good->lendable=="0")
-                        <label>否</label>
-                        @else
-                        <label>是</label>
-                    @endif
-                    @else
-                <select name="lendable" class="form-control">
-
-                    <option value="0" {{ $good->lendable?'':'SELECTED' }}>否</option>
-                    <option value="1" {{ $good->lendable?'SELECTED':'' }}>是</option>
-                </select>
-                    @endif
-            </div>
+           
 
             <div class="form-group">
                 <label>售價：</label>
@@ -145,11 +130,11 @@ function openFile3(event){
 
               <div class="form-group">
                 <label>詳細資訊：</label>
-                <textarea name="details" class="form-control" rows="2"></textarea>
+                <textarea name="details" class="form-control" rows="2" >{{$good->details}}</textarea>
 				<label>產品資訊：</label>
-                <textarea name="details2" class="form-control" rows="2"></textarea>
+                <textarea name="details2" class="form-control" rows="2">{{$good->details2}}</textarea>
 				<label>介紹：</label>
-                <textarea name="details3" class="form-control" rows="2"></textarea>
+                <textarea name="details3" class="form-control" rows="2">{{$good->details3}}</textarea>
             </div>
 
             <div class="text-right">

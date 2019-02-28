@@ -18,7 +18,7 @@
 <div class="row">
     <div class="col-lg-12">
 
-        <form action="/admin/shops/{{$good->id}}" method="POST" role="form" enctype="multipart/form-data">
+        <form action="/admin/shops/supplement/{{$good->id}}" method="POST" role="form" enctype="multipart/form-data">
             {{ csrf_field() }}
 			{{ method_field('PATCH') }}
 

@@ -81,13 +81,13 @@
                         	<th width="150" style="text-align: center">創建時間</th>
                             	<th width="400" style="text-align: center">功能</th>                        
 			@else
-				<th width="120" style="text-align: center">類別編號</th>
-                        	<th width="300" style="text-align: center">類別名稱</th>
+				<th width="220" style="text-align: center">類別編號</th>
+                        	<th width="100" style="text-align: center">類別名稱</th>
                        	 	
-							<th width="150" style="text-align: center">創建時間</th>
+							<th width="250" style="text-align: center">創建時間</th>
 							
                         	
-                            	<th width="40" style="text-align: center">功能</th>                        
+                            	<th width="30" style="text-align: center">功能</th>                        
 			@endif
                         
                     </tr>
@@ -112,21 +112,57 @@
                         <td>
                             <table>
                                 <tbody>
-                                
-                                       
+    <?php
+	
+	$link=mysqli_connect("localhost:33060","root","root","homestead");
+	$sql ="SELECT * FROM goods WHERE category='$categorie->id'";
+	$rec = $link->query($sql);	
+	$rNum = $rec->num_rows;
+	$rs = $rec->fetch_array();
+	$S1=$rs['id'];
+	//echo "$S1"; 
+	if(isset($S1)){
+		
+		$sql1 ="SELECT * FROM ordersdetail WHERE product_id ='$S1'";
+		$rec1 = $link->query($sql1);	
+	    $rNum1 = $rec1->num_rows;
+		$rs1 = $rec1->fetch_array();
+	    $S2=$rs1['id'];
+		//echo "$rNum1";
+		if(isset($S2)){
+			$i=1;
+		}
+	}
+	else{
+		$i=0;
+	}
+		
+	
+	
+	
+	?>
+
 
                                         
-	                                  
+	                                    @if($i=="0")
                                         <td class="table-text" style="text-align: center">
                                                                         <form action="{{ route('admin.categories.destroy', $categorie->id) }}" method="POST">
                                                                             {{ csrf_field() }}
                                                                             {{ method_field('DELETE') }}
-                                                                            <button class="btn btn-danger">刪除</button>
+                                                                            <button class="btn btn-danger ">刪除</button>
                                                                         </form>
                                               
                                         </td>
-										
-                                           
+										@elseif($i=="1")
+											<td class="table-text" style="text-align: center">
+                                                                        <form action="{{ route('admin.categories.destroy', $categorie->id) }}" method="POST">
+                                                                            {{ csrf_field() }}
+                                                                            {{ method_field('DELETE') }}
+                                                                            <button class="btn btn-danger disabled" >刪除</button>
+                                                                        </form>
+                                              
+                                        </td>
+										@endif
                                         </td>
 											
                                             
