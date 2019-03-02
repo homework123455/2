@@ -14,6 +14,8 @@
     <!-- Bootstrap Core CSS -->
     <link href="{{ asset('css/bootstrap1.min.css') }}" rel="stylesheet">
 
+	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+
     <!-- Custom CSS -->
     @if(Auth::user()->previlege_id==3)
     <link href="{{asset('css/sb-admin.css')}}" rel="stylesheet">

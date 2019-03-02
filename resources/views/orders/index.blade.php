@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 
-
+	 
 @section('content')
 
     <!-- Bootstrap 樣板... -->
@@ -22,13 +22,18 @@
 	
     @if (count($order_status1) > 0)
         <div class="row">
-    <div class="col-lg-12">
-        <ol class="breadcrumb">
-            <li class="active">
-                <i class="fa fa-edit"></i>訂單處理-未處理
-            </li>
-        </ol>
-
+    <div class="panel-group" id="accordion">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4 class="panel-title">
+				<a data-toggle="collapse" data-parent="#accordion" 
+				   href="#collapseOne">
+					<i class="fa fa-edit"></i>訂單處理-未處理
+				</a>
+			</h4>
+		</div>
+<div id="collapseOne" class="panel-collapse collapse in">
+			<div class="panel-body">
            <div class="table-responsive">
             <table class="table table-bordered table-hover">
 
@@ -81,18 +86,25 @@
                     </tbody>
                 </table>
             </div>
+		
 			{!! $order_status1->appends(['page2' => $order_status2->currentPage(),'page3' => $order_status3->currentPage() ])->render() !!}
+					</div>
+		</div>
         </div>
     @endif
 	@if (count($order_status2) > 0)
         
-    <div class="col-lg-12">
-        <ol class="breadcrumb">
-            <li class="active">
-                <i class="fa fa-edit"></i>訂單處理-處理中
-            </li>
-        </ol>
-
+   <div class="panel panel-success">
+		<div class="panel-heading">
+			<h4 class="panel-title">
+				<a data-toggle="collapse" data-parent="#accordion" 
+				   href="#collapse2">
+					<i class="fa fa-edit"></i>訂單處理-處理中
+				</a>
+			</h4>
+		</div>
+<div id="collapse2" class="panel-collapse collapse">
+			<div class="panel-body">
            <div class="table-responsive">
             <table class="table table-bordered table-hover">
 
@@ -152,18 +164,23 @@
             </div>
 			
 {!! $order_status2->appends(['page1' => $order_status1->currentPage() ,'page3' => $order_status3->currentPage() ])->render() !!}
-			
+			</div>
+			</div>
         </div>
     @endif
 	@if (count($order_status4) > 0)
         
-    <div class="col-lg-12">
-        <ol class="breadcrumb">
-            <li class="active">
-                <i class="fa fa-edit"></i>訂單處理-已出貨
-            </li>
-        </ol>
-
+   <div class="panel panel-info">
+		<div class="panel-heading">
+			<h4 class="panel-title">
+				<a data-toggle="collapse" data-parent="#accordion" 
+				   href="#collapse3">
+					<i class="fa fa-edit"></i>訂單處理-已出貨
+				</a>
+			</h4>
+		</div>
+<div id="collapse3" class="panel-collapse collapse">
+			<div class="panel-body">
            <div class="table-responsive">
             <table class="table table-bordered table-hover">
 
@@ -235,90 +252,16 @@
 			
 			{!! $order_status4->appends(['page1' => $order_status1->currentPage(),'page2' => $order_status2->currentPage(),'page3' => $order_status3->currentPage() ])->render() !!}
         </div>
+		 </div>
+		  </div>
     @endif
-	
-	@if (count($order_status3) > 0)
-        
-    <div class="col-lg-12">
-        <ol class="breadcrumb">
-            <li class="active">
-                <i class="fa fa-edit"></i>訂單處理-已完成
-            </li>
-        </ol>
 
-           <div class="table-responsive">
-            <table class="table table-bordered table-hover">
-
-                    <!-- 表頭 -->
-                    <thead>
-					<th style="text-align:center">訂單編號</th>
-                    <th style="text-align:center">送貨地址</th>
-					<th style="text-align:center">會員姓名</th>
-                    <th style="text-align:center">處理</th>
-                    </thead>
-
-                    <!-- 表身 -->
-                    <tbody>
-
-                    @foreach ($order_status3 as $order)
-					@if($order->status=="已完成"||$order->status=="駁回")
-                        <tr>
-                            <!-- 任務名稱 -->
-							@if($order->status=="已完成")
-                            <td style="text-align: center">
-                                <div>{{ $order->id}}</div>
-                            </td>
-							@else
-								 <td style="text-align: center"><font color="#FF0000"  >
-                                <div>{{ $order->id}}</div>
-                            </td>
-							@endif
-							@if($order->status=="已完成")
-							<td style="text-align: center">
-                                <div>{{ $order->address}}</div>
-                            </td>
-							@else
-								 <td style="text-align: center"><font color="#FF0000"  >
-                                <div>{{ $order->address}}</div>
-                            </td>
-							@endif
-							
-							@foreach($users as $user)
-							@if($user->id==$order->users_id)
-								@if($order->status=="已完成")
-							<td style="text-align: center">
-                                <div>{{ $user->name}}</div>
-                            </td>
-							@else
-								 <td style="text-align: center"><font color="#FF0000"  >
-                                <div>{{ $order->name}}</div>
-                            </td>
-							@endif
-							@endif
-							@endforeach
-							
-							
-                    
-                    
-
-                        <td class="table-text" style="text-align: center">
-                                @if($order->status=="已完成")
-                                   <div> <a href="{{ route('orders.show1', $order->id) }}" class="btn btn-primary" role="button">查看</a></div>
-                                @else
-									<div> <a href="{{ route('orders.show1', $order->id) }}" class="btn btn-danger" role="button">查看</a></div>
-								@endif
-                        </td>
-                    
-                        </tr>
-						@endif
-                    @endforeach
-					
-                    </tbody>
-                </table>
-            </div>
-			
-			{!! $order_status3->appends(['page1' => $order_status1->currentPage(),'page2' => $order_status2->currentPage() ])->render() !!}
-        </div>
-    @endif
-		
+<script type="text/javascript">
+	$(function () { $('#collapse4').collapse({
+		toggle: false
+	})});
+	$(function () { $('#collapse2').collapse('show')});
+	$(function () { $('#collapse3').collapse('toggle')});
+	$(function () { $('#collapseOne').collapse('hide')});
+</script>
 @endsection

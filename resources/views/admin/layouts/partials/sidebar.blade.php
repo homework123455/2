@@ -62,9 +62,29 @@
 				<li>
                     <a href="{{ route('admin.categories.index') }}"><i class="fa fa-fw fa-edit"></i> 商品分類管理</a>
                 </li>
-            <li>
-                <a href="{{ route('orders.index') }}"><i class="fa fa-fw fa-edit"></i> 訂單處理</a>
-            </li>
+				
+				
+				
+				
+	<li>
+				<a data-toggle="collapse" data-parent="#accordion" 
+				   href="#collapse5">
+					<i class="fa fa-fw fa-edit"></i>訂單處理<b class="caret"></b>
+				</a>
+			
+		
+                <div id="collapse5" class="panel-collapse collapse in">
+				<div class="panel-body">
+				
+				<a href="{{ route('orders.index') }}"><i class="fa fa-fw fa-edit"></i> 進行中</a></br>
+				
+				<a href="{{ route('orders.index1') }}"><i class="fa fa-fw fa-edit"></i> 已完成</a>
+				
+				</div>
+				</div>
+				</li>
+				
+            
            
                <li>
                     <a href="{{ route('admin.news.index') }}"><i class="fa fa-fw fa-edit"></i> 公告管理</a>

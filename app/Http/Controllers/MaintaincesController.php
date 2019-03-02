@@ -166,6 +166,54 @@ class MaintaincesController extends Controller
         //return view('home',['orders' => $order,'ordersdetails' => $ordersdetail]);
         return view('orders.index', $data);
     }
+	 public function index1()
+    {
+		
+        $maintainces=Maintaince::orderBy('created_at', 'DESC')->whereNotIn('status',['通過'])->get();
+        $maintaincesA=Maintaince::orderBy('created_at', 'DESC')->where('status','申請中')->get();
+
+        $place=Place::orderBy('created_at', 'DESC')->get();
+
+        $applications=Application::orderBy('created_at', 'DESC')->get();
+       
+		
+		$users=User::orderBy('created_at','DESC')->get();
+		$orders = Order::orderBy('created_at','DESC')->get();
+		$order_users = Order::where('users_id',Auth::user()->id)->get();
+		//$order_status1 = Order::paginate(2)->where('status',"未處理")->get();
+		$order_status1 = Order::where('status',"未處理")->paginate(2,  ['*'],  'page1');
+		//$order_status2 = Order::where('status',"處理中")->get();
+		$order_status2 = Order::where('status',"處理中")->paginate(2,  ['*'],  'page2');
+		//$order_status3 = Order::whereIn('status',['已完成','駁回'])->get();
+		$order_status3 = Order::whereIn('status',['已完成','駁回'])->paginate(3,  ['*'],  'page3');
+		$order_status4 = Order::where('status','已出貨')->paginate(3,  ['*'],  'page4');
+        $ordersdetail = OrdersDetail::where('users_id',Auth::user()->id)->get();
+		//$nowtime=
+		foreach($order_status4 as $order){
+			$time=((strtotime("now")-strtotime($order->updated_at))/ (60*60*24));
+			if($time>7){
+		    $order->update([
+            'status'=>'已完成',
+			
+        ]);
+				
+			}
+		}
+		
+		
+		$data=['orders'=>$orders,'ordersdetail'=>$ordersdetail,'order_users'=>$order_users,'users'=>$users,'maintainces'=>$maintainces,
+            'maintaincesA'=>$maintaincesA,
+            'applications'=>$applications,
+			'order_status1'=>$order_status1,
+			'order_status2'=>$order_status2,
+			'order_status3'=>$order_status3,
+			'order_status4'=>$order_status4,
+		//	'time'=>$time,
+			'places'=>$place];
+			
+        //return view('home',['orders' => $order,'ordersdetails' => $ordersdetail]);
+        return view('orders.index1', $data);
+    }
 /*
     public function Search(Request $request)
     {
