@@ -115,10 +115,8 @@
     @endif
 <script type="text/javascript">
 	$(function () { $('#collapse4').collapse({
-		toggle: false
+		'show'
 	})});
-	$(function () { $('#collapse2').collapse('show')});
-	$(function () { $('#collapse3').collapse('toggle')});
-	$(function () { $('#collapseOne').collapse('hide')});
+	
 </script>
 @endsection

@@ -73,7 +73,7 @@
 				</a>
 			
 		
-                <div id="collapse5" class="panel-collapse collapse in">
+                <div id="collapse5" class="panel-collapse collapse">
 				<div class="panel-body">
 				
 				<a href="{{ route('orders.index') }}"><i class="fa fa-fw fa-edit"></i> 進行中</a></br>
@@ -82,6 +82,12 @@
 				
 				</div>
 				</div>
+				<script type="text/javascript">
+	$(function () { $('#collapse5').collapse({
+		'hide'
+	})});
+	
+</script>
 				</li>
 				
             

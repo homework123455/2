@@ -28,7 +28,7 @@
 			<h4 class="panel-title">
 				<a data-toggle="collapse" data-parent="#accordion" 
 				   href="#collapseOne">
-					<i class="fa fa-edit"></i>訂單處理-未處理
+					<i class="fa fa-edit"></i>訂單處理-未處理<span class="badge">{{count($order_status1_)}}</span>
 				</a>
 			</h4>
 		</div>
@@ -99,7 +99,7 @@
 			<h4 class="panel-title">
 				<a data-toggle="collapse" data-parent="#accordion" 
 				   href="#collapse2">
-					<i class="fa fa-edit"></i>訂單處理-處理中
+					<i class="fa fa-edit"></i>訂單處理-處理中<span class="badge">{{count($order_status2_)}}</span>
 				</a>
 			</h4>
 		</div>
@@ -175,7 +175,7 @@
 			<h4 class="panel-title">
 				<a data-toggle="collapse" data-parent="#accordion" 
 				   href="#collapse3">
-					<i class="fa fa-edit"></i>訂單處理-已出貨
+					<i class="fa fa-edit"></i>訂單處理-已出貨<span class="badge">{{count($order_status4_)}}</span>
 				</a>
 			</h4>
 		</div>
@@ -260,8 +260,8 @@
 	$(function () { $('#collapse4').collapse({
 		toggle: false
 	})});
-	$(function () { $('#collapse2').collapse('show')});
+	$(function () { $('#collapse2').collapse('toggle')});
 	$(function () { $('#collapse3').collapse('toggle')});
-	$(function () { $('#collapseOne').collapse('hide')});
+	$(function () { $('#collapseOne').collapse('toggle')});
 </script>
 @endsection
