@@ -76,6 +76,7 @@ Route::get('orders1', ['as' => 'orders.index1' , 'uses' => 'MaintaincesControlle
 Route::delete('orders/{id}'  , ['as' => 'orders.destroy', 'uses' => 'MaintaincesController@destroy']);
 Route::get('orders/{id}/show', ['as' => 'orders.show', 'uses' => 'MaintaincesController@show']); 
 Route::get('orders/{id}/show1', ['as' => 'orders.show1', 'uses' => 'MaintaincesController@show1']);
+Route::get('orders/{id}/show2', ['as' => 'orders.show2', 'uses' => 'MaintaincesController@show2']);
 Route::patch('orders/{id}'  , ['as' => 'orders.process', 'uses' => 'MaintaincesController@process']);
 Route::patch('orders/{id}/scrapped', ['as' => 'orders.scrapped', 'uses' => 'MaintaincesController@scrapped']);
 

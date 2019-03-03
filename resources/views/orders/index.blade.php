@@ -40,7 +40,6 @@
                     <!-- 表頭 -->
                     <thead>
 					<th style="text-align:center">訂單編號</th>
-                    <th style="text-align:center">送貨地址</th>
 					<th style="text-align:center">會員姓名</th>
                     <th style="text-align:center">處理</th>
                     </thead>
@@ -55,9 +54,7 @@
                             <td style="text-align: center">
                                 <div>{{ $order->id}}</div>
                             </td>
-							<td style="text-align: center">
-                                <div>{{ $order->address}}</div>
-                            </td>
+							
 							@foreach($users as $user)
 							@if($user->id==$order->users_id)
 							<td style="text-align: center">
@@ -111,7 +108,7 @@
                     <!-- 表頭 -->
                     <thead>
 					<th style="text-align:center">訂單編號</th>
-                    <th style="text-align:center">送貨地址</th>
+
 					<th style="text-align:center">會員姓名</th>
                     <th style="text-align:center">處理</th>
                     </thead>
@@ -126,9 +123,7 @@
                             <td style="text-align: center">
                                 <div>{{ $order->id}}</div>
                             </td>
-							<td style="text-align: center">
-                                <div>{{ $order->address}}</div>
-                            </td>
+						
 							@foreach($users as $user)
 							@if($user->id==$order->users_id)
 							<td style="text-align: center">
@@ -187,7 +182,7 @@
                     <!-- 表頭 -->
                     <thead>
 					<th style="text-align:center">訂單編號</th>
-                    <th style="text-align:center">送貨地址</th>
+
 					<th style="text-align:center">會員姓名</th>
                     <th style="text-align:center">處理</th>
                     </thead>
@@ -206,15 +201,6 @@
 							@else
 								 <td style="text-align: center"><font color="#FF0000"  >
                                 <div>{{ $order->id}}</div>
-                            </td>
-							@endif
-							@if($order->status=="已出貨")
-							<td style="text-align: center">
-                                <div>{{ $order->address}}</div>
-                            </td>
-							@else
-								 <td style="text-align: center"><font color="#FF0000"  >
-                                <div>{{ $order->address}}</div>
                             </td>
 							@endif
 							

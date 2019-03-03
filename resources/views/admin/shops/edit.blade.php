@@ -86,13 +86,23 @@ function openFile3(event){
 				<input type="file" name="img[]" onchange="openFile3(event)" accept="image/jpeg,image/jpg,image/gif,image/png" style="display: block;margin-bottom: 5px;">
 				<img id="output3" height="200" style="display:none">
                 </div>
-                <label>商品名稱：</label>
+				
+				</div>
+             
+				
+            
+<div>
+ <label>商品編號：{{$good->id}}</label>
+ </div>
+            <div class="form-group">
+			
+				
+                
+			   <label>商品名稱：</label>
 
                 <input name="name" class="form-control" placeholder="請輸入商品名稱" value="{{$good->name}}">
 				
-            </div>
-
-            <div class="form-group">
+				
                 <label>商品類別：</label>
                 <select name="category" class="form-control">
                     @foreach($categories as $category)

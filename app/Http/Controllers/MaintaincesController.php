@@ -264,6 +264,22 @@ class MaintaincesController extends Controller
         $data=['orders'=>$orders,'users'=>$users,'order'=>$order,'ordersdetail'=>$ordersdetail,'ordertotal'=>$ordertotal];
         return view('orders.show1', $data);
     }
+	public function show2($id){
+        
+
+        
+        $users=User::orderBy('created_at','DESC')->get();
+		$order=Order::find($id);
+		$orders = Order::where('users_id',$order->users_id)->get();
+        $ordersdetail = OrdersDetail::where('orders_id',$id)->get();
+		$ordertotal=0;
+		foreach($ordersdetail as $order1){
+		$ordertotal = $ordertotal+$order1->total;
+		}   
+
+        $data=['orders'=>$orders,'users'=>$users,'order'=>$order,'ordersdetail'=>$ordersdetail,'ordertotal'=>$ordertotal];
+        return view('orders.ordercancel', $data);
+    }
 
     public function process(Request $request,$id){
         $order=Order::find($id);
