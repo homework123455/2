@@ -83,19 +83,35 @@
                 </tbody>
             </table>
         </div>
+		<ol class="breadcrumb">
+                <li class="active">
+                    <i class="fa fa-edit"></i> 買家信用 <p class="text-primary">共有<?php echo "$i" ?>筆交易紀錄</p>
+                </li>
+            </ol>
+<div class="progress">
 
+
+<div class="progress-bar progress-bar-success" role="progressbar" style="width:<?php echo "$F_times" ?>%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">完成<?php echo "$F_times" ?>% (共<?php echo "$F" ?>筆)</div>
+
+<div class="progress-bar progress-bar-danger" role="progressbar" style="width: <?php echo "$C_times" ?>%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">取消<?php echo "$C_times" ?>% (共<?php echo "$C" ?>筆)</div>
+
+ 
+</div>
 
         
                                     
                                 
-       @if(count($order->users_id)>0)
-	   
+       @if(count($orders_C)>0)
+	   <a data-toggle="collapse" data-parent="#accordion" 
+				   href="#collapse6">
             <ol class="breadcrumb">
                 <li class="active">
-                    <i class="fa fa-edit"></i> 其他購買紀錄
+                    <i class="fa fa-edit"></i> 過往不良紀錄<b class="caret"></b>
                 </li>
             </ol>
-           	
+           	</a>
+			<div id="collapse6" class="panel-collapse collapse">
+				<div class="panel-body">
     <div class="panel-group" id="accordion" role="tablist">
                 <div class="panel panel-default">
             <table class="table table-bordered table-hover">
@@ -112,7 +128,7 @@
 
                 
                     <tr>
-					@foreach($orders as $order2)
+					@foreach($orders_C as $order2)
 					@if($order2->id!=$order->id)
                         <td style="text-align: center">{{$order2->id}}</td>
                           
@@ -131,6 +147,15 @@
 				</div>
 				</div>
 				</table>
+				</div>
+				</div>
+				</div>
+				<script type="text/javascript">
+	$(function () { $('#collapse6').collapse({
+		'hide'
+	})});
+	
+</script>
 				</div>
 				@endif
                 <form action="/orders/{{$order->id}}" method="POST" role="form">
