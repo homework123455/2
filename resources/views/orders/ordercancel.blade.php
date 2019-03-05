@@ -26,7 +26,9 @@
 
 <div class="row">
     <div class="col-lg-12">
-       
+       <form action="ordercancel" method="POST" role="form" >
+	             {{ csrf_field() }}
+			{{ method_field('PATCH') }}
         <div class="form-group">
             <label width="80">訂單編號：</label>
 			{{$order->id}}
@@ -119,11 +121,7 @@
                     
 
         <div class="text-right">
-        @if((Auth::user()->previlege_id>=3))
-            <a class="btn btn-success" href="{{ route('orders.index') }}"  role="button">返回</a>
-		@else
-			<a class="btn btn-success" href="{{ route('admin.dashboard.index') }}"  role="button">返回</a>
-		@endif
+       <button type="submit" class="btn btn-success">送出</button>
         </div>
         </form>
         <p>&nbsp;</p>
