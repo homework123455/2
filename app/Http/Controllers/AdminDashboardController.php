@@ -58,6 +58,7 @@ if (Auth::user()->previlege_id==3)
 		$maintaincesA=$maintaincesALL1->whereIn('status',array('通過','駁回','申請中'))->get();
 		$maintaincesB=$maintaincesALL2->whereIn('status',array('通過','駁回','申請中'))->get();
 		$maintainces=$maintaincesALL->whereIn('status',array('申請中'))->get();
+		$C_orders=Order::whereIn('status',array('取消審核中'))->get();
 		$weeks=Week::orderBy('id','ASC')->get();
 		$times=Time_::orderBy('id','ASC')->get();
 		$places=Place::orderBy('created_at', 'ASC')->get();
@@ -71,7 +72,7 @@ if (Auth::user()->previlege_id==3)
 		$orders = Order::orderBy('created_at','DESC')->get();
 		$order_users = Order::where('users_id',Auth::user()->id)->get();
         $ordersdetails = OrdersDetail::orderBy('id' ,'DESC') ->get();
-		
+		$ordersapplys=Order::where('status',"未處理")->get();
         $departmaentU=$users->where('department_id', Auth::user()->department_id);
 		//$time_nowid=Carbon::now('Asia/Taipei');
         $time_nows=date("H:i:s", time());
@@ -106,7 +107,7 @@ if (Auth::user()->previlege_id==3)
 		}
 		//}
 		$place_overtimes1=$places2->where('time_id', '!=', $time_nowid)->where('status','租借中')->where('lendname',$user2)->get();
-        $data=['orders'=>$orders,'ordersdetails'=>$ordersdetails,'order_users'=>$order_users,'applications'=>$applications,'maintainces'=>$maintainces,'maintainces_A'=>$maintaincesA,
+        $data=['ordersapplys'=>$ordersapplys,'C_orders'=>$C_orders,'orders'=>$orders,'ordersdetails'=>$ordersdetails,'order_users'=>$order_users,'applications'=>$applications,'maintainces'=>$maintainces,'maintainces_A'=>$maintaincesA,
 		'maintainces_B'=>$maintaincesB,'places'=>$places,
             'applicationsA'=>$applicationsA,'news'=>$news,
             "users"=>$users,'departmaentU'=>$departmaentU,'username'=>$username,'times'=>$times,'weeks'=>$weeks,'place_overtimes'=>$place_overtimes,
