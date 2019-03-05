@@ -101,11 +101,18 @@
                                     
                                 
        
-        @if($order->status=="駁回")
+        @if($order->status=="駁回"||$order->status=="已處理")
 
-                <label>駁回原因：</label>
-               <label>{{$order->reason}}</label>
-
+               <div class="panel panel-danger">
+    <div class="panel-heading">
+        <h3 class="panel-title">駁回原因</h3>
+    </div>
+    <div class="panel-body">
+	{{$order->reason}}
+    </div>
+		
+			    
+</div>
 @endif
 
             </div>
