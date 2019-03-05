@@ -135,8 +135,8 @@ class MaintaincesController extends Controller
 		$order_status1_ = Order::where('status',"未處理")->get();
 		$order_status1 = Order::where('status',"未處理")->paginate(2,  ['*'],  'page1');
 		
-		$order_status2_ = Order::where('status',"處理中")->get();
-		$order_status2 = Order::where('status',"處理中")->paginate(2,  ['*'],  'page2');
+		$order_status2_ = Order::whereIn('status',["處理中","已處理"])->get();
+		$order_status2 = Order::whereIn('status',["處理中","已處理"])->paginate(2,  ['*'],  'page2');
 		$order_status3_ = Order::whereIn('status',['已完成','駁回'])->get();
 		$order_status3 = Order::whereIn('status',['已完成','駁回'])->paginate(3,  ['*'],  'page3');
 		$order_status4 = Order::where('status','已出貨')->paginate(3,  ['*'],  'page4');
@@ -408,7 +408,7 @@ class MaintaincesController extends Controller
         $order->update([
             'status'=>'已處理',
 			'updated_at'=>Carbon::now(),
-			'reason1'=>$request->reason1,
+			'reason'=>$request->reason,
 			
 			
         ]);

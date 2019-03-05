@@ -117,7 +117,7 @@
                     <tbody>
 
                     @foreach ($order_status2 as $order)
-					@if($order->status=="處理中")
+					@if($order->status=="處理中"||$order->status=="已處理")
                         <tr>
                             <!-- 任務名稱 -->
                             <td style="text-align: center">
