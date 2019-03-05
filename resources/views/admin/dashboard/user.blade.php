@@ -175,10 +175,9 @@ setTimeout('ShowTime()',1000);
 									<td class="table-text" style="text-align: center">
                                      @if($order_user->status=='處理中'||$order_user->status=='未處理')
                                                                         
-																			  <div> <a href="{{ route('orders.show2', $order_user->id) }}" class="btn btn-primary" role="button">取消</a></div>
-																		{{ csrf_field() }}
-                                                                        {{ method_field('DELETE') }}
-                                                                            <button class="btn btn-danger">取消</button>
+																			  <div> <a href="{{ route('orders.show2', $order_user->id) }}" class="btn btn-danger" role="button">取消</a></div>
+																		
+                                                                           
                                                                         </form>
                                         @elseif($order_user->status=='已出貨'||$order_user->status=='已完成')
                                                                

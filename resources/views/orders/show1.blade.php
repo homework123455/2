@@ -66,7 +66,7 @@
 					@if($order->status=="已出貨"||$order->status=="已完成")
 					<th width="100" style="text-align: center">出貨時間</th>
 				    @elseif($order->status=="駁回")
-					<th width="100" style="text-align: center">處理時間</th>
+					<th width="100" style="text-align: center">駁回時間</th>
 					
 					
 					@endif
@@ -86,7 +86,7 @@
 						@if($order->status=="已出貨"||$order->status=="已完成")
 						<td style="text-align: center">{{$order->updated_at}}</td>
 					@elseif($order->status=="駁回")
-					<td style="text-align: center">{{$order->status}}</td>
+					<td style="text-align: center">{{$order->updated_at}}</td>
 					@endif
 						<td style="text-align: center">{{$order->status}}</td>
 						

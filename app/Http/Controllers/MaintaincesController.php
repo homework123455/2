@@ -255,6 +255,20 @@ class MaintaincesController extends Controller
         $data=['C'=>$C,'F'=>$F,'i'=>$i,'F_times'=>$F_times,'C_times'=>$C_times,'orders_C'=>$orders_C,'orders'=>$orders,'users'=>$users,'order'=>$order,'ordersdetail'=>$ordersdetail,'ordertotal'=>$ordertotal];
         return view('orders.show', $data);
     }
+	public function cancelupdate(Request $request,$id){
+		
+		$users=User::orderBy('created_at','DESC')->get();
+		$order=Order::find($id);
+		$orders = Order::where('users_id',$order->users_id)->get();
+		$order->update([
+                'status'=>'取消審核中',
+				'reason1'=> $request->input('cancel'),
+				'updated_at'=>Carbon::now(),
+            ]);
+			
+			return redirect()->route('admin.dashboard.index');
+		
+	}
 	 public function show1($id){
         
 
