@@ -287,6 +287,29 @@ class MaintaincesController extends Controller
         $data=['orders'=>$orders,'users'=>$users,'order'=>$order,'ordersdetail'=>$ordersdetail,'ordertotal'=>$ordertotal];
         return view('orders.ordercancel', $data);
     }
+	public function cancelshow($id){
+        
+
+        
+        $users=User::orderBy('created_at','DESC')->get();
+		$order=Order::find($id);
+		$orders = Order::where('users_id',$order->users_id)->get();
+		$ordersing=$orders->whereIn('status',["已出貨","已完成","取消","退貨"]);
+		$orders_C =$orders->whereIn('status',["取消","退貨"]);
+		$C=count($orders_C);
+		$F=count($ordersing)-$C;
+		$C_times=ceil((count($orders_C)/count($ordersing))*100);
+		$F_times=100-ceil($C_times);
+		$i=count($ordersing);
+        $ordersdetail = OrdersDetail::where('orders_id',$id)->get();
+		$ordertotal=0;
+		foreach($ordersdetail as $order1){
+		$ordertotal = $ordertotal+$order1->total;
+		}   
+
+        $data=['C'=>$C,'F'=>$F,'i'=>$i,'F_times'=>$F_times,'C_times'=>$C_times,'orders_C'=>$orders_C,'orders'=>$orders,'users'=>$users,'order'=>$order,'ordersdetail'=>$ordersdetail,'ordertotal'=>$ordertotal];
+        return view('orders.cancelshow', $data);
+    }
 
     public function process(Request $request,$id){
         $order=Order::find($id);
