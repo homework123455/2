@@ -179,7 +179,7 @@
                         var a=document.getElementById("method");
 
                         var index=a.selectedIndex ;
-                        var b=document.getElementById("reason");
+                        var b=document.getElementById("reason1");
                         var c=a.options[index].value;
                         if(c=='0'){
 
