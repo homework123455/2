@@ -16,6 +16,7 @@ class Maintaince extends Model
         'method',
         'remark',
         'reason',
+		'reason1',
 		'user_id'
 		
     ];

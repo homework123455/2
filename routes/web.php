@@ -78,6 +78,7 @@ Route::get('orders/{id}/show', ['as' => 'orders.show', 'uses' => 'MaintaincesCon
 Route::get('orders/{id}/show1', ['as' => 'orders.show1', 'uses' => 'MaintaincesController@show1']);
 Route::get('orders/{id}/show2', ['as' => 'orders.show2', 'uses' => 'MaintaincesController@show2']);
 Route::get('orders/{id}/cancelshow', ['as' => 'orders.cancelshow', 'uses' => 'MaintaincesController@cancelshow']);
+Route::patch('orders/{id}/cancel'  , ['as' => 'orders.cancel', 'uses' => 'MaintaincesController@cancel']);
 Route::patch('orders/{id}'  , ['as' => 'orders.process', 'uses' => 'MaintaincesController@process']);
 Route::patch('orders/{id}/scrapped', ['as' => 'orders.scrapped', 'uses' => 'MaintaincesController@scrapped']);
 Route::patch('orders/{id}/ordercancel', ['as' => 'orders.ordercancel'  , 'uses' => 'MaintaincesController@cancelupdate']);

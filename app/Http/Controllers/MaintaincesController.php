@@ -287,8 +287,6 @@ class MaintaincesController extends Controller
     }
 	public function show2($id){
         
-
-        
         $users=User::orderBy('created_at','DESC')->get();
 		$order=Order::find($id);
 		$orders = Order::where('users_id',$order->users_id)->get();
@@ -395,6 +393,29 @@ class MaintaincesController extends Controller
 		
         return redirect()->route('orders.index');
     }
+	 public function cancel(Request $request,$id)
+    {
+    if($request->method=='1'){
+        $order=Order::find($id);
+        $order->update([
+            'status'=>'已取消',
+			'updated_at'=>Carbon::now(),
+			
+        ]);
+    }
+	else{
+		 $order=Order::find($id);
+        $order->update([
+            'status'=>'已處理',
+			'updated_at'=>Carbon::now(),
+			'reason1'=>$request->reason1,
+			
+			
+        ]);
+	}
+        return redirect()->route('admin.dashboard.mis');
+    }
+
 
     public function complete(Request $request,$id){
         $maintaince=Maintaince::find($id);
