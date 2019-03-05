@@ -395,7 +395,7 @@ class MaintaincesController extends Controller
     }
 	 public function cancel(Request $request,$id)
     {
-    if($request->method=='1'){
+    if($request->method=='0'){
         $order=Order::find($id);
         $order->update([
             'status'=>'已取消',
