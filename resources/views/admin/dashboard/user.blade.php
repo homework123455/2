@@ -187,6 +187,14 @@ setTimeout('ShowTime()',1000);
                                                                            
                                                                                 </div>
                                                                             </div>
+										 @elseif($order_user->status=='已取消')
+                                                               
+                                                                           
+                                         <div> <a href="{{ route('orders.show1', $order_user->id) }}" class="btn btn-primary" role="button">查看</a></div>
+                                                                                
+                                                                           
+                                                                                </div>
+                                                                            </div>
                                                                   
                                         @else
                                             <a class="btn btn-danger disabled" role="button">取消</a>
