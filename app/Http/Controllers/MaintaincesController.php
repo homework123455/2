@@ -408,7 +408,7 @@ class MaintaincesController extends Controller
         $order->update([
             'status'=>'已處理',
 			'updated_at'=>Carbon::now(),
-			'reason1'=>$request->reason1,
+			'reason'=>$request->reason,
 			
 			
         ]);
