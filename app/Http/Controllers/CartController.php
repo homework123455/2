@@ -47,6 +47,7 @@ class CartController extends Controller
                 [
                     'photo' => $photo,
                     'product' => $good,
+					'product_id'=>$id,
                     'cost' => $price,
                     'total' => $price,
                     'users_id' => Auth::user()->id

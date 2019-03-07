@@ -18,7 +18,8 @@ class CategorieController extends Controller
 		$ordersdetails = OrdersDetail::all();
 		$goods = Good::orderBy('created_at', 'DESC')->get();
         $categories = Categorie::all();
-		$i=0;	
+		$i=0;
+        		
 		$data = ['i'=>$i,'goods' => $goods,'orders'=>$orders,'ordersdetails'=>$ordersdetails,'categories' => $categories];
         return view('admin.categories.index', $data);
     }
@@ -133,14 +134,24 @@ class CategorieController extends Controller
 
     public function store(Request $request)
     {
-        
+		$category = Category::orderBy('created_at', 'DESC')->get();
+        $categorie = Category::where('name',$request->name )->get();
+		$msg="";
+		if(count($categorie)<=0){
         Categorie::create([
             'name' => $request->name,
-           
-
-        ]);
-
-        return redirect()->route('admin.categories.index');
+            ]);
+			$msg="成功新增類別:".$request->name;
+			return redirect()->route('admin.categories.index');
+			}
+			else{
+			$msg="類別:".$request->name."已存在!";
+			 $data = ['msg'=>$msg,'categories' => $category];
+		
+          return view('admin.categories.create', $data);
+			}
+		
+        //return redirect()->route('admin.categories.index');
     }
 
     public function destroy($id)

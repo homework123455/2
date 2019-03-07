@@ -103,16 +103,21 @@
 			<div class="product-right1">
 				<select name="qty" onchange="javascript:location.href=this.value;">
 					<option value="">數量修改</option>
-					<option value="{{route('cart.update',['id'=>$cart->id,'q'=>'1'])}}">1</option>
-					<option value="{{route('cart.update',['id'=>$cart->id,'q'=>'2'])}}">2</option>
-					<option value="{{route('cart.update',['id'=>$cart->id,'q'=>'3'])}}">3</option>
-					<option value="{{route('cart.update',['id'=>$cart->id,'q'=>'4'])}}">4</option>
-					<option value="{{route('cart.update',['id'=>$cart->id,'q'=>'5'])}}">5</option>
-					<option value="{{route('cart.update',['id'=>$cart->id,'q'=>'6'])}}">6</option>
-					<option value="{{route('cart.update',['id'=>$cart->id,'q'=>'7'])}}">7</option>
-					<option value="{{route('cart.update',['id'=>$cart->id,'q'=>'8'])}}">8</option>
-					<option value="{{route('cart.update',['id'=>$cart->id,'q'=>'9'])}}">9</option>
-					<option value="{{route('cart.update',['id'=>$cart->id,'q'=>'10'])}}">10</option>
+					<?php
+					$link=mysqli_connect("localhost:33060","root","root","homestead");
+					$sql ="SELECT * FROM goods WHERE id='$cart->product_id'";
+					$rec = $link->query($sql);	
+					//$rNum = $rec->num_rows;
+					$rs = $rec->fetch_array();
+					$S1=$rs['value'];
+					
+					
+					?>
+					
+					@for($i=1;$i<=$S1;$i++)
+					<option value="{{route('cart.update',['id'=>$cart->id,'q'=>$i])}}">{{$i}}</option>
+				    @endfor
+					
 				</select>
             </div>
 		</td>

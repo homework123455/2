@@ -168,19 +168,21 @@
                 <Script language="javascript">
                     function agree(){
                         var a=document.getElementById("method");
-
+                        
                         var index=a.selectedIndex ;
                         var b=document.getElementById("reason");
+						var text=b.text;
                         var c=a.options[index].value;
                         if(c=='0'){
 
 
                             b.readOnly=true;
+							reason.value="";
                         }
                         else{
                             if(c=='1'){
                                 b.removeAttribute('readOnly');
-
+                                
                             }
                         }
 
@@ -193,7 +195,7 @@
                 </select>
 
                 <label>駁回原因：</label>
-                <input type="text" id="reason" name="reason" class="form-control" placeholder="請輸入駁回原因" readonly>
+                <input type="text" value="" id="reason" name="reason" class="form-control" placeholder="請輸入駁回原因" readonly>
 
 
 

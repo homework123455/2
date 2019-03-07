@@ -37,7 +37,11 @@
                 <label>類別名稱：</label>
                 <input name="name" class="form-control" placeholder="請輸入類別名稱">
             </div>
+@if(isset($msg))
+<div class="alert alert-danger">{{$msg}}</div>
 
+
+@endif
            
 
             

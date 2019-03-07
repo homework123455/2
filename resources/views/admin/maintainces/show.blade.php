@@ -161,6 +161,7 @@
                         else{
                             if(c=='1'){
                                 b.removeAttribute('readOnly');
+								
 
                             }
                         }
@@ -174,7 +175,7 @@
                 </select>
 
                 <label>駁回原因：</label>
-                <input type="text" id="reason" name="reason" class="form-control" placeholder="請輸入駁回原因" readonly>
+                <input type="text"  id="reason" name="reason" class="form-control" placeholder="請輸入駁回原因" readonly>
 
 
 
