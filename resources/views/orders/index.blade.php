@@ -136,13 +136,16 @@
                     
 
                         <td class="table-text" style="text-align: center">
-						<form action="{{ route('orders.scrapped', $order->id) }}" method="POST">
+						
+						
+                               
+                                  <form action="{{ route('orders.scrapped', $order->id) }}" method="POST">
                                                     {{ csrf_field() }}
                                                     {{ method_field('PATCH') }}
                                                     <button class="btn btn-success">出貨</button>
+													<a href="{{ route('orders.show1', $order->id) }}" class="btn btn-primary" role="button">查看</a>
                                                 </form>
-                                
-                                  
+												
                                 
                         </td>
                     

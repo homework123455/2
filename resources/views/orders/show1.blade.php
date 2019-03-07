@@ -120,8 +120,19 @@
                     
 
         <div class="text-right">
+		
+
         @if((Auth::user()->previlege_id>=3))
+			@if($order->status=="處理中")
+			<form action="{{ route('orders.scrapped', $order->id) }}" method="POST">
+                                                    {{ csrf_field() }}
+                                                    {{ method_field('PATCH') }}
+                                                    <button class="btn btn-success">出貨</button>
+													 <a class="btn btn-success" href="{{ route('orders.index') }}"  role="button">返回</a>
+                                                </form>
+												@else
             <a class="btn btn-success" href="{{ route('orders.index') }}"  role="button">返回</a>
+		@endif
 		@else
 			<a class="btn btn-success" href="{{ route('admin.dashboard.index') }}"  role="button">返回</a>
 		@endif
