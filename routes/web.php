@@ -117,6 +117,11 @@ Route::group(['prefix' => 'admin'], function() {
 	Route::get('shops/{id}/edit', ['as' => 'admin.shops.edit', 'uses' => 'ShopController@edit']);        //修改資產(1)
     Route::patch('shops/{id}', ['as' => 'admin.shops.update', 'uses' => 'ShopController@update']);
 	////
+	////供應商
+	 Route::get('suppliers', ['as' => 'admin.suppliers.index', 'uses' => 'SuppilerController@index']);
+	 Route::get('suppliers/create', ['as' => 'admin.suppliers.create', 'uses' => 'SuppilerController@create']);
+	 Route::post('suppliers', ['as' => 'admin.suppliers.store', 'uses' => 'SuppilerController@store']);
+	 Route::delete('suppliers/{id}', ['as' => 'admin.suppliers.destroy', 'uses' => 'SuppilerController@destroy']);
 	/////分類
     Route::get('categories', ['as' => 'admin.categories.index', 'uses' => 'CategorieController@index']);
 	Route::get('categories/create', ['as' => 'admin.categories.create', 'uses' => 'CategorieController@create']);       

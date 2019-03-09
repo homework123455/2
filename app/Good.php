@@ -23,7 +23,7 @@ class Good extends Model
 		'details',
 		'details2',
 		'details3',
-
+'supplier_id',
 		'photo2',
 		'photo3',
 		'photo4',
@@ -35,5 +35,9 @@ class Good extends Model
     public function plants()
     {
         return $this->hasMany('App\Plant');
+    }
+	public function suppliers() //  Place (n) -> Category (1)
+    {
+        return $this->belongsTo(Supplier::class);
     }
 }
