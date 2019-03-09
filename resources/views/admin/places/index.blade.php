@@ -35,14 +35,14 @@
  <label>商品名稱查詢：</label>  <form action="{{ route('admin.places.search10') }}" method="POST">
     {{ csrf_field() }}
 
-    <select name="week_search" class="form-control">
+    <select name="good_search" class="form-control">
 	<option value="">請選擇</option>
-				@foreach($weeks as $week)
-				@if($week->id==$Search)
+				@foreach($goods1 as $good1)
+				@if($good1->id==$Search)
 				 
-                 <option selected="true" value={{ $week->id }} >{{ $week->week }}</option>
+                 <option selected="true" value={{ $good1->id }} >{{ $good1->name }}</option>
 			 @else
-				  <option  value={{ $week->id }}>{{ $week->week }}</option>
+				  <option  value={{ $good1->id }}>{{ $good1->name }}</option>
 			  @endif
                     @endforeach
 					</select>

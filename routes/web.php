@@ -122,6 +122,8 @@ Route::group(['prefix' => 'admin'], function() {
 	Route::get('categories/create', ['as' => 'admin.categories.create', 'uses' => 'CategorieController@create']);       
 	Route::post('categories', ['as' => 'admin.categories.store', 'uses' => 'CategorieController@store']);
 	Route::delete('categories/{id}', ['as' => 'admin.categories.destroy', 'uses' => 'CategorieController@destroy']);
+	Route::post('categories/search2'  , ['as' => 'admin.categories.search2', 'uses' => 'CategorieController@Search2']);
+Route::post('categories/searchALL1'  , ['as' => 'admin.categories.searchALL1', 'uses' => 'CategorieController@searchALL1']);
     /////   
     /////補貨
     Route::get('shops/{id}/supplement', ['as' => 'admin.shops.supplement', 'uses' => 'ShopController@supplement']);        
@@ -132,6 +134,7 @@ Route::group(['prefix' => 'admin'], function() {
     Route::patch('places/{id}', ['as' => 'admin.places.update', 'uses' => 'PlaceController@update']);     //修改資產(2)
     Route::delete('places/{id}', ['as' => 'admin.places.destroy', 'uses' => 'PlaceController@destroy']);   //刪除資產
     Route::post('places/search'  , ['as' => 'admin.places.search', 'uses' => 'PlaceController@Search']); //查詢星期
+	
     Route::post('places/search1'  , ['as' => 'admin.places.search1', 'uses' => 'PlaceController@Search1']);	//查詢場地類別
 	Route::post('places/search10'  , ['as' => 'admin.places.search10', 'uses' => 'PlaceController@Search10']);	//查詢開放時段
 	Route::post('places/searchALL1'  , ['as' => 'admin.places.searchALL1', 'uses' => 'PlaceController@searchALL1']);	//查詢開放時段

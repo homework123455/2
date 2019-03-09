@@ -26,11 +26,12 @@ class PlaceController extends Controller
     public function index(Request $request)
     {
         
-        $Search = $request->input('week_search');
-        $Search2 = $request->input('time_search');
+        $Search = $request->input('good_search');
+       
         $Search1 = $request->input('category_search');
         //$goods = Good::all();
 		$goods = Good::paginate(2);
+		$goods1 = Good::orderBy('created_at', 'DESC')->get();
         $place = Place::orderBy('created_at', 'DESC')->get();
         $cands = OrdersDetail::all();
 		//$cands=DB::table('ordersdetail')->orderby('id','Desc')->value('product');
@@ -47,7 +48,7 @@ class PlaceController extends Controller
            $place=Place::where('id','0')->get();
        }
 */
-        $data = ['cands'=>$cands,'goods'=>$goods,'places' => $place, 'lendings' => $lendings, 'categories' => $category, 'times' => $times, 'weeks' => $weeks, 'Search' => $Search, 'Search1' => $Search1, 'Search2' => $Search2, 'maintainces' => $maintainces];
+        $data = ['goods1'=>$goods1,'cands'=>$cands,'goods'=>$goods,'places' => $place, 'lendings' => $lendings, 'categories' => $category, 'times' => $times, 'weeks' => $weeks, 'Search' => $Search, 'Search1' => $Search1, 'maintainces' => $maintainces];
 
         return view('admin.places.index', $data);
     }
@@ -290,88 +291,47 @@ class PlaceController extends Controller
 
     public function Search10(Request $request)
     {
-        $maintaincesALL = Maintaince::orderBy('created_at', 'DESC');
-        $maintainces = $maintaincesALL->whereIn('status', array('申請中'))->get();
-        $times = Time_::orderBy('id', 'ASC')->get();
-        $Search = $request->input('week_search');
-        $Search2 = $request->input('time_search');
+        $goodsALL = Good::orderBy('created_at', 'DESC');
+		$goods1=Good::orderBy('created_at', 'DESC')->get();
+        //$maintainces = $maintaincesALL->whereIn('status', array('申請中'))->get();
+        //$times = Time_::orderBy('id', 'ASC')->get();
+        $Search = $request->input('good_search');
+        
         $Search1 = $request->input('category_search');
-        $weeks = Week::orderBy('id', 'ASC')->get();
-        if( $Search == "" && $Search1 ==""&& $Search2 =="") {
+       
+        if( $Search == "" && $Search1 =="") {
 
-            $place = Place::orderBy('created_at', 'DESC')
+            $goods = Good::orderBy('created_at', 'DESC')
                 ->where('id', '0')
-                ->get();
+                ->paginate(2);
         }
-        else if ( $Search2 =="" && $Search1 =="") {
+        else if ( $Search1 =="") {
 
-            $place = Place::orderBy('created_at', 'DESC')
-                ->where('week_id', $Search)
-                ->get();
-        } else if ( $Search == "" &&$Search1 == "") {
-            $place = Place::orderBy('created_at', 'DESC')
-                ->where('time_id', $Search2)
-                ->get();
-        } else if ( $Search =="" && $Search2 =="") {
-            $place = Place::orderBy('created_at', 'DESC')
-                ->where('category', $Search1)
-                ->get();
+            $goods = Good::orderBy('created_at', 'DESC')
+                ->where('id', $Search)
+                ->paginate(2);
         } else if ( $Search == "") {
-            $place = Place::orderBy('created_at', 'DESC')
-                ->where('time_id', $Search2)->where('category', $Search1)
-                ->get();
-        } else if ($Search1 == "") {
-            $place = Place::orderBy('created_at', 'DESC')
-                ->where('time_id', $Search2)->where('week_id', $Search)
-                ->get();
-        } else if ( $Search2 == "") {
-            $place = Place::orderBy('created_at', 'DESC')
-                ->where('category', $Search1)->where('week_id', $Search)
-                ->get();
-        } else
-    {
+            $goods = Good::orderBy('created_at', 'DESC')
+                ->where('category', $Search1)
+                ->paginate(2);
+        }
+         else
+        {
 
-            $place = Place::orderBy('created_at', 'DESC')
-            ->where('category', $Search1)->where('week_id', $Search)->where('time_id', $Search2)
-            ->get();
+            $goods= Good::orderBy('created_at', 'DESC')
+            ->where('category', $Search1)->where('id', $Search)
+            ->paginate(2);
         }
 
         $category = Category::orderBy('created_at', 'DESC')->get();
-        $lendings = Lending::whereNull('returntime')->get();
+       //$goods = Good::paginate(2);
 
-        $data = ['places' => $place, 'lendings' => $lendings, 'categories' => $category, 'weeks' => $weeks, 'times' => $times, 'Search' => $Search, 'Search1' => $Search1, 'Search2' => $Search2,'maintainces'=>$maintainces];
+        $data = ['goods' => $goods,'goods1' => $goods1, 'categories' => $category, 'Search' => $Search, 'Search1' => $Search1];
         return view('admin.places.index', $data);
         }
 
 
-		public function Search2(Request $request)
-    {
-	    
-		$times=Time_::orderBy('id','ASC')->get();
-        $Search =$request->input('week_search');
-        $Search2 =$request->input('time_search');
-		$Search1 =$request->input('category_search');
-		$weeks=Week::orderBy('id','ASC')->get();
-	if(Auth::user()->previlege_id!=3&&$Search2==null)
-	{
-
-	$place = Place::orderBy('created_at', 'DESC')
-            ->where('id','0')
-            ->get();
-	}
-	else
-	{
-
-	$place = Place::orderBy('created_at', 'DESC')
-            ->where('time_id',$Search2)
-            ->get();
-	}        
-        $category=Category::orderBy('created_at' ,'DESC') ->get();
-        $lendings=Lending::whereNull('returntime')->get();
-
-        $data=['places'=>$place,'lendings'=>$lendings,'categories'=>$category,'weeks'=>$weeks,'times'=>$times,'Search'=>$Search,'Search1'=>$Search1,'Search2'=>$Search2];
-        return view('admin.places.index' ,$data);
-    }
+		
 
     public function SearchAll(Request $request)
     {
@@ -388,24 +348,21 @@ class PlaceController extends Controller
     }
 	public function SearchAll1(Request $request)
     {
-	$maintaincesALL = Maintaince::orderBy('created_at', 'DESC');
-        $maintainces = $maintaincesALL->whereIn('status', array('申請中'))->get();
-        $Search =$request->input('week_search');
-        $Search2 =$request->input('time_search');
+	
+        $Search =$request->input('good_search');
+        
 		$Search1 =$request->input('category_search');
-
-        $place=Place::orderBy('created_at', 'DESC')->get();
+        $goods1 = Good::orderBy('created_at', 'DESC')->get();
+        //$place=Place::orderBy('created_at', 'DESC')->get();
         $category=Category::orderBy('created_at' ,'DESC') ->get();
-        $lendings=Lending::whereNULL('returntime')->get();
-		$weeks=Week::orderBy('id','ASC')->get();
-		$times=Time_::orderBy('id','ASC')->get();
+        $goods = Good::paginate(2);
 		/*
         if(!(Auth::user()->previlege_id==3)){
 
            $place=Place::where('id','0')->get();
 	   }
 */
-        $data=['places'=>$place,'lendings'=>$lendings,'categories'=>$category,'times'=>$times,'weeks'=>$weeks,'Search'=>$Search,'Search1'=>$Search1,'Search2'=>$Search2,'maintainces'=>$maintainces];
+        $data=['goods'=>$goods,'goods1'=>$goods1,'categories'=>$category,'Search'=>$Search,'Search1'=>$Search1];
         return view('admin.places.index', $data);
     }
     public function scrapped($id)

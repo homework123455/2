@@ -25,7 +25,7 @@
     </div>
 <!-- /.row -->
 <div class="input-group custom-search-form">
-<label>顯示全部：</label>  <form action="{{ route('admin.places.searchALL1') }}" method="POST">
+<label>顯示全部：</label>  <form action="{{ route('admin.categories.searchALL1') }}" method="POST">
 {{ csrf_field() }}
 <span class="input-group-btn">
 <button class="btn btn-info"><i class="fa fa-search"></i></button>
@@ -33,15 +33,17 @@
 	</form>
 
 
-	<label>商品類別查詢：</label>  <form action="{{ route('admin.places.search10') }}" method="POST">
+	<label>商品類別查詢：</label>  <form action="{{ route('admin.categories.search2') }}" method="POST">
     {{ csrf_field() }}
 
-    <select name="week_search" class="form-control">
+    <select name="category_search" class="form-control">
 	<option value="">請選擇</option>
 				
-				 @foreach($categories as $category)
-				 @if($category->id==123)
+				 @foreach($categories1 as $category)
+				 @if($category->id==$Search1)
                  <option selected="true" value={{ $category->id }}>{{ $category->name }}</option>
+			 @else
+				 <option  value={{ $category->id }}>{{ $category->name }}</option>
 			  @endif
 			@endforeach
 					</select>				
