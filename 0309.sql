@@ -107,15 +107,16 @@ CREATE TABLE `goods` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `status` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
   `value` int(11) DEFAULT NULL,
+  `supplier_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-INSERT INTO `goods` (`id`, `name`, `photo4`, `photo3`, `category`, `details3`, `details`, `details2`, `price`, `stock`, `goods_name1`, `photo1`, `photo2`, `created_at`, `updated_at`, `status`, `value`) VALUES
-(1,	'羽球拍',	'/uploads/2019-03-01/20190301014038769.jpg',	'/uploads/2019-03-01/20190301014038920.jpg',	1,	'333',	'111',	'222',	2500,	30,	'HEDERA HELIX \'INGELISE\' 	',	'/uploads/2019-03-01/20190301014038543.jpg',	'/uploads/2019-03-01/20190301014038613.jpg',	'2018-12-14 06:46:48',	'2019-03-05 08:34:43',	'正常供貨中',	53),
-(2,	'籃球1',	'/uploads/2019-02-22/20190222165614291.jpg',	'/uploads/2019-02-22/20190222165614940.jpg',	2,	'1',	'3',	'2',	300,	96,	'SINNINGIA SPECIOSA ',	'/uploads/2019-02-22/20190222165614706.jpg',	'/uploads/2019-02-22/20190222165614191.jpg',	'2018-12-14 06:47:34',	'2019-02-28 16:04:36',	'正常供貨中',	6),
-(5,	'YouLin',	'/uploads/2019-02-23/20190223142722861.jpg',	'/uploads/2019-02-23/20190223142722836.jpg',	12,	'3',	'1',	'2',	100,	49,	'',	'/uploads/2019-02-23/20190223142722451.jpg',	'/uploads/2019-02-23/20190223142722991.jpg',	'2019-02-23 06:27:22',	'2019-02-28 16:04:30',	'正常供貨中',	19),
-(6,	'homestead',	'/uploads/2019-02-28/20190228190324571.JPG',	'/uploads/2019-02-28/20190228190324195.jpg',	7,	'3',	'1',	'2',	10,	0,	'',	'/uploads/2019-02-28/20190228190324864.jpg',	'/uploads/2019-02-28/20190228190324289.jpg',	'2019-02-28 11:03:24',	'2019-02-28 16:04:23',	'待補貨',	0),
-(7,	'test',	'/uploads/2019-03-01/20190301003714675.jpg',	'/uploads/2019-03-01/20190301003714848.jpg',	13,	'3',	'1',	'2',	110,	100,	'',	'/uploads/2019-03-01/20190301003714574.jpg',	'/uploads/2019-03-01/20190301003714736.jpg',	'2019-02-28 16:37:14',	'2019-03-05 04:53:06',	'下架中',	0);
+INSERT INTO `goods` (`id`, `name`, `photo4`, `photo3`, `category`, `details3`, `details`, `details2`, `price`, `stock`, `goods_name1`, `photo1`, `photo2`, `created_at`, `updated_at`, `status`, `value`, `supplier_id`) VALUES
+(1,	'羽球拍',	'/uploads/2019-03-01/20190301014038769.jpg',	'/uploads/2019-03-01/20190301014038920.jpg',	1,	'333',	'111',	'222',	2500,	30,	'HEDERA HELIX \'INGELISE\' 	',	'/uploads/2019-03-01/20190301014038543.jpg',	'/uploads/2019-03-01/20190301014038613.jpg',	'2018-12-14 06:46:48',	'2019-03-05 08:34:43',	'正常供貨中',	53,	1),
+(2,	'籃球1',	'/uploads/2019-02-22/20190222165614291.jpg',	'/uploads/2019-02-22/20190222165614940.jpg',	2,	'1',	'3',	'2',	300,	96,	'SINNINGIA SPECIOSA ',	'/uploads/2019-02-22/20190222165614706.jpg',	'/uploads/2019-02-22/20190222165614191.jpg',	'2018-12-14 06:47:34',	'2019-02-28 16:04:36',	'正常供貨中',	6,	1),
+(5,	'YouLin',	'/uploads/2019-02-23/20190223142722861.jpg',	'/uploads/2019-02-23/20190223142722836.jpg',	12,	'3',	'1',	'2',	100,	49,	'',	'/uploads/2019-02-23/20190223142722451.jpg',	'/uploads/2019-02-23/20190223142722991.jpg',	'2019-02-23 06:27:22',	'2019-02-28 16:04:30',	'正常供貨中',	19,	1),
+(6,	'homestead',	'/uploads/2019-02-28/20190228190324571.JPG',	'/uploads/2019-02-28/20190228190324195.jpg',	7,	'3',	'1',	'2',	10,	0,	'',	'/uploads/2019-02-28/20190228190324864.jpg',	'/uploads/2019-02-28/20190228190324289.jpg',	'2019-02-28 11:03:24',	'2019-02-28 16:04:23',	'待補貨',	0,	1),
+(7,	'test',	'/uploads/2019-03-01/20190301003714675.jpg',	'/uploads/2019-03-01/20190301003714848.jpg',	13,	'3',	'1',	'2',	110,	100,	'',	'/uploads/2019-03-01/20190301003714574.jpg',	'/uploads/2019-03-01/20190301003714736.jpg',	'2019-02-28 16:37:14',	'2019-03-05 04:53:06',	'下架中',	0,	1);
 
 DROP TABLE IF EXISTS `lendings`;
 CREATE TABLE `lendings` (
@@ -446,6 +447,20 @@ CREATE TABLE `receives` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
+DROP TABLE IF EXISTS `suppliers`;
+CREATE TABLE `suppliers` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `phone` varchar(50) NOT NULL,
+  `address` varchar(50) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `suppliers` (`id`, `name`, `phone`, `address`, `created_at`, `updated_at`) VALUES
+(1,	'勤益科大',	'0912345678',	'太平區國立勤益科技大學',	'2019-03-09 09:38:21',	'0000-00-00 00:00:00');
+
 DROP TABLE IF EXISTS `times`;
 CREATE TABLE `times` (
   `id` int(10) unsigned NOT NULL,
@@ -529,4 +544,4 @@ INSERT INTO `wrongs` (`id`, `user_id`, `wrongname`, `date`, `created_at`, `updat
 (12,	17,	'亂丟垃圾',	'2019-01-01 00:00:00',	'2019-01-11 18:42:08',	'2019-01-11 18:42:08'),
 (13,	17,	'亂丟垃圾',	'2019-01-01 00:00:00',	'2019-01-11 18:42:22',	'2019-01-11 18:42:22');
 
--- 2019-03-05 09:10:29
+-- 2019-03-09 10:26:43
