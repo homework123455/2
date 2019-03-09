@@ -12,15 +12,16 @@ use DB;
 use App\Category;
 class CategorieController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+		$Search1 =$request->input('category_search');
 		$orders = Order::orderBy('created_at','DESC')->get();
 		$ordersdetails = OrdersDetail::all();
 		$goods = Good::orderBy('created_at', 'DESC')->get();
         $categories = Categorie::all();
 		$i=0;
-        		
-		$data = ['i'=>$i,'goods' => $goods,'orders'=>$orders,'ordersdetails'=>$ordersdetails,'categories' => $categories];
+        		$categories1 = Category::orderBy('created_at', 'DESC')->get();
+		$data = ['categories1'=>$categories1,'Search1'=>$Search1,'i'=>$i,'goods' => $goods,'orders'=>$orders,'ordersdetails'=>$ordersdetails,'categories' => $categories];
         return view('admin.categories.index', $data);
     }
 
@@ -159,7 +160,49 @@ class CategorieController extends Controller
         Categorie::destroy($id);
         return redirect()->route('admin.categories.index');
     }
+public function Search2(Request $request)
+    {
+	   
+		$Search1 =$request->input('category_search');
+		
+	if($Search1==null)
+	{
 
+	$category = Category::orderBy('created_at', 'DESC')
+            ->where('id','0')
+            ->get();
+	}
+	else
+	{
+
+	$category = Category::orderBy('created_at', 'DESC')
+            ->where('id', $Search1)
+            ->get();
+	}        
+        $categories1 = Category::orderBy('created_at', 'DESC')->get();
+$i=0;
+        $data=['i'=>$i,'categories1'=>$categories1,'categories'=>$category,'Search1'=>$Search1];
+        return view('admin.categories.index' ,$data);
+    }
+	public function SearchAll1(Request $request)
+    {
+	
+        
+        $i=0;
+		$Search1 =$request->input('category_search');
+       $categories1 = Category::orderBy('created_at', 'DESC')->get();
+        //$place=Place::orderBy('created_at', 'DESC')->get();
+        $category=Category::orderBy('created_at' ,'DESC') ->get();
+       
+		/*
+        if(!(Auth::user()->previlege_id==3)){
+
+           $place=Place::where('id','0')->get();
+	   }
+*/
+        $data=['i'=>$i,'categories1'=>$categories1,'categories'=>$category,'Search1'=>$Search1];
+        return view('admin.categories.index', $data);
+    }
     public function data($id)
     {
 
