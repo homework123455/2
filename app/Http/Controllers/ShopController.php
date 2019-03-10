@@ -9,6 +9,8 @@ use App\Good;
 use App\Plant;
 use DB;
 use App\Category;
+use App\Supplier;
+use App\Suppliersdetail;
 class ShopController extends Controller
 {
     public function index()
@@ -111,6 +113,43 @@ class ShopController extends Controller
 		
 		return view('admin.shops.create', $data);
 	}
+	public function suppliersdetail()
+	{
+		$suppliersdetails = Suppliersdetail::orderBy('created_at', 'DESC')->get();
+		$suppliers = Supplier::orderBy('created_at', 'DESC')->get();
+		$goods=Good::orderBy('created_at','DESC')->get();
+		$data = ['goods'=>$goods,'suppliersdetails' => $suppliersdetails ,'suppliers' => $suppliers];
+		
+		return view('admin.shops.suppliersdetail', $data);
+	}
+	 public function suppliersdetaildestroy($id)
+    {
+        Suppliersdetail::destroy($id);
+        return redirect()->route('admin.shops.suppliersdetail');
+    }
+	public function suppliers()
+	{
+		$suppliers = Supplier::orderBy('created_at', 'DESC')->get();
+		$category = Category::orderBy('created_at', 'DESC')->get();
+		$goods=Good::orderBy('created_at','DESC')->get();
+		$data = ['categories' => $category ,'goods'=>$goods,'suppliers' => $suppliers ];
+		
+		return view('admin.shops.suppliers', $data);
+	}
+	   public function supplierstore(Request $request)
+    {
+        
+       
+        Suppliersdetail::create([
+            'name' => $request->name,
+			'supplier_id'=>$request->supplier_id,
+            'value' => $request->value,
+            'price' => $request->price,
+          
+        ]);
+
+        return redirect()->route('admin.shops.suppliersdetail');
+    }
 
     public function edit($id)
     {

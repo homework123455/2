@@ -57,7 +57,21 @@
                     <a href="{{ route('main.shop') }}"><i class="fa fa-fw fa-dashboard"></i> 商店</a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.places.index') }}"><i class="fa fa-fw fa-edit"></i> 商品管理</a>
+				<a data-toggle="collapse" data-parent="#accordion" 
+				   href="#collapse6">
+				   <i class="fa fa-fw fa-edit"></i>商品管理<b class="caret"></b>
+				    <div id="collapse6" class="panel-collapse collapse">
+				<div class="panel-body">
+                    <a href="{{ route('admin.places.index') }}"><i class="fa fa-fw fa-edit"></i> 商品管理</a></br>
+					 <a href="{{ route('admin.shops.suppliersdetail') }}"><i class="fa fa-fw fa-edit"></i> 進貨</a>
+					 </div>
+				</div>
+				<script type="text/javascript">
+	$(function () { $('#collapse6').collapse({
+		'hide'
+	})});
+	
+</script>
                 </li>
 				<li>
                     <a href="{{ route('admin.categories.index') }}"><i class="fa fa-fw fa-edit"></i> 商品分類管理</a>

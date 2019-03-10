@@ -111,8 +111,12 @@ Route::group(['prefix' => 'admin'], function() {
 	Route::get('places/create', ['as' => 'admin.places.create', 'uses' => 'PlaceController@create']);       //新增資產(1)
 	Route::post('places', ['as' => 'admin.places.store', 'uses' => 'PlaceController@store']);               //新增資產(2)
 	////商品
-	Route::get('shops/create', ['as' => 'admin.shops.create', 'uses' => 'ShopController@create']);       //新增資產(1)
+	Route::get('shops/create', ['as' => 'admin.shops.create', 'uses' => 'ShopController@create']); 
     Route::post('places', ['as' => 'admin.shops.store', 'uses' => 'ShopController@store']);
+	Route::get('shops/suppliersdetail', ['as' => 'admin.shops.suppliersdetail', 'uses' => 'ShopController@suppliersdetail']); 
+	Route::delete('shops/suppliersdetail/{id}', ['as' => 'admin.shops.suppliersdetail.destroy', 'uses' => 'ShopController@suppliersdetaildestroy']); 
+	Route::get('shops/suppliers', ['as' => 'admin.shops.suppliers', 'uses' => 'ShopController@suppliers']); 	//新增資產(1)
+	Route::post('shops/suppliers/store', ['as' => 'admin.shops.supplierstore', 'uses' => 'ShopController@supplierstore']); 
 	Route::delete('shops/{id}', ['as' => 'admin.shops.destroy', 'uses' => 'ShopController@destroy']); 
 	Route::get('shops/{id}/edit', ['as' => 'admin.shops.edit', 'uses' => 'ShopController@edit']);        //修改資產(1)
     Route::patch('shops/{id}', ['as' => 'admin.shops.update', 'uses' => 'ShopController@update']);
