@@ -37,9 +37,9 @@
 
 </div>
 <!-- /.row -->
-
-<div class="row">
 @foreach($suppliers as $supplier)
+<div class="row">
+
     <div class="panel-group" id="accordion">
 	<div class="panel panel-default">
 		<div class="panel-heading">
