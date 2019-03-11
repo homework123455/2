@@ -14,9 +14,10 @@ class SuppilerController extends Controller
 
 		$good = Good::all();
 		$i=0;
+		$a="";
 		
 		
-		$data = ['suppliers'=>$supplier,'goods'=>$good,'i'=>$i];
+		$data = ['suppliers'=>$supplier,'goods'=>$good,'i'=>$i,'a'=>$a];
         return view('admin.suppliers.index', $data);
     }
 	public function create()
