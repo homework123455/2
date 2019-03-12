@@ -37,15 +37,17 @@ CREATE TABLE `carts` (
   `product` varchar(255) DEFAULT NULL,
   `cost` int(255) DEFAULT NULL,
   `qty` int(11) NOT NULL DEFAULT '1',
+  `product_id` int(11) DEFAULT NULL,
   `total` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `users_id` (`users_id`),
   CONSTRAINT `carts_ibfk_1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO `carts` (`users_id`, `id`, `photo`, `product`, `cost`, `qty`, `total`) VALUES
-(27,	16,	'/uploads/2019-02-22/20190222165549622.jpg',	'羽球拍',	250,	6,	1500),
-(26,	20,	'/uploads/2019-02-23/20190223142722451.jpg',	'YouLin',	100,	1,	100);
+INSERT INTO `carts` (`users_id`, `id`, `photo`, `product`, `cost`, `qty`, `product_id`, `total`) VALUES
+(27,	16,	'/uploads/2019-02-22/20190222165549622.jpg',	'羽球拍',	250,	2,	NULL,	22222),
+(26,	21,	'/uploads/2019-03-01/20190301014038543.jpg',	'羽球拍',	11111,	2,	1,	22222),
+(26,	22,	'/uploads/2019-02-23/20190223142722451.jpg',	'YouLin',	100,	2,	5,	200);
 
 DROP TABLE IF EXISTS `categories`;
 CREATE TABLE `categories` (
@@ -573,4 +575,4 @@ INSERT INTO `wrongs` (`id`, `user_id`, `wrongname`, `date`, `created_at`, `updat
 (12,	17,	'亂丟垃圾',	'2019-01-01 00:00:00',	'2019-01-11 18:42:08',	'2019-01-11 18:42:08'),
 (13,	17,	'亂丟垃圾',	'2019-01-01 00:00:00',	'2019-01-11 18:42:22',	'2019-01-11 18:42:22');
 
--- 2019-03-12 14:01:40
+-- 2019-03-12 14:36:06
