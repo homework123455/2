@@ -138,11 +138,9 @@
                                         </td>
 										@elseif($i=="1")
 											<td class="table-text" style="text-align: center">
-                                                                        <form action="{{ route('admin.shops.suppliersdetail.destroy', $suppliersdetail->id) }}" method="POST">
-                                                                            {{ csrf_field() }}
-                                                                            {{ method_field('DELETE') }}
-                                                                            <button class="btn btn-danger disabled" >刪除</button>
-                                                                        </form>
+                                                                   
+                                                                            <button class="btn btn-danger disabled"  >刪除</button>
+                                                                       
                                               
                                         </td>
 										@endif

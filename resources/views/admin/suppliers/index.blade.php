@@ -86,11 +86,9 @@
                                         
 										@elseif($i=="1")
 											
-                                                                        <form action="{{ route('admin.suppliers.destroy', $supplier->id) }}" method="POST">
-                                                                            {{ csrf_field() }}
-                                                                            {{ method_field('DELETE') }}
+                                                                      
                                                                            <i class="fa fa-user"></i>{{ $supplier->name }}<span class="badge"></span></a> <button class="btn btn-danger disabled" >刪除</button>
-                                                                        </form>
+                                                                      
                                               
                                        
 										@endif
