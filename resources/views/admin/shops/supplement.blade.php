@@ -18,7 +18,7 @@
 <div class="row">
     <div class="col-lg-12">
 
-        <form action="/admin/shops/supplement/{{$good->id}}" method="POST" role="form" enctype="multipart/form-data">
+        <form  action="/admin/shops/supplement/{{$good->id}}" method="POST" role="form" enctype="multipart/form-data">
             {{ csrf_field() }}
 			{{ method_field('PATCH') }}
 
@@ -28,12 +28,37 @@
 
                 <input name="name" class="form-control" value="{{$good->name}}" readonly>
             </div>
-
+			<select id="select" name="select" class="form-control" >
+			@foreach($suppliersdetails as $suppliersdetail)
+                        <option value={{$suppliersdetail->id}}>編號:{{$suppliersdetail->id}}&nbsp&nbsp&nbsp剩餘數量:{{$suppliersdetail->value}}&nbsp&nbsp&nbsp進貨時間:{{$suppliersdetail->created_at}}</option>
+			@endforeach
+                       
+                </select>
 
             <div class="form-group">
                 <label>補貨數量：</label>
 
-               <input name="value" class="form-control" placeholder="目前架上剩餘數量    {{$good->value}}   目前庫存數量    {{$good->stock}}" >
+               <input name="value" class="form-control" placeholder="目前架上剩餘數量    {{$good->value}} " >
+            </div>
+			
+	
+				
+			<?php
+			if(isset($request->select)){
+			$value=$_GET['value'];
+	$link=mysqli_connect("localhost:33060","root","root","homestead");
+	$sql ="SELECT * FROM suppliersdetail WHERE id='$value'";
+	$rec = $link->query($sql);	
+	$rNum = $rec->num_rows;
+	$rs = $rec->fetch_array();
+	$S1=$rs['id'];
+			}
+	?>
+	
+			<div class="form-group">
+                <label>商品價格：</label>
+
+               <input name="price" class="form-control"  >
             </div>
 
 

@@ -28,7 +28,7 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <form class"form1" action="/admin/shops/suppliers/store" method="POST"  role="form"   enctype="multipart/form-data">
+        <form class"form1" action="/admin/shops/suppliers/store/{{$good->id}}" method="POST"  role="form"   enctype="multipart/form-data">
             {{ csrf_field() }}
        
                  
@@ -36,9 +36,9 @@
 				<div class="form-group">
                 <label>商品名稱：</label>
 				<select name="name" class="form-control">
-                    @foreach($goods as $good)
+                   
                     <option value={{ $good->id }}>{{ $good->name }}</option>
-                    @endforeach
+                   
                 </select>
                
             </div>

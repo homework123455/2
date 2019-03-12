@@ -30,9 +30,7 @@
     <div class="col-lg-12">
 
         
-        @if(Auth::user()->previlege_id==3)
-            <a href="{{ route('admin.shops.suppliers') }}" class="btn btn-success">商品進貨</a>
-        @endif
+       
     </div>
 
 </div>
@@ -50,6 +48,7 @@
                        	 	
                         	<th width="150" style="text-align: center">供應商名稱</th>
                             	<th width="400" style="text-align: center">進貨數量</th>
+								<th width="400" style="text-align: center">進貨價格</th>
 								<th width="400" style="text-align: center">進貨時間</th>
 								<th width="30" style="text-align: center">功能</th>  
 								
@@ -89,6 +88,11 @@
 						<td style="text-align: center">
 						
                          {{ $suppliersdetail->value }}
+					 
+                        </td>
+						<td style="text-align: center">
+						
+                         {{ $suppliersdetail->price }}
 					 
                         </td>
                         

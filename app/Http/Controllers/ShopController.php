@@ -107,9 +107,10 @@ class ShopController extends Controller
 
 	public function create()
 	{
+		$suppliers = Supplier::orderBy('created_at', 'DESC')->get();
 		$category = Category::orderBy('created_at', 'DESC')->get();
 		$good=Good::orderBy('created_at','DESC')->get();
-		$data = ['categories' => $category ,'goods'=>$good];
+		$data = ['categories' => $category ,'goods'=>$good,'suppliers' => $suppliers];
 		
 		return view('admin.shops.create', $data);
 	}
@@ -127,19 +128,20 @@ class ShopController extends Controller
         Suppliersdetail::destroy($id);
         return redirect()->route('admin.shops.suppliersdetail');
     }
-	public function suppliers()
+	public function suppliers($id)
 	{
 		$suppliers = Supplier::orderBy('created_at', 'DESC')->get();
 		$category = Category::orderBy('created_at', 'DESC')->get();
-		$goods=Good::orderBy('created_at','DESC')->get();
-		$data = ['categories' => $category ,'goods'=>$goods,'suppliers' => $suppliers ];
+		//$goods=Good::orderBy('created_at','DESC')->get();
+		$good = Good::find($id);
+		$data = ['categories' => $category ,'good'=>$good,'suppliers' => $suppliers ];
 		
 		return view('admin.shops.suppliers', $data);
 	}
-	   public function supplierstore(Request $request)
+	   public function supplierstore(Request $request,$id)
     {
         
-       
+        $good = Good::find($id);
         Suppliersdetail::create([
             'name' => $request->name,
 			'supplier_id'=>$request->supplier_id,
@@ -147,8 +149,17 @@ class ShopController extends Controller
             'price' => $request->price,
           
         ]);
+		$stock=$good->stock;
+		
+		 $good->update([
+            
+            'stock' => $stock+$request->value,
+           
 
-        return redirect()->route('admin.shops.suppliersdetail');
+        ]);
+
+
+        return redirect()->route('admin.suppliers.index');
     }
 
     public function edit($id)
@@ -282,11 +293,7 @@ class ShopController extends Controller
             //'date'=>$request->date,
 
             'status' => $request->status,
-			'stock' => $request->stock,
-            
-            'lendable' => $request->lendable,
-            'price' => $request->price,
-            //'warranty'=>$request->warranty,
+			'supplier_id'=>$request->supplier_id,
             'remark' => $request->remark,
 			'details'=>$request->details,
 			'details2'=>$request->details2,
@@ -425,10 +432,11 @@ class ShopController extends Controller
  public function supplement($id)
     {
      
-      
+        $suppliersdetails = Suppliersdetail::orderBy('id', 'ASC')->where('name', $id)->get();
+		$suppliers = Supplier::orderBy('created_at', 'DESC')->get();
         $categories = Category::orderBy('created_at', 'DESC')->get();
         $good = Good::find($id);
-        $data = ['good' => $good, 'categories' => $categories];
+        $data = ['suppliers'=>$suppliers,'good' => $good, 'categories' => $categories,'suppliersdetails'=>$suppliersdetails];
 
         return view('admin.shops.supplement', $data);
     }
@@ -437,20 +445,39 @@ class ShopController extends Controller
     {
 
         $good = Good::find($id);
+		$select=$request->select;
+		$suppliersdetail = Suppliersdetail::where('id', $request->select);
+		
+		$link=mysqli_connect("localhost:33060","root","root","homestead");
+		$sql ="SELECT * FROM suppliersdetail WHERE id='$select'";
+		$rec = $link->query($sql);	
+		$rNum = $rec->num_rows;
+		$rs = $rec->fetch_array();
+		$S1=$rs['value'];
 		
 		
+		$suppliersdetail->update([
+		'value' => $S1 - $request->value
+		]);
+		if($request->price>$good->price)
+		{
+			$good->update([
+             'value' => $good->value+$request->value,
+			 'stock' => $good->stock-$request->value,
+			 'price' => $request->price
+             
+        ]);
+			
+		}
+		else	{
         $good->update([
              'value' => $good->value+$request->value,
 			 'stock' => $good->stock-$request->value
-           
-
-
-            
-
-
-
+			 
+             
         ]);
-
+	
+		}
         return redirect()->route('admin.places.index');
     }
 }

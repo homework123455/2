@@ -99,6 +99,7 @@
                         	<th width="150" style="text-align: center">商品狀態</th>
 							<th width="200" style="text-align: center">架上數量</th>
                         	<th width="200" style="text-align: center">庫存</th>
+							<th width="200" style="text-align: center">售價</th>
                             	<th width="400" style="text-align: center">功能</th>                        
 			@else
 				<th width="120" style="text-align: center">商品圖片</th>
@@ -108,6 +109,7 @@
                             	
                         	<th width="150" style="text-align: center">商品狀態</th>
 							<th width="200" style="text-align: center">架上數量</th>
+							
 							<th width="200" style="text-align: center">庫存</th>
 							
                         	
@@ -149,6 +151,7 @@
                     
 						<td style="text-align: center">{{ $good->value}}</td>
 						<td style="text-align: center">{{ $good->stock}}</td>
+						<td style="text-align: center">{{ $good->price}}</td>
 						
                       
 

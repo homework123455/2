@@ -113,6 +113,17 @@ function openFile3(event){
 				
 
             </div>
+			<div class="form-group">
+                <label>供應商：</label>
+ 
+                <select id="supplier_id" name="supplier_id" class="form-control">
+                    @foreach($suppliers as $supplier)
+                    <option value={{ $supplier->id }}>{{ $supplier->name }}</option>
+                    @endforeach
+                </select>
+				
+
+            </div>
 
             
 
@@ -127,26 +138,7 @@ function openFile3(event){
                 </select>
             </div>
 
-            			
-			 <div class="form-group">
-                <label>可否折扣？</label>
-                <select name="lendable" class="form-control">
-                    <option value="0">否</option>
-                    <option value="1">可</option>
-                </select>
-            </div>
-			<div class="form-group">
-                <label>庫存數量：</label>
-                <input name="stock" class="form-control" placeholder="請輸入庫存數量">
-            </div>
-
-
-            <div class="form-group">
-                <label>商品價格：</label>
-                <input name="price" class="form-control" placeholder="請輸入商品價格">
-            </div>
-
-
+            
             <div class="form-group">
                 <label>詳細資訊：</label>
                 <textarea name="details" class="form-control" rows="2"></textarea>

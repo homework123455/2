@@ -5,19 +5,19 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Supplier;
 use App\Good;
-
+use App\Suppliersdetail;
 class SuppilerController extends Controller
 {
    public function index()
     {
 		$supplier = Supplier::orderBy('created_at', 'DESC')->get();
-
+		$suppliersdetails = Suppliersdetail::orderBy('created_at', 'DESC')->get();
 		$good = Good::all();
 		$i=0;
 		$a="";
 		
 		
-		$data = ['suppliers'=>$supplier,'goods'=>$good,'i'=>$i,'a'=>$a];
+		$data = ['suppliers'=>$supplier,'goods'=>$good,'i'=>$i,'a'=>$a,'suppliersdetails'=>$suppliersdetails];
         return view('admin.suppliers.index', $data);
     }
 	public function create()
@@ -37,7 +37,7 @@ class SuppilerController extends Controller
         Supplier::create([
             'name' => $request->name,
 			'phone'=> $request->phone,
-			'adderss'=>$request->adderss
+			'address'=>$request->address
             ]);
 			$msg="成功新增供應商:".$request->name;
 			return redirect()->route('admin.suppliers.index');
