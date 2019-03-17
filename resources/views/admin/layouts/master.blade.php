@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
+<script src="jqajax_select.js"></script>
     <title>@yield('title') | 管理後台</title>
 
     <!-- Bootstrap Core CSS -->

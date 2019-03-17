@@ -114,12 +114,15 @@ class ShopController extends Controller
 		
 		return view('admin.shops.create', $data);
 	}
-	public function suppliersdetail()
+	public function suppliersdetail(Request $request)
 	{
-		$suppliersdetails = Suppliersdetail::orderBy('created_at', 'DESC')->get();
+		$suppliersdetails = Suppliersdetail::orderBy('created_at', 'DESC')->paginate(5);
 		$suppliers = Supplier::orderBy('created_at', 'DESC')->get();
 		$goods=Good::orderBy('created_at','DESC')->get();
-		$data = ['goods'=>$goods,'suppliersdetails' => $suppliersdetails ,'suppliers' => $suppliers];
+		$Search = $request->input('good_search');
+        
+        $Search1 = $request->input('supplier_search');
+		$data = ['goods'=>$goods,'suppliersdetails' => $suppliersdetails ,'suppliers' => $suppliers, 'Search' => $Search, 'Search1' => $Search1];
 		
 		return view('admin.shops.suppliersdetail', $data);
 	}
@@ -479,6 +482,62 @@ class ShopController extends Controller
 	
 		}
         return redirect()->route('admin.places.index');
+    }
+	 public function Search1(Request $request)
+    {
+        $goodsALL = Good::orderBy('created_at', 'DESC');
+		$goods=Good::orderBy('created_at', 'DESC')->get();
+        //$maintainces = $maintaincesALL->whereIn('status', array('申請中'))->get();
+        //$times = Time_::orderBy('id', 'ASC')->get();
+        $Search = $request->input('good_search');
+        
+        $Search1 = $request->input('supplier_search');
+       $suppliers = Supplier::orderBy('created_at', 'DESC')->get();
+        if( $Search == "" && $Search1 =="") {
+
+            $suppliersdetails = Suppliersdetail::orderBy('created_at', 'DESC')
+                ->where('id', '0')
+                ->paginate(5);
+        }
+        else if ( $Search1 =="") {
+
+            $suppliersdetails = Suppliersdetail::orderBy('created_at', 'DESC')
+                ->where('name', $Search)
+                ->paginate(5);
+        } else if ( $Search == "") {
+            $suppliersdetails = Suppliersdetail::orderBy('created_at', 'DESC')
+                ->where('supplier_id', $Search1)
+                ->paginate(5);
+        }
+         else
+        {
+
+            $suppliersdetails = Suppliersdetail::orderBy('created_at', 'DESC')
+            ->where('supplier_id', $Search1)->where('name', $Search)
+            ->paginate(5);
+        }
+
+        
+
+        $data = ['suppliers'=>$suppliers,'suppliersdetails' => $suppliersdetails,'goods' => $goods, 'Search' => $Search, 'Search1' => $Search1];
+        return view('admin.shops.suppliersdetail', $data);
+        }
+
+
+		
+
+    
+	public function SearchALL(Request $request)
+    {
+		$Search = $request->input('good_search');
+        
+        $Search1 = $request->input('supplier_search');
+	$suppliersdetails = Suppliersdetail::orderBy('created_at', 'DESC')->paginate(5);
+		$suppliers = Supplier::orderBy('created_at', 'DESC')->get();
+		$goods=Good::orderBy('created_at','DESC')->get();
+		$data = ['goods'=>$goods,'suppliersdetails' => $suppliersdetails ,'suppliers' => $suppliers, 'Search' => $Search, 'Search1' => $Search1];
+		
+		return view('admin.shops.suppliersdetail', $data);
     }
 }
 

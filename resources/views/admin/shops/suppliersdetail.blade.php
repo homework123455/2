@@ -22,6 +22,52 @@
         </div>
     </div>
 <!-- /.row -->
+<div class="input-group custom-search-form">
+<label>顯示全部：</label>  <form action="{{ route('admin.shops.suppliersdetail.searchALL') }}" method="POST">
+{{ csrf_field() }}
+<span class="input-group-btn"><button class="btn btn-info"><i class="fa fa-search"></i></button> </span>
+</form>
+   
+	
+
+ <label>商品名稱查詢：</label>  <form action="{{ route('admin.shops.suppliersdetail.search1') }}" method="POST">
+    {{ csrf_field() }}
+
+    <select name="good_search" class="form-control">
+	<option value="">請選擇</option>
+				@foreach($goods as $good)
+				@if($good->id==$Search)
+				 
+                 <option selected="true" value={{ $good->id }} >{{ $good->name }}</option>
+			 @else
+				  <option  value={{ $good->id }}>{{ $good->name }}</option>
+			  @endif
+                    @endforeach
+					</select>
+					
+
+<div>
+ <label>供應商查詢：</label>
+    {{ csrf_field() }}
+     <select name="supplier_search" class="form-control">
+	 <option value="">請選擇</option>
+                    @foreach($suppliers as $supplier)
+					@if($supplier->id==$Search1)
+                 <option selected="true" value={{ $supplier->id }}>{{ $supplier->name }}</option>
+			 @else
+				  <option value={{ $supplier->id }}>{{ $supplier->name }}</option>
+			  @endif
+                    
+                    @endforeach
+                </select>
+        </div>
+        <span class="input-group-btn">
+            <button class="btn btn-info"><i class="fa fa-search"></i></button>
+        </span>
+</form>
+
+</div>
+
 
 
 </div>
@@ -50,7 +96,7 @@
                             	<th width="400" style="text-align: center">進貨數量</th>
 								<th width="400" style="text-align: center">進貨價格</th>
 								<th width="400" style="text-align: center">進貨時間</th>
-								<th width="30" style="text-align: center">功能</th>  
+								
 								
 			@else
 				<th width="220" style="text-align: center">供應商編號</th>
@@ -99,67 +145,13 @@
                         <td style="text-align: center">
 						{{ $suppliersdetail->created_at }}
 						</td>
-						 <td>
-                            <table>
-                                <tbody>
-    <?php
-	
-	$link=mysqli_connect("localhost:33060","root","root","homestead");
-	$sql ="SELECT * FROM goods WHERE supplier_id='$suppliersdetail->supplier_id'";
-	$rec = $link->query($sql);	
-	$rNum = $rec->num_rows;
-	$rs = $rec->fetch_array();
-	$S1=$rs['id'];
-	//echo "$rNum"; 
-	if($rNum>=1){
-		
-			$i=1;
-		
-	}
-	else{
-		$i=0;
-	}
-		
-	
-	
-	
-	?>
-
-
-                                        
-	                                    @if($i=="0")
-                                        <td class="table-text" style="text-align: center">
-                                                                        <form action="{{ route('admin.shops.suppliersdetail.destroy', $suppliersdetail->id) }}" method="POST">
-                                                                            {{ csrf_field() }}
-                                                                            {{ method_field('DELETE') }}
-                                                                            <button class="btn btn-danger ">刪除</button>
-                                                                        </form>
-                                              
-                                        </td>
-										@elseif($i=="1")
-											<td class="table-text" style="text-align: center">
-                                                                   
-                                                                            <button class="btn btn-danger disabled"  >刪除</button>
-                                                                       
-                                              
-                                        </td>
-										@endif
-                                        </td>
-											
-                                            
-                                            
-                                    
-                                    
-                                </tr>
-                                </tbody>
-                            </table>
-                        </td>
-
+						
                 @endforeach
                 </tbody>
             </table>
 </div>
         </div>
+		{!! $suppliersdetails->links() !!}
     </div>
 </div>
 <!-- /.row -->

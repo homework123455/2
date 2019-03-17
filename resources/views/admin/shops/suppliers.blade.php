@@ -46,7 +46,9 @@
  <label>供應商名稱：</label>
 				<select name="supplier_id" class="form-control">
                     @foreach($suppliers as $supplier)
+					@if($supplier->id==$good->supplier_id)
                     <option value={{ $supplier->id }}>{{ $supplier->name }}</option>
+				@endif
                     @endforeach
                 </select>
                
