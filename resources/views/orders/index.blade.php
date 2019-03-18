@@ -26,13 +26,13 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h4 class="panel-title">
-				<a data-toggle="collapse" data-parent="#accordion" 
+				<a data-toggle="collapse"
 				   href="#collapseOne">
 					<i class="fa fa-edit"></i>訂單處理-未處理<span class="badge">{{count($order_status1_)}}</span>
 				</a>
 			</h4>
 		</div>
-<div id="collapseOne" class="panel-collapse collapse in">
+<div id="collapseOne" class="panel-collapse collapse">
 			<div class="panel-body">
            <div class="table-responsive">
             <table class="table table-bordered table-hover">
@@ -94,7 +94,7 @@
    <div class="panel panel-success">
 		<div class="panel-heading">
 			<h4 class="panel-title">
-				<a data-toggle="collapse" data-parent="#accordion" 
+				<a data-toggle="collapse"
 				   href="#collapse2">
 					<i class="fa fa-edit"></i>訂單處理-處理中<span class="badge">{{count($order_status2_)}}</span>
 				</a>
@@ -171,7 +171,7 @@
    <div class="panel panel-info">
 		<div class="panel-heading">
 			<h4 class="panel-title">
-				<a data-toggle="collapse" data-parent="#accordion" 
+				<a data-toggle="collapse" 
 				   href="#collapse3">
 					<i class="fa fa-edit"></i>訂單處理-已出貨<span class="badge">{{count($order_status4_)}}</span>
 				</a>
@@ -239,18 +239,20 @@
                 </table>
             </div>
 			
-			{!! $order_status4->appends(['page1' => $order_status1->currentPage(),'page2' => $order_status2->currentPage(),'page3' => $order_status3->currentPage() ])->render() !!}
+			{!! $order_status4->appends(['page1' => $order_status1->currentPage(),'page2' => $order_status2->currentPage() ])->render() !!}
         </div>
 		 </div>
 		  </div>
     @endif
-
+ </div>
+		  </div>
 <script type="text/javascript">
+
 	$(function () { $('#collapse4').collapse({
 		toggle: false
 	})});
-	$(function () { $('#collapse2').collapse('toggle')});
-	$(function () { $('#collapse3').collapse('toggle')});
-	$(function () { $('#collapseOne').collapse('toggle')});
+	$(function () { $('#collapse2').collapse('parent')});
+	$(function () { $('#collapse3').collapse('parent')});
+	$(function () { $('#collapseOne').collapse('parent')});
 </script>
 @endsection
