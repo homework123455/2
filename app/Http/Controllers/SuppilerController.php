@@ -28,6 +28,29 @@ class SuppilerController extends Controller
 		
 		return view('admin.suppliers.create', $data);
 	}
+	 public function scrapped($id)
+    {
+
+        $supplier=Supplier::find($id);
+        $supplier->update([
+            'status'=>'配合中',
+			
+			
+        ]);
+		
+        return redirect()->route('admin.suppliers.index');
+    }
+	 public function scrapped1($id)
+    {
+
+        $supplier=Supplier::find($id);
+        $supplier->update([
+            'status'=>'已終止',
+
+        ]);
+		
+        return redirect()->route('admin.suppliers.index');
+    }
 	public function store(Request $request)
     {
 		$supplier = Supplier::orderBy('created_at', 'DESC')->get();

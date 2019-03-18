@@ -92,8 +92,22 @@
                                               
                                        
 										@endif
-					
-				
+					@if($supplier->status!='配合中')
+				  <form action="{{ route('admin.suppliers.scrapped', $supplier->id) }}" method="POST">
+                                                    {{ csrf_field() }}
+                                                    {{ method_field('PATCH') }}
+                                                    <button class="btn btn-success">啟用</button>
+										
+                                                </form>
+											
+												@elseif($supplier->status!='已終止')
+				  <form action="{{ route('admin.suppliers.scrapped1', $supplier->id) }}" method="POST">
+                                                    {{ csrf_field() }}
+                                                    {{ method_field('PATCH') }}
+                                                    <button class="btn btn-danger">終止</button>
+													
+                                                </form>
+												@endif
 			</h4>
 		</div>
 <div id="{{ $supplier->name }}" class="panel-collapse collapse in">
@@ -105,6 +119,7 @@
 
                         <th width="300" style="text-align: center">供應商名稱</th>
 						<th width="300" style="text-align: center">供應商地址</th>
+						<th width="300" style="text-align: center">供應商狀態</th>
 						<th width="300" style="text-align: center">供應商電話</th>
                         <th width="150" style="text-align: center">創建時間</th>
                                                 
@@ -123,6 +138,9 @@
                         
                         <td style="text-align: center">
 						<div>{{ $supplier->address }}</div>
+						</td>
+						 <td style="text-align: center">
+						<div>{{ $supplier->status }}</div>
 						</td>
 						 <td style="text-align: center">
 						<div>{{ $supplier->phone }}</div>
@@ -165,14 +183,22 @@
                          {{ $good->stock }}
 						
                             </td>
-
-
+				@if($supplier->status!='配合中')
                         <td class="table-text" style="text-align: center">
+
+                                 <a class="btn btn-primary disabled" role="button"  >進貨</a>
+												
+                                
+                        </td>
+						@elseif($supplier->status!='終止中')
+						<td class="table-text" style="text-align: center">
 
                                  <a class="btn btn-primary" role="button" href="{{ route('admin.shops.suppliers', $good->id) }}" >進貨</a>
 												
                                 
                         </td>
+                    @endif
+						
                     
 	
                     

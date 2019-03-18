@@ -128,6 +128,8 @@ Route::group(['prefix' => 'admin'], function() {
 	 Route::get('suppliers/create', ['as' => 'admin.suppliers.create', 'uses' => 'SuppilerController@create']);
 	 Route::post('suppliers', ['as' => 'admin.suppliers.store', 'uses' => 'SuppilerController@store']);
 	 Route::delete('suppliers/{id}', ['as' => 'admin.suppliers.destroy', 'uses' => 'SuppilerController@destroy']);
+	 Route::patch('suppliers/{id}/scrapped', ['as' => 'admin.suppliers.scrapped', 'uses' => 'SuppilerController@scrapped']);
+	 Route::patch('suppliers/{id}/scrapped1', ['as' => 'admin.suppliers.scrapped1', 'uses' => 'SuppilerController@scrapped1']);
 	/////分類
     Route::get('categories', ['as' => 'admin.categories.index', 'uses' => 'CategorieController@index']);
 	Route::get('categories/create', ['as' => 'admin.categories.create', 'uses' => 'CategorieController@create']);       
