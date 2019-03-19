@@ -123,7 +123,9 @@ function openFile3(event){
 
                 <label>{{$good->status}}</label>
             </div>
+<label>安全庫存量：</label>
 
+                <input name="save_stock" class="form-control" placeholder="請輸入安全庫存量" value="{{$good->save_stock}}">
            
 
            

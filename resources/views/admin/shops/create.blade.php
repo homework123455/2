@@ -124,7 +124,11 @@ function openFile3(event){
 				
 
             </div>
-
+             <div class="form-group">
+                <label>安全存量：</label>
+				<input name="save_stock" class="form-control" placeholder="請輸入安全存量">
+               
+            </div>
             
 
             <div class="form-group">

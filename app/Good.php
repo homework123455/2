@@ -24,6 +24,7 @@ class Good extends Model
 		'details2',
 		'details3',
 'supplier_id',
+'save_stock',
 		'photo2',
 		'photo3',
 		'photo4',

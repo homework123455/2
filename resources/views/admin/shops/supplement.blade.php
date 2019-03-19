@@ -30,7 +30,9 @@
             </div>
 			<select id="select" name="select" class="form-control" >
 			@foreach($suppliersdetails as $suppliersdetail)
+			@if($suppliersdetail->value>0)
                         <option value={{$suppliersdetail->id}}>編號:{{$suppliersdetail->id}}&nbsp&nbsp&nbsp剩餘數量:{{$suppliersdetail->value}}&nbsp&nbsp&nbsp進貨時間:{{$suppliersdetail->created_at}}</option>
+			@endif
 			@endforeach
                        
                 </select>

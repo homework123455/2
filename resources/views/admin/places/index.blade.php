@@ -145,6 +145,8 @@
                         </td>
 						@if($good->value<=0)
 							<td style="text-align: center"><font color="#FF0000"  > 待補貨 </td>
+						@elseif($good->stock<=$good->save_stock)
+						<td style="text-align: center"><font color="#FF0000"  > 需進貨 </td>
 						@else
                         <td style="text-align: center"> {{ $good->status}} </td>
 						@endif

@@ -233,7 +233,7 @@ class ShopController extends Controller
 			'details'=>$request->details,
 			'details2'=>$request->details2,
 			'details3'=>$request->details3,
-
+			'save_stock'=>$request->save_stock,
 
           
 
@@ -301,6 +301,7 @@ class ShopController extends Controller
 			'details'=>$request->details,
 			'details2'=>$request->details2,
 			'details3'=>$request->details3,
+			'save_stock'=>$request->save_stock,
 
 
           
@@ -467,7 +468,8 @@ class ShopController extends Controller
 			$good->update([
              'value' => $good->value+$request->value,
 			 'stock' => $good->stock-$request->value,
-			 'price' => $request->price
+			 'price' => $request->price,
+			 'status'=>'正常供貨中'
              
         ]);
 			
@@ -475,8 +477,8 @@ class ShopController extends Controller
 		else	{
         $good->update([
              'value' => $good->value+$request->value,
-			 'stock' => $good->stock-$request->value
-			 
+			 'stock' => $good->stock-$request->value,
+			 'status'=>'正常供貨中'
              
         ]);
 	
