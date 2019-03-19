@@ -269,6 +269,18 @@ class MaintaincesController extends Controller
 			return redirect()->route('admin.dashboard.index');
 		
 	}
+	 public function show5($id,$users_id){
+        
+
+        
+		
+		$order=Order::find($id);
+		$orders = Order::where('users_id',$users_id)->get();
+       
+
+        $data=['orders'=>$orders,'order'=>$order];
+        return view('orders.show5', $data);
+    }
 	 public function show1($id){
         
 
