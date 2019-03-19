@@ -34,6 +34,7 @@
 					<th style="text-align:center">訂單編號</th>
                     
 					<th style="text-align:center">會員姓名</th>
+					 <th style="text-align:center">訂單狀態</th>
                   <th style="text-align:center">訂單時間</th>
                     </thead>
 
@@ -48,10 +49,22 @@
                                 <div>{{$order->id}}</div>
                             </td>
 							
-								 <td style="text-align: center"><font color="#FF0000"  >
+								 <td style="text-align: center">
                                 <div>{{$order->name}}</div>
                             </td>
-							
+							@if($order->status=="已取消")
+							 <td style="text-align: center"><font color="#FF0000"  >
+                                <div>{{$order->status}}</div>
+                            </td>
+							@elseif($order->status=="已完成")
+							<td style="text-align: center"><font color="#7FFF00"  >
+                                <div>{{$order->status}}</div>
+                            </td>
+							@else
+								<td style="text-align: center">
+                                <div>{{$order->status}}</div>
+                            </td>
+							@endif
 							<td style="text-align: center">
                                 <div>{{$order->updated_at}}</div>
                             </td>
