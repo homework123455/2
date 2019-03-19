@@ -85,7 +85,7 @@
         </div>
 		<ol class="breadcrumb">
                 <li class="active">
-                    <i class="fa fa-edit"></i> 買家信用 <p class="text-primary">共有<?php echo "$i" ?>筆交易紀錄</p>
+                    <i class="fa fa-edit"></i> 買家信用 <a class="text-primary" href="{{ route('orders.show5',['user_id'=>$order->users_id,'id'=>$order->id]) }}">共有<?php echo "$i" ?>筆交易紀錄</a>
                 </li>
             </ol>
 <div class="progress">

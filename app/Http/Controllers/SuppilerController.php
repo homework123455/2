@@ -10,7 +10,8 @@ class SuppilerController extends Controller
 {
    public function index()
     {
-		$supplier = Supplier::orderBy('created_at', 'DESC')->get();
+		
+		$supplier = Supplier::orderBy('created_at', 'DESC')->paginate(2);
 		$suppliersdetails = Suppliersdetail::orderBy('created_at', 'DESC')->get();
 		$good = Good::all();
 		$i=0;

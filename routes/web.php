@@ -82,6 +82,7 @@ Route::patch('orders/{id}/cancel'  , ['as' => 'orders.cancel', 'uses' => 'Mainta
 Route::patch('orders/{id}'  , ['as' => 'orders.process', 'uses' => 'MaintaincesController@process']);
 Route::patch('orders/{id}/scrapped', ['as' => 'orders.scrapped', 'uses' => 'MaintaincesController@scrapped']);
 Route::patch('orders/{id}/ordercancel', ['as' => 'orders.ordercancel'  , 'uses' => 'MaintaincesController@cancelupdate']);
+Route::get('orders/{id}/show/{users_id}/show5', ['as' => 'orders.show5', 'uses' => 'MaintaincesController@show5']);
 
 //checkout
 Route::get('checkout',['as'=> 'checkout','uses'=>'CheckoutController@cartdetail']);
@@ -176,7 +177,8 @@ Route::patch('places/{id}/scrapped1', ['as' => 'admin.places.scrapped1', 'uses' 
 
     //報修
     Route::get('maintainces', ['as' => 'admin.maintainces.index', 'uses' => 'MaintaincesController@index']);                        //報修主畫面
-    Route::get('maintainces/{id}/show', ['as' => 'admin.maintainces.show', 'uses' => 'MaintaincesController@show']);               //選擇維修方式(1)
+    Route::get('maintainces/{id}/show', ['as' => 'admin.maintainces.show', 'uses' => 'MaintaincesController@show']);    
+	  	//選擇維修方式(1)
     Route::patch('maintainces/{id}'  , ['as' => 'admin.maintainces.process', 'uses' => 'MaintaincesController@process']);            //選擇維修方式(2)
     //Route::get('maintainces/{id}/details'  , ['as' => 'admin.maintainces.details', 'uses' => 'MaintainceItemsController@index']);      //輸入維修項目資料
    // Route::post('maintainces/{id}/detail'  , ['as' => 'admin.maintainces.details.store', 'uses' => 'MaintainceItemsController@store']);  //新增維修項目

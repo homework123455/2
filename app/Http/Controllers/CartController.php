@@ -21,13 +21,21 @@ class CartController extends Controller
         if (Auth::check()) {
 			$good=Good::all();
             $all = 0;
+			$q = 0;
             $data = DB::table('carts')
                 ->where('users_id',Auth::user()->id)
                 ->get();
             foreach ($data as $s){
                 $all = $all + $s->total;
             }
-            return view('cart',['carts' => $data,'a' =>$all,'goods'=>$good]);
+			if($all < '299'){
+				$all =$all + 60;
+				$q = 60;
+			}else{
+			$all =$all+30;
+			$q =30;
+			}
+            return view('cart',['carts' => $data,'a' =>$all,'goods'=>$good,'q'=>$q]);
         }else{
             return redirect()->route('login');
         }

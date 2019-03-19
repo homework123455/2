@@ -37,9 +37,9 @@
 
 </div>
 <!-- /.row -->
-@foreach($suppliers as $supplier)
-<div class="row">
 
+<div class="row">
+@foreach($suppliers as $supplier)
     <div class="panel-group" id="accordion">
 	<div class="panel panel-default">
 		<div class="panel-heading">
@@ -215,10 +215,12 @@
     </div>
 </div>
 </div>
-
+@endforeach
 </div>
 
-@endforeach
+
+{!! $suppliers->render() !!}
+
 <!-- /.row -->
 <script type="text/javascript">
 var a =<?php echo $a ?>';
