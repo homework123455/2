@@ -22,6 +22,7 @@ class CartController extends Controller
 			$good=Good::all();
             $all = 0;
 			$q = 0;
+			$qq =0;
             $data = DB::table('carts')
                 ->where('users_id',Auth::user()->id)
                 ->get();
@@ -29,13 +30,14 @@ class CartController extends Controller
                 $all = $all + $s->total;
             }
 			if($all < '299'){
+				$qq=300-$all;
 				$all =$all + 60;
 				$q = 60;
 			}else{
-			$all =$all+30;
-			$q =30;
+			$all =$all;
+			$q =0;
 			}
-            return view('cart',['carts' => $data,'a' =>$all,'goods'=>$good,'q'=>$q]);
+            return view('cart',['carts' => $data,'a' =>$all,'goods'=>$good,'q'=>$q,'qq'=>$qq]);
         }else{
             return redirect()->route('login');
         }
