@@ -239,7 +239,7 @@ class MaintaincesController extends Controller
         $users=User::orderBy('created_at','DESC')->get();
 		$order=Order::find($id);
 		$orders = Order::where('users_id',$order->users_id)->get();
-		$ordersing=$orders->whereIn('status',["已出貨","已完成","取消","退貨"]);
+		$ordersing=$orders->whereIn('status',["已出貨","已完成","取消","退貨","已取消","處理中"]);
 		$orders_C =$orders->whereIn('status',["取消","退貨"]);
 		$C=count($orders_C);
 		$F=count($ordersing)-$C;
@@ -276,7 +276,7 @@ class MaintaincesController extends Controller
 		
 		$order=Order::find($id);
 		$orders = Order::where('users_id',$users_id)->get();
-       
+ 
 
         $data=['orders'=>$orders,'order'=>$order];
         return view('orders.show5', $data);
