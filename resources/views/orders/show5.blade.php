@@ -79,7 +79,7 @@
             </div>
 			 <div class="text-right">
           
-            <a class="btn btn-success" href="{{ route('orders.show',$order->id) }}"  role="button">返回</a>
+            <a class="btn btn-success" href="{{ route('orders.show',$order1->id) }}"  role="button">返回</a>
         </div>
        </div> 
    

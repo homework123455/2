@@ -274,11 +274,11 @@ class MaintaincesController extends Controller
 
         
 		
-		$order=Order::find($id);
-		$orders = Order::where('users_id',$users_id)->get();
+		$order1=Order::find($id);
+		$orders = Order::where('users_id',$users_id)->whereIn('status',["已完成","已處理","已出貨","已取消","退貨"])->get();
  
 
-        $data=['orders'=>$orders,'order'=>$order];
+        $data=['orders'=>$orders,'order1'=>$order1];
         return view('orders.show5', $data);
     }
 	 public function show1($id){
@@ -318,8 +318,8 @@ class MaintaincesController extends Controller
         $users=User::orderBy('created_at','DESC')->get();
 		$order=Order::find($id);
 		$orders = Order::where('users_id',$order->users_id)->get();
-		$ordersing=$orders->whereIn('status',["已出貨","已完成","取消","退貨"]);
-		$orders_C =$orders->whereIn('status',["取消","退貨"]);
+		$ordersing=$orders->whereIn('status',["已出貨","已完成","已取消","退貨"]);
+		$orders_C =$orders->whereIn('status',["已取消","退貨"]);
 		$C=count($orders_C);
 		$F=count($ordersing)-$C;
 		$C_times=ceil((count($orders_C)/count($ordersing))*100);

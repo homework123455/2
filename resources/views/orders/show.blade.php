@@ -103,14 +103,14 @@
                                 
        @if(count($orders_C)>0)
 	   <a data-toggle="collapse" data-parent="#accordion" 
-				   href="#collapse6">
+				   href="#collapse7">
             <ol class="breadcrumb">
                 <li class="active">
                     <i class="fa fa-edit"></i> 過往不良紀錄<b class="caret"></b>
                 </li>
             </ol>
            	</a>
-			<div id="collapse6" class="panel-collapse collapse">
+			<div id="collapse7" class="panel-collapse collapse">
 				<div class="panel-body">
     <div class="panel-group" id="accordion" role="tablist">
                 <div class="panel panel-default">
@@ -151,7 +151,7 @@
 				</div>
 				</div>
 				<script type="text/javascript">
-	$(function () { $('#collapse6').collapse({
+	$(function () { $('#collapse7').collapse({
 		'hide'
 	})});
 	
