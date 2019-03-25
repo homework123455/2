@@ -115,6 +115,9 @@
 			<li>
                 <a href="{{ route('admin.suppliers.index') }}"><i class="fa fa-fw fa-edit"></i> 供應商管理</a>
             </li>
+			<li>
+                <a href="{{ route('admin.setting.edit') }}"><i class="fa fa-fw fa-edit"></i> 系統管理</a>
+            </li>
             @endif
         </ul>
     </div>

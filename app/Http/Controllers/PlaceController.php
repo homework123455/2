@@ -14,6 +14,7 @@ use App\Maintaince;
 use App\MaintainceItem;
 use App\User;
 use DB;
+use App\Setting;
 //use App\Vendor;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -30,7 +31,10 @@ class PlaceController extends Controller
        
         $Search1 = $request->input('category_search');
         //$goods = Good::all();
-		$goods = Good::paginate(2);
+		$set_good=Setting::orderBy('updated_at', 'DESC')->value('goods');
+		
+		
+		$goods = Good::paginate($set_good);
 		$goods1 = Good::orderBy('created_at', 'DESC')->get();
         $place = Place::orderBy('created_at', 'DESC')->get();
         $cands = OrdersDetail::all();
@@ -42,15 +46,19 @@ class PlaceController extends Controller
         $times = Time_::orderBy('id', 'ASC')->get();
 		$maintaincesALL = Maintaince::orderBy('created_at', 'DESC');
         $maintainces = $maintaincesALL->whereIn('status', array('申請中'))->get();
-        /*
-        if(!(Auth::user()->previlege_id==3)){
+		
+		
+	
+       
+	   $data = ['goods1'=>$goods1,'cands'=>$cands,'goods'=>$goods,'places' => $place, 'lendings' => $lendings, 'categories' => $category, 'times' => $times, 'weeks' => $weeks, 'Search' => $Search, 'Search1' => $Search1, 'maintainces' => $maintainces];
 
-           $place=Place::where('id','0')->get();
-       }
-*/
-        $data = ['goods1'=>$goods1,'cands'=>$cands,'goods'=>$goods,'places' => $place, 'lendings' => $lendings, 'categories' => $category, 'times' => $times, 'weeks' => $weeks, 'Search' => $Search, 'Search1' => $Search1, 'maintainces' => $maintainces];
+
+
 
         return view('admin.places.index', $data);
+
+
+
     }
 
     public function create()
@@ -291,6 +299,7 @@ class PlaceController extends Controller
 
     public function Search10(Request $request)
     {
+		$set_good=Setting::orderBy('updated_at', 'DESC')->value('goods');
         $goodsALL = Good::orderBy('created_at', 'DESC');
 		$goods1=Good::orderBy('created_at', 'DESC')->get();
         //$maintainces = $maintaincesALL->whereIn('status', array('申請中'))->get();
@@ -298,31 +307,43 @@ class PlaceController extends Controller
         $Search = $request->input('good_search');
         
         $Search1 = $request->input('category_search');
-       
+		if(isset($_GET['Search1'])){
+        $i=$_GET['Search1'];
+		
+		$goods = Good::orderBy('created_at', 'DESC')
+                ->where('category', $i)
+                ->paginate($set_good);
+				
+		 $category = Category::orderBy('created_at', 'DESC')->get();
+		$data = ['goods' => $goods,'goods1' => $goods1, 'categories' => $category, 'Search' => $Search, 'Search1' => $Search1,'i'=>$i];
+        return view('admin.places.index', $data);
+		
+		}
+		else{
         if( $Search == "" && $Search1 =="") {
 
             $goods = Good::orderBy('created_at', 'DESC')
                 ->where('id', '0')
-                ->paginate(2);
+                ->paginate($set_good);
         }
         else if ( $Search1 =="") {
 
             $goods = Good::orderBy('created_at', 'DESC')
                 ->where('id', $Search)
-                ->paginate(2);
+                ->paginate($set_good);
         } else if ( $Search == "") {
             $goods = Good::orderBy('created_at', 'DESC')
                 ->where('category', $Search1)
-                ->paginate(2);
+                ->paginate($set_good);
         }
          else
         {
 
             $goods= Good::orderBy('created_at', 'DESC')
             ->where('category', $Search1)->where('id', $Search)
-            ->paginate(2);
+            ->paginate($set_good);
         }
-
+		}
         $category = Category::orderBy('created_at', 'DESC')->get();
        //$goods = Good::paginate(2);
 
@@ -350,12 +371,12 @@ class PlaceController extends Controller
     {
 	
         $Search =$request->input('good_search');
-        
+        $set_good=Setting::orderBy('updated_at', 'DESC')->value('goods');
 		$Search1 =$request->input('category_search');
         $goods1 = Good::orderBy('created_at', 'DESC')->get();
         //$place=Place::orderBy('created_at', 'DESC')->get();
         $category=Category::orderBy('created_at' ,'DESC') ->get();
-        $goods = Good::paginate(2);
+        $goods = Good::paginate($set_good);
 		/*
         if(!(Auth::user()->previlege_id==3)){
 

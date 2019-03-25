@@ -93,7 +93,10 @@ Route::post('/orders',['as'=> 'orders.store','uses'=>'CheckoutController@store',
 Route::group(['prefix' => 'admin'], function() {
 	
     Route::get('/', ['as' => 'admin.dashboard.index', 'uses' => 'AdminDashboardController@index']);	
-	/////
+	/////系統設定
+	Route::get('setting/edit'   , ['as' => 'admin.setting.edit' , 'uses' => 'AdminDashboardController@edit']);
+	Route::post('setting'   , ['as' => 'admin.setting.update' , 'uses' => 'AdminDashboardController@update']);
+	////////
 	Route::get('news'         , ['as' => 'admin.news.index' , 'uses' => 'NewsController@index']);
     Route::get('news/create'   , ['as' => 'admin.news.create' , 'uses' => 'NewsController@create']);
     Route::post('news'         , ['as' => 'admin.news.store'  , 'uses' => 'NewsController@store']);
@@ -150,8 +153,8 @@ Route::post('categories/searchALL1'  , ['as' => 'admin.categories.searchALL1', '
     Route::post('places/search'  , ['as' => 'admin.places.search', 'uses' => 'PlaceController@Search']); //查詢星期
 	
     Route::post('places/search1'  , ['as' => 'admin.places.search1', 'uses' => 'PlaceController@Search1']);	//查詢場地類別
-	Route::post('places/search10'  , ['as' => 'admin.places.search10', 'uses' => 'PlaceController@Search10']);	//查詢開放時段
-	Route::post('places/searchALL1'  , ['as' => 'admin.places.searchALL1', 'uses' => 'PlaceController@searchALL1']);	//查詢開放時段
+	Route::get('places/search10'  , ['as' => 'admin.places.search10', 'uses' => 'PlaceController@Search10']);	//查詢開放時段
+	Route::get('places/searchALL1'  , ['as' => 'admin.places.searchALL1', 'uses' => 'PlaceController@searchALL1']);	//查詢開放時段
     Route::get('places/{id}/data', ['as' => 'admin.places.data', 'uses' => 'PlaceController@data']);       //資產詳細資料
 
     Route::get('places/instascan', ['as' => 'admin.places.instascan', 'uses' => 'PlaceController@instascan']);

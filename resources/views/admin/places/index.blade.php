@@ -5,7 +5,6 @@
 @section('content')
 <!-- Page Heading -->
 
-
 <div class="row">
     <div class="col-sm-12">
         <h1 class="page-header">
@@ -27,6 +26,7 @@
 <div class="input-group custom-search-form">
 <label>顯示全部：</label>  <form action="{{ route('admin.places.searchALL1') }}" method="POST">
 {{ csrf_field() }}
+{{ method_field('GET') }}
 <span class="input-group-btn">
 <button class="btn btn-info"><i class="fa fa-search"></i></button>
     </span>
@@ -34,8 +34,9 @@
 
  <label>商品名稱查詢：</label>  <form action="{{ route('admin.places.search10') }}" method="POST">
     {{ csrf_field() }}
+{{ method_field('GET') }}
 
-    <select name="good_search" class="form-control">
+    <select name="good_search" class="form-control" >
 	<option value="">請選擇</option>
 				@foreach($goods1 as $good1)
 				@if($good1->id==$Search)
@@ -47,10 +48,12 @@
                     @endforeach
 					</select>
 					
+					
 
 <div>
  <label>商品類別查詢：</label>
     {{ csrf_field() }}
+	
      <select name="category_search" class="form-control">
 	 <option value="">請選擇</option>
                     @foreach($categories as $category)
@@ -253,7 +256,13 @@
 </div>
         </div>
     </div>
-	{{$goods->links()}}
+	@if(isset($Search1))
+	{{ $goods->appends(['Search1' => $Search1 ])->Links() }}
+@elseif(isset($i))
+{{ $goods->appends(['Search1' => $i ])->Links() }}
+@else
+{{$goods->Links()}}
+    @endif
 </div>
 <!-- /.row -->
 @endsection

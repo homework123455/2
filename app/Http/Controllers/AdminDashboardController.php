@@ -10,6 +10,7 @@ use App\Week;
 use App\Time_;
 use App\Maintaince;
 use App\User;
+use App\Setting;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Http\Requests;
@@ -119,5 +120,27 @@ if (Auth::user()->previlege_id==3)
         elseif(Auth::user()->previlege_id)
             return view('admin.dashboard.user',$data);
 
+    }
+	public function edit()
+	{
+		
+		$good=Setting::where('id',1)->value('goods');
+		$order=Setting::where('id',1)->value('orders');
+		$data = ['good'=>$good,'order' => $order];
+		
+		return view('admin.setting.edit', $data);
+	}
+	public function update(Request $request)
+    {
+
+        $set = Setting::where('id',1);
+			
+        $set->update([
+            'goods' => $request->goods,
+            'orders' => $request->orders,
+            
+        ]);
+
+        return redirect()->route('admin.places.index');
     }
 }
