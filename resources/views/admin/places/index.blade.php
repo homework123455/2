@@ -218,11 +218,42 @@
 	                                   @if($good->status=="下架中"&&$S1<=0)
 										
                                         <td class="table-text" style="text-align: center">
-                                                                        <form action="{{ route('admin.shops.destroy', $good->id) }}" method="POST">
+										<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal1">
+                                                                刪除
+                                                            </button>
+                                                            <!-- Modal -->
+                                                            <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                                                <div class="modal-dialog" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                                            <h4 class="modal-title" id="myModalLabel">提示訊息</h4>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            確定要刪除這項商品？
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <table style="text-align: right">
+                                                                                <tbody style="text-align: right">
+                                                                                <tr class="table-text" style="text-align: center">
+                                                                                    <td width="100" >
+                                                                                       <form action="{{ route('admin.shops.destroy', $good->id) }}" method="POST">
                                                                             {{ csrf_field() }}
                                                                             {{ method_field('DELETE') }}
                                                                             <button class="btn btn-danger ">刪除</button>
                                                                         </form>
+                                                                                    </td>
+                                                                                    <td width="100">
+                                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>	
+                                                                        
                                               
                                         </td>
 										@else
