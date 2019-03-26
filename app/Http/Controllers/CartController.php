@@ -8,7 +8,7 @@ use Redirect;
 use App\Cart;
 use DB;
 use App\Good;
-
+use App\Setting;
 
 
 class CartController extends Controller
@@ -17,7 +17,8 @@ class CartController extends Controller
 
     public function index()
     {
-
+     $price=Setting::where('id',1)->value('prices');
+	 $low_price=Setting::where('id',1)->value('low_prices');
         if (Auth::check()) {
 			$good=Good::all();
             $all = 0;
@@ -29,10 +30,10 @@ class CartController extends Controller
             foreach ($data as $s){
                 $all = $all + $s->total;
             }
-			if($all < '299'){
-				$qq=300-$all;
-				$all =$all + 60;
-				$q = 60;
+			if($all < $low_price){
+				$qq=$low_price-$all;
+				$all =$all + $price;
+				$q = $price;
 			}else{
 			$all =$all;
 			$q =0;

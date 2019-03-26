@@ -84,7 +84,7 @@
                 </table>
             </div>
 		
-			{!! $order_status1->appends(['page2' => $order_status2->currentPage(),'page3' => $order_status3->currentPage() ])->render() !!}
+			{!! $order_status1->appends(['page2' => $order_status2->currentPage(),'page4' => $order_status4->currentPage() ])->render() !!}
 					</div>
 		</div>
         </div>
@@ -161,7 +161,7 @@
                 </table>
             </div>
 			
-{!! $order_status2->appends(['page1' => $order_status1->currentPage() ,'page3' => $order_status3->currentPage() ])->render() !!}
+{!! $order_status2->appends(['page1' => $order_status1->currentPage() ,'page4' => $order_status4->currentPage() ])->render() !!}
 			</div>
 			</div>
         </div>
@@ -198,7 +198,7 @@
                         <tr>
                             <!-- 任務名稱 -->
 							@if($order->status=="已出貨")
-                            <td style="text-align: center">
+                           <td style="text-align: center">
                                 <div>{{ $order->id}}</div>
                             </td>
 							@else

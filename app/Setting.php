@@ -10,6 +10,8 @@ class Setting extends Model
     protected $fillable = [
         'goods',
         'orders',
+		'prices',
+		'low_prices'
         
     ];
     public function user() // Maintaince (n) -> asset (1)
