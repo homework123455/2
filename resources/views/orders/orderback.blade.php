@@ -16,7 +16,7 @@
 
     <div class="col-lg-12">
         <h1 class="page-header">
-            訂單處理 <small>訂單處理</small>
+            退貨申請 <small>退貨申請</small>
         </h1>
     </div>
 </div>
@@ -26,7 +26,9 @@
 
 <div class="row">
     <div class="col-lg-12">
-       
+       <form action="orderback" method="POST" role="form" >
+	             {{ csrf_field() }}
+	{{ method_field('PATCH') }}
         <div class="form-group">
             <label width="80">訂單編號：</label>
 			{{$order->id}}
@@ -66,17 +68,11 @@
 					@if($order->status=="已出貨"||$order->status=="已完成")
 					<th width="100" style="text-align: center">出貨時間</th>
 				    @elseif($order->status=="駁回")
-					<th width="100" style="text-align: center">駁回時間</th>
+					<th width="100" style="text-align: center">處理時間</th>
 					
 					
 					@endif
-					<th width="100" style="text-align: center">訂單狀態</th>
-					@if((Auth::user()->previlege_id=1))
-					@if($order->status=="已完成")
-						
-					<th width="100" style="text-align: center">功能</th>
-					@endif
-				@endif
+					
                 </tr>
                 </thead>
                 <tbody>
@@ -92,29 +88,10 @@
 						@if($order->status=="已出貨"||$order->status=="已完成")
 						<td style="text-align: center">{{$order->updated_at}}</td>
 					@elseif($order->status=="駁回")
-					<td style="text-align: center">{{$order->updated_at}}</td>
+					<td style="text-align: center">{{$order->status}}</td>
 					@endif
-					@if($order1->status !='')
-						<td style="text-align: center"><font color="#FF0000" >{{$order1->status}}</td> 
-					@else
-						<td style="text-align: center">{{$order->status}}</td>
-					@endif
-						@if((Auth::user()->previlege_id=1))
-					@if($order->status=="已完成"&&$order1->status!="退貨中")
 						
-					<td class="table-text" style="text-align: center">
-                                
-                                   <div> <a href="{{ route('orders.back',['product_id'=>$order1->product_id,'id'=>$order->id]) }}" class="btn btn-primary" role="button">退貨</a></div>
-                                
-                        </td>
-						@elseif($order->status=="已完成"&&$order1->status=="退貨中")
-						<td class="table-text" style="text-align: center">
-                                
-                                   <div> <a class="btn btn-primary" role="button" disabled>退貨</a></div>
-                                
-                        </td>
-					@endif
-				@endif
+						
                     </tr>
                 @endforeach
                 </tbody>
@@ -126,41 +103,25 @@
                                     
                                 
        
-        @if($order->status=="駁回"||$order->status=="已處理")
+        @if($order->status=="駁回")
 
-               <div class="panel panel-danger">
-    <div class="panel-heading">
-        <h3 class="panel-title">駁回原因</h3>
-    </div>
-    <div class="panel-body">
-	{{$order->reason}}
-    </div>
-		
-			    
-</div>
+                <label>駁回原因：</label>
+               <label>{{$order->reason}}</label>
+
 @endif
 
             </div>
+			
+		</div>
+		<div class="form-group">
+            <label width="80">填寫退貨原因：</label>
+			  <input name="reason" class="form-control" placeholder="請輸入退貨原因" >
+        </div>
 
                     
 
         <div class="text-right">
-		
-
-        @if((Auth::user()->previlege_id>=3))
-			@if($order->status=="處理中")
-			<form action="{{ route('orders.scrapped', $order->id) }}" method="POST">
-                                                    {{ csrf_field() }}
-                                                    {{ method_field('PATCH') }}
-                                                    <button class="btn btn-success">出貨</button>
-													 <a class="btn btn-success" href="{{ route('orders.index') }}"  role="button">返回</a>
-                                                </form>
-												@else
-            <a class="btn btn-success" href="{{ route('orders.index') }}"  role="button">返回</a>
-		@endif
-		@else
-			<a class="btn btn-success" href="{{ route('admin.dashboard.index') }}"  role="button">返回</a>
-		@endif
+       <button type="submit" class="btn btn-success">送出</button>
         </div>
         </form>
         <p>&nbsp;</p>

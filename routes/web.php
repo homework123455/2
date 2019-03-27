@@ -83,6 +83,8 @@ Route::patch('orders/{id}'  , ['as' => 'orders.process', 'uses' => 'MaintaincesC
 Route::patch('orders/{id}/scrapped', ['as' => 'orders.scrapped', 'uses' => 'MaintaincesController@scrapped']);
 Route::patch('orders/{id}/ordercancel', ['as' => 'orders.ordercancel'  , 'uses' => 'MaintaincesController@cancelupdate']);
 Route::get('orders/{id}/show/{users_id}/show5', ['as' => 'orders.show5', 'uses' => 'MaintaincesController@show5']);
+Route::get('orders/{id}/show1/{product_id}/orderback', ['as' => 'orders.back', 'uses' => 'MaintaincesController@orderback']);
+Route::patch('orders/{id}/show1/{product_id}/orderback', ['as' => 'orders.backupdate', 'uses' => 'MaintaincesController@orderbackupdate']);
 
 //checkout
 Route::get('checkout',['as'=> 'checkout','uses'=>'CheckoutController@cartdetail']);

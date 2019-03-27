@@ -394,6 +394,43 @@ class MaintaincesController extends Controller
 */
         return redirect()->route('orders.index');
     }
+	public function orderback($id,$product_id){
+        
+
+        $users=User::orderBy('created_at','DESC')->get();
+		$order=Order::find($id);
+		$orders = Order::where('users_id',$order->users_id)->get();
+        $ordersdetail = OrdersDetail::where('orders_id',$id)->where('product_id',$product_id)->get();
+		$ordertotal=0;
+		foreach($ordersdetail as $order1){
+		$ordertotal = $ordertotal+$order1->total;
+		}   
+
+        $data=['orders'=>$orders,'users'=>$users,'order'=>$order,'ordersdetail'=>$ordersdetail,'ordertotal'=>$ordertotal];
+      
+        return view('orders.orderback', $data);
+    }
+	public function orderbackupdate(Request $request,$id,$product_id){
+        
+
+        $users=User::orderBy('created_at','DESC')->get();
+		$order=Order::find($id);
+		$orders = Order::where('users_id',$order->users_id)->get();
+        $ordersdetail = OrdersDetail::where('orders_id',$id)->where('product_id',$product_id);
+		$ordertotal=0;
+		foreach($ordersdetail as $order1){
+		$ordertotal = $ordertotal+$order1->total;
+		}   
+		
+		$ordersdetail->update([
+                'status'=>'退貨中',
+				'backreason'=>$request->input('reason')
+				
+            ]);
+        $data=['orders'=>$orders,'users'=>$users,'order'=>$order,'ordersdetail'=>$ordersdetail,'ordertotal'=>$ordertotal];
+      
+        return redirect()->route('orders.show1',$id);
+    }
 	 public function scrapped($id)
     {
 

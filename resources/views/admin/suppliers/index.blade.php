@@ -86,7 +86,7 @@
                                                                                        <form action="{{ route('admin.suppliers.destroy', $supplier->id) }}" method="POST">
                                                                             {{ csrf_field() }}
                                                                             {{ method_field('DELETE') }}
-                                                          <button class="btn btn-danger ">刪除</button>
+																		<button class="btn btn-danger ">刪除</button>
                                                                         </form>
                                                                                     </td>
                                                                                     <td width="100">
