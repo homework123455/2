@@ -28,22 +28,57 @@
 
                 <input name="name" class="form-control" value="{{$good->name}}" readonly>
             </div>
-			<select id="select" name="select" class="form-control" >
-			@foreach($suppliersdetails as $suppliersdetail)
-			@if($suppliersdetail->value>0)
-                        <option value={{$suppliersdetail->id}}>編號:{{$suppliersdetail->id}}&nbsp&nbsp&nbsp剩餘數量:{{$suppliersdetail->value}}&nbsp&nbsp&nbsp進貨時間:{{$suppliersdetail->created_at}}</option>
-			@endif
-			@endforeach
-                       
-                </select>
+			
+			<div class="row">
+    <div class="col-lg-12">
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th width="100" style="text-align: center">編號</th>
+                        <th style="text-align: center">剩餘數量</th>
+                        <th width="100" style="text-align: center">進貨成本</th>
+                        <th style="text-align: center">進貨時間</th>
+                        <th width="200" style="text-align: center">功能</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach($suppliersdetails as $suppliersdetail)
+                    <tr>
+                        <td style="text-align: center">{{ $suppliersdetail->id}}</td>
+                        <td style="text-align: center">{{ $suppliersdetail->value }}</td>
+                        <td style="text-align: center">{{ $suppliersdetail->price}}</td>
+                        <td style="text-align: center">{{ $suppliersdetail->created_at }} </td>
+						@if($suppliersdetail->checked==0)
+                        <td style="text-align: center"><input type="checkbox" name="select" value="{{route('admin.shops.update2',['id'=>$good->id,'q'=>$suppliersdetail->id])}}" onchange="javascript:location.href=this.value;"></td>
+                        @else
+						<td style="text-align: center"><input type="checkbox" name="select" checked value="{{route('admin.shops.update2',['id'=>$good->id,'q'=>$suppliersdetail->id])}}" onchange="javascript:location.href=this.value;"></td>
+				        @endif
+				@endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+			
 
             <div class="form-group">
                 <label>補貨數量：</label>
 
-               <input name="value" class="form-control" placeholder="目前架上剩餘數量    {{$good->value}} " >
+               <input name="value" id="value" class="form-control" placeholder="目前架上剩餘數量    {{$good->value}} " onchange="myFunction()">
+			   <label>最大進貨數量：{{$total}}</label>
             </div>
 			
-	
+	<script>
+    function myFunction(){
+        var x=document.getElementById("value");
+		if(x.value>{{$total}}){
+
+        x.value={{$total}};
+		alert("超出最大進貨數量");
+		}
+     }
+</script>
 				
 			<?php
 			if(isset($request->select)){
@@ -61,6 +96,7 @@
                 <label>商品價格：</label>
 
                <input name="price" class="form-control"  >
+			   <label>建議售價：{{$price}}</label>
             </div>
 
 

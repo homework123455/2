@@ -17,7 +17,7 @@ class Suppliersdetail extends Model
 		'value',
       
         'supplier_id',
-		
+		'checked'
 
 
     ];

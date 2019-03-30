@@ -145,6 +145,7 @@ Route::group(['prefix' => 'admin'], function() {
 Route::post('categories/searchALL1'  , ['as' => 'admin.categories.searchALL1', 'uses' => 'CategorieController@searchALL1']);
     /////   
     /////補貨
+	Route::get('shops/{id}/{q}/supplement', ['as' => 'admin.shops.update2', 'uses' => 'ShopController@update2',function($id,$q){}]);
     Route::get('shops/{id}/supplement', ['as' => 'admin.shops.supplement', 'uses' => 'ShopController@supplement']);        
     Route::patch('shops/supplement/{id}', ['as' => 'admin.shops.update1', 'uses' => 'ShopController@update1']);    
      /////////	

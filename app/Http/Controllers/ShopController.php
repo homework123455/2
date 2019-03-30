@@ -436,33 +436,87 @@ class ShopController extends Controller
  public function supplement($id)
     {
      
-        $suppliersdetails = Suppliersdetail::orderBy('id', 'ASC')->where('name', $id)->get();
+        $suppliersdetails = Suppliersdetail::orderBy('id', 'ASC')->where('name', $id)->where('value','>',0)->get();
 		$suppliers = Supplier::orderBy('created_at', 'DESC')->get();
         $categories = Category::orderBy('created_at', 'DESC')->get();
         $good = Good::find($id);
-        $data = ['suppliers'=>$suppliers,'good' => $good, 'categories' => $categories,'suppliersdetails'=>$suppliersdetails];
+		$total=0;
+		$price=0;
+		$link=mysqli_connect("localhost:33060","root","root","homestead");
+		$sql ="SELECT * FROM suppliersdetail WHERE name='$id' and checked='1'";
+		$rec = $link->query($sql);	
+		$rNum = $rec->num_rows;
+		if($rNum>0){
+		$suppliersdetail2 = Suppliersdetail::where('name', $id)->where('checked',1)->get();
+		foreach($suppliersdetail2 as $suppliersdetail){
+		$total=$total + $suppliersdetail->value;
+		if($price<=($suppliersdetail->price)*1.5){
+			$price=($suppliersdetail->price)*1.5;
+		}
+		
+		}
+		}
+        $data = ['price'=>$price,'total'=>$total,'suppliers'=>$suppliers,'good' => $good, 'categories' => $categories,'suppliersdetails'=>$suppliersdetails];
 
         return view('admin.shops.supplement', $data);
+    }
+	public function update2($id,$q)
+    {
+		$good = Good::find($id);
+		$suppliersdetails = Suppliersdetail::orderBy('id', 'ASC')->where('id', $q);
+		$checked=$suppliersdetails->value('checked');
+		if($checked==0){
+		$suppliersdetails->update([
+            'checked'=>'1',
+			
+        ]);
+        }
+		else{
+			$suppliersdetails->update([
+            'checked'=>'0',
+			
+        ]);
+		}
+		
+        return redirect()->route('admin.shops.supplement',$id);
+
     }
 
     public function update1(Request $request, $id)
     {
+		
 
         $good = Good::find($id);
-		$select=$request->select;
-		$suppliersdetail = Suppliersdetail::where('id', $request->select);
+		//$select=$request->select;
+		$value=$request->value;
+		$suppliersdetails = Suppliersdetail::where('name', $id)->where('checked',1)->get();
 		
+		foreach($suppliersdetails as $suppliersdetail){
+			
 		$link=mysqli_connect("localhost:33060","root","root","homestead");
-		$sql ="SELECT * FROM suppliersdetail WHERE id='$select'";
+		$sql ="SELECT * FROM suppliersdetail WHERE id='$suppliersdetail->id'";
 		$rec = $link->query($sql);	
 		$rNum = $rec->num_rows;
 		$rs = $rec->fetch_array();
 		$S1=$rs['value'];
 		
-		
+		//$S1=$suppliersdetail->value('value');
+		if($value>=$S1){
 		$suppliersdetail->update([
-		'value' => $S1 - $request->value
+		'value' => '0',
+		'checked'=>'0'
 		]);
+		$value=$value-$S1;
+		}
+		else{
+		$suppliersdetail->update([
+		'value' => $S1 -$value,
+		
+		'checked'=>'0'
+		]);
+		break;
+		}
+		}
 		if($request->price>$good->price)
 		{
 			$good->update([
