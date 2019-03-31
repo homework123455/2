@@ -24,11 +24,13 @@ class CartController extends Controller
             $all = 0;
 			$q = 0;
 			$qq =0;
+			$i=0;
             $data = DB::table('carts')
                 ->where('users_id',Auth::user()->id)
                 ->get();
             foreach ($data as $s){
                 $all = $all + $s->total;
+				$i = $i + $s->total;
             }
 			if($all < $low_price){
 				$qq=$low_price-$all;
@@ -38,7 +40,7 @@ class CartController extends Controller
 			$all =$all;
 			$q =0;
 			}
-            return view('cart',['carts' => $data,'a' =>$all,'goods'=>$good,'q'=>$q,'qq'=>$qq]);
+            return view('cart',['carts' => $data,'a' =>$all,'goods'=>$good,'q'=>$q,'qq'=>$qq,'b'=>$i]);
         }else{
             return redirect()->route('login');
         }

@@ -140,8 +140,8 @@
 		</tr>
 		@endforeach
 		</table>
-			<h3>運費：$<?php echo $q; ?>      結帳總金額 : $ <?php echo $a; ?></h3>
-			<h3>還差$<?php echo $qq; ?>即可享有免運費</h3>
+			<h3>運費：$<?php echo $q;?>       購買金額 : $ <?php echo $b; ?></h3>
+			<h3>結帳總金額為：$<?php echo $a; ?></h3>
 			<div class="add-to-cart-btn">
 				<a href="{{route('checkout')}}" class="btn essence-btn">下單</a>
 			</div>

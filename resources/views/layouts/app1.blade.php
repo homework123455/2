@@ -35,7 +35,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    勤益體育館場地系統
+                    體育用品購物系統
                 </a>
             </div>
 
