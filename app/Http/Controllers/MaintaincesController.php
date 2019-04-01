@@ -410,6 +410,54 @@ class MaintaincesController extends Controller
       
         return view('orders.orderback', $data);
     }
+	public function backindex(){
+        
+		$orders =Order::all();
+        $ordersdetail = OrdersDetail::all();
+		
+		$users = User::all();
+
+        $data=['orders'=>$orders,'ordersdetail'=>$ordersdetail,'users'=>$users];
+      
+        return view('orders.backindex', $data);
+    }
+	public function backshow($id){
+        
+		$ordersdetail = OrdersDetail::find($id);
+        
+		$order=Order::where('id',$ordersdetail->orders_id)->first();
+		$users=User::orderBy('created_at','DESC')->get();
+        
+		
+		
+        $data=['users'=>$users,'order'=>$order,'ordersdetail'=>$ordersdetail];
+      
+        return view('orders.backshow', $data);
+    }
+	public function backshowupdate(Request $request,$id){
+        
+		$ordersdetail = OrdersDetail::find($id);
+        
+		$order=Order::where('id',$ordersdetail->orders_id)->get();
+		$users =User::all();
+        
+		
+		if($request->method=='0'){
+		$ordersdetail->update([
+                'status'=>'已退貨'
+
+            ]);
+		}
+		elseif($request->method=='1'){
+			$ordersdetail->update([
+			'status'=>'拒絕退貨',
+				'backreason1'=>$request->input('reason')
+			 ]);
+		}
+        $data=['users'=>$users,'order'=>$order,'ordersdetail'=>$ordersdetail];
+      
+        return redirect()->route('orders.backindex',$id);
+    }
 	public function orderbackupdate(Request $request,$id,$product_id){
         
 

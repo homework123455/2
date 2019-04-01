@@ -109,6 +109,7 @@
         </div>
 		 </div>
 		  </div>
+		  
 		  </div>
 @else
 	  <i class="fa fa-edit"></i>無資料

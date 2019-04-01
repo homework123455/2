@@ -72,6 +72,9 @@ Route::get('news/detail/{id}', ['as' => 'news.detail', 'uses' => 'NewsDetailCont
 Route::post('/shop/search',['as'=> 'search','uses'=>'ShopController@search']);
 
 Route::get('orders', ['as' => 'orders.index' , 'uses' => 'MaintaincesController@index']);
+Route::get('ordersback', ['as' => 'orders.backindex' , 'uses' => 'MaintaincesController@backindex']);
+Route::get('ordersback/{id}/backshow', ['as' => 'orders.backshow' , 'uses' => 'MaintaincesController@backshow']);
+Route::patch('ordersback/{id}/backshow', ['as' => 'orders.backshowupdate' , 'uses' => 'MaintaincesController@backshowupdate']);
 Route::get('orders1', ['as' => 'orders.index1' , 'uses' => 'MaintaincesController@index1']);
 Route::delete('orders/{id}'  , ['as' => 'orders.destroy', 'uses' => 'MaintaincesController@destroy']);
 Route::get('orders/{id}/show', ['as' => 'orders.show', 'uses' => 'MaintaincesController@show']); 
