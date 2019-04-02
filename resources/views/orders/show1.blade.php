@@ -100,7 +100,7 @@
 						<td style="text-align: center">{{$order->status}}</td>
 					@endif
 						@if((Auth::user()->previlege_id==1))
-							@if($order->status=="已完成"&&$order1->status!="退貨中"&&$order1->status!="已退貨")
+							@if($order->status=="已完成"&&$order1->status!="退貨中"&&$order1->status!="已退貨"&&$order1->status!="拒絕退貨")
 						
 					<td class="table-text" style="text-align: center">
                                 
@@ -114,6 +114,12 @@
                                 
                         </td>
 						@elseif($order->status=="已完成"&&$order1->status=="已退貨")
+						<td class="table-text" style="text-align: center">
+                                
+                                   <div> <a class="btn btn-primary" role="button" disabled>退貨</a></div>
+                                
+                        </td>
+						@elseif($order->status=="已完成"&&$order1->status=="拒絕退貨")
 						<td class="table-text" style="text-align: center">
                                 
                                    <div> <a class="btn btn-primary" role="button" disabled>退貨</a></div>
