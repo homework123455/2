@@ -18,6 +18,7 @@
                 <a href="{{ route('main.shop') }}" class="btn btn-primary">前往商城</a>
         </div>
         </div>
+
 		@if(count($place_overtimes1) > 0)
 	<div class="row">
     <div class="col-lg-12">
