@@ -93,8 +93,9 @@
 				<a href="{{ route('orders.index') }}"><i class="fa fa-fw fa-edit"></i> 進行中</a></br>
 				
 				<a href="{{ route('orders.index1') }}"><i class="fa fa-fw fa-edit"></i> 已完成</a></br>
-				
-				<a href=""><i class="fa fa-fw fa-edit"></i> 退貨</a>
+
+				<a href="{{ route('orders.backindex') }}"><i class="fa fa-fw fa-edit"></i> 退貨</a>
+
 				</div>
 				</div>
 				<script type="text/javascript">

@@ -71,7 +71,7 @@
 					
 					@endif
 					<th width="100" style="text-align: center">訂單狀態</th>
-					@if((Auth::user()->previlege_id=1))
+					@if((Auth::user()->previlege_id==1))
 					@if($order->status=="已完成")
 						
 					<th width="100" style="text-align: center">功能</th>
@@ -99,8 +99,8 @@
 					@else
 						<td style="text-align: center">{{$order->status}}</td>
 					@endif
-						@if((Auth::user()->previlege_id=1))
-					@if($order->status=="已完成"&&$order1->status!="退貨中")
+						@if((Auth::user()->previlege_id==1))
+							@if($order->status=="已完成"&&$order1->status!="退貨中"&&$order1->status!="已退貨"&&$order1->status!="拒絕退貨")
 						
 					<td class="table-text" style="text-align: center">
                                 
@@ -108,6 +108,18 @@
                                 
                         </td>
 						@elseif($order->status=="已完成"&&$order1->status=="退貨中")
+						<td class="table-text" style="text-align: center">
+                                
+                                   <div> <a class="btn btn-primary" role="button" disabled>退貨</a></div>
+                                
+                        </td>
+						@elseif($order->status=="已完成"&&$order1->status=="已退貨")
+						<td class="table-text" style="text-align: center">
+                                
+                                   <div> <a class="btn btn-primary" role="button" disabled>退貨</a></div>
+                                
+                        </td>
+						@elseif($order->status=="已完成"&&$order1->status=="拒絕退貨")
 						<td class="table-text" style="text-align: center">
                                 
                                    <div> <a class="btn btn-primary" role="button" disabled>退貨</a></div>
@@ -138,6 +150,14 @@
 		
 			    
 </div>
+@elseif($order1->status=="拒絕退貨")
+<div class="panel panel-danger">
+    <div class="panel-heading">
+        <h3 class="panel-title">駁回原因</h3>
+    </div>
+    <div class="panel-body">
+	{{$order1->backreason1}}
+    </div>
 @endif
 
             </div>
