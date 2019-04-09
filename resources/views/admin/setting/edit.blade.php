@@ -29,6 +29,7 @@
             筆數設定</a>
     </li>
     <li><a href="#ios" data-toggle="tab">運費設定</a></li>
+	<li><a href="#ios1" data-toggle="tab">VIP設定</a></li>
     
 </ul>
 <div id="myTabContent" class="tab-content">
@@ -65,6 +66,13 @@
                
             </div>
 			 </div>
+			 <div class="tab-pane fade" id="ios1">
+          <div class="form-group">
+                <label>VIP設定：</label>
+				<input name="vip" class="form-control" placeholder="請輸入VIP金額" value={{$vip}}>
+               
+            </div>
+			</div>
             <div class="text-right">
                 <button type="submit" class="btn btn-success">確定</button>
             </div>

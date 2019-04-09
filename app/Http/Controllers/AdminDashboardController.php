@@ -128,7 +128,8 @@ if (Auth::user()->previlege_id==3)
 		$order=Setting::where('id',1)->value('orders');
 		$price=Setting::where('id',1)->value('prices');
 		$low_price=Setting::where('id',1)->value('low_prices');
-		$data = ['good'=>$good,'order' => $order,'price'=>$price,'low_price'=>$low_price];
+		$vip=Setting::where('id',1)->value('vip');
+		$data = ['vip'=>$vip,'good'=>$good,'order' => $order,'price'=>$price,'low_price'=>$low_price];
 		
 		return view('admin.setting.edit', $data);
 	}
@@ -141,7 +142,8 @@ if (Auth::user()->previlege_id==3)
             'goods' => $request->goods,
             'orders' => $request->orders,
 			'prices'=>$request->price,
-			'low_prices'=>$request->low_price
+			'low_prices'=>$request->low_price,
+			'vip'=>$request->vip
             
         ]);
 

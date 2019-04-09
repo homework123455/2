@@ -9,7 +9,7 @@ use App\Cart;
 use DB;
 use App\Good;
 use App\Setting;
-
+use App\User;
 
 class CartController extends Controller
 {
@@ -19,6 +19,7 @@ class CartController extends Controller
     {
      $price=Setting::where('id',1)->value('prices');
 	 $low_price=Setting::where('id',1)->value('low_prices');
+	 $vip=User::where('id',Auth::user()->id)->value('vip');
         if (Auth::check()) {
 			$good=Good::all();
             $all = 0;
@@ -32,6 +33,7 @@ class CartController extends Controller
                 $all = $all + $s->total;
 				$i = $i + $s->total;
             }
+			if($vip==0){
 			if($all < $low_price){
 				$qq=$low_price-$all;
 				$all =$all + $price;
@@ -39,8 +41,8 @@ class CartController extends Controller
 			}else{
 			$all =$all;
 			$q =0;
-			}
-            return view('cart',['carts' => $data,'a' =>$all,'goods'=>$good,'q'=>$q,'qq'=>$qq,'b'=>$i]);
+			}}
+            return view('cart',['low_price'=>$low_price,'carts' => $data,'a' =>$all,'goods'=>$good,'q'=>$q,'qq'=>$qq,'b'=>$i,'vip'=>$vip]);
         }else{
             return redirect()->route('login');
         }
@@ -99,6 +101,8 @@ class CartController extends Controller
             'qty' => $q,
             'total' => $cost * $q
         ]);
+
+		
         return redirect()->route('cart');
 
     }
