@@ -13,9 +13,11 @@ class Setting extends Model
 		'prices',
 		'low_prices',
 
+
 		'photo1',
 		'photo2',
 		'photo3',
+
 
 		'vip'
 
