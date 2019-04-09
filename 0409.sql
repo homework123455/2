@@ -490,11 +490,14 @@ CREATE TABLE `setting` (
   `prices` int(11) NOT NULL,
   `vip` int(11) NOT NULL,
   `low_prices` int(11) NOT NULL,
-  `updated_at` date NOT NULL
+  `updated_at` date NOT NULL,
+  `photo1` varchar(255) NOT NULL,
+  `photo2` varchar(255) NOT NULL,
+  `photo3` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `setting` (`id`, `goods`, `orders`, `prices`, `vip`, `low_prices`, `updated_at`) VALUES
-(1,	2,	3,	70,	10000,	500,	'2019-04-09');
+INSERT INTO `setting` (`id`, `goods`, `orders`, `prices`, `vip`, `low_prices`, `updated_at`, `photo1`, `photo2`, `photo3`) VALUES
+(1,	2,	3,	70,	10000,	500,	'2019-04-09',	'/uploads/2019-04-09/20190409210550905.jpg',	'/uploads/2019-04-09/20190409210550688.jpg',	'/uploads/2019-04-09/20190409210550421.jpg');
 
 DROP TABLE IF EXISTS `suppliers`;
 CREATE TABLE `suppliers` (
@@ -628,4 +631,4 @@ INSERT INTO `wrongs` (`id`, `user_id`, `wrongname`, `date`, `created_at`, `updat
 (12,	17,	'亂丟垃圾',	'2019-01-01 00:00:00',	'2019-01-11 18:42:08',	'2019-01-11 18:42:08'),
 (13,	17,	'亂丟垃圾',	'2019-01-01 00:00:00',	'2019-01-11 18:42:22',	'2019-01-11 18:42:22');
 
--- 2019-04-09 11:18:41
+-- 2019-04-09 13:08:43
