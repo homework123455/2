@@ -20,7 +20,7 @@ class ShopController extends Controller
         $data = Good::all();
 		$category = Category::all();
 		$good = Good::where('id','1')->get()->first();
-        return view('Shop', ['goods' => $data,'categories'=>$category,'good'=>$good,'setting'=>$]);
+        return view('Shop', ['goods' => $data,'categories'=>$category,'good'=>$good,'setting'=>$setting]);
     }
 
 

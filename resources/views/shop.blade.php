@@ -48,13 +48,13 @@
 	<!-- 轮播（Carousel）项目 -->
 	<div class="carousel-inner">
 		<div class="item active">
-			<img src={{$setting->photo1}} alt="First slide">
+			<img src={{$setting->photo1}} height="200"  alt="First slide">
 		</div>
 		<div class="item">
-			<img src={{$setting->photo2}} alt="Second slide">
+			<img src={{$setting->photo2}}  height="200" alt="Second slide">
 		</div>
 		<div class="item">
-			<img src={{$setting->photo3}} alt="Third slide">
+			<img src={{$setting->photo3}} height="200" alt="Third slide">
 		</div>
 	</div>
 	<!-- 轮播（Carousel）导航 -->
@@ -187,9 +187,43 @@
 
 </body>
 <script>
-$(function(){
+$(function() {
 	$('.coverflow').css('max-width',$('.coverflow img').width());
+    carouselNormalization();
 });
+function carouselNormalization() {
+    var items = $('.carousel .carousel-inner .item'), heights = [], tallest, bwidth, height, width;
+    if( items.length ) {
+        function normalizeHeights() {
+            bwidth = $('.carousel').width();
+            items.each(function() {
+                height = $(this).height();
+                width = $(this).width();
+                if( width > bwidth ) {
+                    height = height * ( bwidth / width );
+                }
+                heights.push(height);
+            });
+            tallest = Math.max.apply(null, heights);
+            if( tallest > bwidth ) {
+                tallest = bwidth;
+            }
+            items.each(function() {
+                $(this).css('height', tallest + 'px');
+            });
+        };
+        normalizeHeights();
+        $(window).on('resize', function() {
+            bwidth = $('.carousel').width();
+            heights = [];
+            items.each(function() {
+                $(this).css('height', 'auto');
+            });
+            normalizeHeights();
+        });
+    }
+}
+
 </script>
 
 </html>
