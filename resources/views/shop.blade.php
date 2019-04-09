@@ -48,13 +48,13 @@
 	<!-- 轮播（Carousel）项目 -->
 	<div class="carousel-inner">
 		<div class="item active">
-			<img src={{$good->photo1}} alt="First slide">
+			<img src={{$setting->photo1}} alt="First slide">
 		</div>
 		<div class="item">
-			<img src={{$good->photo2}} alt="Second slide">
+			<img src={{$setting->photo2}} alt="Second slide">
 		</div>
 		<div class="item">
-			<img src={{$good->photo3}} alt="Third slide">
+			<img src={{$setting->photo3}} alt="Third slide">
 		</div>
 	</div>
 	<!-- 轮播（Carousel）导航 -->

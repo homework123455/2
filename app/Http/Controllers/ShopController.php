@@ -10,15 +10,17 @@ use App\Plant;
 use DB;
 use App\Category;
 use App\Supplier;
+use App\Setting;
 use App\Suppliersdetail;
 class ShopController extends Controller
 {
     public function index()
     {
+		$setting=Setting::where('id','1')->get()->first();
         $data = Good::all();
 		$category = Category::all();
 		$good = Good::where('id','1')->get()->first();
-        return view('Shop', ['goods' => $data,'categories'=>$category,'good'=>$good]);
+        return view('Shop', ['goods' => $data,'categories'=>$category,'good'=>$good,'setting'=>$]);
     }
 
 

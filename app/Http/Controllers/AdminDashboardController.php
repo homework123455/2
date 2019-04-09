@@ -123,12 +123,14 @@ if (Auth::user()->previlege_id==3)
     }
 	public function edit()
 	{
-		
+		$run1 =Setting::where('id',1)->value('photo1');
+		$run2 =Setting::where('id',1)->value('photo2');
+		$run3 =Setting::where('id',1)->value('photo3');
 		$good=Setting::where('id',1)->value('goods');
 		$order=Setting::where('id',1)->value('orders');
 		$price=Setting::where('id',1)->value('prices');
 		$low_price=Setting::where('id',1)->value('low_prices');
-		$data = ['good'=>$good,'order' => $order,'price'=>$price,'low_price'=>$low_price];
+		$data = ['good'=>$good,'order' => $order,'price'=>$price,'low_price'=>$low_price,'run1'=>$run1,'run2'=>$run2,'run3'=>$run3];
 		
 		return view('admin.setting.edit', $data);
 	}
@@ -136,15 +138,125 @@ if (Auth::user()->previlege_id==3)
     {
 
         $set = Setting::where('id',1);
+			$file = $request->file('img1');
+            if (!empty($file)) {//此处防止没有多文件上传的情况
+                $allowed_extensions = ["png", "jpg", "gif","JPG"];
+
+                if ($file->getClientOriginalExtension() && !in_array($file->getClientOriginalExtension(), $allowed_extensions)) {
+                    exit('您只能上傳PNG、JPG或GIF格式的圖片！');
+                }
+                $destinationPath = '/uploads/' . date('Y-m-d'); // public文件夹下面uploads/xxxx-xx-xx 建文件夹
+                $extension = $file->getClientOriginalExtension();   // 上传文件后缀
+                $fileName = date('YmdHis') . mt_rand(100, 999) . '.' . $extension; // 重命名
+                $file->move(public_path() . $destinationPath, $fileName); // 保存图片
+                $filePath= $destinationPath . '/' . $fileName;
+
+            }
 			
+			$file1 = $request->file('img2');
+            if (!empty($file1)) {//此处防止没有多文件上传的情况
+                $allowed_extensions = ["png", "jpg", "gif","JPG"];
+
+                if ($file1->getClientOriginalExtension() && !in_array($file1->getClientOriginalExtension(), $allowed_extensions)) {
+                    exit('您只能上傳PNG、JPG或GIF格式的圖片！');
+                }
+                $destinationPath = '/uploads/' . date('Y-m-d'); // public文件夹下面uploads/xxxx-xx-xx 建文件夹
+                $extension = $file1->getClientOriginalExtension();   // 上传文件后缀
+                $fileName = date('YmdHis') . mt_rand(100, 999) . '.' . $extension; // 重命名
+                $file1->move(public_path() . $destinationPath, $fileName); // 保存图片
+                $filePath1= $destinationPath . '/' . $fileName;
+
+            }
+			$file2 = $request->file('img3');
+            if (!empty($file2)) {//此处防止没有多文件上传的情况
+                $allowed_extensions = ["png", "jpg", "gif","JPG"];
+
+                if ($file2->getClientOriginalExtension() && !in_array($file2->getClientOriginalExtension(), $allowed_extensions)) {
+                    exit('您只能上傳PNG、JPG或GIF格式的圖片！');
+                }
+                $destinationPath = '/uploads/' . date('Y-m-d'); // public文件夹下面uploads/xxxx-xx-xx 建文件夹
+                $extension = $file2->getClientOriginalExtension();   // 上传文件后缀
+                $fileName = date('YmdHis') . mt_rand(100, 999) . '.' . $extension; // 重命名
+                $file2->move(public_path() . $destinationPath, $fileName); // 保存图片
+                $filePath2= $destinationPath . '/' . $fileName;
+
+            }
+	if(!empty($file)&&!empty($file1)&&!empty($file2)){
         $set->update([
             'goods' => $request->goods,
             'orders' => $request->orders,
 			'prices'=>$request->price,
-			'low_prices'=>$request->low_price
-            
+			'low_prices'=>$request->low_price,
+            'photo1'=>$filePath,
+			'photo2'=>$filePath1,
+			'photo3'=>$filePath2
         ]);
-
+	}
+	elseif(empty($file)&&!empty($file1)&&!empty($file2)){
+$set->update([
+            'goods' => $request->goods,
+            'orders' => $request->orders,
+			'prices'=>$request->price,
+			'low_prices'=>$request->low_price,
+			'photo2'=>$filePath1,
+			'photo3'=>$filePath2
+        ]);
+	}
+	elseif(!empty($file)&&empty($file1)&&!empty($file2)){
+$set->update([
+            'goods' => $request->goods,
+            'orders' => $request->orders,
+			'prices'=>$request->price,
+			'low_prices'=>$request->low_price,
+			'photo1'=>$filePath,
+			'photo3'=>$filePath2
+        ]);
+	}
+	elseif(!empty($file)&&!empty($file1)&&empty($file2)){
+$set->update([
+            'goods' => $request->goods,
+            'orders' => $request->orders,
+			'prices'=>$request->price,
+			'low_prices'=>$request->low_price,
+			'photo1'=>$filePath,
+			'photo2'=>$filePath1
+        ]);
+	}
+	elseif(empty($file)&&empty($file1)&&!empty($file2)){
+$set->update([
+            'goods' => $request->goods,
+            'orders' => $request->orders,
+			'prices'=>$request->price,
+			'low_prices'=>$request->low_price,
+			'photo3'=>$filePath2
+        ]);
+	}
+		elseif(!empty($file)&&empty($file1)&&empty($file2)){
+$set->update([
+            'goods' => $request->goods,
+            'orders' => $request->orders,
+			'prices'=>$request->price,
+			'low_prices'=>$request->low_price,
+			'photo1'=>$filePath
+        ]);
+	}
+	elseif(empty($file)&&!empty($file1)&&empty($file2)){
+$set->update([
+            'goods' => $request->goods,
+            'orders' => $request->orders,
+			'prices'=>$request->price,
+			'low_prices'=>$request->low_price,
+			'photo2'=>$filePath1
+        ]);
+	}
+	elseif(empty($file)&&empty($file1)&&empty($file2)){
+$set->update([
+            'goods' => $request->goods,
+            'orders' => $request->orders,
+			'prices'=>$request->price,
+			'low_prices'=>$request->low_price
+        ]);
+	}
         return redirect()->route('admin.places.index');
     }
 }

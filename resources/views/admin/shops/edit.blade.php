@@ -78,7 +78,7 @@ function openFile3(event){
                 </fieldset>
 
                 <input type="file" name="img[]"  onchange="openFile(event)" accept="image/jpeg,image/jpg,image/gif,image/png" style="display: block;margin-bottom: 5px;">	
-				<img id="output" height="200" style="display:none">
+				<img id="output"  height="200" style="display:none">
 				<input type="file" name="img[]" onchange="openFile1(event)" accept="image/jpeg,image/jpg,image/gif,image/png" style="display: block;margin-bottom: 5px;">
 				<img id="output1" height="200" style="display:none">
 				<input type="file" name="img[]" onchange="openFile2(event)" accept="image/jpeg,image/jpg,image/gif,image/png" style="display: block;margin-bottom: 5px;">	

@@ -11,7 +11,10 @@ class Setting extends Model
         'goods',
         'orders',
 		'prices',
-		'low_prices'
+		'low_prices',
+		'photo1',
+		'photo2',
+		'photo3'
         
     ];
     public function user() // Maintaince (n) -> asset (1)
