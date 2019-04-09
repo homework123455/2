@@ -130,7 +130,12 @@ if (Auth::user()->previlege_id==3)
 		$order=Setting::where('id',1)->value('orders');
 		$price=Setting::where('id',1)->value('prices');
 		$low_price=Setting::where('id',1)->value('low_prices');
+<<<<<<< HEAD
 		$data = ['good'=>$good,'order' => $order,'price'=>$price,'low_price'=>$low_price,'run1'=>$run1,'run2'=>$run2,'run3'=>$run3];
+=======
+		$vip=Setting::where('id',1)->value('vip');
+		$data = ['vip'=>$vip,'good'=>$good,'order' => $order,'price'=>$price,'low_price'=>$low_price];
+>>>>>>> 5123ec303ffa1e291ef0236b2232293855f163eb
 		
 		return view('admin.setting.edit', $data);
 	}
@@ -187,6 +192,7 @@ if (Auth::user()->previlege_id==3)
             'orders' => $request->orders,
 			'prices'=>$request->price,
 			'low_prices'=>$request->low_price,
+<<<<<<< HEAD
             'photo1'=>$filePath,
 			'photo2'=>$filePath1,
 			'photo3'=>$filePath2
@@ -255,6 +261,10 @@ $set->update([
             'orders' => $request->orders,
 			'prices'=>$request->price,
 			'low_prices'=>$request->low_price
+=======
+			'vip'=>$request->vip
+            
+>>>>>>> 5123ec303ffa1e291ef0236b2232293855f163eb
         ]);
 	}
         return redirect()->route('admin.places.index');

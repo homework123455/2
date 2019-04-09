@@ -7,6 +7,7 @@ use App\Good;
 use DB;
 use App\Cart;
 use App\Order;
+use App\Setting;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 class CheckoutController extends Controller
@@ -45,6 +46,22 @@ class CheckoutController extends Controller
                 ]
 			
             );
+		$level = DB::table('users')->where('id', Auth::user()->id)->value('level');
+			DB::table('users')
+        ->where('id', Auth::user()->id)
+        ->update([
+            'level' =>$level+$cart->cost,
+			
+        ]);
+		$vip=Setting::where('id',1)->value('vip');
+		if($level>$vip){
+			DB::table('users')
+        ->where('id', Auth::user()->id)
+        ->update([
+            'vip' => 1,
+			
+        ]);
+		}
 			$stock=Good::where('name',$cart->product)->get()->first();
 			//$result = $stock->stock-$cart->qty;
 			/*DB::table('goods')->where('name',$cart->product)->update(

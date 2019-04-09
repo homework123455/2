@@ -29,7 +29,11 @@
             筆數設定</a>
     </li>
     <li><a href="#ios" data-toggle="tab">運費設定</a></li>
+<<<<<<< HEAD
 	<li><a href="#run" data-toggle="tab">跑馬燈設定</a></li>
+=======
+	<li><a href="#ios1" data-toggle="tab">VIP設定</a></li>
+>>>>>>> 5123ec303ffa1e291ef0236b2232293855f163eb
     
 </ul>
 <div id="myTabContent" class="tab-content">
@@ -66,6 +70,7 @@
                
             </div>
 			 </div>
+<<<<<<< HEAD
 			  <div class="tab-pane fade" id="run">
           <div class="form-group">
                 <label>跑馬燈設定：</label>
@@ -82,6 +87,15 @@
             </div>
 			
 			 </div>
+=======
+			 <div class="tab-pane fade" id="ios1">
+          <div class="form-group">
+                <label>VIP設定：</label>
+				<input name="vip" class="form-control" placeholder="請輸入VIP金額" value={{$vip}}>
+               
+            </div>
+			</div>
+>>>>>>> 5123ec303ffa1e291ef0236b2232293855f163eb
             <div class="text-right">
                 <button type="submit" class="btn btn-success">確定</button>
             </div>
