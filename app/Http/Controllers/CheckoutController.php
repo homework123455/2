@@ -26,6 +26,7 @@ class CheckoutController extends Controller
 				'created_at'=>Carbon::now(),
             ]
         );
+		
         while ($row = Cart::where('users_id',Auth::user()->id)->first() != null){
             $cart = Cart::where('users_id',Auth::user()->id)->first();
 			foreach($good as $good1){
@@ -43,22 +44,25 @@ class CheckoutController extends Controller
                     'orders_id' => $count,
 					'product_id'=>$product_id
 					
-                ]
+                ] );
 			
-            );
-		$level = DB::table('users')->where('id', Auth::user()->id)->value('level');
-			DB::table('users')
+			
+           
+			$level = DB::table('users')->where('id', Auth::user()->id)->value('level');
+		DB::table('users')
         ->where('id', Auth::user()->id)
         ->update([
-            'level' =>$level+$cart->cost,
+            'level' =>$level+$cart->total,
 			
         ]);
+		$level1 = DB::table('users')->where('id', Auth::user()->id)->value('level');
 		$vip=Setting::where('id',1)->value('vip');
-		if($level>$vip){
+		if($level1>$vip){
 			DB::table('users')
         ->where('id', Auth::user()->id)
         ->update([
             'vip' => 1,
+			'vip_time'=>Carbon::now()
 			
         ]);
 		}

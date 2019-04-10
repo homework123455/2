@@ -57,7 +57,11 @@
                 @foreach($users as $user)
                     <tr>
                         <td style="text-align: center"><a href="{{ route('admin.users.data', $user->id) }}">{{ $user->email }}</a></td>
+						@if($user->vip==0)
                         <td style="text-align: center">{{ $user->name }}</td>
+					@else
+						 <td style="text-align: center"><font color="#CC00CC">{{ $user->name }}</td>
+					@endif
                         <td style="text-align: center">
                             @foreach($departments as $department)
                                 @if($user->department_id==$department->id)

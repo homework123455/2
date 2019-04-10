@@ -90,7 +90,7 @@
 
 			 <div class="tab-pane fade" id="ios1">
           <div class="form-group">
-                <label>VIP設定：</label>
+                <label>VIP金額設定：</label>
 				<input name="vip" class="form-control" placeholder="請輸入VIP金額" value={{$vip}}>
                
             </div>

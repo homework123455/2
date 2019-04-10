@@ -38,9 +38,28 @@
                     </form>
                 </div>
                 <!-- User Login Info -->
+						<?php
+						use Illuminate\Support\Facades\Auth;
+						use App\User;
+						use Carbon\Carbon;
+			            $vip=User::where('id',Auth::user()->id)->value('vip');
+						$vip_time=User::where('id',Auth::user()->id)->value('vip_time');
+	                    $vip_time1=Carbon::parse($vip_time)->addDays(30)->format('Ymd');
+	
+			
+	?>
+				@if($vip==1)
                 <div class="user-login-info">
-                    <a href="{{route('login')}}"><img src="{{asset('/img/core-img/user.svg')}}" alt=""></a>
+                    <a href="{{route('login')}}"><img src="{{asset('/img/core-img/390125.png')}}" alt="">{{$vip_time1}}</a>
+					
                 </div>
+				@else
+					<div class="user-login-info">
+                    <a href="{{route('login')}}"><img src="{{asset('/img/core-img/user.svg')}}" alt=""></a>
+					
+                </div>
+				@endif
+					
                 <!-- Cart Area -->
                 <div class="cart-area">
                     <a href="{{route('cart')}}" id="essenceCartBtn"><img src="{{asset('/img/core-img/bag.svg')}}" alt=""> <span></span></a>

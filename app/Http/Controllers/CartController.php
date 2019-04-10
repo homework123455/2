@@ -10,7 +10,7 @@ use DB;
 use App\Good;
 use App\Setting;
 use App\User;
-
+use Carbon\Carbon;
 class CartController extends Controller
 {
 
@@ -20,6 +20,8 @@ class CartController extends Controller
      $price=Setting::where('id',1)->value('prices');
 	 $low_price=Setting::where('id',1)->value('low_prices');
 	 $vip=User::where('id',Auth::user()->id)->value('vip');
+	 $vip_time=User::where('id',Auth::user()->id)->value('vip_time');
+	 $vip_time1=Carbon::parse($vip_time)->addDays(30)->format('Y-m-d');
         if (Auth::check()) {
 			$good=Good::all();
             $all = 0;
@@ -42,7 +44,7 @@ class CartController extends Controller
 			$all =$all;
 			$q =0;
 			}}
-            return view('cart',['low_price'=>$low_price,'carts' => $data,'a' =>$all,'goods'=>$good,'q'=>$q,'qq'=>$qq,'b'=>$i,'vip'=>$vip]);
+            return view('cart',['low_price'=>$low_price,'carts' => $data,'a' =>$all,'goods'=>$good,'q'=>$q,'qq'=>$qq,'b'=>$i,'vip'=>$vip,'vip_time1'=>$vip_time1]);
         }else{
             return redirect()->route('login');
         }

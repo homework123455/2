@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Http\Requests\PlaceRequest;
@@ -11,7 +11,9 @@ use DB;
 use App\Category;
 use App\Supplier;
 use App\Setting;
+use App\User;
 use App\Suppliersdetail;
+use Carbon\Carbon;
 class ShopController extends Controller
 {
     public function index()
@@ -20,6 +22,18 @@ class ShopController extends Controller
         $data = Good::all();
 		$category = Category::all();
 		$good = Good::where('id','1')->get()->first();
+		$vip_time=User::where('id',Auth::user()->id)->value('vip_time');
+	    $vip_time1=Carbon::parse($vip_time)->addDays(30)->format('Y-m-d');
+		if(Carbon::now()>=$vip_time1){
+		DB::table('users')
+        ->where('id', Auth::user()->id)
+        ->update([
+            'vip' => 0,
+			'vip_time'=>null,
+			'level'=>0
+			
+        ]);
+		}
         return view('Shop', ['goods' => $data,'categories'=>$category,'good'=>$good,'setting'=>$setting]);
     }
 
