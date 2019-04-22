@@ -35,6 +35,7 @@ class CartController extends Controller
                 $all = $all + $s->total;
 				$i = $i + $s->total;
             }
+
 			if($vip==0){
 			if($all < $low_price){
 				$qq=$low_price-$all;
