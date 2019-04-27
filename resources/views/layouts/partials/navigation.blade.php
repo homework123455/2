@@ -42,13 +42,16 @@
 						use Illuminate\Support\Facades\Auth;
 						use App\User;
 						use Carbon\Carbon;
+						if(Auth::check()){
 			            $vip=User::where('id',Auth::user()->id)->value('vip');
 						$vip_time=User::where('id',Auth::user()->id)->value('vip_time');
 	                    $vip_time1=Carbon::parse($vip_time)->addDays(30)->format('Ymd');
+						}
 	
 			
 	?>
-				@if($vip==1)
+	
+				@if(isset($vip)&&$vip==1)
                 <div class="user-login-info">
                     <a href="{{route('login')}}"><img src="{{asset('/img/core-img/390125.png')}}" alt="">{{$vip_time1}}</a>
 					
