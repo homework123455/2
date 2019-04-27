@@ -120,6 +120,68 @@
 			<li>
                 <a href="{{ route('admin.setting.edit') }}"><i class="fa fa-fw fa-edit"></i> 系統管理</a>
             </li>
+			@elseif(Auth::user()->previlege_id==2)
+			<li class="active">
+                    <a href="{{ route('admin.dashboard.index') }}"><i class="fa fa-fw fa-dashboard"></i> 首頁</a>
+                </li>
+				<li class="active">
+                    <a href="{{ route('main.shop') }}"><i class="fa fa-fw fa-dashboard"></i> 商店</a>
+                </li>
+                <li>
+				<a data-toggle="collapse" data-parent="#accordion" 
+				   href="#collapse6">
+				   <i class="fa fa-fw fa-edit"></i>商品管理<b class="caret"></b>
+				    <div id="collapse6" class="panel-collapse collapse">
+				<div class="panel-body">
+                    <a href="{{ route('admin.places.index') }}"><i class="fa fa-fw fa-edit"></i> 商品管理</a></br>
+					 
+					 </div>
+				</div>
+				<script type="text/javascript">
+	$(function () { $('#collapse6').collapse({
+		'hide'
+	})});
+	
+</script>
+                </li>
+				
+				
+				
+				
+				
+	<li>
+				<a data-toggle="collapse" data-parent="#accordion" 
+
+				href="#collapse5">
+					<i class="fa fa-fw fa-edit"></i>訂單處理<b class="caret"></b>
+				</a>
+			
+		
+                <div id="collapse5" class="panel-collapse collapse">
+				<div class="panel-body">
+				
+				<a href="{{ route('orders.index') }}"><i class="fa fa-fw fa-edit"></i> 進行中</a></br>
+				
+				<a href="{{ route('orders.index1') }}"><i class="fa fa-fw fa-edit"></i> 已完成</a></br>
+
+				<a href="{{ route('orders.backindex') }}"><i class="fa fa-fw fa-edit"></i> 退貨</a>
+
+				</div>
+				</div>
+				<script type="text/javascript">
+	$(function () { $('#collapse5').collapse({
+		'hide'
+	})});
+	
+</script>
+				</li>
+				
+            
+           
+               <li>
+                    <a href="{{ route('admin.news.index') }}"><i class="fa fa-fw fa-edit"></i> 公告管理</a>
+               </li>
+
             @endif
         </ul>
     </div>

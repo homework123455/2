@@ -102,7 +102,7 @@
                         	<th width="150" style="text-align: center">商品狀態</th>
 							<th width="200" style="text-align: center">架上數量</th>
                         	<th width="200" style="text-align: center">庫存</th>
-							<th width="200" style="text-align: center">售價</th>
+							
                             	<th width="400" style="text-align: center">功能</th>                        
 			@else
 				<th width="120" style="text-align: center">商品圖片</th>
@@ -114,7 +114,7 @@
 							<th width="200" style="text-align: center">架上數量</th>
 							
 							<th width="200" style="text-align: center">庫存</th>
-							
+							<th width="200" style="text-align: center">售價</th>
                         	
                             	<th width="80" style="text-align: center">功能</th>                        
 			@endif
@@ -134,6 +134,8 @@
                         </td>
                         <td style="text-align: center">
 						@if(Auth::user()->previlege_id==3)
+                         {{ $good->name }}
+					 @elseif(Auth::user()->previlege_id==2)
                          {{ $good->name }}
 					 @else
 						 <a href="{{ route('admin.places.data', $good->id) }}">{{ $good->name }}</a>
@@ -164,7 +166,7 @@
                             <table>
                                 <tbody>
                                 <tr class="table-text" style="text-align: center">
-                                    @if(Auth::user()->previlege_id>=3)
+                                    @if(Auth::user()->previlege_id>=2)
 
     
                                             <td width="80" >
@@ -214,7 +216,7 @@
 										?>
 										
 										
-										
+									@if(Auth::user()->previlege_id>=3)
 	                                   @if($good->status=="下架中"&&$S1<=0)
 										
                                         <td class="table-text" style="text-align: center">
@@ -269,6 +271,8 @@
 										
 										
 										@endif
+										@endif
+									
 											
 											
 											

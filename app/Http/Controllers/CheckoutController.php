@@ -27,7 +27,8 @@ class CheckoutController extends Controller
             ]
         );
 		
-        while ($row = Cart::where('users_id',Auth::user()->id)->first() != null){
+        while 
+		($row = Cart::where('users_id',Auth::user()->id)->first() != null){
             $cart = Cart::where('users_id',Auth::user()->id)->first();
 			foreach($good as $good1){
 				if($cart->product==$good1->name){
