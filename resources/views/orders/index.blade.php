@@ -84,7 +84,7 @@
                 </table>
             </div>
 		
-			{!! $order_status1->appends(['page2' => $order_status2->currentPage(),'page4' => $order_status4->currentPage() ])->render() !!}
+			{!! $order_status1->appends(['page2' => $order_status2->currentPage(),'page4' => $order_status4->currentPage() ])->fragment('collapseOne')->render() !!}
 					</div>
 		</div>
         </div>
@@ -161,7 +161,7 @@
                 </table>
             </div>
 			
-{!! $order_status2->appends(['page1' => $order_status1->currentPage() ,'page4' => $order_status4->currentPage() ])->render() !!}
+{!! $order_status2->appends(['page1' => $order_status1->currentPage() ,'page4' => $order_status4->currentPage() ])->fragment('collapse2')->render() !!}
 			</div>
 			</div>
         </div>
@@ -239,20 +239,31 @@
                 </table>
             </div>
 			
-			{!! $order_status4->appends(['page1' => $order_status1->currentPage(),'page2' => $order_status2->currentPage() ])->render() !!}
+			{!! $order_status4->appends(['page1' => $order_status1->currentPage(),'page2' => $order_status2->currentPage() ])->fragment('collapse3')->render() !!}
         </div>
 		 </div>
 		  </div>
     @endif
  </div>
 		  </div>
+		  </div>
 <script type="text/javascript">
 
-	$(function () { $('#collapse4').collapse({
-		toggle: false
-	})});
-	$(function () { $('#collapse2').collapse('parent')});
-	$(function () { $('#collapse3').collapse('parent')});
-	$(function () { $('#collapseOne').collapse('parent')});
+	$(document).ready(function () {
+    var hash = window.location.hash;
+    if (hash) {
+        $("#accordion .panel-collapse").removeClass('in');
+        $(hash).addClass('in');
+    }
+
+    $('#accordion').on('shown.bs.collapse', function () {
+        var activeId = $("#accordion .in").attr('id');
+        window.location.hash = activeId;
+    });
+
+    $('#accordion').on('hidden.bs.collapse', function () {
+        window.location.hash = '';
+    });
+});
 </script>
 @endsection

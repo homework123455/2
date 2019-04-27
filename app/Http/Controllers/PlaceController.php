@@ -395,7 +395,7 @@ class PlaceController extends Controller
 			
         ]);
 		
-        return redirect()->route('admin.places.index');
+        return redirect()->back();
     }
 	public function scrapped1($id)
     {
@@ -412,7 +412,7 @@ class PlaceController extends Controller
             'status'=>'待補貨',
 			]);
 		}
-        return redirect()->route('admin.places.index');
+        return redirect()->back();
     }
 
     public function lendings_create($id)
