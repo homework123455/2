@@ -17,6 +17,7 @@ class CartController extends Controller
 
     public function index()
     {
+	$vip_discount=Setting::where('id',1)->value('vip_discount');
      $price=Setting::where('id',1)->value('prices');
 	 $low_price=Setting::where('id',1)->value('low_prices');
 	 $vip=User::where('id',Auth::user()->id)->value('vip');
@@ -28,6 +29,8 @@ class CartController extends Controller
 			$q = 0;
 			$qq =0;
 			$i=0;
+			
+			$abc=10;
             $data = DB::table('carts')
                 ->where('users_id',Auth::user()->id)
                 ->get();
@@ -36,16 +39,26 @@ class CartController extends Controller
 				$i = $i + $s->total;
             }
 
-			if($vip==0){
+		if($vip==0){
 			if($all < $low_price){
 				$qq=$low_price-$all;
 				$all =$all + $price;
 				$q = $price;
-			}else{
+			}
+			else
+			{
 			$all =$all;
 			$q =0;
-			}}
-            return view('cart',['low_price'=>$low_price,'carts' => $data,'a' =>$all,'goods'=>$good,'q'=>$q,'qq'=>$qq,'b'=>$i,'vip'=>$vip,'vip_time1'=>$vip_time1]);
+			}
+		
+		}elseif($vip==1){
+			$all =$all;
+			$vip_all=$all*$vip_discount/10;
+			$q =0;	
+			$abc=($abc-$vip_discount)*10;
+			}
+			
+            return view('cart',['low_price'=>$low_price,'carts' => $data,'abc' =>$abc,'a' =>$all,'goods'=>$good,'q'=>$q,'qq'=>$qq,'b'=>$i,'vip_all'=>$vip_all,'vip'=>$vip,'vip_time1'=>$vip_time1]);
         }else{
             return redirect()->route('login');
         }

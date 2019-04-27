@@ -94,6 +94,10 @@
 				<input name="vip" class="form-control" placeholder="請輸入VIP金額" value={{$vip}}>
                
             </div>
+			<label>VIP折扣設定：EX：9.5</label>
+				<input name="vip_discount" class="form-control" placeholder="請輸入折扣數量" value={{$vip_discount}}>
+               
+            </div>
 			</div>
 
             <div class="text-right">

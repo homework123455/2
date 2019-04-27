@@ -45,7 +45,8 @@ CREATE TABLE `carts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `carts` (`users_id`, `id`, `photo`, `product`, `cost`, `qty`, `product_id`, `total`) VALUES
-(27,	16,	'/uploads/2019-02-22/20190222165549622.jpg',	'羽球拍',	250,	3,	NULL,	33333);
+(27,	16,	'/uploads/2019-02-22/20190222165549622.jpg',	'羽球拍',	250,	3,	NULL,	33333),
+(22,	19,	'/uploads/2019-02-22/20190222165614706.jpg',	'籃球1',	300,	2,	2,	600);
 
 DROP TABLE IF EXISTS `categories`;
 CREATE TABLE `categories` (
@@ -113,13 +114,13 @@ CREATE TABLE `goods` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `goods` (`id`, `name`, `photo4`, `photo3`, `category`, `details3`, `details`, `details2`, `price`, `stock`, `save_stock`, `goods_name1`, `photo1`, `photo2`, `created_at`, `updated_at`, `status`, `value`, `supplier_id`) VALUES
-(1,	'羽球拍',	'/uploads/2019-03-01/20190301014038769.jpg',	'/uploads/2019-03-01/20190301014038920.jpg',	1,	'333',	'111',	'222',	111,	951,	0,	'HEDERA HELIX \'INGELISE\' 	',	'/uploads/2019-03-01/20190301014038543.jpg',	'/uploads/2019-03-01/20190301014038613.jpg',	'2018-12-14 06:46:48',	'2019-04-02 05:02:19',	'正常供貨中',	110,	1),
-(2,	'籃球1',	'/uploads/2019-02-22/20190222165614291.jpg',	'/uploads/2019-02-22/20190222165614940.jpg',	2,	'1',	'3',	'2',	300,	96,	0,	'SINNINGIA SPECIOSA ',	'/uploads/2019-02-22/20190222165614706.jpg',	'/uploads/2019-02-22/20190222165614191.jpg',	'2018-12-14 06:47:34',	'2019-02-28 16:04:36',	'正常供貨中',	6,	1),
-(5,	'YouLin',	'/uploads/2019-02-23/20190223142722861.jpg',	'/uploads/2019-02-23/20190223142722836.jpg',	12,	'3',	'1',	'2',	100,	49,	0,	'',	'/uploads/2019-02-23/20190223142722451.jpg',	'/uploads/2019-02-23/20190223142722991.jpg',	'2019-02-23 06:27:22',	'2019-03-19 14:28:38',	'下架中',	19,	1),
+(1,	'羽球拍',	'/uploads/2019-03-01/20190301014038769.jpg',	'/uploads/2019-03-01/20190301014038920.jpg',	1,	'333',	'111',	'222',	111,	951,	0,	'HEDERA HELIX \'INGELISE\' 	',	'/uploads/2019-03-01/20190301014038543.jpg',	'/uploads/2019-03-01/20190301014038613.jpg',	'2018-12-14 06:46:48',	'2019-04-23 13:54:50',	'下架中',	108,	1),
+(2,	'籃球1',	'/uploads/2019-02-22/20190222165614291.jpg',	'/uploads/2019-02-22/20190222165614940.jpg',	2,	'1',	'3',	'2',	300,	96,	0,	'SINNINGIA SPECIOSA ',	'/uploads/2019-02-22/20190222165614706.jpg',	'/uploads/2019-02-22/20190222165614191.jpg',	'2018-12-14 06:47:34',	'2019-04-23 13:54:46',	'正常供貨中',	2,	1),
+(5,	'YouLin',	'/uploads/2019-02-23/20190223142722861.jpg',	'/uploads/2019-02-23/20190223142722836.jpg',	12,	'3',	'1',	'2',	100,	49,	0,	'',	'/uploads/2019-02-23/20190223142722451.jpg',	'/uploads/2019-02-23/20190223142722991.jpg',	'2019-02-23 06:27:22',	'2019-04-22 16:16:12',	'正常供貨中',	19,	1),
 (6,	'homestead',	'/uploads/2019-02-28/20190228190324571.JPG',	'/uploads/2019-02-28/20190228190324195.jpg',	7,	'3',	'1',	'2',	150,	71,	0,	'',	'/uploads/2019-02-28/20190228190324864.jpg',	'/uploads/2019-02-28/20190228190324289.jpg',	'2019-02-28 11:03:24',	'2019-04-02 05:07:09',	'正常供貨中',	40,	1),
 (7,	'test',	'/uploads/2019-03-01/20190301003714675.jpg',	'/uploads/2019-03-01/20190301003714848.jpg',	13,	'3',	'1',	'2',	110,	100,	0,	'',	'/uploads/2019-03-01/20190301003714574.jpg',	'/uploads/2019-03-01/20190301003714736.jpg',	'2019-02-28 16:37:14',	'2019-03-17 10:33:38',	'正常供貨中',	0,	1),
 (8,	'1112',	'/uploads/2019-03-12/20190312204917657.jpg',	'/uploads/2019-03-12/20190312204917914.jpg',	14,	'33',	'11',	'22',	150,	50,	10,	'',	'/uploads/2019-03-12/20190312204917957.jpg',	'/uploads/2019-03-12/20190312204917941.jpg',	'2019-03-12 12:49:17',	'2019-04-02 05:11:19',	'正常供貨中',	50,	2),
-(9,	'1113',	'/uploads/2019-03-12/20190312205357687.jpg',	'/uploads/2019-03-12/20190312205357671.jpg',	14,	'333',	'11',	'22',	200,	500,	0,	'',	'/uploads/2019-03-12/20190312205357695.jpg',	'/uploads/2019-03-12/20190312205357111.jpg',	'2019-03-12 12:53:57',	'2019-03-12 12:54:51',	'補貨中',	500,	1),
+(9,	'1113',	'/uploads/2019-03-12/20190312205357687.jpg',	'/uploads/2019-03-12/20190312205357671.jpg',	14,	'333',	'11',	'22',	200,	500,	0,	'',	'/uploads/2019-03-12/20190312205357695.jpg',	'/uploads/2019-03-12/20190312205357111.jpg',	'2019-03-12 12:53:57',	'2019-04-22 16:23:15',	'下架中',	500,	1),
 (10,	'aaa',	'/uploads/2019-03-19/20190319144232971.jpg',	'/uploads/2019-03-19/20190319144232855.jpg',	14,	'3',	'1',	'2',	10,	1,	10,	'',	'/uploads/2019-03-19/20190319144232143.jpg',	'/uploads/2019-03-19/20190319144232787.jpg',	'2019-03-19 06:42:32',	'2019-03-19 07:17:40',	'正常供貨中',	1,	1);
 
 DROP TABLE IF EXISTS `lendings`;
@@ -284,15 +285,15 @@ INSERT INTO `orders` (`id`, `name`, `postcode`, `ph_number`, `address`, `created
 (3,	'5455',	'dasf',	'dafs',	'dasf',	'2019-02-26 11:54:04',	'2019-03-11 11:24:52',	26,	'已完成',	NULL,	NULL),
 (4,	'黃宥領',	'406',	'0936763689',	'國立勤益科技大學',	'2019-02-26 12:30:56',	'2019-02-26 12:31:22',	28,	'駁回',	'爽',	NULL),
 (5,	'尤盈宜',	'aa',	'0945678912',	'aa',	'2019-02-28 11:32:52',	'2019-03-25 16:17:31',	26,	'已完成',	NULL,	'123456'),
-(6,	'尤盈宜',	'aa',	'0945678912',	'aa',	'2019-02-28 11:33:11',	'2019-04-01 11:02:02',	26,	'已出貨',	NULL,	NULL),
+(6,	'尤盈宜',	'aa',	'0945678912',	'aa',	'2019-02-28 11:33:11',	'2019-04-22 15:51:13',	26,	'已完成',	NULL,	NULL),
 (7,	'尤盈宜',	'aa',	'0945678912',	'aa',	'2019-02-28 11:33:41',	'2019-02-28 11:33:41',	26,	'已處理',	NULL,	NULL),
 (8,	'尤盈宜1',	'3',	'0912345678',	'2',	'2019-03-05 05:05:39',	'2019-03-05 05:05:39',	22,	'未處理',	NULL,	NULL),
 (9,	'尤盈宜1',	'aa',	'0912345678',	'aa',	'2019-03-05 08:23:06',	'2019-03-26 14:50:30',	22,	'已完成',	NULL,	NULL),
 (10,	'尤盈宜1',	'11',	'0912345678',	'11',	'2019-03-05 08:26:04',	'2019-03-05 08:26:27',	22,	'已取消',	NULL,	'111'),
 (11,	'尤盈宜1',	'11',	'0912345678',	'11',	'2019-03-05 08:33:49',	'2019-03-17 10:04:29',	22,	'已完成',	NULL,	NULL),
-(12,	'尤盈宜1',	'aaa',	'0912345678',	'aaa',	'2019-03-19 07:17:07',	'2019-03-26 14:54:18',	22,	'已出貨',	NULL,	NULL),
+(12,	'尤盈宜1',	'aaa',	'0912345678',	'aaa',	'2019-03-19 07:17:07',	'2019-04-22 15:51:13',	22,	'已完成',	NULL,	NULL),
 (13,	'尤盈宜',	'aa',	'0945678912',	'aa',	'2019-04-09 08:10:04',	'2019-04-09 08:10:04',	26,	'未處理',	NULL,	NULL),
-(14,	'尤盈宜',	'aa',	'0945678912',	'aa',	'2019-04-09 08:52:10',	'2019-04-09 08:52:10',	26,	'未處理',	NULL,	NULL),
+(14,	'尤盈宜',	'aa',	'0945678912',	'aa',	'2019-04-09 08:52:10',	'2019-04-23 13:54:50',	26,	'處理中',	NULL,	NULL),
 (15,	'尤盈宜',	'aa',	'0945678912',	'aa',	'2019-04-09 09:14:55',	'2019-04-09 09:14:55',	26,	'未處理',	NULL,	NULL),
 (16,	'尤盈宜',	'aa',	'0945678912',	'aa',	'2019-04-09 09:15:23',	'2019-04-09 09:15:23',	26,	'未處理',	NULL,	NULL),
 (17,	'尤盈宜',	'aa',	'0945678912',	'aa',	'2019-04-09 09:16:33',	'2019-04-09 09:16:33',	26,	'未處理',	NULL,	NULL),
@@ -301,10 +302,13 @@ INSERT INTO `orders` (`id`, `name`, `postcode`, `ph_number`, `address`, `created
 (20,	'尤盈宜',	'aa',	'0945678912',	'aa',	'2019-04-10 01:50:01',	'2019-04-10 01:50:01',	26,	'未處理',	NULL,	NULL),
 (21,	'尤盈宜',	'aa',	'0945678912',	'aa',	'2019-04-10 01:55:10',	'2019-04-10 01:55:10',	26,	'未處理',	NULL,	NULL),
 (22,	'尤盈宜',	'aa',	'0945678912',	'aa',	'2019-04-10 01:55:36',	'2019-04-10 01:55:36',	26,	'未處理',	NULL,	NULL),
-(23,	'尤盈宜',	'aa',	'0945678912',	'aa',	'2019-04-10 01:58:48',	'2019-04-10 01:58:48',	26,	'未處理',	NULL,	NULL),
+(23,	'尤盈宜',	'aa',	'0945678912',	'aa',	'2019-04-10 01:58:48',	'2019-04-22 15:51:41',	26,	'處理中',	NULL,	NULL),
 (24,	'尤盈宜',	'aa',	'0945678912',	'aa',	'2019-04-10 02:02:16',	'2019-04-10 02:02:16',	26,	'未處理',	NULL,	NULL),
 (25,	'尤盈宜',	'aa',	'0945678912',	'aa',	'2019-04-10 02:42:33',	'2019-04-10 02:42:33',	26,	'未處理',	NULL,	NULL),
-(26,	'尤盈宜',	'aa',	'0945678912',	'aa',	'2019-04-10 02:42:51',	'2019-04-10 02:42:51',	26,	'未處理',	NULL,	NULL);
+(26,	'尤盈宜',	'aa',	'0945678912',	'aa',	'2019-04-10 02:42:51',	'2019-04-22 15:51:55',	26,	'處理中',	NULL,	NULL),
+(27,	'尤盈宜1',	'123',	'0912345678',	'123',	'2019-04-23 13:54:08',	'2019-04-23 13:54:08',	22,	'未處理',	NULL,	NULL),
+(28,	'尤盈宜1',	'123',	'0912345678',	'123',	'2019-04-23 13:54:08',	'2019-04-23 13:54:56',	22,	'已出貨',	NULL,	NULL),
+(29,	'尤盈宜1',	'123',	'0912345678',	'我家',	'2019-04-23 13:56:58',	'2019-04-23 13:56:58',	22,	'未處理',	NULL,	NULL);
 
 DROP TABLE IF EXISTS `ordersdetail`;
 CREATE TABLE `ordersdetail` (
@@ -359,7 +363,10 @@ INSERT INTO `ordersdetail` (`id`, `orders_id`, `users_id`, `product`, `product_i
 (87,	24,	26,	'籃球1',	2,	300,	1,	300,	'',	'',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00',	''),
 (88,	25,	26,	'籃球1',	2,	300,	2,	600,	'',	'',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00',	''),
 (89,	25,	26,	'homestead',	6,	150,	1,	150,	'',	'',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00',	''),
-(90,	26,	26,	'籃球1',	2,	300,	1,	300,	'',	'',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00',	'');
+(90,	26,	26,	'籃球1',	2,	300,	1,	300,	'',	'',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00',	''),
+(91,	28,	22,	'籃球1',	2,	300,	3,	900,	'',	'',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00',	''),
+(92,	27,	22,	'籃球1',	2,	300,	3,	900,	'',	'',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00',	''),
+(93,	29,	22,	'籃球1',	2,	300,	1,	300,	'',	'',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00',	'');
 
 DROP TABLE IF EXISTS `password_resets`;
 CREATE TABLE `password_resets` (
@@ -481,6 +488,7 @@ CREATE TABLE `previleges` (
 
 INSERT INTO `previleges` (`id`, `name`, `created_at`, `updated_at`) VALUES
 (1,	'使用者',	NULL,	NULL),
+(2,	'一般管理者',	NULL,	NULL),
 (3,	'管理員',	NULL,	NULL),
 (4,	'系統管理員',	NULL,	NULL);
 
@@ -506,6 +514,7 @@ CREATE TABLE `setting` (
   `orders` int(11) NOT NULL,
   `prices` int(11) NOT NULL,
   `vip` int(11) NOT NULL,
+  `vip_discount` double NOT NULL,
   `low_prices` int(11) NOT NULL,
   `updated_at` date NOT NULL,
   `photo1` varchar(255) NOT NULL,
@@ -513,8 +522,8 @@ CREATE TABLE `setting` (
   `photo3` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `setting` (`id`, `goods`, `orders`, `prices`, `vip`, `low_prices`, `updated_at`, `photo1`, `photo2`, `photo3`) VALUES
-(1,	2,	3,	70,	1000,	500,	'2019-04-10',	'/uploads/2019-04-09/20190409210550905.jpg',	'/uploads/2019-04-09/20190409210550688.jpg',	'/uploads/2019-04-09/20190409210550421.jpg');
+INSERT INTO `setting` (`id`, `goods`, `orders`, `prices`, `vip`, `vip_discount`, `low_prices`, `updated_at`, `photo1`, `photo2`, `photo3`) VALUES
+(1,	2,	3,	70,	1000,	8.5,	500,	'2019-04-23',	'/uploads/2019-04-09/20190409210550905.jpg',	'/uploads/2019-04-09/20190409210550688.jpg',	'/uploads/2019-04-09/20190409210550421.jpg');
 
 DROP TABLE IF EXISTS `suppliers`;
 CREATE TABLE `suppliers` (
@@ -608,10 +617,10 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`address`, `id`, `name`, `email`, `password`, `extension`, `position`, `phone`, `department_id`, `previlege_id`, `remember_token`, `created_at`, `updated_at`, `times`, `place`, `vip`, `vip_time`, `level`) VALUES
 ('',	16,	'管理員',	'admin1@gmail.com',	'$2y$10$UjRDChSZWsth6TRYJIx7SObtI3ZZcHU8gtpHQGwoFfhwE07fNfYza',	'113',	'管理員',	'0912-345-678',	8,	3,	'oItTaN3nNLPPcFaOKWEuw5iQnU64WJeJRmB495cAefmw8e6q323uqyjkEfnL',	'2017-11-02 10:48:50',	'2019-01-15 15:50:46',	0,	NULL,	NULL,	NULL,	NULL),
 ('',	17,	'使用者',	'user1@gmail.com',	'user1',	'167',	'學生',	'0934-567-891',	7,	1,	'PMlwz2P30jXCxdUnWxq8kI9SCfQvQhZpscwodUXc4IktIg8NQSCNOL9H9v9e',	'2019-01-02 10:49:56',	'2019-01-15 08:42:38',	0,	'0',	NULL,	NULL,	NULL),
-('',	22,	'尤盈宜1',	'user123@gmail.com',	'$2y$10$U0opfxF9oIo/zI4S85tk5.yIpXmM7vCPbA2CAYsbTVzpifTNAV1qS',	'',	'學生',	'0912345678',	1,	1,	'BJKKWFF9WlBLG8PWLpYw3pURAYwQUPbFutzcTx9ngj0ql94vuid34SKJeivO',	'2019-01-15 08:53:57',	'2019-04-01 11:14:24',	0,	NULL,	NULL,	NULL,	NULL),
-('',	24,	'尤盈宜2',	'superuser123@gmail.com',	'$2y$10$ps79jP29YVOXzWNTL6MKJeQZn1pmv1Atxmvg2G7HSY1m2hRpK4SVG',	'',	'系統管理員',	'0956123456',	1,	4,	'j5iaWr0AIoJ1CETsvoOj27s4S6c4afLJUeffc8WiRC5sxnXWF4FekwgsFIUW',	'2019-01-15 09:04:10',	'2019-01-15 10:21:17',	0,	NULL,	NULL,	NULL,	NULL),
-('',	26,	'尤盈宜',	'admin123@gmail.com',	'$2y$10$zuVCBIwFIfueiEFJ783C6uOzDlJE3lZ6xP.9wmLioCJ1PcwJOM6ae',	'',	'管理員',	'0945678912',	1,	3,	'3skkuVHS9sjwagfpmt1DVrdOOjeW4SnJJ5pucgQIU6IkjSUmPEhCqEjPyStN',	'2019-01-15 09:10:06',	'2019-04-02 05:12:23',	0,	NULL,	1,	'2019-04-08',	1050),
-('aaaaaa',	27,	'yaqq',	'gg123@gmail.com',	'$2y$10$rmHpoKeWsLHCcKZK0D4FK.2tEuISteoyBq9FO83gLl9EJ/vZ31s1m',	NULL,	NULL,	NULL,	1,	3,	'S4UJ3Qu0dOyyIkMtd7zRnJPJfjPa7moS3VdzET2lb7jo4Iygp41B2dUHFr0W',	'2019-02-26 12:19:25',	'2019-02-26 12:29:05',	0,	NULL,	NULL,	NULL,	NULL),
+('',	22,	'尤盈宜1',	'user123@gmail.com',	'$2y$10$U0opfxF9oIo/zI4S85tk5.yIpXmM7vCPbA2CAYsbTVzpifTNAV1qS',	'',	'學生',	'0912345678',	1,	1,	'boNqwJPEBelIXKbZE9OvExqceWkbjFlDahYaMFSB7htwqxt39hjgdWYszLBd',	'2019-01-15 08:53:57',	'2019-04-23 14:52:40',	0,	NULL,	1,	'2019-04-23',	1200),
+('',	24,	'尤盈宜2',	'user155@gmail.com',	'$2y$10$ps79jP29YVOXzWNTL6MKJeQZn1pmv1Atxmvg2G7HSY1m2hRpK4SVG',	'',	'系統管理員',	'0956123456',	1,	2,	'DuO1oelqZb19fapqZZ4LtMiB7vQ2y1X1p799m0Jr79oSMcmrW3jSFwk1zHIY',	'2019-01-15 09:04:10',	'2019-04-23 14:56:55',	0,	NULL,	NULL,	NULL,	NULL),
+('',	26,	'尤盈宜',	'admin123@gmail.com',	'$2y$10$zuVCBIwFIfueiEFJ783C6uOzDlJE3lZ6xP.9wmLioCJ1PcwJOM6ae',	'',	'管理員',	'0945678912',	1,	3,	'WEfXc7R1Uugny2fpNlajOFHIZptCJ3uaQ70Om2EbkvMLiLf7rWAi1vMP99eI',	'2019-01-15 09:10:06',	'2019-04-23 14:55:32',	0,	NULL,	1,	'2019-04-08',	1050),
+('aaaaaa',	27,	'yaqq',	'gg123@gmail.com',	'$2y$10$rmHpoKeWsLHCcKZK0D4FK.2tEuISteoyBq9FO83gLl9EJ/vZ31s1m',	NULL,	NULL,	NULL,	1,	2,	'S4UJ3Qu0dOyyIkMtd7zRnJPJfjPa7moS3VdzET2lb7jo4Iygp41B2dUHFr0W',	'2019-02-26 12:19:25',	'2019-02-26 12:29:05',	0,	NULL,	NULL,	NULL,	NULL),
 ('國立勤益科技大學',	28,	'黃宥領',	'yolin0513@gmail.com',	'$2y$10$ogtzDSWkZD8gFakKjLFzEur2J/M08HQDGDfuRyg90eexF4Uco/Rwu',	NULL,	NULL,	'0936763689',	1,	1,	'cCKhDJvu4V7RtCZjOF2FkKgzUMiW2HOZanVPla2f6enhJQnWtVFd6suyTIMu',	'2019-02-26 12:30:03',	'2019-02-26 12:31:04',	0,	NULL,	NULL,	NULL,	NULL);
 
 DROP TABLE IF EXISTS `weeks`;
@@ -649,4 +658,4 @@ INSERT INTO `wrongs` (`id`, `user_id`, `wrongname`, `date`, `created_at`, `updat
 (12,	17,	'亂丟垃圾',	'2019-01-01 00:00:00',	'2019-01-11 18:42:08',	'2019-01-11 18:42:08'),
 (13,	17,	'亂丟垃圾',	'2019-01-01 00:00:00',	'2019-01-11 18:42:22',	'2019-01-11 18:42:22');
 
--- 2019-04-10 03:36:42
+-- 2019-04-26 15:04:39

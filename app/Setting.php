@@ -12,7 +12,7 @@ class Setting extends Model
         'orders',
 		'prices',
 		'low_prices',
-
+		'vip_discount',
 
 		'photo1',
 		'photo2',

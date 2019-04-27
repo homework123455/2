@@ -130,6 +130,7 @@ if (Auth::user()->previlege_id==3)
 		$order=Setting::where('id',1)->value('orders');
 		$price=Setting::where('id',1)->value('prices');
 		$low_price=Setting::where('id',1)->value('low_prices');
+		$vip_discount=Setting::where('id',1)->value('vip_discount');
 
 
 
@@ -137,7 +138,7 @@ if (Auth::user()->previlege_id==3)
 
 
 
-		$data = ['vip'=>$vip,'good'=>$good,'order' => $order,'price'=>$price,'low_price'=>$low_price,'run1'=>$run1,'run2'=>$run2,'run3'=>$run3];
+		$data = ['vip'=>$vip,'vip_discount'=>$vip_discount,'good'=>$good,'order' => $order,'price'=>$price,'low_price'=>$low_price,'run1'=>$run1,'run2'=>$run2,'run3'=>$run3];
 
 		
 		return view('admin.setting.edit', $data);
@@ -197,6 +198,7 @@ if (Auth::user()->previlege_id==3)
 			'low_prices'=>$request->low_price,
 
 			'vip'=>$request->vip,
+			'vip_discount'=>$request->vip_discount,
 
             'photo1'=>$filePath,
 			'photo2'=>$filePath1,
@@ -210,6 +212,7 @@ $set->update([
 			'prices'=>$request->price,
 			'low_prices'=>$request->low_price,
 			'vip'=>$request->vip,
+			'vip_discount'=>$request->vip_discount,
 			'photo2'=>$filePath1,
 			'photo3'=>$filePath2
         ]);
@@ -221,6 +224,7 @@ $set->update([
 			'prices'=>$request->price,
 			'low_prices'=>$request->low_price,
 			'vip'=>$request->vip,
+			'vip_discount'=>$request->vip_discount,
 			'photo1'=>$filePath,
 			'photo3'=>$filePath2
         ]);
@@ -232,6 +236,7 @@ $set->update([
 			'prices'=>$request->price,
 			'low_prices'=>$request->low_price,
 			'vip'=>$request->vip,
+			'vip_discount'=>$request->vip_discount,
 			'photo1'=>$filePath,
 			'photo2'=>$filePath1
         ]);
@@ -243,6 +248,7 @@ $set->update([
 			'prices'=>$request->price,
 			'low_prices'=>$request->low_price,
 			'vip'=>$request->vip,
+			'vip_discount'=>$request->vip_discount,
 			'photo3'=>$filePath2
         ]);
 	}
@@ -253,6 +259,7 @@ $set->update([
 			'prices'=>$request->price,
 			'low_prices'=>$request->low_price,
 			'vip'=>$request->vip,
+			'vip_discount'=>$request->vip_discount,
 			'photo1'=>$filePath
         ]);
 	}
@@ -263,6 +270,7 @@ $set->update([
 			'prices'=>$request->price,
 			'low_prices'=>$request->low_price,
 			'vip'=>$request->vip,
+			'vip_discount'=>$request->vip_discount,
 			'photo2'=>$filePath1
         ]);
 	}
@@ -274,8 +282,8 @@ $set->update([
 
 			'low_prices'=>$request->low_price,
 
-			'vip'=>$request->vip
-            
+			'vip'=>$request->vip,
+            'vip_discount'=>$request->vip_discount
 
 
         ]);
