@@ -27,7 +27,8 @@
 
     <!-- Custom Fonts -->
     <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
-
+	<link href="{{ asset('css/style2.css') }}" rel="stylesheet" type="text/css">
+<link href="{{ asset('css/bootstrap2.min.css') }}" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -67,6 +68,10 @@
     <script src="{{ asset('js/plugins/morris/raphael.min.js') }}"></script>
     <script src="{{ asset('js/plugins/morris/morris.min.js') }}"></script>
     <script src="{{ asset('js/plugins/morris/morris-data.js') }}"></script>
+	 <script src="{{ asset('js/jquery2.min.js') }}"></script>
+	 <script src="{{ asset('js/lib.js') }}"></script>
+	
+
 
 </body>
 

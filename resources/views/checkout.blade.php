@@ -18,7 +18,8 @@
     <!-- Core Style CSS -->
     <link rel="stylesheet" href="../css/core-style.css">
     <link rel="stylesheet" href="../style.css">
-
+<link href="{{ asset('css/style2.css') }}" rel="stylesheet" type="text/css">
+<link href="{{ asset('css/bootstrap2.min.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -29,7 +30,22 @@
 <div class="checkout_area section-padding-80">
     <div class="container">
         <div class="row">
-
+<div class="container"> 
+    <ul class="nav nav-pills nav-justified step step-arrow"> 
+        <li style="width:320px;"> 
+            <a href="{{ route('main.shop') }}">購買商品</a> 
+        </li> 
+        <li style="width:320px;"> 
+            <a href="{{ route('cart') }}">確認購買內容</a> 
+        </li> 
+        <li style="width:320px;"> 
+            <a>填寫基本資料</a> 
+        </li> 
+       
+    </ul> 
+ 
+ 
+</div>
             <div class="col-12 col-md-6">
                 <div class="checkout_details_area mt-50 clearfix">
 
@@ -116,3 +132,11 @@
 <div class="clearfix mr-50 mt-50 mb-50">
 </div>
 </html>
+<script src="{{ asset('js/jquery2.min.js') }}"></script>
+	 <script src="{{ asset('js/lib.js') }}"></script>
+<script type="text/javascript"> 
+$(function() { 
+    bsStep(2)/bsStep(3); 
+    //bsStep(i) i 为number 可定位到第几步 如bsStep(2)/bsStep(3) 
+}) 
+</script>

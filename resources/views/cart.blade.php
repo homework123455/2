@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
 @extends('layouts.master')
+
 <html>
 
 <head>
@@ -11,11 +12,13 @@
 
     <!-- Title  -->
     <title>體育用品系統</title>
-
+<link href="{{ asset('css/style2.css') }}" rel="stylesheet" type="text/css">
+<link href="{{ asset('css/bootstrap2.min.css') }}" rel="stylesheet">
     <!-- Favicon  -->
     <link rel="icon" href="../img/core-img/plant.ico">
 
     <!-- Core Style CSS -->
+	<link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="../css/core-style.css">
     <link rel="stylesheet" href="../style.css">
 </head>
@@ -26,15 +29,33 @@
                 <div class="col-12">
                     <div class="page-title text-center">
                         <h2>購物車</h2>
-                    </div>
+						
+						</div>
+					
                 </div>
             </div>
         </div>
 	</div>
+	<div class="container"> 
+    <ul class="nav nav-pills nav-justified step step-arrow"> 
+        <li style="width:320px;"> 
+            <a href="{{ route('main.shop') }}">購買商品</a> 
+        </li> 
+        <li style="width:320px;"> 
+            <a>確認購買內容</a> 
+        </li> 
+        <li style="width:320px;"> 
+            <a>填寫基本資料</a> 
+        </li> 
+       
+    </ul> 
+ 
+ 
+</div>
+
 	<div class="clearfix mr-50 mt-50 mb-50">
 	</div>
-	<div class="clearfix mr-50 mt-50 mb-50">
-	</div>
+	
     @if(count($carts)<1)
         <center>
         <h2>Nothing in Cart!</h2>
@@ -162,3 +183,11 @@
 	</div>
 </body>
 </html>
+<script src="{{ asset('js/jquery2.min.js') }}"></script>
+	 <script src="{{ asset('js/lib.js') }}"></script>
+<script type="text/javascript"> 
+$(function() { 
+    bsStep(1)/bsStep(2); 
+    //bsStep(i) i 为number 可定位到第几步 如bsStep(2)/bsStep(3) 
+}) 
+</script>
