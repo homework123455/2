@@ -205,7 +205,7 @@
 
         <div class="text-right">
             <button type="submit" class="btn btn-success">確定</button>
-            <a class="btn btn-success" href="{{ route('orders.index') }}"  role="button">返回</a>
+            <a class="btn btn-success" href="javascript:window.history.go(-1);"  role="button">返回</a>
         </div>
         </form>
         <p>&nbsp;</p>

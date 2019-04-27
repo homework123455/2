@@ -41,9 +41,10 @@ class ShopController extends Controller
     //淨化力
     public function cleanup($id)
     {
+		$setting=Setting::where('id','1')->get()->first();
 		$category = Category::all();		
         $data = Good::where('category','=',$id)->get();
-        return view('Shop', ['goods' => $data,'categories'=>$category]);
+        return view('Shop', ['goods' => $data,'categories'=>$category,'setting'=>$setting]);
         
     }
     public function cleandown()
@@ -78,9 +79,10 @@ class ShopController extends Controller
     //價格排序
     public function price($tpye)
     {
+		$setting=Setting::where('id','1')->get()->first();
 		$category = Category::all();
         $data = Good::orderBy('price', $tpye)->get();
-        return view('Shop', ['goods' => $data,'categories'=>$category]);
+        return view('Shop', ['goods' => $data,'categories'=>$category,'setting'=>$setting]);
     }
 
 

@@ -42,6 +42,7 @@
 						use Illuminate\Support\Facades\Auth;
 						use App\User;
 						use Carbon\Carbon;
+
 if(Auth::check()){
 			            $vip=User::where('id',Auth::user()->id)->value('vip');
 						$vip_time=User::where('id',Auth::user()->id)->value('vip_time');

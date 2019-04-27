@@ -36,6 +36,8 @@
             </div>
         </div>
     </div>
+	<div class="clearfix mr-50 mt-50 mb-50">
+	</div>
 	<div class="container coverflow">
 	<div id="myCarousel" class="carousel slide">
 	<!-- 轮播（Carousel）指标 -->
