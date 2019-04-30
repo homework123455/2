@@ -10,13 +10,60 @@ use App\Order;
 use App\Setting;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use App\User;
 class CheckoutController extends Controller
 {
     public function store(Request $request)
     {
+		$low_prices =Setting::where('id','1')->value('low_prices');
 		$good =Good::all();
+		$all = 0;
+		$i=0;
+		 $data = DB::table('carts')
+                ->where('users_id',Auth::user()->id)
+                ->get();
+            foreach ($data as $s){
+                $all = $all + $s->total;
+				$i = $i + $s->total;
+            }
+			
+		if(Auth::user()->vip ==1){
+       
+	      Order::create([
+            'name' => $request->name,
+            'address' => $request->address,
+            'postcode' => $request->postcode,
+			'ph_number'=>$request->ph_number,
+			'car_money'=>0,
+			'vip_check'=>1
+            
+        ]);
+		}
+		elseif(Auth::user()->vip ==0&&$i>$low_prices){
 		
-        Order::create($request->all());
+	      Order::create([
+            'name' => $request->name,
+            'address' => $request->address,
+            'postcode' => $request->postcode,
+			'ph_number'=>$request->ph_number,
+			'car_money'=>0,
+			'vip_check'=>0
+            
+        ]);
+		}
+		elseif(Auth::user()->vip==0&&$i<$low_prices){
+		
+	       Order::create([
+            'name' => $request->name,
+            'address' => $request->address,
+            'postcode' => $request->postcode,
+			'ph_number'=>$request->ph_number,
+			'car_money'=>1,
+			'vip_check'=>0
+            
+        ]);
+		}
+
 		
         $count =  DB::table('orders')->orderby('id','Desc')->value('id');
         DB::table('orders')->where('users_id',null)->update(
@@ -82,14 +129,42 @@ class CheckoutController extends Controller
 
     public function cartdetail()
     {
+		$low_prices =Setting::where('id','1')->value('low_prices');
+		$vip_discount=Setting::where('id',1)->value('vip_discount');
+		$price=Setting::where('id',1)->value('prices');
+		$low_price=Setting::where('id',1)->value('low_prices');
+		$vip=User::where('id',Auth::user()->id)->value('vip');
         $all = 0;
+		$q=0;
         $data = DB::table('carts')
             ->where('users_id', Auth::user()->id)
             ->get();
         foreach ($data as $s) {
             $all = $all + $s->total;
         }
-        return view('checkout', ['checkouts' => $data, 'a' => $all]);
+		if($vip==0){
+			$vip_all=0;
+			if($all < $low_price){
+				$qq=$low_price-$all;
+				$all =$all + $price;
+				$q = $price;
+				
+			}
+			else
+			{
+			$all =$all;
+			$q =0;
+			}
+			}
+		elseif($vip==1){
+			$all =$all;
+			$vip_all=$all*$vip_discount/10;
+			$q =0;	
+			
+			}
+			
+			
+        return view('checkout', ['checkouts' => $data, 'a' => $all,'q'=>$q,'vip'=>$vip,'vip_all'=>$vip_all]);
 
     }
 

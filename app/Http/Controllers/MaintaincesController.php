@@ -236,24 +236,37 @@ class MaintaincesController extends Controller
     public function show($id){
         
 
-        
+        $vip_discount=Setting::where('id','1')->value('vip_discount');
+		$price=Setting::where('id','1')->value('prices');	
         $users=User::orderBy('created_at','DESC')->get();
 		$order=Order::find($id);
+		$vip_total=0;
+		$F_times=0;
+		$C_times=0;
 		$orders = Order::where('users_id',$order->users_id)->get();
 		$ordersing=$orders->whereIn('status',["已出貨","已完成","取消","退貨","已取消","處理中"]);
 		$orders_C =$orders->whereIn('status',["取消","退貨"]);
 		$C=count($orders_C);
 		$F=count($ordersing)-$C;
+		if(count($orders_C)>0){
 		$C_times=ceil((count($orders_C)/count($ordersing))*100);
+		
 		$F_times=100-ceil($C_times);
+		}
 		$i=count($ordersing);
         $ordersdetail = OrdersDetail::where('orders_id',$id)->get();
 		$ordertotal=0;
 		foreach($ordersdetail as $order1){
 		$ordertotal = $ordertotal+$order1->total;
 		}   
+		if($order->vip_check==1)
+		{
+			$vip_total=$ordertotal*$vip_discount/10;
+			
+		}
+		
 
-        $data=['C'=>$C,'F'=>$F,'i'=>$i,'F_times'=>$F_times,'C_times'=>$C_times,'orders_C'=>$orders_C,'orders'=>$orders,'users'=>$users,'order'=>$order,'ordersdetail'=>$ordersdetail,'ordertotal'=>$ordertotal];
+        $data=['C'=>$C,'F'=>$F,'i'=>$i,'F_times'=>$F_times,'C_times'=>$C_times,'orders_C'=>$orders_C,'orders'=>$orders,'users'=>$users,'order'=>$order,'ordersdetail'=>$ordersdetail,'ordertotal'=>$ordertotal,'vip_total'=>$vip_total,'price'=>$price];
         return view('orders.show', $data);
     }
 	public function cancelupdate(Request $request,$id){
@@ -285,17 +298,23 @@ class MaintaincesController extends Controller
 	 public function show1($id){
         
 
-        
+        $vip_discount=Setting::where('id','1')->value('vip_discount');
+		$price=Setting::where('id','1')->value('prices');	
         $users=User::orderBy('created_at','DESC')->get();
 		$order=Order::find($id);
 		$orders = Order::where('users_id',$order->users_id)->get();
         $ordersdetail = OrdersDetail::where('orders_id',$id)->get();
 		$ordertotal=0;
+		$vip_total=0;
 		foreach($ordersdetail as $order1){
 		$ordertotal = $ordertotal+$order1->total;
 		}   
+		if($order->vip_check==1)
+		{
+			$vip_total=$ordertotal*$vip_discount/10;
+		}
 
-        $data=['orders'=>$orders,'users'=>$users,'order'=>$order,'ordersdetail'=>$ordersdetail,'ordertotal'=>$ordertotal];
+        $data=['orders'=>$orders,'users'=>$users,'order'=>$order,'ordersdetail'=>$ordersdetail,'ordertotal'=>$ordertotal,'vip_total'=>$vip_total,'price'=>$price];
         return view('orders.show1', $data);
     }
 	public function show2($id){

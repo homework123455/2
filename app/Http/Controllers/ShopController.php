@@ -22,6 +22,7 @@ class ShopController extends Controller
         $data = Good::all();
 		$category = Category::all();
 		$good = Good::where('id','1')->get()->first();
+		if(Auth::check()){
 		$vip_time=User::where('id',Auth::user()->id)->value('vip_time');
 	    $vip_time1=Carbon::parse($vip_time)->addDays(30)->format('Y-m-d');
 		if(Carbon::now()>=$vip_time1){
@@ -33,7 +34,7 @@ class ShopController extends Controller
 			'level'=>0
 			
         ]);
-		}
+		}}
         return view('Shop', ['goods' => $data,'categories'=>$category,'good'=>$good,'setting'=>$setting]);
     }
 

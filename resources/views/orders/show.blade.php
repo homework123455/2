@@ -47,6 +47,23 @@
 
 			{{$ordertotal}}
         </div>
+		@if($order->car_money==0)
+		<div class="form-group">
+            <label width="80">運費：</label>
+			0
+        </div>
+		@elseif($order->car_money==1)
+		<div class="form-group">
+            <label width="80">運費：</label>
+			{{$price}}
+        </div>
+		@endif
+		@if($order->vip_check==1)
+		<div class="form-group">
+            <label width="80">折扣後金額：</label>
+			{{$vip_total}}
+        </div>
+		@endif
 		
 		
         <ol class="breadcrumb">
@@ -80,6 +97,20 @@
 						
                     </tr>
                 @endforeach
+				@if($order->car_money==0)
+
+		@elseif($order->car_money==1)
+		<tr>
+					
+                        <td style="text-align: center">運費</td>
+                          <td style="text-align: center">1</td>  
+                         <td style="text-align: center">{{$price}}</td>
+						 
+
+						
+                    </tr>
+		@endif
+				 
                 </tbody>
             </table>
         </div>

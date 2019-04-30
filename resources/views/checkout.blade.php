@@ -104,19 +104,26 @@
                                 </tr>
 
                         @foreach($checkouts as $checkout)
+						
                                  <tr>
                                   　<td align="left">{{$checkout->product}}</td>
                                     <td align="center">{{$checkout->cost}}</td>
                                     <td align="center">{{$checkout->qty}}</td>
                                     <td align="right">{{$checkout->total}}</td>
                                  </tr>
+
                         @endforeach
+						
                             </table>
                         </div>
 
-
+@if($vip==1)
                     <h6>總金額 : $<?php echo $a; ?></h6>
-
+				 <h6>折扣後金額: $<?php echo $vip_all; ?></h6>
+				@else
+					運費：$<?php echo $q;?>
+					   <h6>總金額 : $<?php echo $a; ?></h6>
+ @endif
                 </div>
             </div>
 

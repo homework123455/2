@@ -19,7 +19,7 @@ class Order extends Model
         return $this->hasMany('app\Cart');
     }
       protected  $fillable=[
-     'id','name', 'postcode', 'ph_number', 'address', 'created_at', 'updated_at','status','reason','reason1',
+     'id','name', 'postcode', 'ph_number', 'address', 'created_at', 'updated_at','status','reason','reason1','vip_check','car_money'
 ];
 
 

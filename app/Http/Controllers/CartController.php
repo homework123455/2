@@ -20,9 +20,11 @@ class CartController extends Controller
 	$vip_discount=Setting::where('id',1)->value('vip_discount');
      $price=Setting::where('id',1)->value('prices');
 	 $low_price=Setting::where('id',1)->value('low_prices');
+	 if(Auth::check()){
 	 $vip=User::where('id',Auth::user()->id)->value('vip');
 	 $vip_time=User::where('id',Auth::user()->id)->value('vip_time');
 	 $vip_time1=Carbon::parse($vip_time)->addDays(30)->format('Y-m-d');
+	 }
         if (Auth::check()) {
 			$good=Good::all();
             $all = 0;
@@ -40,18 +42,20 @@ class CartController extends Controller
             }
 
 		if($vip==0){
+			$vip_all=0;
 			if($all < $low_price){
 				$qq=$low_price-$all;
 				$all =$all + $price;
 				$q = $price;
+				
 			}
 			else
 			{
 			$all =$all;
 			$q =0;
 			}
-		
-		}elseif($vip==1){
+			}
+		elseif($vip==1){
 			$all =$all;
 			$vip_all=$all*$vip_discount/10;
 			$q =0;	
