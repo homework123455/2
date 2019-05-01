@@ -248,7 +248,7 @@ class MaintaincesController extends Controller
 		$orders_C =$orders->whereIn('status',["取消","退貨"]);
 		$C=count($orders_C);
 		$F=count($ordersing)-$C;
-		if(count($orders_C)>0){
+		if(count($ordersing)>0){
 		$C_times=ceil((count($orders_C)/count($ordersing))*100);
 		
 		$F_times=100-ceil($C_times);

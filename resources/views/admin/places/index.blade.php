@@ -102,6 +102,7 @@
                         	<th width="150" style="text-align: center">商品狀態</th>
 							<th width="200" style="text-align: center">架上數量</th>
                         	<th width="200" style="text-align: center">庫存</th>
+							<th width="200" style="text-align: center">售價</th>
 							
                             	<th width="400" style="text-align: center">功能</th>                        
 			@else

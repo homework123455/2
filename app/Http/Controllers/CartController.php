@@ -62,7 +62,7 @@ class CartController extends Controller
 			$abc=($abc-$vip_discount)*10;
 			}
 			
-            return view('cart',['low_price'=>$low_price,'carts' => $data,'abc' =>$abc,'a' =>$all,'goods'=>$good,'q'=>$q,'qq'=>$qq,'b'=>$i,'vip_all'=>$vip_all,'vip'=>$vip,'vip_time1'=>$vip_time1]);
+            return view('cart',['low_price'=>$low_price,'carts' => $data,'abc' =>$abc,'a' =>$all,'goods'=>$good,'q'=>$q,'qq'=>$qq,'b'=>$i,'vip_all'=>$vip_all,'vip'=>$vip,'vip_time1'=>$vip_time1,'vip_discount'=>$vip_discount]);
         }else{
             return redirect()->route('login');
         }
