@@ -44,7 +44,7 @@ class CartController extends Controller
 		if($vip==0){
 			$vip_all=0;
 			if($all < $low_price){
-				$qq=$low_price-$all;
+
 				$all =$all + $price;
 				$q = $price;
 				
@@ -56,13 +56,22 @@ class CartController extends Controller
 			}
 			}
 		elseif($vip==1){
-			$all =$all;
-			$vip_all=$all*$vip_discount/10;
-			$q =0;	
 			$abc=($abc-$vip_discount)*10;
+			if($all < $low_price){
+			$q =$price;	
+			$all =$all+$q;
+			$vip_all=ceil($all*$vip_discount/10);
+			
+			}
+			else
+			{
+				$all=$all;
+				$q=0;
+				$vip_all=ceil($all*$vip_discount/10);
+			}
 			}
 			
-            return view('cart',['low_price'=>$low_price,'carts' => $data,'abc' =>$abc,'a' =>$all,'goods'=>$good,'q'=>$q,'qq'=>$qq,'b'=>$i,'vip_all'=>$vip_all,'vip'=>$vip,'vip_time1'=>$vip_time1,'vip_discount'=>$vip_discount]);
+            return view('cart',['low_price'=>$low_price,'carts' => $data,'abc' =>$abc,'a' =>$all,'goods'=>$good,'q'=>$q,'b'=>$i,'vip_all'=>$vip_all,'vip'=>$vip,'vip_time1'=>$vip_time1,'vip_discount'=>$vip_discount]);
         }else{
             return redirect()->route('login');
         }

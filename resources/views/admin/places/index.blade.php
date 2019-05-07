@@ -170,23 +170,40 @@
                                     @if(Auth::user()->previlege_id>=2)
 
     
-                                            <td width="80" >
-                                                @if($good->status!='下架中')
-                                                <form action="{{ route('admin.places.scrapped', $good->id) }}" method="POST">
+                                           
+                                                @if($good->status=='正常供貨中') 
+													<td width="80" >
+                                                <form action="{{ route('admin.places.scrapped1', $good->id) }}" method="POST">
+                                                    {{ csrf_field() }}
+                                                    {{ method_field('PATCH') }}
+                                                    <button class="btn btn-danger disabled" disabled>上架</button>
+                                                </form>
+												</td>
+												<td width="80" >
+												 <form action="{{ route('admin.places.scrapped', $good->id) }}" method="POST">
                                                     {{ csrf_field() }}
                                                     {{ method_field('PATCH') }}
                                                     <button class="btn btn-danger">下架</button>
                                                 </form>
-                                            @endif
-											@if($good->status=='下架中')
+                                              @endif
+											@if($good->status!='正常供貨中')
+												<td width="80" >
                                                 <form action="{{ route('admin.places.scrapped1', $good->id) }}" method="POST">
                                                     {{ csrf_field() }}
                                                     {{ method_field('PATCH') }}
-                                                    <button class="btn btn-danger">上架</button>
+                                                    <button class="btn btn-danger ">上架</button>
                                                 </form>
+												</td>
+												<td width="80" >
+												<form action="{{ route('admin.places.scrapped', $good->id) }}" method="POST">
+                                                    {{ csrf_field() }}
+                                                    {{ method_field('PATCH') }}
+                                                    <button class="btn btn-danger disabled"disabled >下架</button>
+                                                </form> 
+												</td>
+
                                             @endif
                                                 
-                                            </td>
 
                                        
 

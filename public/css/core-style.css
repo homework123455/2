@@ -366,7 +366,7 @@ img {
     position: relative;
     z-index: 1;
     -webkit-box-flex: 0;
-    -ms-flex: 0 0 90px;
+    -ms-flex: 0 0 1000px;
     flex: 0 0 90px;
     width: 90px;
     display: block;
@@ -423,8 +423,8 @@ img {
 /* Cart Area CSS */
 .right-side-cart-area {
   position: fixed;
-  width: 670px;
-  height: 100%;
+  width: 800px;
+  height: 150%;
   top: 0;
   right: -800px;
   background-color: #ffffff;
@@ -464,7 +464,7 @@ img {
         height: 50px;
         line-height: 50px; } }
     .right-side-cart-area .cart-button a img {
-      max-width: 20px; }
+      max-width: 50px; }
     .right-side-cart-area .cart-button a span {
       font-family: "Ubuntu", sans-serif;
       font-size: 18px;

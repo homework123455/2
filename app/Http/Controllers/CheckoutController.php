@@ -27,7 +27,7 @@ class CheckoutController extends Controller
 				$i = $i + $s->total;
             }
 			
-		if(Auth::user()->vip ==1){
+		if(Auth::user()->vip ==1&&$i>$low_prices){
        
 	      Order::create([
             'name' => $request->name,
@@ -35,6 +35,18 @@ class CheckoutController extends Controller
             'postcode' => $request->postcode,
 			'ph_number'=>$request->ph_number,
 			'car_money'=>0,
+			'vip_check'=>1
+            
+        ]);
+		}
+		elseif(Auth::user()->vip ==1&&$i>$low_prices){
+		
+	      Order::create([
+            'name' => $request->name,
+            'address' => $request->address,
+            'postcode' => $request->postcode,
+			'ph_number'=>$request->ph_number,
+			'car_money'=>1,
 			'vip_check'=>1
             
         ]);
@@ -145,7 +157,6 @@ class CheckoutController extends Controller
 		if($vip==0){
 			$vip_all=0;
 			if($all < $low_price){
-				$qq=$low_price-$all;
 				$all =$all + $price;
 				$q = $price;
 				
@@ -157,10 +168,19 @@ class CheckoutController extends Controller
 			}
 			}
 		elseif($vip==1){
-			$all =$all;
-			$vip_all=$all*$vip_discount/10;
-			$q =0;	
+
+			if($all < $low_price){
+			$q =$price;	
+			$all =$all+$q;
+			$vip_all=ceil($all*$vip_discount/10);
 			
+			}
+			else
+			{
+				$all=$all;
+				$q=0;
+				$vip_all=ceil($all*$vip_discount/10);
+			}
 			}
 			
 			
