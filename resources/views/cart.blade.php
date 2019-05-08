@@ -163,7 +163,7 @@
 			<h3>運費：$<?php echo $q;?>       購買金額 : $ <?php echo $b; ?></h3>
 			@if($vip=='1')
 			<h3>結帳總金額為：$<DEL><?php echo $a; ?></DEL>   <font color="#FF0000" >$<?php echo $vip_all;?></h3>
-			<h3><font color="#FF0000"  >VIP可享免運費({{$vip_time1}})與{{$vip_discount}}折</h3>
+			<h3><font color="#FF0000"  >VIP可享{{$vip_discount}}折優惠</h3>
 		    @else
 				<h3>結帳總金額為：$<?php echo $a; ?></h3>
 			<h3><font color="#FF0000"  >購物金額達$<?php echo $low_price; ?>免運費</h3>

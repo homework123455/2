@@ -88,7 +88,7 @@
 					@endif
 					<th width="100" style="text-align: center">訂單狀態</th>
 					@if((Auth::user()->previlege_id==1))
-					@if($order->status=="已完成")
+					@if($order->status=="已出貨")
 						
 					<th width="100" style="text-align: center">功能</th>
 					@endif
@@ -116,26 +116,26 @@
 						<td style="text-align: center">{{$order->status}}</td>
 					@endif
 						@if((Auth::user()->previlege_id==1))
-							@if($order->status=="已完成"&&$order1->status!="退貨中"&&$order1->status!="已退貨"&&$order1->status!="拒絕退貨")
+							@if($order->status=="已出貨"&&$order1->status!="退貨中"&&$order1->status!="已退貨"&&$order1->status!="拒絕退貨")
 						
 					<td class="table-text" style="text-align: center">
                                 
                                    <div> <a href="{{ route('orders.back',['product_id'=>$order1->product_id,'id'=>$order->id]) }}" class="btn btn-primary" role="button">退貨</a></div>
                                 
                         </td>
-						@elseif($order->status=="已完成"&&$order1->status=="退貨中")
+						@elseif($order->status=="已出貨"&&$order1->status=="退貨中")
 						<td class="table-text" style="text-align: center">
                                 
                                    <div> <a class="btn btn-primary" role="button" disabled>退貨</a></div>
                                 
                         </td>
-						@elseif($order->status=="已完成"&&$order1->status=="已退貨")
+						@elseif($order->status=="已出貨"&&$order1->status=="已退貨")
 						<td class="table-text" style="text-align: center">
                                 
                                    <div> <a class="btn btn-primary" role="button" disabled>退貨</a></div>
                                 
                         </td>
-						@elseif($order->status=="已完成"&&$order1->status=="拒絕退貨")
+						@elseif($order->status=="已出貨"&&$order1->status=="拒絕退貨")
 						<td class="table-text" style="text-align: center">
                                 
                                    <div> <a class="btn btn-primary" role="button" disabled>退貨</a></div>

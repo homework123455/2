@@ -118,6 +118,7 @@
                         </div>
 
 @if($vip==1)
+				<h6>運費：$<?php echo $q ?>
                     <h6>總金額 : $<?php echo $a; ?></h6>
 				 <h6>折扣後金額: $<?php echo $vip_all; ?></h6>
 				@else
