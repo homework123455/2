@@ -53,10 +53,12 @@
                 <label width="80">權限：</label>
                     <label name="previlege_id">{{$previlege->name}}</label>
             </div>
-
+	<div>
+           <a class="btn btn-primary" role="button" href="{{ route('admin.users.edit', $user->id) }}" >修改</a>
+        </div>
 
         <div>
-            <a href="{{ route('admin.users.index') }}" class="btn btn-success">返回</a>
+            <a href="{{ route('admin.dashboard.index') }}" class="btn btn-success">返回</a>
         </div>
         <p>&nbsp;</p>
         <p>&nbsp;</p>

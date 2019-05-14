@@ -66,7 +66,7 @@
                 <label width="80">連絡電話：</label>
                 <input name="phone" class="form-control" placeholder="請輸入連絡電話" value="{{$user->phone}}">
             </div>
-
+	@if(Auth::user()->previlege_id==3)
             <div class="form-group">
                 <label width="80">權限：</label>
                 <select name="previlege_id" class="form-control">
@@ -79,6 +79,7 @@
                     @endforeach
                 </select>
             </div>
+			@endif
 
 
             <div class="text-right">

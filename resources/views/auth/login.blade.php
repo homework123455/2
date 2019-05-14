@@ -54,6 +54,10 @@
                                 <button type="submit" class="btn btn-primary">
                                     Login
                                 </button>
+								
+								  <a class="btn btn-link" href="{{ url('/register') }}">
+                                    註冊帳號
+                                </a>
 
                                 <a class="btn btn-link" href="{{ url('/password/reset') }}">
                                     忘記密碼了嗎?
