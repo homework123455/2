@@ -25,6 +25,7 @@
 <div class="input-group custom-search-form">
 <label>顯示全部：</label>  <form action="{{ route('admin.shops.suppliersdetail.searchALL') }}" method="POST">
 {{ csrf_field() }}
+{{ method_field('GET') }}
 <span class="input-group-btn"><button class="btn btn-info"><i class="fa fa-search"></i></button> </span>
 </form>
    
@@ -32,7 +33,7 @@
 
  <label>商品名稱查詢：</label>  <form action="{{ route('admin.shops.suppliersdetail.search1') }}" method="POST">
     {{ csrf_field() }}
-
+{{ method_field('GET') }}
     <select name="good_search" class="form-control">
 	<option value="">請選擇</option>
 				@foreach($goods as $good)
@@ -151,7 +152,22 @@
             </table>
 </div>
         </div>
-		{!! $suppliersdetails->links() !!}
+		
+@if(($Search)<>"" && ($Search1)<>"")
+	{{ $suppliersdetails->appends(['Search1' => $Search1 , 'Search' => $Search])->Links() }}
+@elseif(($Search)==""&&($Search1)<>"")
+	{{ $suppliersdetails->appends(['Search1' => $Search1 ])->Links() }}
+@elseif(($Search)<>"" && ($Search1)=="")
+	{{ $suppliersdetails->appends(['Search' => $Search])->Links() }}
+@elseif(isset($i)&& isset($ii))
+{{ $suppliersdetails->appends(['Search1' => $i,'Search' => $ii ])->Links() }}
+@elseif(!isset($i)&& isset($ii))
+{{ $suppliersdetails->appends(['Search' => $ii ])->Links() }}
+@elseif(isset($i)&& !isset($ii))
+{{ $suppliersdetails->appends(['Search1' => $i ])->Links() }}
+@else
+{{$suppliersdetails->Links()}}
+    @endif
     </div>
 </div>
 <!-- /.row -->

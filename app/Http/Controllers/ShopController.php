@@ -568,6 +568,40 @@ class ShopController extends Controller
         $Search = $request->input('good_search');
         
         $Search1 = $request->input('supplier_search');
+		if(isset($_GET['Search1'])&& isset($_GET['Search'])){
+			$i=$_GET['Search1'];
+			$ii=$_GET['Search'];
+			$suppliersdetails = Suppliersdetail::orderBy('created_at', 'DESC')
+                ->where('supplier_id', $i)->where('name', $ii)
+                ->paginate(5);
+				$suppliers = Supplier::orderBy('created_at', 'DESC')->get();
+				$data = ['suppliers'=>$suppliers,'suppliersdetails' => $suppliersdetails,'goods' => $goods, 'Search' => $Search, 'Search1' => $Search1,'i'=>$i,'ii'=>$ii];
+        return view('admin.shops.suppliersdetail', $data);
+			
+		}
+		elseif(isset($_GET['Search1'])&& empty($_GET['Search'])){
+			$i=$_GET['Search1'];
+			
+			$suppliersdetails = Suppliersdetail::orderBy('created_at', 'DESC')
+                ->where('supplier_id', $i)
+                ->paginate(5);
+				$suppliers = Supplier::orderBy('created_at', 'DESC')->get();
+				$data = ['suppliers'=>$suppliers,'suppliersdetails' => $suppliersdetails,'goods' => $goods, 'Search' => $Search, 'Search1' => $Search1,'i'=>$i];
+        return view('admin.shops.suppliersdetail', $data);
+			
+		}
+		elseif(empty($_GET['Search1'])&& isset($_GET['Search'])){
+			
+			$ii=$_GET['Search'];
+			$suppliersdetails = Suppliersdetail::orderBy('created_at', 'DESC')
+                ->where('name', $ii)
+                ->paginate(5);
+				$suppliers = Supplier::orderBy('created_at', 'DESC')->get();
+				$data = ['suppliers'=>$suppliers,'suppliersdetails' => $suppliersdetails,'goods' => $goods, 'Search' => $Search, 'Search1' => $Search1,'ii'=>$ii];
+        return view('admin.shops.suppliersdetail', $data);
+			
+		}
+		else{
        $suppliers = Supplier::orderBy('created_at', 'DESC')->get();
         if( $Search == "" && $Search1 =="") {
 
@@ -598,7 +632,7 @@ class ShopController extends Controller
         $data = ['suppliers'=>$suppliers,'suppliersdetails' => $suppliersdetails,'goods' => $goods, 'Search' => $Search, 'Search1' => $Search1];
         return view('admin.shops.suppliersdetail', $data);
         }
-
+	}
 
 		
 
