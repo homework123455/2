@@ -124,8 +124,8 @@ Route::group(['prefix' => 'admin'], function() {
     Route::post('places', ['as' => 'admin.shops.store', 'uses' => 'ShopController@store']);
 	Route::get('shops/suppliersdetail', ['as' => 'admin.shops.suppliersdetail', 'uses' => 'ShopController@suppliersdetail']); 
 	Route::delete('shops/suppliersdetail/{id}', ['as' => 'admin.shops.suppliersdetail.destroy', 'uses' => 'ShopController@suppliersdetaildestroy']); 
-	Route::post('shops/suppliersdetail/search1'  , ['as' => 'admin.shops.suppliersdetail.search1', 'uses' => 'ShopController@Search1']);
-    Route::post('shops/suppliersdetail/searchALL'  , ['as' => 'admin.shops.suppliersdetail.searchALL', 'uses' => 'ShopController@searchALL']);
+	Route::get('shops/suppliersdetail/search1'  , ['as' => 'admin.shops.suppliersdetail.search1', 'uses' => 'ShopController@Search1']);
+    Route::get('shops/suppliersdetail/searchALL'  , ['as' => 'admin.shops.suppliersdetail.searchALL', 'uses' => 'ShopController@searchALL']);
 	Route::get('shops/{id}/suppliers', ['as' => 'admin.shops.suppliers', 'uses' => 'ShopController@suppliers']); 	//新增資產(1)
 	Route::post('shops/suppliers/store/{id}', ['as' => 'admin.shops.supplierstore', 'uses' => 'ShopController@supplierstore']); 
 	Route::delete('shops/{id}', ['as' => 'admin.shops.destroy', 'uses' => 'ShopController@destroy']); 
@@ -143,6 +143,8 @@ Route::group(['prefix' => 'admin'], function() {
     Route::get('categories', ['as' => 'admin.categories.index', 'uses' => 'CategorieController@index']);
 	Route::get('categories/create', ['as' => 'admin.categories.create', 'uses' => 'CategorieController@create']);       
 	Route::post('categories', ['as' => 'admin.categories.store', 'uses' => 'CategorieController@store']);
+	Route::get('categories/{id}/edit', ['as' => 'admin.categories.edit', 'uses' => 'CategorieController@edit']);        //修改資產(1)
+    Route::patch('categories/{id}', ['as' => 'admin.categories.update', 'uses' => 'CategorieController@update']); 
 	Route::delete('categories/{id}', ['as' => 'admin.categories.destroy', 'uses' => 'CategorieController@destroy']);
 	Route::post('categories/search2'  , ['as' => 'admin.categories.search2', 'uses' => 'CategorieController@Search2']);
 Route::post('categories/searchALL1'  , ['as' => 'admin.categories.searchALL1', 'uses' => 'CategorieController@searchALL1']);

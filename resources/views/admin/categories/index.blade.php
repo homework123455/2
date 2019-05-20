@@ -144,7 +144,11 @@
 	
 	?>
 
-
+                                       <td width="80" >
+                                           
+                                                <a class="btn btn-primary" role="button" href="{{ route('admin.categories.edit', $categorie->id) }}" >修改</a>
+                                            
+                                        </td>
                                         
 	                                    @if($i=="0")
                                         <td class="table-text" style="text-align: center">

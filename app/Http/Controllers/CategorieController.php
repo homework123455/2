@@ -60,77 +60,30 @@ class CategorieController extends Controller
     {
      
       
-        $categories = Category::orderBy('created_at', 'DESC')->get();
+        $categories = Category::find($id);
 
 		
 
 
-        $good = Good::find($id);
-        $data = ['good' => $good, 'categories' => $categories];
+        
+        $data = [ 'categories' => $categories];
 
-        return view('admin.shops.edit', $data);
+        return view('admin.categories.edit', $data);
     }
 
-    public function update(PlaceRequest $request, $id)
+    public function update(Request $request, $id)
     {
 
-        $good = Good::find($id);
-		 $file = $request->file('img');
-        $filePath = [];  // 定义空数组用来存放图片路径
-        foreach ($file as $key => $value) {
-            // 判断图片上传中是否出错
-
-/*
-                if (!$value->isValid()) {
-                    exit('上傳圖片出錯，請重試！');
-					//echo '<script>alert('.上傳圖片出錯，請重試！.');</script>';
-                }
-*/
-            //if(!empty($value)){//此处防止没有多文件上传的情况
-               // $allowed_extensions = ["png", "jpg", "gif","JPG"];
-
-            /*
-                            if (!$value->isValid()) {
-                               // exit"<script> alert('上傳圖片出錯，請重試！')</script>";
-                                echo '<script>alert('.上傳圖片出錯，請重試！.');</script>';
-                            }
-            */
-            if (!empty($value)) {//此处防止没有多文件上传的情况
-                $allowed_extensions = ["png", "jpg", "gif","JPG"];
-
-                if ($value->getClientOriginalExtension() && !in_array($value->getClientOriginalExtension(), $allowed_extensions)) {
-                    exit('您只能上傳PNG、JPG或GIF格式的圖片！');
-                }
-                $destinationPath = '/uploads/' . date('Y-m-d'); // public文件夹下面uploads/xxxx-xx-xx 建文件夹
-                $extension = $value->getClientOriginalExtension();   // 上传文件后缀
-                $fileName = date('YmdHis') . mt_rand(100, 999) . '.' . $extension; // 重命名
-                $value->move(public_path() . $destinationPath, $fileName); // 保存图片
-                $filePath[] = $destinationPath . '/' . $fileName;
-
-            }
-        }
-        $good->update([
-            'goods_name2' => $request->name,
-            'category' => $request->category,
-            
-            'lendable' => $request->lendable,
-            //'location' => $request->location,
-            //'warranty'=>$request->warranty,
-            'remark' => $request->remark,
-
-
-          
-
-            'photo1' => $filePath[0],
-			 'pgoto2' => $filePath[1],
-
+        $categories = Category::find($id);
+        $categories->update([
+            'name' => $request->name,
             
 
 
 
         ]);;
 
-        return redirect()->route('admin.places.index');
+        return redirect()->route('admin.categories.index');
     }
 
     public function store(Request $request)
