@@ -6,12 +6,14 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Http\Requests\PlaceRequest;
 use App\Good;
+use App\Report;
 use App\Plant;
 use DB;
 use App\Category;
 use App\Supplier;
 use App\Setting;
 use App\User;
+use App\Addstock;
 use App\Suppliersdetail;
 use Carbon\Carbon;
 class ShopController extends Controller
@@ -323,18 +325,17 @@ class ShopController extends Controller
 			'details3'=>$request->details3,
 			'save_stock'=>$request->save_stock,
 
-
-          
-
             'photo1' => $filePath[0],
 			'photo2' => $filePath[1],
 			'photo3' => $filePath[2],
 			'photo4' => $filePath[3],
 
-            
-
-
-
+        ]);
+		$good=Good::orderby('id','desc')->first();
+		Report::create([
+            'good_id' => $good->id,
+			
+     
         ]);
 
         return redirect()->route('admin.places.index');
@@ -476,6 +477,7 @@ class ShopController extends Controller
 		
 		}
 		}
+		
         $data = ['price'=>$price,'total'=>$total,'suppliers'=>$suppliers,'good' => $good, 'categories' => $categories,'suppliersdetails'=>$suppliersdetails];
 
         return view('admin.shops.supplement', $data);
@@ -526,6 +528,12 @@ class ShopController extends Controller
 		'value' => '0',
 		'checked'=>'0'
 		]);
+		Addstock::create([
+            'value' => $S1,
+			'supply_id' =>$suppliersdetail->id,
+			'good_id' =>$good->id
+       
+        ]);
 		$value=$value-$S1;
 		}
 		else{
@@ -534,6 +542,12 @@ class ShopController extends Controller
 		
 		'checked'=>'0'
 		]);
+		Addstock::create([
+            'value' => $value,
+			'supply_id' =>$suppliersdetail->id,
+			'good_id' =>$good->id
+       
+        ]);
 		break;
 		}
 		}
@@ -546,6 +560,7 @@ class ShopController extends Controller
 			 'status'=>'正常供貨中'
              
         ]);
+		 
 			
 		}
 		else	{
@@ -555,6 +570,7 @@ class ShopController extends Controller
 			 'status'=>'正常供貨中'
              
         ]);
+		 
 	
 		}
         return redirect()->route('admin.places.index');

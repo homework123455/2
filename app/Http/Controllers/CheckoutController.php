@@ -8,6 +8,7 @@ use DB;
 use App\Cart;
 use App\Order;
 use App\Setting;
+use App\Addstock;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\User;
@@ -39,7 +40,7 @@ class CheckoutController extends Controller
             
         ]);
 		}
-		elseif(Auth::user()->vip ==1&&$i>$low_prices){
+		elseif(Auth::user()->vip ==1&&$i<$low_prices){
 		
 	      Order::create([
             'name' => $request->name,
@@ -94,19 +95,67 @@ class CheckoutController extends Controller
 					$product_id=$good1->id;
 				}
 			}
-            DB::table('ordersdetail')->insert(
+			/*
+		$link=mysqli_connect("localhost:33060","root","root","homestead");
+		$sql1 ="SELECT * FROM addstock WHERE good_id='$product_id'";
+		$rec1 = $link->query($sql1);	
+		$rNum = $rec1->num_rows;
+		$rs1 = $rec1->fetch_array();
+		$S2=$rs1['supply_id'];
+		*/
+            
+		$value=$cart->qty;
+		$addstocks=Addstock::where('good_id',$product_id)->where('value','>','0')->orderby('id','ASC')->get();
+		foreach($addstocks as $addstock){
+			
+		$link=mysqli_connect("localhost:33060","root","root","homestead");
+		$sql ="SELECT * FROM addstock WHERE id='$addstock->id'";
+		$rec = $link->query($sql);	
+		$rNum = $rec->num_rows;
+		$rs = $rec->fetch_array();
+		$S1=$rs['value'];
+		$S2=$rs['supply_id'];
+		
+		
+		if($value >= $S1){
+			DB::table('ordersdetail')->insert(
                 [
-                    'qty' => $cart->qty,
+                    'qty' => $S1,
                     'product' => $cart->product,
                     'cost' => $cart->cost,
-                    'total' => $cart->total,
+                    'total' => $S1*$cart->cost,
                     'users_id' => Auth::user()->id,
                     'orders_id' => $count,
-					'product_id'=>$product_id
+					'product_id'=>$product_id,
+					'supply_id'=>$S2
 					
                 ] );
-			
-			
+		$addstock->update([
+             'value' => '0'
+			 
+        ]);
+		$value= $value - $S1;
+		}
+		else{
+			DB::table('ordersdetail')->insert(
+                [
+                    'qty' => $value,
+                    'product' => $cart->product,
+                    'cost' => $cart->cost,
+                    'total' => $value*$cart->cost,
+                    'users_id' => Auth::user()->id,
+                    'orders_id' => $count,
+					'product_id'=>$product_id,
+					'supply_id'=>$S2
+					
+                ] );
+			$addstock->update([
+             'value' => $S1 - $value
+			 
+        ]);
+			break;
+		}
+		}	
            
 			$level = DB::table('users')->where('id', Auth::user()->id)->value('level');
 		DB::table('users')

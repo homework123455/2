@@ -11,7 +11,9 @@ use App\Category;
 use App\Maintaince;
 use App\MaintainceItem;
 use App\User;
+use App\Report;
 use App\Vendor;
+use App\Suppliersdetail;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use DB;
@@ -387,14 +389,25 @@ class MaintaincesController extends Controller
 				
             ]);
 		//}
-		}	
 		}
+		}	
+		$supply_cost=Suppliersdetail::where('id',$order1->supply_id)->value('price');
+		$report=Report::where('good_id',$order1->product_id);
+		$earn=Report::where('good_id',$order1->product_id)->value('earn');
+		$trade=Report::where('good_id',$order1->product_id)->value('trade');
+		$report->update([
+			'earn'=>$earn + ($order1->cost - $supply_cost)*$order1->qty,
+			'trade'=>$trade+$order1->qty
+			]);
+		
+		
 		}
 			$order->update([
                 'status'=>'處理中',
 				'updated_at'=>Carbon::now(),
 				
             ]);
+			
         //}
 		//OrdersDetail::where('orders_id',$id)->first()->delete();
 		//}
