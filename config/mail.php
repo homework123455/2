@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => 'hello@example.com',
-        'name' => 'Example',
+        'address' => 'hello@gmail.com',
+        'name' => '體育用品購物系統',
     ],
 
     /*
@@ -111,5 +111,13 @@ return [
     */
 
     'sendmail' => '/usr/sbin/sendmail -bs',
+	'stream' => [
+ 'ssl' => [
+ 'allow_self_signed' => true,
+ 'verify_peer' => false,
+ 'verify_peer_name' => false,
+ ],
+],
+
 
 ];
