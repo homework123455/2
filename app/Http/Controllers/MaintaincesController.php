@@ -362,6 +362,7 @@ class MaintaincesController extends Controller
 		$ordersdetail = OrdersDetail::where('orders_id',$id)->get();
 		$goods = Good::orderBy('created_at', 'DESC')->get();
 		
+		
         $reason = $request->input('reason');
         
         if($request->method=='1'){
@@ -413,17 +414,27 @@ class MaintaincesController extends Controller
 		//}
 		}
         //Mail
-		/*
-        foreach ($maintaince->applications()->get() as $application){
-            $user=User::find($application->user_id);
+		 $total =0;
+        foreach($ordersdetail as $order2){
+		$total = $total+$order2->total;
+		}
+			
+
+
+			$orders123=Order::find($id);
+            $user=User::find($orders123->users_id);
             $to = ['email'=>$user->email,
                 'name'=>$user->name];
-            $data=[];
-            Mail::later(1,' admin.mails.status',$data, function($message) use ($to) {
-                $message->to($to['email'], $to['name'])->subject('申請通過');
+            $data = ['ordersdetail'=>$ordersdetail,
+'total'=>$total];
+
+                
+           
+            Mail::later(1,' admin.mails.spend',$data, function($message) use ($to) {
+                $message->to($to['email'], $to['name'])->subject('購物明細');
             });
-        }
-*/
+        
+
         return redirect()->route('orders.index');
     }
 	public function orderback($id,$product_id){
