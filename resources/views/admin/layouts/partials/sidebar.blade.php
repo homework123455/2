@@ -118,6 +118,9 @@
                 <a href="{{ route('admin.suppliers.index') }}"><i class="fa fa-fw fa-edit"></i> 供應商管理</a>
             </li>
 			<li>
+                <a href="{{ route('admin.reports.index') }}"><i class="fa fa-fw fa-edit"></i> 每月報表管理</a>
+            </li>
+			<li>
                 <a href="{{ route('admin.setting.edit') }}"><i class="fa fa-fw fa-edit"></i> 系統管理</a>
             </li>
 			@elseif(Auth::user()->previlege_id==2)
