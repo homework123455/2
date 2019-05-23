@@ -11,11 +11,25 @@ use App\Monthly;
 use Carbon\Carbon;
 class ReportController extends Controller
 {
-   public function index()
+   public function index($id)
     {
 		
-		$reports = Report::orderBy('earn', 'DESC')->paginate(3);
-		$reports1 = Report::all();
+		$reports = Report::find($id);
+		$months=Monthly::orderBy('month','asc')->get();
+		$goods = Good::all();
+		$i=0;
+		$a="";
+		
+		
+		$data = ['reports'=>$reports,'goods'=>$goods,'i'=>$i,'a'=>$a,'months'=>$months];
+        return view('admin.reports.index1', $data);
+    }
+	
+	public function index1()
+    {
+		
+		$reports = Report::orderBy('id', 'ASC')->paginate(5);
+		
 		
 		$goods = Good::all();
 		$i=0;
@@ -46,7 +60,8 @@ class ReportController extends Controller
 		Monthly::create([
             'good_id' => $report1->good_id,
 			'earn'=> $report1->earn,
-			'month'=> $startmonth
+			'month'=> $startmonth,
+			'trade'=>$$report1->trade,
 			
             ]);
 		}
@@ -56,8 +71,26 @@ class ReportController extends Controller
 		}
 		}
 		
-		$data = ['reports'=>$reports,'goods'=>$goods,'months'=>$months,'i'=>$i,'a'=>$a];
-        return view('admin.reports.index', $data);
+		
+		$data = ['reports'=>$reports,'goods'=>$goods,'i'=>$i,'a'=>$a];
+        return view('admin.reports.all', $data);
+    }
+	public function sort1($id)
+    {
+		if($id=='id'){
+			$reports = Report::orderBy($id, 'ASC')->paginate(5);
+		}
+		else{
+		$reports = Report::orderBy($id, 'DESC')->paginate(5);
+		}
+		
+		$goods = Good::all();
+		$i=0;
+		$a="";
+		
+		
+		$data = ['reports'=>$reports,'goods'=>$goods,'i'=>$i,'a'=>$a];
+        return view('admin.reports.all', $data);
     }
 	
 }

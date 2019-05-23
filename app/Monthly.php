@@ -8,6 +8,6 @@ class Monthly extends Model
 {
     protected $table ='monthly';
 	protected  $fillable=[
-     'id','good_id','created_at','earn','month'
+     'id','good_id','created_at','earn','month','trade'
 ];
 }
