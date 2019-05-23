@@ -182,6 +182,26 @@ class UsersController extends Controller
 
         return redirect()->route('admin.users.showwrong', $data);
     }
+	public function checkupdate($id)
+    {
+		$check =User::where('email',$id);
+		$check->update(['check'=>1]);
+ 
+        return redirect()->route('check');
 
+}
+public function checkindex()
+    {
 
+        return view('check');
+
+}
+  public function checkmail()
+    {
+
+        return view('checkmail');
+
+}
+  
+	
 }

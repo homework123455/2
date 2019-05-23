@@ -18,7 +18,7 @@ Route::get('/home',
 Route::get('/'         , ['as' => 'home.index' , 'uses' => 'HomeController@index']);
 //Route::get('posts'     , ['as' => 'posts.index', 'uses' => 'PostsController@index']);
 //Route::get('posts/{id}', ['as' => 'posts.show' , 'uses' => 'PostsController@show']);
-
+Route::get('checkmail'   , ['as' => 'checkmail' , 'uses' => 'UsersController@checkmail']);
 
 //顯示商品頁面
 Route::get('shop/main', ['as' => 'main.shop', 'uses' => 'ShopController@index']);
@@ -88,6 +88,8 @@ Route::patch('orders/{id}/ordercancel', ['as' => 'orders.ordercancel'  , 'uses' 
 Route::get('orders/{id}/show/{users_id}/show5', ['as' => 'orders.show5', 'uses' => 'MaintaincesController@show5']);
 Route::get('orders/{id}/show1/{product_id}/orderback', ['as' => 'orders.back', 'uses' => 'MaintaincesController@orderback']);
 Route::patch('orders/{id}/show1/{product_id}/orderback', ['as' => 'orders.backupdate', 'uses' => 'MaintaincesController@orderbackupdate']);
+Route::patch('users/{id}', ['as' => 'checkupdate', 'uses' => 'UsersController@checkupdate']);
+Route::get('users', ['as' => 'check', 'uses' => 'UsersController@checkindex']); 
 
 //checkout
 Route::get('checkout',['as'=> 'checkout','uses'=>'CheckoutController@cartdetail']);
@@ -218,8 +220,7 @@ Route::patch('places/{id}/scrapped1', ['as' => 'admin.places.scrapped1', 'uses' 
 	Route::delete('users/{id}/wrongdata/{wid}', ['as' => 'admin.users.showwrong.destroy1', 'uses' => 'UsersController@destroy1']);
 	Route::get('users/{id}/wrongdata/{wid}/wrongedit', ['as' => 'admin.users.showwrong.wrongedit'   , 'uses' => 'UsersController@wrongedit']);
     Route::patch('users/{id}/wrongdata/{wid}'   , ['as' => 'admin.users.showwrong.update1' , 'uses' => 'UsersController@update1']);
-
-
+	
 
 });
 

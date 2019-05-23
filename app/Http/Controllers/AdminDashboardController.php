@@ -113,6 +113,7 @@ if (Auth::user()->previlege_id==3)
             'applicationsA'=>$applicationsA,'news'=>$news,
             "users"=>$users,'departmaentU'=>$departmaentU,'username'=>$username,'times'=>$times,'weeks'=>$weeks,'place_overtimes'=>$place_overtimes,
             'place_overtimes1'=>$place_overtimes1,'time_nowid'=>$time_nowid,'time_nows'=>$time_nows];
+			
         if (Auth::user()->previlege_id==3)
             return view('admin.dashboard.mis',$data);
 		elseif(Auth::user()->previlege_id==2)

@@ -430,7 +430,7 @@ class MaintaincesController extends Controller
 
                 
            
-            Mail::later(1,' admin.mails.spend',$data, function($message) use ($to) {
+            Mail::later(1,' mails.spend',$data, function($message) use ($to) {
                 $message->to($to['email'], $to['name'])->subject('購物明細');
             });
         
