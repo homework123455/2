@@ -29,20 +29,15 @@
 <!-- /.row -->
 
 <div class="row">
-@foreach($reports as $report)
+
 @foreach($goods as $good )
-@if($good->id==$report->good_id)
-    <div class="panel-group" id="accordion">
+@if($good->id==$reports->good_id)
+    
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h4 class="panel-title">
-				<a data-toggle="collapse" data-parent="#accordion" 
-				   href="#{{ $report->good_id }}">
-				   <i class="fa fa-user"></i>{{ $good->name }}<span class="badge"></span></a>
-				
-			</h4>
-		</div>
-<div id="{{ $report->good_id }}" class="panel-collapse collapse in">
+			
+		
+
 			<div class="panel-body">
            <div class="table-responsive">
             <table class="table table-striped">
@@ -65,7 +60,7 @@
                        
                         <td style="text-align: center">
 					
-                        <div> {{ $report->good_id }}</div>
+                        <div> {{ $reports->good_id }}</div>
 					 
                         </td>
                         
@@ -76,10 +71,10 @@
 						<div>{{ $good->status }}</div>
 						</td>
 						 <td style="text-align: center">
-						<div>{{ $report->earn }}</div>
+						<div>{{ $reports->earn }}</div>
 						</td>
 						 <td style="text-align: center">
-						<div>{{ $report->trade }}</div>
+						<div>{{ $reports->trade }}</div>
 						</td>
 
 						</tr>
@@ -98,12 +93,12 @@
 
                         <th width="300" style="text-align: center">月份</th>
 						 <th width="300" style="text-align: center">收益</th>
-
-                        <th width="400" style="text-align: center">功能</th>                        
+						 <th width="300" style="text-align: center">交易數</th>
+                       
 
                 </thead>
 				@foreach($months as $month)
-				@if($report->good_id==$month->good_id)
+				@if($reports->good_id==$month->good_id)
 				<tbody> 
 				
 						<tr>
@@ -118,13 +113,13 @@
 								{{$month->earn}}
 						
                             </td>
-				
-                        <td class="table-text" style="text-align: center">
-
-                                 <a class="btn btn-primary" role="button"  >查看</a>
-												
+							<td style="text-align: center">
                                 
-                        </td>
+								{{$month->trade}}
+						
+                            </td>
+				
+                       
 						
 						
                     
@@ -140,22 +135,21 @@
 				@endif
 @endforeach
             </table>
-							
+						 
 </div>
         </div>
+		
     </div>
+	
 </div>
-</div>
-@endforeach
+ 
 </div>
 
+<a class="btn btn-success" style="center" href="javascript:window.history.go(-1);"  role="button">返回</a>	
 
-{!! $reports->render() !!}
+
+
 
 <!-- /.row -->
-<script type="text/javascript">
-var a =<?php echo $a ?>';
-	$(function () { $('#'a).collapse('toggle')});
 
-</script>
 @endsection

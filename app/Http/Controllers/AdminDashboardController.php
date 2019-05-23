@@ -122,6 +122,7 @@ if (Auth::user()->previlege_id==3)
             return view('admin.dashboard.admin',$data);
         elseif(Auth::user()->previlege_id)
             return view('admin.dashboard.user',$data);
+			
 
     }
 	public function edit()

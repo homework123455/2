@@ -15,10 +15,12 @@ use Illuminate\Contracts\Encryption\DecryptException;
 
 class UsersController extends Controller
 {
+	/*
     public function __construct()
     {
         $this->middleware('auth');
     }
+	*/
     //
     public function index()
     {
@@ -187,7 +189,7 @@ class UsersController extends Controller
 		$check =User::where('email',$id);
 		$check->update(['check'=>1]);
  
-        return redirect()->route('check');
+       return view('check');
 
 }
 public function checkindex()
