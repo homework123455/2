@@ -6,7 +6,7 @@ use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
-
+use Illuminate\Support\Facades\Mail;
 class RegisterController extends Controller
 {
     /*
@@ -27,7 +27,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/admin';
+    protected $redirectTo = 'checkmail';
 
     /**
      * Create a new controller instance.
@@ -69,6 +69,18 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+		
+            
+            $to = ['email'=>$data['email'],
+                'name'=>$data['name']];
+            $data1 = ['id'=>$data['email']];
+
+                
+           
+            Mail::later(1,' mails.shop',$data1, function($message) use ($to) {
+                $message->to($to['email'], $to['name'])->subject('註冊驗證');
+            });
+		
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -84,5 +96,8 @@ class RegisterController extends Controller
             'previlege_id' =>1,
 
         ]);
+		
+		
     }
-}
+	
+}	
