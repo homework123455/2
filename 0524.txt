@@ -1,0 +1,6 @@
+RegisterController  §R°£:protected $redirectTo = 'checkmail';
+Kernel §R°£:CsrfToken...
+UserController §R°£    public function __construct()
+    {
+        $this->middleware('auth');
+    }

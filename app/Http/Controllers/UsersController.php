@@ -186,10 +186,10 @@ class UsersController extends Controller
     }
 	public function checkupdate($id)
     {
-		$check =User::where('email',$id);
-		$check->update(['check'=>1]);
+  $check =User::where('id',$id);
+  $check->update(['check'=>1]);
  
-       return view('check');
+        return redirect()->route('check');
 
 }
 public function checkindex()

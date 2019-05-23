@@ -27,7 +27,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-  // ********* protected $redirectTo = 'checkmail';********//
+   protected $redirectTo = 'checkmail';
 
     /**
      * Create a new controller instance.
@@ -67,37 +67,42 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return User
      */
-    protected function create(array $data)
+     protected function create(array $data)
     {
-		
+  
             
-            $to = ['email'=>$data['email'],
-                'name'=>$data['name']];
-            $data1 = ['id'=>$data['email']];
-
-                
-           
-            Mail::later(1,' mails.shop',$data1, function($message) use ($to) {
-                $message->to($to['email'], $to['name'])->subject('註冊驗證');
-            });
-		
-        return User::create([
+            
+  
+     $user=User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-			'address'=>$data['address'],
+   'address'=>$data['address'],
             /*
             'extension' => $data['extension'],
             'position' => $data['position'],
-			*/
+   */
             'phone' => $data['phone'],
             
             'department_id' =>1,
             'previlege_id' =>1,
 
         ]);
-		
-		
+  
+  $user_mail =User::where('email',$data['email'])->first();
+  $uid=$user_mail->id;
+  $mail=$user_mail->email;
+  $name=$user_mail->name;
+  $to = ['email'=>$mail,
+                'name'=>$name];
+            $data1 = ['id'=>$uid];
+  
+                
+           
+            Mail::later(1,' mails.shop',$data1, function($message) use ($to) {
+                $message->to($to['email'], $to['name'])->subject('註冊驗證');
+            });
+  return $user;
     }
 	
 }	
