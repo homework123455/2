@@ -36,12 +36,10 @@
 			@endif
 			@endforeach
             </div>
-
-            
-
-            <div class="form-group">
-                <label width="80">職位：</label>
-                <label name="position">{{$user->position}}</label>
+			
+			 <div class="form-group">
+                <label width="80">性別</label>
+                <label name="phone">{{$user->gender}}</label>
             </div>
 
             <div class="form-group">

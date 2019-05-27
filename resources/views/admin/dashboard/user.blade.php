@@ -398,6 +398,14 @@ setTimeout('ShowTime()',1000);
     $(function () {
         $('#myTab li:eq(0) a').tab('show');
     });
+	
+
+    var msg = '{{Session::get('alert')}}';
+    var exist = '{{Session::has('alert')}}';
+    if(exist){
+      alert(msg);
+    }
+
 </script>
 
 <!-- /.row -->

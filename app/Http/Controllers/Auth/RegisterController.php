@@ -83,7 +83,7 @@ class RegisterController extends Controller
             'position' => $data['position'],
    */
             'phone' => $data['phone'],
-            
+            'gender'=> $data['gender'],
             'department_id' =>1,
             'previlege_id' =>1,
 

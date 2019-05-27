@@ -220,7 +220,8 @@ Route::patch('places/{id}/scrapped1', ['as' => 'admin.places.scrapped1', 'uses' 
 	Route::delete('users/{id}/wrongdata/{wid}', ['as' => 'admin.users.showwrong.destroy1', 'uses' => 'UsersController@destroy1']);
 	Route::get('users/{id}/wrongdata/{wid}/wrongedit', ['as' => 'admin.users.showwrong.wrongedit'   , 'uses' => 'UsersController@wrongedit']);
     Route::patch('users/{id}/wrongdata/{wid}'   , ['as' => 'admin.users.showwrong.update1' , 'uses' => 'UsersController@update1']);
-	
+	Route::get('users/{id}/editpassword', ['as' => 'admin.users.editpassword', 'uses' => 'UsersController@editpassword']);
+	Route::patch('users/{id}/editpassword', ['as' => 'admin.users.updatepassword', 'uses' => 'UsersController@updatepassword']); 
 
 });
 

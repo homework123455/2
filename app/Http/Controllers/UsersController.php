@@ -12,6 +12,8 @@ use App\Http\Requests\WrongRequest;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
+use Hash;
+
 
 class UsersController extends Controller
 {
@@ -192,12 +194,42 @@ class UsersController extends Controller
         return redirect()->route('check');
 
 }
-public function checkindex()
+	public function checkindex()
     {
 
         return view('check');
 
 }
+	public function editpassword($id)
+    {
+        $user=User::find($id);
+        $data = ['user'=>$user,];
+        return view('admin.users.editpassword', $data);
+    }
+	public function updatepassword(Request $request,$id)
+    {
+
+       $user=User::find($id);
+       $oldpassword=$request->oldpassword;
+	   $newpassword=$request->newpassword;
+	   $newpasswordcheck=$request->newpasswordcheck;
+        $data = ['user'=>$user,];
+			if(Hash::check($oldpassword,$user->password))
+		{
+			if($newpassword==$newpasswordcheck)
+			{
+			$user->update(['password'=>bcrypt($newpassword)]);
+			return redirect()->route('admin.dashboard.index')->with('alert', '更新成功');
+			}
+			else{
+			return redirect()->route('admin.users.editpassword',$id)->with('alert', '兩次密碼不相同');
+			}
+		}
+		else{
+			return redirect()->route('admin.users.editpassword',$id)->with('alert', '原始密碼錯誤');
+			}
+
+    }
   public function checkmail()
     {
 

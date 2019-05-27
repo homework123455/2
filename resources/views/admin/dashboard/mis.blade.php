@@ -136,6 +136,13 @@ document.getElementById('showbox').innerHTML = '現在是'+h+'點'+m+'分'+s+'�
 
 setTimeout('ShowTime()',1000);
 }
+
+    var msg = '{{Session::get('alert')}}';
+    var exist = '{{Session::has('alert')}}';
+    if(exist){
+      alert(msg);
+    }
+
 </script>
 <body onload="ShowTime()">
 

@@ -48,7 +48,7 @@
                         <th style="text-align: center">E-mail</th>
                         <th width="120" style="text-align: center">姓名</th>
                         <th width="100" style="text-align: center">科系</th>
-                        <th width="120" style="text-align: center">職位</th>
+                       
                         <th width="80 " style="text-align: center">手機</th>
                         <th width="100" style="text-align: center">權限</th>
                         <th width="200" style="text-align: center">功能</th>
@@ -71,8 +71,8 @@
                                 @endif
                                 @endforeach
                         </td>
-                        <td style="text-align: center">{{ $user->position}}</td>
-                        <td style="text-align: center">{{ $user->extension }}</td>
+                        
+                        <td style="text-align: center">{{ $user->phone }}</td>
                         <td style="text-align: center">
                             @foreach($previleges as $previlege)
                             @if($user->previlege_id==$previlege->id)

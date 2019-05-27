@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 
-@section('title', '修改資產')
+@section('title', '修改會員資料')
 
 @section('content')
 <!-- Page Heading -->
@@ -8,7 +8,7 @@
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-            修改資產 <small>編輯資產資料</small>
+            修改個人資料 <small>編輯會員資料</small>
         </h1>
     </div>
 </div>
@@ -57,11 +57,7 @@
                 <input name="extension" class="form-control" placeholder="請輸入分機號碼" value="{{$user->extension}}">
             </div>
 
-            <div class="form-group">
-                <label width="80">職位：</label>
-                <input name="position" class="form-control" placeholder="請輸入職位" value="{{$user->position}}">
-            </div>
-
+	
             <div class="form-group">
                 <label width="80">連絡電話：</label>
                 <input name="phone" class="form-control" placeholder="請輸入連絡電話" value="{{$user->phone}}">

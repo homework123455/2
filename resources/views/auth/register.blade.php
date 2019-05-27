@@ -23,7 +23,8 @@
                                 @endif
                             </div>
                         </div>
-
+	
+			
 
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
@@ -53,6 +54,18 @@
                                
                             </div>
                         </div>
+							<div class="form-group">
+               <label for="gender" class="col-md-4 control-label">性別：</label>
+			   <div class="col-md-6">
+				<select name="gender" class="form-control">
+				
+                    <option value="男">男</option>
+					 <option value="女">女</option>
+                    
+				</select>
+               
+            </div>
+			</div>
 						
 						
 
