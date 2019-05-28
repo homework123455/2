@@ -77,13 +77,13 @@ function openFile3(event){
                     <label>上傳商品圖片:</label>
                 </fieldset>
 
-                <input type="file" name="img[]"  onchange="openFile(event)" accept="image/jpeg,image/jpg,image/gif,image/png" style="display: block;margin-bottom: 5px;">	
+                <input type="file" name="img1"  onchange="openFile(event)" accept="image/jpeg,image/jpg,image/gif,image/png" style="display: block;margin-bottom: 5px;">	
 				<img id="output"  height="200" style="display:none">
-				<input type="file" name="img[]" onchange="openFile1(event)" accept="image/jpeg,image/jpg,image/gif,image/png" style="display: block;margin-bottom: 5px;">
+				<input type="file" name="img2" onchange="openFile1(event)" accept="image/jpeg,image/jpg,image/gif,image/png" style="display: block;margin-bottom: 5px;">
 				<img id="output1" height="200" style="display:none">
-				<input type="file" name="img[]" onchange="openFile2(event)" accept="image/jpeg,image/jpg,image/gif,image/png" style="display: block;margin-bottom: 5px;">	
+				<input type="file" name="img3" onchange="openFile2(event)" accept="image/jpeg,image/jpg,image/gif,image/png" style="display: block;margin-bottom: 5px;">	
 				<img id="output2" height="200" style="display:none">
-				<input type="file" name="img[]" onchange="openFile3(event)" accept="image/jpeg,image/jpg,image/gif,image/png" style="display: block;margin-bottom: 5px;">
+				<input type="file" name="img4" onchange="openFile3(event)" accept="image/jpeg,image/jpg,image/gif,image/png" style="display: block;margin-bottom: 5px;">
 				<img id="output3" height="200" style="display:none">
                 </div>
 				

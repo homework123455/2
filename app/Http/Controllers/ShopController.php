@@ -206,41 +206,64 @@ class ShopController extends Controller
     {
 
         $good = Good::find($id);
-		$file = $request->file('img');
-        $filePath = [];  // 定义空数组用来存放图片路径
-        foreach ($file as $key => $value) {
-            // 判断图片上传中是否出错
-
-/*
-                if (!$value->isValid()) {
-                    exit('上傳圖片出錯，請重試！');
-					//echo '<script>alert('.上傳圖片出錯，請重試！.');</script>';
-                }
-*/
-            //if(!empty($value)){//此处防止没有多文件上传的情况
-               // $allowed_extensions = ["png", "jpg", "gif","JPG"];
-
-            /*
-                            if (!$value->isValid()) {
-                               // exit"<script> alert('上傳圖片出錯，請重試！')</script>";
-                                echo '<script>alert('.上傳圖片出錯，請重試！.');</script>';
-                            }
-            */
-            if (!empty($value)) {//此处防止没有多文件上传的情况
+$file = $request->file('img1');
+            if (!empty($file)) {//此处防止没有多文件上传的情况
                 $allowed_extensions = ["png", "jpg", "gif","JPG"];
 
-                if ($value->getClientOriginalExtension() && !in_array($value->getClientOriginalExtension(), $allowed_extensions)) {
+                if ($file->getClientOriginalExtension() && !in_array($file->getClientOriginalExtension(), $allowed_extensions)) {
                     exit('您只能上傳PNG、JPG或GIF格式的圖片！');
                 }
                 $destinationPath = '/uploads/' . date('Y-m-d'); // public文件夹下面uploads/xxxx-xx-xx 建文件夹
-                $extension = $value->getClientOriginalExtension();   // 上传文件后缀
+                $extension = $file->getClientOriginalExtension();   // 上传文件后缀
                 $fileName = date('YmdHis') . mt_rand(100, 999) . '.' . $extension; // 重命名
-                $value->move(public_path() . $destinationPath, $fileName); // 保存图片
-                $filePath[] = $destinationPath . '/' . $fileName;
+                $file->move(public_path() . $destinationPath, $fileName); // 保存图片
+                $filePath= $destinationPath . '/' . $fileName;
 
             }
-        }
-		
+			
+			$file1 = $request->file('img2');
+            if (!empty($file1)) {//此处防止没有多文件上传的情况
+                $allowed_extensions = ["png", "jpg", "gif","JPG"];
+
+                if ($file1->getClientOriginalExtension() && !in_array($file1->getClientOriginalExtension(), $allowed_extensions)) {
+                    exit('您只能上傳PNG、JPG或GIF格式的圖片！');
+                }
+                $destinationPath = '/uploads/' . date('Y-m-d'); // public文件夹下面uploads/xxxx-xx-xx 建文件夹
+                $extension = $file1->getClientOriginalExtension();   // 上传文件后缀
+                $fileName = date('YmdHis') . mt_rand(100, 999) . '.' . $extension; // 重命名
+                $file1->move(public_path() . $destinationPath, $fileName); // 保存图片
+                $filePath1= $destinationPath . '/' . $fileName;
+
+            }
+			$file2 = $request->file('img3');
+            if (!empty($file2)) {//此处防止没有多文件上传的情况
+                $allowed_extensions = ["png", "jpg", "gif","JPG"];
+
+                if ($file2->getClientOriginalExtension() && !in_array($file2->getClientOriginalExtension(), $allowed_extensions)) {
+                    exit('您只能上傳PNG、JPG或GIF格式的圖片！');
+                }
+                $destinationPath = '/uploads/' . date('Y-m-d'); // public文件夹下面uploads/xxxx-xx-xx 建文件夹
+                $extension = $file2->getClientOriginalExtension();   // 上传文件后缀
+                $fileName = date('YmdHis') . mt_rand(100, 999) . '.' . $extension; // 重命名
+                $file2->move(public_path() . $destinationPath, $fileName); // 保存图片
+                $filePath2= $destinationPath . '/' . $fileName;
+
+            }
+			$file3 = $request->file('img4');
+            if (!empty($file3)) {//此处防止没有多文件上传的情况
+                $allowed_extensions = ["png", "jpg", "gif","JPG"];
+
+                if ($file3->getClientOriginalExtension() && !in_array($file3->getClientOriginalExtension(), $allowed_extensions)) {
+                    exit('您只能上傳PNG、JPG或GIF格式的圖片！');
+                }
+                $destinationPath = '/uploads/' . date('Y-m-d'); // public文件夹下面uploads/xxxx-xx-xx 建文件夹
+                $extension = $file3->getClientOriginalExtension();   // 上传文件后缀
+                $fileName = date('YmdHis') . mt_rand(100, 999) . '.' . $extension; // 重命名
+                $file3->move(public_path() . $destinationPath, $fileName); // 保存图片
+                $filePath3= $destinationPath . '/' . $fileName;
+
+            }
+		if(!empty($file)&&!empty($file1)&&!empty($file2)&&!empty($file3)){
         $good->update([
              'name' => $request->name,
             'category' => $request->category,
@@ -256,20 +279,357 @@ class ShopController extends Controller
 			'details2'=>$request->details2,
 			'details3'=>$request->details3,
 			'save_stock'=>$request->save_stock,
+            'photo1'=>$filePath,
+			'photo2'=>$filePath1,
+			'photo3'=>$filePath2,
+			'photo4'=>$filePath3
+        ]);
+	}
+	elseif(!empty($file)&&!empty($file1)&&!empty($file2)&&empty($file3)){
+ $good->update([
+             'name' => $request->name,
+            'category' => $request->category,
+            //'date'=>$request->date,
 
-          
+            
+            
+            'lendable' => $request->lendable,
+            'price' => $request->price,
+            //'warranty'=>$request->warranty,
+            'remark' => $request->remark,
+			'details'=>$request->details,
+			'details2'=>$request->details2,
+			'details3'=>$request->details3,
+			'save_stock'=>$request->save_stock,
+			 'photo1'=>$filePath,
+			'photo2'=>$filePath1,
+			'photo3'=>$filePath2,
+			
+        ]);
+	}
+	elseif(!empty($file)&&!empty($file1)&&empty($file2)&&!empty($file3)){
+ $good->update([
+             'name' => $request->name,
+            'category' => $request->category,
+            //'date'=>$request->date,
 
-            'photo1' => $filePath[0],
-			'photo2' => $filePath[1],
-			'photo3' => $filePath[2],
-			'photo4' => $filePath[3],
+            
+            
+            'lendable' => $request->lendable,
+            'price' => $request->price,
+            //'warranty'=>$request->warranty,
+            'remark' => $request->remark,
+			'details'=>$request->details,
+			'details2'=>$request->details2,
+			'details3'=>$request->details3,
+			'save_stock'=>$request->save_stock,
+			   'photo1'=>$filePath,
+			'photo2'=>$filePath1,
+			
+			'photo4'=>$filePath3
+        ]);
+	}
+	elseif(!empty($file)&&empty($file1)&&!empty($file2)&&!empty($file3)){
+		$good->update([
+             'name' => $request->name,
+            'category' => $request->category,
+            //'date'=>$request->date,
+
+            
+            
+            'lendable' => $request->lendable,
+            'price' => $request->price,
+            //'warranty'=>$request->warranty,
+            'remark' => $request->remark,
+			'details'=>$request->details,
+			'details2'=>$request->details2,
+			'details3'=>$request->details3,
+			'save_stock'=>$request->save_stock,
+			 'photo1'=>$filePath,
+			
+			'photo3'=>$filePath2,
+			'photo4'=>$filePath3
+        ]);
+	}
+elseif(empty($file)&&!empty($file1)&&!empty($file2)&&!empty($file3)){
+ $good->update([
+             'name' => $request->name,
+            'category' => $request->category,
+            //'date'=>$request->date,
+
+            
+            
+            'lendable' => $request->lendable,
+            'price' => $request->price,
+            //'warranty'=>$request->warranty,
+            'remark' => $request->remark,
+			'details'=>$request->details,
+			'details2'=>$request->details2,
+			'details3'=>$request->details3,
+			'save_stock'=>$request->save_stock,
+			'photo2'=>$filePath1,
+			'photo3'=>$filePath2,
+			'photo4'=>$filePath3
+        ]);
+	}
+		elseif(!empty($file)&&!empty($file1)&&empty($file2)&&empty($file3)){
+ $good->update([
+             'name' => $request->name,
+            'category' => $request->category,
+            //'date'=>$request->date,
+
+            
+            
+            'lendable' => $request->lendable,
+            'price' => $request->price,
+            //'warranty'=>$request->warranty,
+            'remark' => $request->remark,
+			'details'=>$request->details,
+			'details2'=>$request->details2,
+			'details3'=>$request->details3,
+			'save_stock'=>$request->save_stock,
+			 'photo1'=>$filePath,
+			'photo2'=>$filePath1,
+			
+        ]);
+	}
+	elseif(!empty($file)&&empty($file1)&&!empty($file2)&&empty($file3)){
+ $good->update([
+             'name' => $request->name,
+            'category' => $request->category,
+            //'date'=>$request->date,
+
+            
+            
+            'lendable' => $request->lendable,
+            'price' => $request->price,
+            //'warranty'=>$request->warranty,
+            'remark' => $request->remark,
+			'details'=>$request->details,
+			'details2'=>$request->details2,
+			'details3'=>$request->details3,
+			'save_stock'=>$request->save_stock,
+			'photo1'=>$filePath,
+			
+			'photo3'=>$filePath2,
+			
+        ]);
+	}
+	elseif(empty($file)&&!empty($file1)&&!empty($file2)&&empty($file3)){
+ $good->update([
+             'name' => $request->name,
+            'category' => $request->category,
+            //'date'=>$request->date,
+
+            
+            
+            'lendable' => $request->lendable,
+            'price' => $request->price,
+            //'warranty'=>$request->warranty,
+            'remark' => $request->remark,
+			'details'=>$request->details,
+			'details2'=>$request->details2,
+			'details3'=>$request->details3,
+			'save_stock'=>$request->save_stock,
+			'photo2'=>$filePath1,
+			'photo3'=>$filePath2,
+
+
+        ]);
+	}
+elseif(empty($file)&&!empty($file1)&&empty($file2)&&!empty($file3)){
+       $good->update([
+             'name' => $request->name,
+            'category' => $request->category,
+            //'date'=>$request->date,
+
+            
+            
+            'lendable' => $request->lendable,
+            'price' => $request->price,
+            //'warranty'=>$request->warranty,
+            'remark' => $request->remark,
+			'details'=>$request->details,
+			'details2'=>$request->details2,
+			'details3'=>$request->details3,
+			'save_stock'=>$request->save_stock,
+            
+			'photo2'=>$filePath1,
+			
+			'photo4'=>$filePath3
+        ]);
+		}
+		elseif(!empty($file)&&empty($file1)&&empty($file2)&&!empty($file3)){
+       $good->update([
+             'name' => $request->name,
+            'category' => $request->category,
+            //'date'=>$request->date,
+
+            
+            
+            'lendable' => $request->lendable,
+            'price' => $request->price,
+            //'warranty'=>$request->warranty,
+            'remark' => $request->remark,
+			'details'=>$request->details,
+			'details2'=>$request->details2,
+			'details3'=>$request->details3,
+			'save_stock'=>$request->save_stock,
+
+            'photo1'=>$filePath,
+
+			'photo4'=>$filePath3
+        ]);
+		}
+		
+		elseif(empty($file)&&empty($file1)&&!empty($file2)&&!empty($file3)){
+       $good->update([
+             'name' => $request->name,
+            'category' => $request->category,
+            //'date'=>$request->date,
+
+            
+            
+            'lendable' => $request->lendable,
+            'price' => $request->price,
+            //'warranty'=>$request->warranty,
+            'remark' => $request->remark,
+			'details'=>$request->details,
+			'details2'=>$request->details2,
+			'details3'=>$request->details3,
+			'save_stock'=>$request->save_stock,
+			'photo3'=>$filePath2,
+			'photo4'=>$filePath3
+        ]);
+		}
+		elseif(!empty($file)&&empty($file1)&&empty($file2)&&empty($file3)){
+       $good->update([
+             'name' => $request->name,
+            'category' => $request->category,
+            //'date'=>$request->date,
+
+            
+            
+            'lendable' => $request->lendable,
+            'price' => $request->price,
+            //'warranty'=>$request->warranty,
+            'remark' => $request->remark,
+			'details'=>$request->details,
+			'details2'=>$request->details2,
+			'details3'=>$request->details3,
+			'save_stock'=>$request->save_stock,
+            'photo1'=>$filePath,
+	
+        ]);
+		}
+		elseif(empty($file)&&!empty($file1)&&empty($file2)&&empty($file3)){
+       $good->update([
+             'name' => $request->name,
+            'category' => $request->category,
+            //'date'=>$request->date,
+
+            
+            
+            'lendable' => $request->lendable,
+            'price' => $request->price,
+            //'warranty'=>$request->warranty,
+            'remark' => $request->remark,
+			'details'=>$request->details,
+			'details2'=>$request->details2,
+			'details3'=>$request->details3,
+			'save_stock'=>$request->save_stock,
+      
+			'photo2'=>$filePath1,
+
+        ]);
+		}
+		elseif(empty($file)&&empty($file1)&&!empty($file2)&&empty($file3)){
+       $good->update([
+             'name' => $request->name,
+            'category' => $request->category,
+            //'date'=>$request->date,
+
+            
+            
+            'lendable' => $request->lendable,
+            'price' => $request->price,
+            //'warranty'=>$request->warranty,
+            'remark' => $request->remark,
+			'details'=>$request->details,
+			'details2'=>$request->details2,
+			'details3'=>$request->details3,
+			'save_stock'=>$request->save_stock,
+			'photo3'=>$filePath2,
+	
+        ]);
+		}
+		elseif(empty($file)&&empty($file1)&&empty($file2)&&!empty($file3)){
+        $good->update([
+             'name' => $request->name,
+            'category' => $request->category,
+            //'date'=>$request->date,
+
+            
+            
+            'lendable' => $request->lendable,
+            'price' => $request->price,
+            //'warranty'=>$request->warranty,
+            'remark' => $request->remark,
+			'details'=>$request->details,
+			'details2'=>$request->details2,
+			'details3'=>$request->details3,
+			'save_stock'=>$request->save_stock,
+			'photo4'=>$filePath3
+        ]);
+		}
+		elseif(empty($file)&&empty($file1)&&empty($file2)&&empty($file3)){
+ $good->update([
+             'name' => $request->name,
+            'category' => $request->category,
+            //'date'=>$request->date,
+
+            
+            
+            'lendable' => $request->lendable,
+            'price' => $request->price,
+            //'warranty'=>$request->warranty,
+            'remark' => $request->remark,
+			'details'=>$request->details,
+			'details2'=>$request->details2,
+			'details3'=>$request->details3,
+			'save_stock'=>$request->save_stock,
+ 'photo1' => $filePath,
+			'photo2' => $filePath1,
+			'photo3' => $filePath2,
+			'photo4' => $filePath3,
+        ]);
+		}
+      /*  $good->update([
+             'name' => $request->name,
+            'category' => $request->category,
+            //'date'=>$request->date,
+
+            
+            
+            'lendable' => $request->lendable,
+            'price' => $request->price,
+            //'warranty'=>$request->warranty,
+            'remark' => $request->remark,
+			'details'=>$request->details,
+			'details2'=>$request->details2,
+			'details3'=>$request->details3,
+			'save_stock'=>$request->save_stock,
+            'photo1' => $filePath,
+			'photo2' => $filePath1,
+			'photo3' => $filePath2,
+			'photo4' => $filePath3,
 
 
             
 
 
 
-        ]);
+        ]);*/
 
         return redirect()->route('admin.places.index');
     }

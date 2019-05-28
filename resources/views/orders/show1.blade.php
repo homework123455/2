@@ -80,7 +80,7 @@
 					<th width="100" style="text-align: center">商品單價</th>
                     <th width="100" style="text-align: center">下單時間</th>
 					@if($order->status=="已出貨"||$order->status=="已完成")
-					<th width="100" style="text-align: center">出貨時間</th>
+					<th width="100" style="text-align: center">出貨日期</th>
 				    @elseif($order->status=="駁回")
 					<th width="100" style="text-align: center">駁回時間</th>
 					
@@ -106,7 +106,7 @@
 
                         <td style="text-align: center">{{$order->created_at}}</td>
 						@if($order->status=="已出貨"||$order->status=="已完成")
-						<td style="text-align: center">{{$order->updated_at}}</td>
+						<td style="text-align: center">{{$order->buytime}}</td>
 					@elseif($order->status=="駁回")
 					<td style="text-align: center">{{$order->updated_at}}</td>
 					@endif
@@ -154,7 +154,7 @@
                                     
                                 
        
-        @if($order->status=="駁回"||$order->status=="已處理")
+ @if($order->status=="駁回"||$order->status=="已處理")
 
                <div class="panel panel-danger">
     <div class="panel-heading">

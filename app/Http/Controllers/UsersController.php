@@ -76,6 +76,7 @@ class UsersController extends Controller
         $user=User::orderBy('created_at', 'DESC')->first();
         $user->update([
             'password'=>bcrypt($user->password),
+			'check'=>1
 
         ]);
 

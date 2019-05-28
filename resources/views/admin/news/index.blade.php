@@ -77,7 +77,7 @@
                                                         <h4 class="modal-title" id="myModalLabel">提示訊息</h4>
                                                     </div>
                                                     <div class="modal-body">
-                                                        確定刪除？
+                                                        確定刪除這篇公告？
                                                     </div>
                                                     <div class="modal-footer">
                                                         <table style="text-align: right">

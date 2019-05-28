@@ -27,7 +27,19 @@
 						
                     </tr>
                @endforeach
-	
+		@if($order->car_money==0)
+
+		@elseif($order->car_money==1)
+		<tr>
+					
+                        <td style="text-align: center">運費</td>
+                          <td style="text-align: center">1</td>  
+                         <td style="text-align: center">{{$price}}</td>
+						 
+
+						
+                    </tr>
+		@endif
 				 
                 </tbody>
             </table>

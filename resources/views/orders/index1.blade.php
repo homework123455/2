@@ -26,7 +26,7 @@
  <div class="panel panel-warning">
 		<div class="panel-heading">
 			<h4 class="panel-title">
-				<a data-toggle="collapse" data-parent="#accordion" 
+				<a data-toggle="collapse"  
 				   href="#collapse4">
 					<i class="fa fa-edit"></i>訂單處理-已完成
 				</a>
@@ -105,7 +105,7 @@
                 </table>
             </div>
 			
-			{!! $order_status3->appends(['page1' => $order_status1->currentPage(),'page2' => $order_status2->currentPage() ])->render() !!}
+			{!! $order_status3->appends(['page1' => $order_status1->currentPage(),'page2' => $order_status2->currentPage() ])->fragment('collapse4')->render() !!}
         </div>
 		 </div>
 		  </div>
@@ -114,10 +114,25 @@
 @else
 	  <i class="fa fa-edit"></i>無資料
     @endif
-<script type="text/javascript">
-	$(function () { $('#collapse4').collapse({
-		'show'
-	})});
-	
+	<script type="text/javascript">
+
+	$(document).ready(function () {
+    var hash = window.location.hash;
+    if (hash) {
+        $("#accordion .panel-collapse").removeClass('in');
+        $(hash).addClass('in');
+    }
+
+    $('#accordion').on('shown.bs.collapse', function () {
+        var activeId = $("#accordion .in").attr('id');
+        window.location.hash = activeId;
+    });
+
+    $('#accordion').on('hidden.bs.collapse', function () {
+        window.location.hash = '';
+    });
+});
+
 </script>
+
 @endsection

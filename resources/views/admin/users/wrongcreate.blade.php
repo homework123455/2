@@ -63,9 +63,9 @@
 
                     </script>
                     <select id="wrongname" name="wrongname" class="form-control" >
-                        <option value="破壞場地" >破壞場地</option>
-                        <option value="逾時未還" >逾時未還</option>
-                        <option value="違反規定" >違反規定</option>
+                        <option value="逾時未取貨" >逾時未取貨</option>
+                        <option value="惡意訂購" >惡意訂購</option>
+
 
 
                     </select>
@@ -74,9 +74,10 @@
 
                 </div>
             <div class="form-group">
-                <label width="80">違規時間：</label>
+                <label width="80">違規時間： 例如：2019-01-01</label>
                 <input name="date" class="form-control" placeholder="請輸入違規時間">
             </div>
+			
 
 
             <div class="text-right">

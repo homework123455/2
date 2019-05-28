@@ -27,7 +27,7 @@
 			
 
                 
-                <label>場地名稱：</label>
+                <label>類別名稱：</label>
 
                 <input name="name" class="form-control"  value="{{$categories->name}}">
             </div>

@@ -147,7 +147,7 @@ class MaintaincesController extends Controller
         $ordersdetail = OrdersDetail::where('users_id',Auth::user()->id)->get();
 		//$nowtime=
 		foreach($order_status4 as $order){
-			$time=((strtotime("now")-strtotime($order->updated_at))/ (60*60*24));
+			$time=((strtotime("now")-strtotime($order->buytime))/ (60*60*24));
 			if($time>7){
 		    $order->update([
             'status'=>'已完成',
@@ -246,7 +246,7 @@ class MaintaincesController extends Controller
 		$F_times=0;
 		$C_times=0;
 		$orders = Order::where('users_id',$order->users_id)->get();
-		$ordersing=$orders->whereIn('status',["已出貨","已完成","取消","退貨","已取消","處理中"]);
+		$ordersing=$orders->whereIn('status',["已出貨","已完成","取消","退貨","已取消"]);
 		$orders_C =$orders->whereIn('status',["取消","退貨"]);
 		$C=count($orders_C);
 		$F=count($ordersing)-$C;
@@ -268,7 +268,7 @@ class MaintaincesController extends Controller
 		}
 		
 
-        $data=['C'=>$C,'F'=>$F,'i'=>$i,'F_times'=>$F_times,'C_times'=>$C_times,'orders_C'=>$orders_C,'orders'=>$orders,'users'=>$users,'order'=>$order,'ordersdetail'=>$ordersdetail,'ordertotal'=>$ordertotal,'vip_total'=>$vip_total,'price'=>$price];
+        $data=['C'=>$C,'F'=>$F,'i'=>$i,'F_times'=>$F_times,'C_times'=>$C_times,'orders_C'=>$orders_C,'orders'=>$orders,'users'=>$users,'order'=>$order,'ordersdetail'=>$ordersdetail,'ordertotal'=>$ordertotal,'vip_total'=>ceil($vip_total),'price'=>$price];
         return view('orders.show', $data);
     }
 	public function cancelupdate(Request $request,$id){
@@ -361,7 +361,7 @@ class MaintaincesController extends Controller
         $order=Order::find($id);
 		$ordersdetail = OrdersDetail::where('orders_id',$id)->get();
 		$goods = Good::orderBy('created_at', 'DESC')->get();
-		
+		$price=Setting::where('id','1')->value('prices');	
 		
         $reason = $request->input('reason');
         
@@ -415,24 +415,33 @@ class MaintaincesController extends Controller
 		}
         //Mail
 		 $total =0;
+		 if($order->car_money==0){
         foreach($ordersdetail as $order2){
 		$total = $total+$order2->total;
 		}
-			
+		 }
+		 elseif($order->car_money==1){
+	foreach($ordersdetail as $order2){
+		$total = $total+$order2->total;
+		
+		}
+			 $total =$total+$price;
+		 }
 
-
+if($request->method=='0'){
 			$orders123=Order::find($id);
             $user=User::find($orders123->users_id);
             $to = ['email'=>$user->email,
                 'name'=>$user->name];
             $data = ['ordersdetail'=>$ordersdetail,
-'total'=>$total];
+'total'=>$total,'order'=>$order,'price'=>$price];
 
                 
            
             Mail::later(1,' mails.spend',$data, function($message) use ($to) {
                 $message->to($to['email'], $to['name'])->subject('購物明細');
             });
+}
         
 
         return redirect()->route('orders.index');
@@ -529,6 +538,7 @@ class MaintaincesController extends Controller
         $order->update([
             'status'=>'已出貨',
 			'updated_at'=>Carbon::now(),
+			'buytime'=>Carbon::now()->toDateString(),
 			
         ]);
 		

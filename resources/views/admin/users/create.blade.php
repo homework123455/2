@@ -15,7 +15,7 @@
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-            新增使用者 <small>請輸入使用者資料</small>
+            新增管理者 <small>請輸入管理者資料</small>
         </h1>
     </div>
 </div>
@@ -72,15 +72,17 @@
             <div class="form-group">
                 <label width="80">權限：</label>
                 <select name='previlege_id' class="form-control">
-                    @foreach($previleges as $previlege)
-                        <option value="{{ $previlege->id }}">{{ $previlege->name }}</option>
-                    @endforeach
+                   
+                        <option value="2">一般管理員</option>
+						<option value="3">管理員</option>
+                    
                 </select>
             </div>
 
 
             <div class="text-right">
                 <button type="submit" class="btn btn-success">新增</button>
+				<a class="btn btn-success" href="javascript:window.history.go(-1);"  role="button">返回</a>
             </div>
 
             <p>&nbsp;</p>

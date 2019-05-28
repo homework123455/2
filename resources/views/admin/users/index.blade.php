@@ -33,7 +33,7 @@
 <div class="row" style="margin-bottom: 20px; text-align: right" >
 
     <div class="col-lg-12">
-        <a href="{{ route('admin.users.create') }}" class="btn btn-success">建立新使用者</a>
+        <a href="{{ route('admin.users.create') }}" class="btn btn-success">建立新管理者</a>
     </div>
 </div>
 @endif

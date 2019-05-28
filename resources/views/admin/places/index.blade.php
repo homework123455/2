@@ -311,6 +311,7 @@
     </div>
 	@if(isset($Search1))
 	{{ $goods->appends(['Search1' => $Search1 ])->Links() }}
+		
 @elseif(isset($i))
 {{ $goods->appends(['Search1' => $i ])->Links() }}
 @else

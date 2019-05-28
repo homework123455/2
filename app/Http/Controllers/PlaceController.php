@@ -349,6 +349,7 @@ class PlaceController extends Controller
 
         $data = ['goods' => $goods,'goods1' => $goods1, 'categories' => $category, 'Search' => $Search, 'Search1' => $Search1];
         return view('admin.places.index', $data);
+		
         }
 
 

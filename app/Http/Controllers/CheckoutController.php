@@ -60,7 +60,8 @@ class CheckoutController extends Controller
             'postcode' => $request->postcode,
 			'ph_number'=>$request->ph_number,
 			'car_money'=>0,
-			'vip_check'=>0
+			'vip_check'=>0,
+			'buytime'=>Carbon::now()->toDateString(),
             
         ]);
 		}
@@ -73,7 +74,7 @@ class CheckoutController extends Controller
 			'ph_number'=>$request->ph_number,
 			'car_money'=>1,
 			'vip_check'=>0
-            
+            'buytime'=>Carbon::now()->toDateString(),
         ]);
 		}
 
