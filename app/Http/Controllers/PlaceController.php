@@ -15,6 +15,7 @@ use App\MaintainceItem;
 use App\User;
 use DB;
 use App\Setting;
+use Session;
 //use App\Vendor;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -26,7 +27,13 @@ class PlaceController extends Controller
     //
     public function index(Request $request)
     {
-        
+		
+        if(isset($_SESSION['Search1'])){
+	$E="Search1";
+	session_register("E");
+	//session_destroy();
+		}
+       
         $Search = $request->input('good_search');
        
         $Search1 = $request->input('category_search');
@@ -39,17 +46,31 @@ class PlaceController extends Controller
         $place = Place::orderBy('created_at', 'DESC')->get();
         $cands = OrdersDetail::all();
 		//$cands=DB::table('ordersdetail')->orderby('id','Desc')->value('product');
-		
+		$value = Session::get('Search1');
+		$value1 = Session::get('Search');
         $category = Category::orderBy('created_at', 'DESC')->get();
         $lendings = Lending::whereNULL('returntime')->get();
         $weeks = Week::orderBy('id', 'ASC')->get();
         $times = Time_::orderBy('id', 'ASC')->get();
 		$maintaincesALL = Maintaince::orderBy('created_at', 'DESC');
         $maintainces = $maintaincesALL->whereIn('status', array('申請中'))->get();
+		if($_SERVER['QUERY_STRING']<>""&&!isset($_GET['page'])){
+			 $i=$_SERVER['QUERY_STRING'];
+		if(isset($value1)){
+			$goods = Good::orderBy('created_at', 'DESC')
+                ->where('id', $i)
+                ->paginate($set_good);
+		}
+		else{
+		$goods = Good::orderBy('created_at', 'DESC')
+                ->where('category', $i)
+                ->paginate($set_good);
+		}
+		 $category = Category::orderBy('created_at', 'DESC')->get();
+		$data = ['goods' => $goods,'goods1' => $goods1, 'categories' => $category, 'Search' => $Search, 'Search1' => $Search1,'i'=>$i,'value'=>$value,'value1'=>$value1];
+        return view('admin.places.index', $data);
+		}
 		
-		
-	
-       
 	   $data = ['goods1'=>$goods1,'cands'=>$cands,'goods'=>$goods,'places' => $place, 'lendings' => $lendings, 'categories' => $category, 'times' => $times, 'weeks' => $weeks, 'Search' => $Search, 'Search1' => $Search1, 'maintainces' => $maintainces];
 
 
@@ -299,6 +320,9 @@ class PlaceController extends Controller
 
     public function Search10(Request $request)
     {
+		
+		Session::forget('Search1');
+		Session::forget('Search');
 		$set_good=Setting::orderBy('updated_at', 'DESC')->value('goods');
         $goodsALL = Good::orderBy('created_at', 'DESC');
 		$goods1=Good::orderBy('created_at', 'DESC')->get();
@@ -307,6 +331,22 @@ class PlaceController extends Controller
         $Search = $request->input('good_search');
         
         $Search1 = $request->input('category_search');
+		/*
+		if(!isset($_SESSION)){
+		Session_start();
+		
+		}
+		echo $_SESSION['Search1'];
+		*/
+		$value = Session::get('Search1');
+		$value1 = Session::get('Search');
+		//$_SESSION['Search1']=$Search1;
+		if($Search<>""){
+		Session::put('Search', $Search);
+		}
+		if($Search1<>""){
+		Session::put('Search1', $Search1);
+		}
 		if(isset($_GET['Search1'])){
         $i=$_GET['Search1'];
 		
@@ -315,10 +355,11 @@ class PlaceController extends Controller
                 ->paginate($set_good);
 				
 		 $category = Category::orderBy('created_at', 'DESC')->get();
-		$data = ['goods' => $goods,'goods1' => $goods1, 'categories' => $category, 'Search' => $Search, 'Search1' => $Search1,'i'=>$i];
+		$data = ['goods' => $goods,'goods1' => $goods1, 'categories' => $category, 'Search' => $Search, 'Search1' => $Search1,'i'=>$i,'value'=>$value,'value1'=>$value1];
         return view('admin.places.index', $data);
 		
 		}
+		
 		else{
         if( $Search == "" && $Search1 =="") {
 
@@ -347,7 +388,7 @@ class PlaceController extends Controller
         $category = Category::orderBy('created_at', 'DESC')->get();
        //$goods = Good::paginate(2);
 
-        $data = ['goods' => $goods,'goods1' => $goods1, 'categories' => $category, 'Search' => $Search, 'Search1' => $Search1];
+        $data = ['goods' => $goods,'goods1' => $goods1, 'categories' => $category, 'Search' => $Search, 'Search1' => $Search1,'value'=>$value,'value1'=>$value1];
         return view('admin.places.index', $data);
 		
         }
@@ -370,7 +411,13 @@ class PlaceController extends Controller
     }
 	public function SearchAll1(Request $request)
     {
-	
+		/*
+		if(isset($_SESSION['Search1'])){
+	Session::flush();
+		}
+		*/
+		Session::forget('Search1');
+		Session::forget('Search');
         $Search =$request->input('good_search');
         $set_good=Setting::orderBy('updated_at', 'DESC')->value('goods');
 		$Search1 =$request->input('category_search');
@@ -384,25 +431,63 @@ class PlaceController extends Controller
            $place=Place::where('id','0')->get();
 	   }
 */
+
         $data=['goods'=>$goods,'goods1'=>$goods1,'categories'=>$category,'Search'=>$Search,'Search1'=>$Search1];
-        return view('admin.places.index', $data);
+        //return view('admin.places.index', $data);
+		return redirect()->route('admin.places.index');
     }
     public function scrapped($id)
     {
-
+	/*
+ if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+		
+    }
+	
+	if(isset($_SESSION['Search1'])){
+	echo $_SESSION['Search1'];
+	}
+		*/
+	$value = Session::get('Search1');
+	$value1 = Session::get('Search');
         $place=Good::find($id);
         $place->update([
             'status'=>'下架中',
 			
         ]);
 		
-        return redirect()->back();
+       // return redirect()->back();
+	   if(isset($value1)){
+	   return redirect()->route('admin.places.index',$value1);
+	   
+		}
+		elseif(!isset($value1)&&isset($value)){
+	   return redirect()->route('admin.places.index',$value);
+	   
+		}
+	  
+	  else{
+		  return redirect()->back();
+	  }
+	  
     }
 	public function scrapped1($id)
     {
-
-        $place=Good::find($id);
+	/*
+ if(!isset($_SESSION)) 
+    { 
+        session_start(); 
 		
+    }
+	if(isset($_SESSION['Search1'])){
+	echo $_SESSION['Search1'];
+	}
+	*/
+	//echo $_SESSION['Search1'];
+        $place=Good::find($id);
+		$value = Session::get('Search1');
+		$value1 = Session::get('Search');
 		if($place->stock>0){
         $place->update([
             'status'=>'正常供貨中',
@@ -413,7 +498,18 @@ class PlaceController extends Controller
             'status'=>'待補貨',
 			]);
 		}
-        return redirect()->back();
+       // return redirect()->back();
+	  if(isset($value1)){
+	   return redirect()->route('admin.places.index',$value1);
+	  
+	  }
+	  elseif(!isset($value1)&&isset($value)){
+	   return redirect()->route('admin.places.index',$value);
+	  
+	  }
+	  else{
+		  return redirect()->back();
+	  }
     }
 
     public function lendings_create($id)

@@ -1,4 +1,5 @@
-﻿@extends('admin.layouts.master')
+﻿
+@extends('admin.layouts.master')
 
 @section('title', '商品管理')
 
@@ -173,14 +174,14 @@
                                            
                                                 @if($good->status=='正常供貨中') 
 													<td width="80" >
-                                                <form action="{{ route('admin.places.scrapped1', $good->id) }}" method="POST">
+												    <form action="{{ route('admin.places.scrapped1', $good->id) }}" method="POST">
                                                     {{ csrf_field() }}
                                                     {{ method_field('PATCH') }}
                                                     <button class="btn btn-danger disabled" disabled>上架</button>
                                                 </form>
 												</td>
 												<td width="80" >
-												 <form action="{{ route('admin.places.scrapped', $good->id) }}" method="POST">
+												 <form action="{{ route('admin.places.scrapped',[$good->id]) }}" method="POST">
                                                     {{ csrf_field() }}
                                                     {{ method_field('PATCH') }}
                                                     <button class="btn btn-danger">下架</button>
@@ -188,7 +189,7 @@
                                               @endif
 											@if($good->status!='正常供貨中')
 												<td width="80" >
-                                                <form action="{{ route('admin.places.scrapped1', $good->id) }}" method="POST">
+                                                <form action="{{ route('admin.places.scrapped1', [$good->id]) }}" method="POST">
                                                     {{ csrf_field() }}
                                                     {{ method_field('PATCH') }}
                                                     <button class="btn btn-danger ">上架</button>

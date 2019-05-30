@@ -180,7 +180,8 @@ Route::post('categories/searchALL1'  , ['as' => 'admin.categories.searchALL1', '
 
     //報廢資產
     Route::patch('places/{id}/scrapped', ['as' => 'admin.places.scrapped', 'uses' => 'PlaceController@scrapped']);  
-Route::patch('places/{id}/scrapped1', ['as' => 'admin.places.scrapped1', 'uses' => 'PlaceController@scrapped1']); 	//報廢資產
+Route::patch('places/{id}/scrapped1', ['as' => 'admin.places.scrapped1', 'uses' => 'PlaceController@scrapped1']); 
+	//報廢資產
 
     //未做
     //Route::patch('places/{id}/scrapped', ['as' => 'admin.places.update', 'uses' => 'PlaceController@update']);     //取消報修資產
