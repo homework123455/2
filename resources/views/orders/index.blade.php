@@ -88,6 +88,12 @@
 					</div>
 		</div>
         </div>
+		@else
+			<div class="panel-heading">
+			<h4 class="panel-title">
+			<i class="fa fa-edit"></i>目前無未處理之訂單
+			</h4>
+			</div>
     @endif
 	@if (count($order_status2) > 0)
         
@@ -165,6 +171,12 @@
 			</div>
 			</div>
         </div>
+		@else
+			<div class="panel-heading">
+			<h4 class="panel-title">
+			<i class="fa fa-edit"></i>目前無處理中之訂單
+			</h4>
+			</div>
     @endif
 	@if (count($order_status4) > 0)
         
@@ -243,6 +255,12 @@
         </div>
 		 </div>
 		  </div>
+		  @else
+			<div class="panel-heading">
+			<h4 class="panel-title">
+			<i class="fa fa-edit"></i>目前無已出貨之訂單
+			</h4>
+			</div>
     @endif
  </div>
 		  </div>

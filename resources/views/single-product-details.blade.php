@@ -112,7 +112,7 @@
 
         <div class="single_product_desc clearfix"> 
 
-            <img src={{ $good->photo3}} style="border:2px green dashed;"" alt="">
+            <img src={{ $good->photo3}} style="border:2px green dashed; " "width="450px" height="350px" alt="">
 
         </div>
 												

@@ -56,7 +56,7 @@
         </div>
 
         <div>
-            <a href="{{ route('admin.dashboard.index') }}" class="btn btn-success">返回</a>
+            <a class="btn btn-success" href="javascript:window.history.go(-1);"  role="button">返回</a>
         </div>
         <p>&nbsp;</p>
         <p>&nbsp;</p>

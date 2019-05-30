@@ -23,6 +23,7 @@ class ShopController extends Controller
 		$setting=Setting::where('id','1')->get()->first();
         $data = Good::all();
 		$category = Category::all();
+		$id=1;
 		$good = Good::where('id','1')->get()->first();
 		if(Auth::check()){
 		$vip_time=User::where('id',Auth::user()->id)->value('vip_time');
@@ -37,7 +38,7 @@ class ShopController extends Controller
 			
         ]);
 		}}
-        return view('Shop', ['goods' => $data,'categories'=>$category,'good'=>$good,'setting'=>$setting]);
+        return view('Shop', ['goods' => $data,'categories'=>$category,'good'=>$good,'setting'=>$setting,'id'=>$id]);
     }
 
 
@@ -45,9 +46,10 @@ class ShopController extends Controller
     public function cleanup($id)
     {
 		$setting=Setting::where('id','1')->get()->first();
-		$category = Category::all();		
-        $data = Good::where('category','=',$id)->get();
-        return view('Shop', ['goods' => $data,'categories'=>$category,'setting'=>$setting]);
+		$category = Category::all();	
+        $i=1;		
+        $data = Good::where('category',$id)->get();
+        return view('Shop', ['goods' => $data,'categories'=>$category,'setting'=>$setting,'i'=>$i,'id'=>$id]);
         
     }
     public function cleandown()
@@ -80,12 +82,28 @@ class ShopController extends Controller
      
      
     //價格排序
-    public function price($tpye)
+    public function price($tpye,$id)
     {
 		$setting=Setting::where('id','1')->get()->first();
 		$category = Category::all();
+		$i=1;
+		if(isset($id)){
+			$data = Good::where('category',$id)->orderBy('price', $tpye)->get();
+		}
+		else{
+			$data = Good::orderBy('price', $tpye)->get();
+		}
+        return view('Shop', ['goods' => $data,'categories'=>$category,'setting'=>$setting,'id'=>$id]);
+    }
+	public function pricesort($tpye)
+    {
+		$setting=Setting::where('id','1')->get()->first();
+		$category = Category::all();
+		$id=1;
+		
         $data = Good::orderBy('price', $tpye)->get();
-        return view('Shop', ['goods' => $data,'categories'=>$category,'setting'=>$setting]);
+		
+        return view('Shop', ['goods' => $data,'categories'=>$category,'setting'=>$setting,'id'=>$id]);
     }
 
 

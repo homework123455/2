@@ -43,12 +43,14 @@ Route::get('detail/{id}', ['as' => 'detail', 'uses' => 'ShopDetailController@ind
 }]);
 
 //價格排序
-Route::get('shopprice/{type}', ['as' => 'sort.shop', 'uses' => 'ShopController@price',function($type){
+Route::get('shopprice/{type}/{id}', ['as' => 'sort.shop', 'uses' => 'ShopController@price',function($id,$type){
+}]);
+Route::get('shopprice/{type}', ['as' => 'sort.shop.id', 'uses' => 'ShopController@pricesort',function($type){
 }]);
 
 
 //淨化能力篩選
-Route::get('shopcleanup/{id}', ['as' => 'cleanup.shop', 'uses' => 'ShopController@cleanup',function(){
+Route::get('shopcleanup/{id}', ['as' => 'cleanup.shop', 'uses' => 'ShopController@cleanup',function($id){
 }]);
 Route::get('shop/cleandown', ['as' => 'cleandown.shop', 'uses' => 'ShopController@cleandown',function(){
 }]);

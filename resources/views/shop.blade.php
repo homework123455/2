@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 @extends('layouts.master')
+
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="">
@@ -14,18 +15,18 @@
 	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
 	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- Favicon  -->
-    <link rel="icon" href="../img/core-img/plant.ico">
+    <link rel="icon" href="/img/core-img/plant.ico">
 
     <!-- Core Style CSS -->
-    <link rel="stylesheet" href="../css/core-style.css">
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="/css/core-style.css">
+    <link rel="stylesheet" href="/style.css">
 
 
 </head>
 
 <body>
     <!-- ##### Breadcumb Area Start ##### -->
-    <div class="breadcumb_area bg-img" style="background-image: url(../img/bg-img/test2.jpg);">
+    <div class="breadcumb_area bg-img" style="background-image: url(/img/bg-img/test2.jpg);">
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12">
@@ -90,12 +91,13 @@
                                     <!-- Single Item -->
                                     <li data-toggle="collapse" data-target="#clothing">
                                       
-                                        <ul class="sub-menu collapse show" id="clothing">
+                                        <ul class="sub-menu collapse show" id="clothing"> 
+										<li><a href="{{route('main.shop')}}">全部</a></li>
 										@foreach($categories as $category)
 										
 										 <li><a href="{{route('cleanup.shop',$category->id)}}">{{$category->name}}</a></li>
 										@endforeach
-                                           
+                                        
                                           
                                         </ul>
                                     </li>
@@ -136,8 +138,20 @@
                                         <form name="jump">
                                             <select onchange="location=document.jump.menu.options[document.jump.menu.selectedIndex].value;" value="GO" name="menu"><br />
                                             <option value="" selected="selected">價格排序</option>
-                                            <option value="{{route('sort.shop',['type'=>'asc'])}}">低到高</option>
-                                            <option value="{{route('sort.shop',['type'=>'desc'])}}">高到低</option>
+											
+											@if(dirname($_SERVER["REQUEST_URI"])=="/shopcleanup"||$_SERVER["REQUEST_URI"]=="/shopprice/asc/$id"||$_SERVER["REQUEST_URI"]=="/shopprice/desc/$id")
+											<option value="{{route('sort.shop',['type'=>'asc','id'=>$id])}}">低到高</option>
+											<option value="{{route('sort.shop',['type'=>'desc','id'=>$id])}}">高到低</option>
+											
+											
+											
+											@else
+                                            <option value="{{route('sort.shop.id',['type'=>'asc'])}}">低到高</option>
+                                            <option value="{{route('sort.shop.id',['type'=>'desc'])}}">高到低</option>
+											
+											@endif
+											
+											
                                             </select>
                                         </form>
                                     </div>
@@ -170,7 +184,7 @@
                                         <div class="hover-content">
                                             <!-- Add to Cart -->
                                             <div class="add-to-cart-btn">
-                                                <a href="{{route('cart.add',['id'=>$good->id])}}" class="btn essence-btn">Add to Cart</a>
+                                                <a href="{{route('cart.add',['id'=>$good->id])}}" class="btn essence-btn">加到購物車</a>
                                             </div>
                                         </div>
                                     </div>

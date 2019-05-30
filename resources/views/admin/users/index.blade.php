@@ -47,7 +47,7 @@
                     <tr>
                         <th style="text-align: center">E-mail</th>
                         <th width="120" style="text-align: center">姓名</th>
-                        <th width="100" style="text-align: center">科系</th>
+                        <th width="100" style="text-align: center">性別</th>
                        
                         <th width="80 " style="text-align: center">手機</th>
                         <th width="100" style="text-align: center">權限</th>
@@ -65,11 +65,9 @@
 						 <td style="text-align: center"><font color="#CC00CC">{{ $user->name }}</td>
 					@endif
                         <td style="text-align: center">
-                            @foreach($departments as $department)
-                                @if($user->department_id==$department->id)
-                                    {{ $department->name }}
-                                @endif
-                                @endforeach
+                            
+                                    {{ $user->gender }}
+                                
                         </td>
                         
                         <td style="text-align: center">{{ $user->phone }}</td>
