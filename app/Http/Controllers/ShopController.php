@@ -110,14 +110,14 @@ class ShopController extends Controller
     //搜尋
     public function search(Request $request)
     {
-
+		$id=1;
         $search = $request->input("search");
-
+		$setting=Setting::where('id','1')->get()->first();
+		$category = Category::all();
         $data =DB::table('goods')
-            ->join('plants', 'goods.id', '=', 'plants.goods_id')
-            ->where('goods_name2','like','%'.$search.'%')
+            ->where('name','like','%'.$search.'%')
             ->get();
-        return view('Shop', ['goods' => $data]);
+        return view('Shop', ['goods' => $data,'setting'=>$setting,'categories'=>$category,'id'=>$id]);
     }
 	  public function index1(Request $request)
     {

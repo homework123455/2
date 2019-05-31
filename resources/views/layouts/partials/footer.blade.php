@@ -12,9 +12,9 @@
                         <!-- Footer Menu -->
                         <div class="footer_menu">
                             <ul>
-                                <li><a href="{{route('main.shop')}}">Shop</a></li>
-                                <li><a href="{{route('main.news')}}">News</a></li>
-                                <li><a href="{{route('main.contact')}}">Contact</a></li>
+                                <li><a href="{{route('main.shop')}}">商城</a></li>
+                                <li><a href="{{route('main.news')}}">公告</a></li>
+                                <li><a href="{{route('main.contact')}}">關於我們</a></li>
 
                             </ul>
                         </div>

@@ -12,7 +12,7 @@ return [
     | as the size rules. Feel free to tweak each of these messages here.
     |
     */
-
+	'phone_number'    => 'Phone number format is wrong.',
     'accepted'             => 'The :attribute must be accepted.',
     'active_url'           => 'The :attribute is not a valid URL.',
     'after'                => 'The :attribute must be a date after :date.',
@@ -97,6 +97,28 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+		'name' => [
+        'required' => '名稱不能為空',
+        'unique' => '名字已使用',
+    ],
+    'email' => [
+        'required' => '信箱不能為空',
+        'email' => '格式不正確',
+        'unique' => '重覆的mail',
+    ],
+	 'password' => [
+        'required' => '密碼不能為空',
+		'min'=>'密碼至少6個字',
+        'confirmed' => '兩次密碼不相同',
+    ],
+	 'phone' => [
+        'required' => '手機號碼不可為空',
+        'phone_number' => '手機格式錯誤',
+    ],
+	'password_confirmation' => [
+        'required' => '請再次確認密碼',
+       
+    ],
     ],
 
     /*

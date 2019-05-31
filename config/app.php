@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => 'My Application',
+    'name' => '勤益體育用品購物系統',
 
     /*
     |--------------------------------------------------------------------------
